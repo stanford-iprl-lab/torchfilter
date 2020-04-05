@@ -1,0 +1,47 @@
+:orphan:
+
+:mod:`diffbayes.base._measurement_models`
+=========================================
+
+.. py:module:: diffbayes.base._measurement_models
+
+
+Module Contents
+---------------
+
+.. py:class:: ParticleFilterMeasurementModel(state_dim)
+
+   Bases: :class:`abc.ABC`, :class:`torch.nn.Module`
+
+   Observation model base class for a generic differentiable particle
+   filter; maps (state, observation) pairs to the log-likelihood of the
+   observation given the state ( $\log p(z | x)$ ).
+
+   .. attribute:: state_dim
+      
+
+      Dimensionality of our state.
+
+      :type: int
+
+
+   .. method:: forward(self, *, states, observations)
+      :abstractmethod:
+
+
+      Observation model forward pass, over batch size ``N``.
+      For each member of a batch, we expect ``M`` separate states (particles)
+      and just one unique observation.
+
+      :param states: States to pass to our observation model.
+                     Shape should be ``(N, M, state_dim)``.
+      :type states: torch.tensor
+      :param observations: Measurement inputs. Should be
+                           either a dict of tensors or tensor of size ``(N, ...)``.
+      :type observations: dict or torch.tensor
+
+      :returns: *torch.tensor* -- Log-likelihoods of each state, conditioned on a
+                corresponding observation. Shape should be ``(N, M)``.
+
+
+

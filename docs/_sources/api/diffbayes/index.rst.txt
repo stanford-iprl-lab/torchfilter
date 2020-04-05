@@ -1,0 +1,17 @@
+:mod:`diffbayes`
+================
+
+.. py:module:: diffbayes
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   base/index.rst
+   datasets/index.rst
+   train/index.rst
+
+

@@ -1,0 +1,79 @@
+:mod:`diffbayes.datasets`
+=========================
+
+.. py:module:: diffbayes.datasets
+
+
+Package Contents
+----------------
+
+.. function:: split_trajectories(trajectories, subsequence_length)
+
+   Helper for splitting a list of trajectories into a list of overlapping
+   subsequences.
+
+   For each trajectory, assuming a subsequence length of 10, this function
+   includes in its output overlapping subsequences corresponding to
+   timesteps...
+
+   .. code-block::
+
+          [0:10], [10:20], [20:30], ...
+
+   as well as...
+
+   .. code-block::
+
+          [5:15], [15:25], [25:30], ...
+
+   :param trajectories: list of trajectories, where each is a tuple of
+                        ``(states, observations, controls)``. Each tuple member should be
+                        either a numpy array or dict of numpy arrays with shape ``(T, ...)``.
+   :type trajectories: list
+   :param subsequence_length: # of timesteps per subsequence.
+   :type subsequence_length: int
+
+   :returns: *list* -- A list of subsequences, as ``(states, observations, controls)``
+             tuples. Each tuple member should be either a numpy array or dict of
+             numpy arrays with shape ``(subsequence_length, ...)``.
+
+
+.. py:class:: SubsequenceDataset(trajectories, subsequence_length)
+
+   Bases: :class:`torch.utils.data.Dataset`
+
+   A data preprocessor for producing training subsequences from
+   a list of trajectories.
+
+   Thin wrapper around ``diffbayes.datasets.split_trajectories()``.
+
+   :param trajectories: list of trajectories, where each is a tuple of
+                        ``(states, observations, controls)``. Each tuple member should be
+                        either a numpy array or dict of numpy arrays with shape ``(T, ...)``.
+   :type trajectories: list
+   :param subsequence_length: # of timesteps per subsequence.
+   :type subsequence_length: int
+
+   .. method:: __getitem__(self, index)
+
+
+      Get a subsequence from our dataset.
+
+      :param index: Subsequence number in our dataset.
+      :type index: int
+
+      :returns: *tuple* -- ``(states, observations, controls)`` tuple that contains
+                data for a single subsequence. Each tuple member should be either a
+                numpy array or dict of numpy arrays with shape
+                ``(subsequence_length, ...)``.
+
+
+   .. method:: __len__(self)
+
+
+      Total number of subsequences in the dataset.
+
+      :returns: *int* -- Length of dataset.
+
+
+

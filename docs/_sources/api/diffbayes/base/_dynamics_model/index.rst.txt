@@ -1,0 +1,68 @@
+:orphan:
+
+:mod:`diffbayes.base._dynamics_model`
+=====================================
+
+.. py:module:: diffbayes.base._dynamics_model
+
+
+Module Contents
+---------------
+
+.. py:class:: DynamicsModel(*, state_dim)
+
+   Bases: :class:`torch.nn.Module`, :class:`abc.ABC`
+
+   Base class for a generic differentiable dynamics model.
+
+   As a minimum, subclasses should override either ``forward`` or ``forward_loop``
+   for computing dynamics estimates.
+
+   .. attribute:: state_dim
+      
+
+      Dimensionality of our state.
+
+      :type: int
+
+
+   .. method:: forward(self, *, initial_states, controls)
+
+
+      Dynamics model forward pass, single timestep.
+
+      By default, this is implemented by bootstrapping the ``forward_loop()``
+      method.
+
+      :param initial_states: Initial states of our system.
+      :type initial_states: torch.tensor
+      :param controls: Control inputs. Should be either a
+                       dict of tensors or tensor of size ``(N, ...)``.
+      :type controls: dict or torch.tensor
+
+      :returns: *torch.tensor* -- Predicted state for each batch element. Shape should
+                be ``(N, state_dim).``
+
+
+   .. method:: forward_loop(self, *, initial_states, controls)
+
+
+      Dynamics model forward pass, over sequence length ``T`` and batch size
+      ``N``.  By default, this is implemented by iteratively calling
+      ``forward()``.
+
+      To inject code between timesteps (for example, to inspect hidden state),
+      use ``register_forward_hook()``.
+
+      :param initial_states: Initial states to pass to our
+                             dynamics model. Shape should be ``(N, state_dim)``.
+      :type initial_states: torch.tensor
+      :param controls: Control inputs. Should be either a
+                       dict of tensors or tensor of size ``(T, N, ...)``.
+      :type controls: dict or torch.tensor
+
+      :returns: *torch.tensor* -- Predicted states at each timestep. Shape should be
+                ``(T, N, state_dim).``
+
+
+

@@ -1,0 +1,42 @@
+:orphan:
+
+:mod:`diffbayes.datasets._split_trajectories`
+=============================================
+
+.. py:module:: diffbayes.datasets._split_trajectories
+
+
+Module Contents
+---------------
+
+.. function:: split_trajectories(trajectories, subsequence_length)
+
+   Helper for splitting a list of trajectories into a list of overlapping
+   subsequences.
+
+   For each trajectory, assuming a subsequence length of 10, this function
+   includes in its output overlapping subsequences corresponding to
+   timesteps...
+
+   .. code-block::
+
+          [0:10], [10:20], [20:30], ...
+
+   as well as...
+
+   .. code-block::
+
+          [5:15], [15:25], [25:30], ...
+
+   :param trajectories: list of trajectories, where each is a tuple of
+                        ``(states, observations, controls)``. Each tuple member should be
+                        either a numpy array or dict of numpy arrays with shape ``(T, ...)``.
+   :type trajectories: list
+   :param subsequence_length: # of timesteps per subsequence.
+   :type subsequence_length: int
+
+   :returns: *list* -- A list of subsequences, as ``(states, observations, controls)``
+             tuples. Each tuple member should be either a numpy array or dict of
+             numpy arrays with shape ``(subsequence_length, ...)``.
+
+

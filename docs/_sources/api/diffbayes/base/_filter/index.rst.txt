@@ -1,0 +1,85 @@
+:orphan:
+
+:mod:`diffbayes.base._filter`
+=============================
+
+.. py:module:: diffbayes.base._filter
+
+
+Module Contents
+---------------
+
+.. py:class:: Filter(*, state_dim)
+
+   Bases: :class:`torch.nn.Module`, :class:`abc.ABC`
+
+   Base class for a generic differentiable state estimator.
+
+   As a minimum, subclasses should override:
+
+
+   * ``initialize_beliefs`` for populating the initial belief of our estimator
+   * ``forward`` or ``forward_loop`` for computing state estimates
+
+   .. attribute:: state_dim
+      
+
+      Dimensionality of our state.
+
+      :type: int
+
+
+   .. method:: initialize_beliefs(self, *, mean, covariance)
+      :abstractmethod:
+
+
+      Initialize our filter with a Gaussian prior.
+
+      :param mean: Mean of belief. Shape should be
+                   ``(N, state_dim)``.
+      :type mean: torch.tensor
+      :param covariance: Covariance of belief. Shape should be
+                         ``(N, state_dim, state_dim)``.
+      :type covariance: torch.tensor
+
+
+   .. method:: forward(self, *, observations, controls)
+
+
+      Filtering forward pass, over a single timestep.
+
+      By default, this is implemented by bootstrapping the ``forward_loop()``
+      method.
+
+      :param observations: Observation inputs. Should be
+                           either a dict of tensors or tensor of size ``(N, ...)``.
+      :type observations: dict or torch.tensor
+      :param controls: Control inputs. Should be either a
+                       dict of tensors or tensor of size ``(N, ...)``.
+      :type controls: dict or torch.tensor
+
+      :returns: *torch.tensor* -- Predicted state for each batch element. Shape should
+                be ``(N, state_dim).``
+
+
+   .. method:: forward_loop(self, *, observations, controls)
+
+
+      Filtering forward pass, over sequence length ``T`` and batch size ``N``.
+      By default, this is implemented by iteratively calling ``forward()``.
+
+      To inject code between timesteps (for example, to inspect hidden state),
+      use ``register_forward_hook()``.
+
+      :param observations: observation inputs. should be
+                           either a dict of tensors or tensor of size ``(T, N, ...)``.
+      :type observations: dict or torch.tensor
+      :param controls: control inputs. should be either a
+                       dict of tensors or tensor of size ``(T, N, ...)``.
+      :type controls: dict or torch.tensor
+
+      :returns: *torch.tensor* -- Predicted states at each timestep. Shape should be
+                ``(T, N, state_dim).``
+
+
+
