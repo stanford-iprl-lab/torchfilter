@@ -77,7 +77,7 @@ def _split_helper(x, subsequence_length, offset):
         # value in the dictionary
         output = {}
         for key, value in x.items():
-            output[key] = _split_helper(value, offset=offset)
+            output[key] = _split_helper(value, subsequence_length, offset)
 
         # Return a wrapped dictionary; this makes it iterable
         return fannypack.utils.SliceWrapper(output)

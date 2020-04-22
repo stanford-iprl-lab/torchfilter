@@ -1,8 +1,9 @@
-from . import Filter, DynamicsModel, ParticleFilterMeasurementModel
-
 import abc
-import torch
+
 import numpy as np
+import torch
+
+from . import DynamicsModel, Filter, ParticleFilterMeasurementModel
 
 
 class ParticleFilter(Filter):
@@ -158,17 +159,13 @@ class ParticleFilter(Filter):
         assert self.particle_states == (N, M, self.state_dim)
 
         # Re-weight particles using observations
-        self.particle_log_weights = (
-            self.particle_log_weights
-            + self.measurement_model(
-                states=self.particle_states, observations=observations
-            )
+        self.particle_log_weights = self.particle_log_weights + self.measurement_model(
+            states=self.particle_states, observations=observations
         )
 
         # Normalize particle weights
-        self.particle_log_weights = (
-            self.particle_log_weights
-            - torch.logsumexp(self.particle_log_weights, dim=1, keepdim=True)
+        self.particle_log_weights = self.particle_log_weights - torch.logsumexp(
+            self.particle_log_weights, dim=1, keepdim=True
         )
 
         # Compute output

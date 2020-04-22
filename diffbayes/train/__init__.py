@@ -1,1 +1,1 @@
-from ._train_dynamics import train_dynamics
+from ._train_dynamics import train_dynamics_recurrent

@@ -1,5 +1,6 @@
 import pytest
 
+
 def test_import():
     # Checks syntax :)
     import diffbayes

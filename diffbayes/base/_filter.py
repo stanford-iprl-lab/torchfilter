@@ -1,7 +1,8 @@
 import abc
+
+import fannypack
 import torch
 import torch.nn as nn
-import fannypack
 
 
 class Filter(nn.Module, abc.ABC):

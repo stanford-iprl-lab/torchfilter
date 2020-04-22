@@ -1,4 +1,5 @@
 import torch
+
 from ._split_trajectories import split_trajectories
 
 
@@ -17,9 +18,7 @@ class SubsequenceDataset(torch.utils.data.Dataset):
 
     def __init__(self, trajectories, subsequence_length):
         # Split trajectory into overlapping subsequences
-        self.subsequences = split_trajectories(
-            trajectories, subsequence_length
-        )
+        self.subsequences = split_trajectories(trajectories, subsequence_length)
 
     def __getitem__(self, index):
         """Get a subsequence from our dataset.

@@ -1,6 +1,9 @@
 import abc
-import torch.nn as nn
+from typing import Union, Dict, Tuple
+
 import fannypack
+import torch
+import torch.nn as nn
 
 
 class DynamicsModel(nn.Module, abc.ABC):
@@ -10,11 +13,16 @@ class DynamicsModel(nn.Module, abc.ABC):
     for computing dynamics estimates.
     """
 
-    def __init__(self, *, state_dim):
+    def __init__(self, *, state_dim: int) -> None:
         self.state_dim = state_dim
         """int: Dimensionality of our state."""
 
-    def forward(self, *, initial_states, controls):
+    def forward(
+        self,
+        *,
+        initial_states: torch.tensor,
+        controls: Union[Dict[str, torch.tensor], torch.tensor]
+    ) -> torch.tensor:
         """Dynamics model forward pass, single timestep.
 
         By default, this is implemented by bootstrapping the `forward_loop()`
@@ -43,7 +51,11 @@ class DynamicsModel(nn.Module, abc.ABC):
         assert output.shape[0] == 1
         return output[0]
 
-    def forward_loop(self, *, initial_states, controls):
+    def forward_loop(
+        self,
+        *,
+        initial_states: torch.tensor, controls: Union[Dict[Any, torch.Tensor], torch.Tensor]
+    ) -> torch.Tensor:
         """Dynamics model forward pass, over sequence length `T` and batch size
         `N`.  By default, this is implemented by iteratively calling
         `forward()`.
