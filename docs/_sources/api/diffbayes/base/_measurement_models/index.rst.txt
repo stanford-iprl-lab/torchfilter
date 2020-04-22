@@ -9,7 +9,7 @@
 Module Contents
 ---------------
 
-.. py:class:: ParticleFilterMeasurementModel(state_dim)
+.. py:class:: ParticleFilterMeasurementModel(state_dim: int)
 
    Bases: :class:`abc.ABC`, :class:`torch.nn.Module`
 
@@ -25,7 +25,7 @@ Module Contents
       :type: int
 
 
-   .. method:: forward(self, *, states, observations)
+   .. method:: forward(self, *, states: torch.Tensor, observations: Union[Dict[str, torch.Tensor], torch.Tensor])
       :abstractmethod:
 
 
@@ -35,12 +35,12 @@ Module Contents
 
       :param states: States to pass to our observation model.
                      Shape should be ``(N, M, state_dim)``.
-      :type states: torch.tensor
+      :type states: torch.Tensor
       :param observations: Measurement inputs. Should be
                            either a dict of tensors or tensor of size ``(N, ...)``.
-      :type observations: dict or torch.tensor
+      :type observations: dict or torch.Tensor
 
-      :returns: *torch.tensor* -- Log-likelihoods of each state, conditioned on a
+      :returns: *torch.Tensor* -- Log-likelihoods of each state, conditioned on a
                 corresponding observation. Shape should be ``(N, M)``.
 
 

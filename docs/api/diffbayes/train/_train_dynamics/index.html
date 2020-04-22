@@ -84,7 +84,10 @@
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.train._train_dynamics</span></code></a><ul>
 <li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
-<li><a class="reference internal" href="#diffbayes.train._train_dynamics.train_dynamics">train_dynamics</a></li>
+<li><a class="reference internal" href="#diffbayes.train._train_dynamics.train_dynamics_single_step">train_dynamics_single_step</a></li>
+</ul>
+<ul>
+<li><a class="reference internal" href="#diffbayes.train._train_dynamics.train_dynamics_recurrent">train_dynamics_recurrent</a></li>
 </ul>
 </li>
 </ul>
@@ -158,9 +161,48 @@
 <div class="section" id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="diffbayes.train._train_dynamics.train_dynamics">
-<code class="sig-prename descclassname">diffbayes.train._train_dynamics.</code><code class="sig-name descname">train_dynamics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.train._train_dynamics.train_dynamics" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="diffbayes.train._train_dynamics.train_dynamics_single_step">
+<code class="sig-prename descclassname">diffbayes.train._train_dynamics.</code><code class="sig-name descname">train_dynamics_single_step</code><span class="sig-paren">(</span><em class="sig-param">buddy: fannypack.utils.Buddy, dynamics_model: diffbayes.base.DynamicsModel, dataloader: DataLoader, *, loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss, log_interval: int = 1</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.train._train_dynamics.train_dynamics_single_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimizes a dynamics model’s single-step prediction accuracy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>buddy</strong> (<em>fannypack.utils.Buddy</em>) – Training helper.</p></li>
+<li><p><strong>dynamics_model</strong> (<a class="reference internal" href="../../base/index.html#diffbayes.base.DynamicsModel" title="diffbayes.base.DynamicsModel"><em>diffbayes.base.DynamicsModel</em></a>) – Model to train.</p></li>
+<li><p><strong>dataloader</strong> (<em>DataLoader</em>) – Loader for a SingleStepDataset.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>loss_function</strong> (<em>callable</em><em>, </em><em>optional</em>) – Loss function use, from
+<code class="docutils literal notranslate"><span class="pre">torch.nn.functional</span></code>. Defaults to MSE.</p></li>
+<li><p><strong>log_interval</strong> (<em>int</em><em>, </em><em>optional</em>) – Minibatches between each Tensorboard log.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="diffbayes.train._train_dynamics.train_dynamics_recurrent">
+<code class="sig-prename descclassname">diffbayes.train._train_dynamics.</code><code class="sig-name descname">train_dynamics_recurrent</code><span class="sig-paren">(</span><em class="sig-param">buddy: fannypack.utils.Buddy, dynamics_model: diffbayes.base.DynamicsModel, dataloader: DataLoader, *, loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss, log_interval: int = 1</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.train._train_dynamics.train_dynamics_recurrent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains a dynamics model via backpropagation through time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>buddy</strong> (<em>fannypack.utils.Buddy</em>) – Training helper.</p></li>
+<li><p><strong>dynamics_model</strong> (<a class="reference internal" href="../../base/index.html#diffbayes.base.DynamicsModel" title="diffbayes.base.DynamicsModel"><em>diffbayes.base.DynamicsModel</em></a>) – Model to train.</p></li>
+<li><p><strong>dataloader</strong> (<em>DataLoader</em>) – Loader for a SubsequenceDataset.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>loss_function</strong> (<em>callable</em><em>, </em><em>optional</em>) – Loss function use, from
+<code class="docutils literal notranslate"><span class="pre">torch.nn.functional</span></code>. Defaults to MSE.</p></li>
+<li><p><strong>log_interval</strong> (<em>int</em><em>, </em><em>optional</em>) – Minibatches between each Tensorboard log.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </div>

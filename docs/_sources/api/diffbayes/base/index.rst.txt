@@ -7,7 +7,7 @@
 Package Contents
 ----------------
 
-.. py:class:: DynamicsModel(*, state_dim)
+.. py:class:: DynamicsModel(*, state_dim: int)
 
    Bases: :class:`torch.nn.Module`, :class:`abc.ABC`
 
@@ -24,7 +24,7 @@ Package Contents
       :type: int
 
 
-   .. method:: forward(self, *, initial_states, controls)
+   .. method:: forward(self, *, initial_states: torch.Tensor, controls: Union[Dict[str, torch.Tensor], torch.Tensor])
 
 
       Dynamics model forward pass, single timestep.
@@ -33,16 +33,16 @@ Package Contents
       method.
 
       :param initial_states: Initial states of our system.
-      :type initial_states: torch.tensor
+      :type initial_states: torch.Tensor
       :param controls: Control inputs. Should be either a
                        dict of tensors or tensor of size ``(N, ...)``.
-      :type controls: dict or torch.tensor
+      :type controls: dict or torch.Tensor
 
-      :returns: *torch.tensor* -- Predicted state for each batch element. Shape should
+      :returns: *torch.Tensor* -- Predicted state for each batch element. Shape should
                 be ``(N, state_dim).``
 
 
-   .. method:: forward_loop(self, *, initial_states, controls)
+   .. method:: forward_loop(self, *, initial_states: torch.Tensor, controls: Union[Dict[Any, torch.Tensor], torch.Tensor])
 
 
       Dynamics model forward pass, over sequence length ``T`` and batch size
@@ -54,17 +54,17 @@ Package Contents
 
       :param initial_states: Initial states to pass to our
                              dynamics model. Shape should be ``(N, state_dim)``.
-      :type initial_states: torch.tensor
+      :type initial_states: torch.Tensor
       :param controls: Control inputs. Should be either a
                        dict of tensors or tensor of size ``(T, N, ...)``.
-      :type controls: dict or torch.tensor
+      :type controls: dict or torch.Tensor
 
-      :returns: *torch.tensor* -- Predicted states at each timestep. Shape should be
+      :returns: *torch.Tensor* -- Predicted states at each timestep. Shape should be
                 ``(T, N, state_dim).``
 
 
 
-.. py:class:: Filter(*, state_dim)
+.. py:class:: Filter(*, state_dim: int)
 
    Bases: :class:`torch.nn.Module`, :class:`abc.ABC`
 
@@ -84,7 +84,7 @@ Package Contents
       :type: int
 
 
-   .. method:: initialize_beliefs(self, *, mean, covariance)
+   .. method:: initialize_beliefs(self, *, mean: torch.Tensor, covariance: torch.Tensor)
       :abstractmethod:
 
 
@@ -92,13 +92,13 @@ Package Contents
 
       :param mean: Mean of belief. Shape should be
                    ``(N, state_dim)``.
-      :type mean: torch.tensor
+      :type mean: torch.Tensor
       :param covariance: Covariance of belief. Shape should be
                          ``(N, state_dim, state_dim)``.
-      :type covariance: torch.tensor
+      :type covariance: torch.Tensor
 
 
-   .. method:: forward(self, *, observations, controls)
+   .. method:: forward(self, *, observations: Union[Dict[str, torch.Tensor], torch.Tensor], controls: Union[Dict[str, torch.Tensor], torch.Tensor])
 
 
       Filtering forward pass, over a single timestep.
@@ -108,16 +108,16 @@ Package Contents
 
       :param observations: Observation inputs. Should be
                            either a dict of tensors or tensor of size ``(N, ...)``.
-      :type observations: dict or torch.tensor
+      :type observations: dict or torch.Tensor
       :param controls: Control inputs. Should be either a
                        dict of tensors or tensor of size ``(N, ...)``.
-      :type controls: dict or torch.tensor
+      :type controls: dict or torch.Tensor
 
-      :returns: *torch.tensor* -- Predicted state for each batch element. Shape should
+      :returns: *torch.Tensor* -- Predicted state for each batch element. Shape should
                 be ``(N, state_dim).``
 
 
-   .. method:: forward_loop(self, *, observations, controls)
+   .. method:: forward_loop(self, *, observations: Union[Dict[str, torch.Tensor], torch.Tensor], controls: Union[Dict[str, torch.Tensor], torch.Tensor])
 
 
       Filtering forward pass, over sequence length ``T`` and batch size ``N``.
@@ -128,17 +128,17 @@ Package Contents
 
       :param observations: observation inputs. should be
                            either a dict of tensors or tensor of size ``(T, N, ...)``.
-      :type observations: dict or torch.tensor
+      :type observations: dict or torch.Tensor
       :param controls: control inputs. should be either a
                        dict of tensors or tensor of size ``(T, N, ...)``.
-      :type controls: dict or torch.tensor
+      :type controls: dict or torch.Tensor
 
-      :returns: *torch.tensor* -- Predicted states at each timestep. Shape should be
+      :returns: *torch.Tensor* -- Predicted states at each timestep. Shape should be
                 ``(T, N, state_dim).``
 
 
 
-.. py:class:: ParticleFilterMeasurementModel(state_dim)
+.. py:class:: ParticleFilterMeasurementModel(state_dim: int)
 
    Bases: :class:`abc.ABC`, :class:`torch.nn.Module`
 
@@ -154,7 +154,7 @@ Package Contents
       :type: int
 
 
-   .. method:: forward(self, *, states, observations)
+   .. method:: forward(self, *, states: torch.Tensor, observations: Union[Dict[str, torch.Tensor], torch.Tensor])
       :abstractmethod:
 
 
@@ -164,17 +164,17 @@ Package Contents
 
       :param states: States to pass to our observation model.
                      Shape should be ``(N, M, state_dim)``.
-      :type states: torch.tensor
+      :type states: torch.Tensor
       :param observations: Measurement inputs. Should be
                            either a dict of tensors or tensor of size ``(N, ...)``.
-      :type observations: dict or torch.tensor
+      :type observations: dict or torch.Tensor
 
-      :returns: *torch.tensor* -- Log-likelihoods of each state, conditioned on a
+      :returns: *torch.Tensor* -- Log-likelihoods of each state, conditioned on a
                 corresponding observation. Shape should be ``(N, M)``.
 
 
 
-.. py:class:: ParticleFilter(*, dynamics_model, measurement_model, num_particles=100, resample=True, soft_resample_alpha=1.0, estimation_method='weighted_average')
+.. py:class:: ParticleFilter(*, dynamics_model: DynamicsModel, measurement_model: ParticleFilterMeasurementModel, num_particles: int = 100, resample: bool = True, soft_resample_alpha: float = 1.0, estimation_method: str = 'weighted_average')
 
    Bases: :class:`diffbayes.base.Filter`
 
@@ -238,7 +238,7 @@ Package Contents
 
 
    .. attribute:: particle_states
-      
+      :annotation: :torch.Tensor
 
       Discrete particles representing our current belief
       distribution. Shape should be ``(N, M, state_dim)``.
@@ -247,7 +247,7 @@ Package Contents
 
 
    .. attribute:: particle_log_weights
-      
+      :annotation: :torch.Tensor
 
       Weights corresponding to each particle, stored as
       log-likelihoods. Shape should be ``(N, M)``.
@@ -255,32 +255,32 @@ Package Contents
       :type: torch.tensor
 
 
-   .. method:: initialize_beliefs(self, *, mean, covariance)
+   .. method:: initialize_beliefs(self, *, mean: torch.Tensor, covariance: torch.Tensor)
 
 
       Populates initial particles, which will be normally distributed.
 
       :param mean: Mean of belief. Shape should be
                    ``(N, state_dim)``.
-      :type mean: torch.tensor
+      :type mean: torch.Tensor
       :param covariance: Covariance of belief. Shape should be
                          ``(N, state_dim, state_dim)``.
-      :type covariance: torch.tensor
+      :type covariance: torch.Tensor
 
 
-   .. method:: forward(self, *, observations, controls)
+   .. method:: forward(self, *, observations: Union[Dict[str, torch.Tensor], torch.Tensor], controls: Union[Dict[str, torch.Tensor], torch.Tensor])
 
 
       Particle filter forward pass, single timestep.
 
       :param observations: observation inputs. should be
                            either a dict of tensors or tensor of size ``(N, ...)``.
-      :type observations: dict or torch.tensor
+      :type observations: dict or torch.Tensor
       :param controls: control inputs. should be either a
                        dict of tensors or tensor of size ``(N, ...)``.
-      :type controls: dict or torch.tensor
+      :type controls: dict or torch.Tensor
 
-      :returns: *torch.tensor* -- Predicted state for each batch element. Shape should
+      :returns: *torch.Tensor* -- Predicted state for each batch element. Shape should
                 be ``(N, state_dim).``
 
 

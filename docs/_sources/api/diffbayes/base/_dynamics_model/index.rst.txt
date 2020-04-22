@@ -9,7 +9,7 @@
 Module Contents
 ---------------
 
-.. py:class:: DynamicsModel(*, state_dim)
+.. py:class:: DynamicsModel(*, state_dim: int)
 
    Bases: :class:`torch.nn.Module`, :class:`abc.ABC`
 
@@ -26,7 +26,7 @@ Module Contents
       :type: int
 
 
-   .. method:: forward(self, *, initial_states, controls)
+   .. method:: forward(self, *, initial_states: torch.Tensor, controls: Union[Dict[str, torch.Tensor], torch.Tensor])
 
 
       Dynamics model forward pass, single timestep.
@@ -35,16 +35,16 @@ Module Contents
       method.
 
       :param initial_states: Initial states of our system.
-      :type initial_states: torch.tensor
+      :type initial_states: torch.Tensor
       :param controls: Control inputs. Should be either a
                        dict of tensors or tensor of size ``(N, ...)``.
-      :type controls: dict or torch.tensor
+      :type controls: dict or torch.Tensor
 
-      :returns: *torch.tensor* -- Predicted state for each batch element. Shape should
+      :returns: *torch.Tensor* -- Predicted state for each batch element. Shape should
                 be ``(N, state_dim).``
 
 
-   .. method:: forward_loop(self, *, initial_states, controls)
+   .. method:: forward_loop(self, *, initial_states: torch.Tensor, controls: Union[Dict[Any, torch.Tensor], torch.Tensor])
 
 
       Dynamics model forward pass, over sequence length ``T`` and batch size
@@ -56,12 +56,12 @@ Module Contents
 
       :param initial_states: Initial states to pass to our
                              dynamics model. Shape should be ``(N, state_dim)``.
-      :type initial_states: torch.tensor
+      :type initial_states: torch.Tensor
       :param controls: Control inputs. Should be either a
                        dict of tensors or tensor of size ``(T, N, ...)``.
-      :type controls: dict or torch.tensor
+      :type controls: dict or torch.Tensor
 
-      :returns: *torch.tensor* -- Predicted states at each timestep. Shape should be
+      :returns: *torch.Tensor* -- Predicted states at each timestep. Shape should be
                 ``(T, N, state_dim).``
 
 

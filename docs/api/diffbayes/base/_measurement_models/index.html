@@ -165,7 +165,7 @@
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="diffbayes.base._measurement_models.ParticleFilterMeasurementModel">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._measurement_models.</code><code class="sig-name descname">ParticleFilterMeasurementModel</code><span class="sig-paren">(</span><em class="sig-param">state_dim</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._measurement_models.ParticleFilterMeasurementModel" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._measurement_models.</code><code class="sig-name descname">ParticleFilterMeasurementModel</code><span class="sig-paren">(</span><em class="sig-param">state_dim: int</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._measurement_models.ParticleFilterMeasurementModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
 <p>Observation model base class for a generic differentiable particle
 filter; maps (state, observation) pairs to the log-likelihood of the
@@ -183,21 +183,21 @@ observation given the state ( <span class="math notranslate nohighlight">\(\log 
 
 <dl class="method">
 <dt id="diffbayes.base._measurement_models.ParticleFilterMeasurementModel.forward">
-<em class="property">abstract </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">*</em>, <em class="sig-param">states</em>, <em class="sig-param">observations</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._measurement_models.ParticleFilterMeasurementModel.forward" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param">self, *, states: torch.Tensor, observations: Union[Dict[str, torch.Tensor], torch.Tensor]</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._measurement_models.ParticleFilterMeasurementModel.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Observation model forward pass, over batch size <code class="docutils literal notranslate"><span class="pre">N</span></code>.
 For each member of a batch, we expect <code class="docutils literal notranslate"><span class="pre">M</span></code> separate states (particles)
 and just one unique observation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>states</strong> (<em>torch.tensor</em>) – States to pass to our observation model.
+<li><p><strong>states</strong> (<em>torch.Tensor</em>) – States to pass to our observation model.
 Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">M,</span> <span class="pre">state_dim)</span></code>.</p></li>
-<li><p><strong>observations</strong> (<em>dict</em><em> or </em><em>torch.tensor</em>) – Measurement inputs. Should be
+<li><p><strong>observations</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Measurement inputs. Should be
 either a dict of tensors or tensor of size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>torch.tensor</em> – Log-likelihoods of each state, conditioned on a
+<dd class="field-even"><p><em>torch.Tensor</em> – Log-likelihoods of each state, conditioned on a
 corresponding observation. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">M)</span></code>.</p>
 </dd>
 </dl>

@@ -9,7 +9,7 @@
 Module Contents
 ---------------
 
-.. py:class:: ParticleFilter(*, dynamics_model, measurement_model, num_particles=100, resample=True, soft_resample_alpha=1.0, estimation_method='weighted_average')
+.. py:class:: ParticleFilter(*, dynamics_model: DynamicsModel, measurement_model: ParticleFilterMeasurementModel, num_particles: int = 100, resample: bool = True, soft_resample_alpha: float = 1.0, estimation_method: str = 'weighted_average')
 
    Bases: :class:`diffbayes.base.Filter`
 
@@ -73,7 +73,7 @@ Module Contents
 
 
    .. attribute:: particle_states
-      
+      :annotation: :torch.Tensor
 
       Discrete particles representing our current belief
       distribution. Shape should be ``(N, M, state_dim)``.
@@ -82,7 +82,7 @@ Module Contents
 
 
    .. attribute:: particle_log_weights
-      
+      :annotation: :torch.Tensor
 
       Weights corresponding to each particle, stored as
       log-likelihoods. Shape should be ``(N, M)``.
@@ -90,32 +90,32 @@ Module Contents
       :type: torch.tensor
 
 
-   .. method:: initialize_beliefs(self, *, mean, covariance)
+   .. method:: initialize_beliefs(self, *, mean: torch.Tensor, covariance: torch.Tensor)
 
 
       Populates initial particles, which will be normally distributed.
 
       :param mean: Mean of belief. Shape should be
                    ``(N, state_dim)``.
-      :type mean: torch.tensor
+      :type mean: torch.Tensor
       :param covariance: Covariance of belief. Shape should be
                          ``(N, state_dim, state_dim)``.
-      :type covariance: torch.tensor
+      :type covariance: torch.Tensor
 
 
-   .. method:: forward(self, *, observations, controls)
+   .. method:: forward(self, *, observations: Union[Dict[str, torch.Tensor], torch.Tensor], controls: Union[Dict[str, torch.Tensor], torch.Tensor])
 
 
       Particle filter forward pass, single timestep.
 
       :param observations: observation inputs. should be
                            either a dict of tensors or tensor of size ``(N, ...)``.
-      :type observations: dict or torch.tensor
+      :type observations: dict or torch.Tensor
       :param controls: control inputs. should be either a
                        dict of tensors or tensor of size ``(N, ...)``.
-      :type controls: dict or torch.tensor
+      :type controls: dict or torch.Tensor
 
-      :returns: *torch.tensor* -- Predicted state for each batch element. Shape should
+      :returns: *torch.Tensor* -- Predicted state for each batch element. Shape should
                 be ``(N, state_dim).``
 
 

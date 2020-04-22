@@ -9,7 +9,7 @@
 Module Contents
 ---------------
 
-.. py:class:: SubsequenceDataset(trajectories, subsequence_length)
+.. py:class:: SubsequenceDataset(trajectories: List[Tuple], subsequence_length: int)
 
    Bases: :class:`torch.utils.data.Dataset`
 
@@ -25,7 +25,7 @@ Module Contents
    :param subsequence_length: # of timesteps per subsequence.
    :type subsequence_length: int
 
-   .. method:: __getitem__(self, index)
+   .. method:: __getitem__(self, index: int)
 
 
       Get a subsequence from our dataset.
