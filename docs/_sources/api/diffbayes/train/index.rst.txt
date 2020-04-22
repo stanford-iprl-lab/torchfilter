@@ -1,0 +1,12 @@
+:mod:`diffbayes.train`
+======================
+
+.. py:module:: diffbayes.train
+
+
+Package Contents
+----------------
+
+.. function:: train_dynamics()
+
+

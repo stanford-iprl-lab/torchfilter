@@ -1,0 +1,14 @@
+:orphan:
+
+:mod:`diffbayes.train._train_dynamics`
+======================================
+
+.. py:module:: diffbayes.train._train_dynamics
+
+
+Module Contents
+---------------
+
+.. function:: train_dynamics()
+
+
