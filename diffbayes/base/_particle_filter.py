@@ -1,4 +1,5 @@
 import abc
+from typing import Dict, Union
 
 import numpy as np
 import torch
@@ -13,12 +14,12 @@ class ParticleFilter(Filter):
     def __init__(
         self,
         *,
-        dynamics_model,
-        measurement_model,
-        num_particles=100,
-        resample=True,
-        soft_resample_alpha=1.0,
-        estimation_method="weighted_average",
+        dynamics_model: DynamicsModel,
+        measurement_model: ParticleFilterMeasurementModel,
+        num_particles: int = 100,
+        resample: bool = True,
+        soft_resample_alpha: float = 1.0,
+        estimation_method: str = "weighted_average",
     ):
         # Sanity check for submodules
         assert isinstance(dynamics_model, DynamicsModel)
@@ -57,22 +58,22 @@ class ParticleFilter(Filter):
         """
 
         # "Hidden state" tensors
-        self.particle_states = None
+        self.particle_states: torch.Tensor
         """torch.tensor: Discrete particles representing our current belief
         distribution. Shape should be `(N, M, state_dim)`.
         """
-        self.particle_log_weights = None
+        self.particle_log_weights: torch.Tensor
         """torch.tensor: Weights corresponding to each particle, stored as
         log-likelihoods. Shape should be `(N, M)`.
         """
 
-    def initialize_beliefs(self, *, mean, covariance):
+    def initialize_beliefs(self, *, mean: torch.Tensor, covariance: torch.Tensor):
         """Populates initial particles, which will be normally distributed.
 
         Args:
-            mean (torch.tensor): Mean of belief. Shape should be
+            mean (torch.Tensor): Mean of belief. Shape should be
                 `(N, state_dim)`.
-            covariance (torch.tensor): Covariance of belief. Shape should be
+            covariance (torch.Tensor): Covariance of belief. Shape should be
                 `(N, state_dim, state_dim)`.
         """
         N = mean.shape[0]
@@ -86,7 +87,7 @@ class ParticleFilter(Filter):
             .sample(M)
             .transpose(0, 1)
         )
-        assert particle_states.shape == (N, M, self.state_dim)
+        assert self.particle_states.shape == (N, M, self.state_dim)
 
         # Normalize weights
         self.particle_log_weights = self.particle_states.new_full(
@@ -94,17 +95,22 @@ class ParticleFilter(Filter):
         )
         assert self.particle_log_weights == (N, M)
 
-    def forward(self, *, observations, controls):
+    def forward(
+        self,
+        *,
+        observations: Union[Dict[str, torch.Tensor], torch.Tensor],
+        controls: Union[Dict[str, torch.Tensor], torch.Tensor],
+    ) -> torch.Tensor:
         """Particle filter forward pass, single timestep.
 
         Args:
-            observations (dict or torch.tensor): observation inputs. should be
+            observations (dict or torch.Tensor): observation inputs. should be
                 either a dict of tensors or tensor of size `(N, ...)`.
-            controls (dict or torch.tensor): control inputs. should be either a
+            controls (dict or torch.Tensor): control inputs. should be either a
                 dict of tensors or tensor of size `(N, ...)`.
 
         Returns:
-            torch.tensor: Predicted state for each batch element. Shape should
+            torch.Tensor: Predicted state for each batch element. Shape should
             be `(N, state_dim).`
         """
 
@@ -114,7 +120,7 @@ class ParticleFilter(Filter):
         ), "Particle filter not initialized!"
 
         # Get our batch size (N), current particle count (M), & state dimension
-        N, M, state_dim = self.particles.shape
+        N, M, state_dim = self.particle_states.shape
         assert state_dim == self.state_dim
 
         # If we're not resampling and our current particle count doesn't match
@@ -184,7 +190,7 @@ class ParticleFilter(Filter):
             assert False, "Invalid estimation method!"
 
         # Resampling
-        if resample:
+        if self.resample:
             if self.soft_resample_alpha < 1.0:
                 # TODO: port this implementation over!
                 assert False, "Not yet ported"
@@ -202,7 +208,7 @@ class ParticleFilter(Filter):
                 state_indices = distribution.sample((self.num_particles,)).T
                 assert state_indices.shape == (N, self.num_particles)
 
-                new_states = torch.zeros_like(states_pred)
+                new_states = torch.zeros_like(self.particle_states)
                 for i in range(N):
                     # TODO: 90% sure this loop can be factored out
                     new_states[i] = self.particle_states[i][state_indices[i]]

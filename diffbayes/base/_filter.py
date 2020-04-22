@@ -1,4 +1,5 @@
 import abc
+from typing import Dict, Union
 
 import fannypack
 import torch
@@ -13,37 +14,42 @@ class Filter(nn.Module, abc.ABC):
     - `forward` or `forward_loop` for computing state estimates
     """
 
-    def __init__(self, *, state_dim):
+    def __init__(self, *, state_dim: int):
         super().__init__()
         self.state_dim = state_dim
         """int: Dimensionality of our state."""
 
     @abc.abstractmethod
-    def initialize_beliefs(self, *, mean, covariance):
+    def initialize_beliefs(self, *, mean: torch.Tensor, covariance: torch.Tensor):
         """Initialize our filter with a Gaussian prior.
 
         Args:
-            mean (torch.tensor): Mean of belief. Shape should be
+            mean (torch.Tensor): Mean of belief. Shape should be
                 `(N, state_dim)`.
-            covariance (torch.tensor): Covariance of belief. Shape should be
+            covariance (torch.Tensor): Covariance of belief. Shape should be
                 `(N, state_dim, state_dim)`.
         """
         pass
 
-    def forward(self, *, observations, controls):
+    def forward(
+        self,
+        *,
+        observations: Union[Dict[str, torch.Tensor], torch.Tensor],
+        controls: Union[Dict[str, torch.Tensor], torch.Tensor]
+    ) -> torch.Tensor:
         """Filtering forward pass, over a single timestep.
 
         By default, this is implemented by bootstrapping the `forward_loop()`
         method.
 
         Args:
-            observations (dict or torch.tensor): Observation inputs. Should be
+            observations (dict or torch.Tensor): Observation inputs. Should be
                 either a dict of tensors or tensor of size `(N, ...)`.
-            controls (dict or torch.tensor): Control inputs. Should be either a
+            controls (dict or torch.Tensor): Control inputs. Should be either a
                 dict of tensors or tensor of size `(N, ...)`.
 
         Returns:
-            torch.tensor: Predicted state for each batch element. Shape should
+            torch.Tensor: Predicted state for each batch element. Shape should
             be `(N, state_dim).`
         """
 
@@ -61,7 +67,12 @@ class Filter(nn.Module, abc.ABC):
         assert output.shape[0] == 1
         return output[0]
 
-    def forward_loop(self, *, observations, controls):
+    def forward_loop(
+        self,
+        *,
+        observations: Union[Dict[str, torch.Tensor], torch.Tensor],
+        controls: Union[Dict[str, torch.Tensor], torch.Tensor]
+    ) -> torch.Tensor:
         """Filtering forward pass, over sequence length `T` and batch size `N`.
         By default, this is implemented by iteratively calling `forward()`.
 
@@ -69,13 +80,13 @@ class Filter(nn.Module, abc.ABC):
         use `register_forward_hook()`.
 
         Args:
-            observations (dict or torch.tensor): observation inputs. should be
+            observations (dict or torch.Tensor): observation inputs. should be
                 either a dict of tensors or tensor of size `(T, N, ...)`.
-            controls (dict or torch.tensor): control inputs. should be either a
+            controls (dict or torch.Tensor): control inputs. should be either a
                 dict of tensors or tensor of size `(T, N, ...)`.
 
         Returns:
-            torch.tensor: Predicted states at each timestep. Shape should be
+            torch.Tensor: Predicted states at each timestep. Shape should be
             `(T, N, state_dim).`
         """
 
