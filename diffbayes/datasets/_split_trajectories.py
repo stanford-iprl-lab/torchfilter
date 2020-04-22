@@ -1,8 +1,10 @@
+from typing import Dict, List, Tuple, Union, cast
+
 import fannypack
 import numpy as np
 
 
-def split_trajectories(trajectories, subsequence_length):
+def split_trajectories(trajectories: List[Tuple], subsequence_length: int):
     """Helper for splitting a list of trajectories into a list of overlapping
     subsequences.
 
@@ -58,11 +60,18 @@ def split_trajectories(trajectories, subsequence_length):
     return subsequences
 
 
-def _split_helper(x, subsequence_length, sections, offset):
+def _split_helper(
+    x: Union[Dict[str, np.ndarray], np.ndarray],
+    subsequence_length: int,
+    sections: int,
+    offset: int,
+):
     """Private helper: splits arrays or dicts of arrays of shape `(T, ...)`
     into `(sections, subsequence_length, ...)`.
     """
     if type(x) == np.ndarray:
+        x = cast(np.ndarray, x)
+
         # Offset our starting point
         x = x[offset:]
 

@@ -1,9 +1,13 @@
+from typing import List, Tuple, Union
+
+import numpy as np
 import torch
+from torch.utils.data import Dataset
 
 from ._split_trajectories import split_trajectories
 
 
-class SubsequenceDataset(torch.utils.data.Dataset):
+class SubsequenceDataset(Dataset):
     """A data preprocessor for producing training subsequences from
     a list of trajectories.
 
@@ -16,11 +20,13 @@ class SubsequenceDataset(torch.utils.data.Dataset):
         subsequence_length (int): # of timesteps per subsequence.
     """
 
-    def __init__(self, trajectories, subsequence_length):
+    def __init__(self, trajectories: List[Tuple], subsequence_length: int):
         # Split trajectory into overlapping subsequences
         self.subsequences = split_trajectories(trajectories, subsequence_length)
 
-    def __getitem__(self, index):
+    def __getitem__(
+        self, index: int
+    ) -> Tuple[np.ndarray, Union[dict, np.ndarray], Union[dict, np.ndarray]]:
         """Get a subsequence from our dataset.
 
         Args:
