@@ -1,5 +1,5 @@
 import abc
-from typing import Union, Dict, Tuple
+from typing import Any, Dict, Union, cast
 
 import fannypack
 import torch
@@ -20,21 +20,21 @@ class DynamicsModel(nn.Module, abc.ABC):
     def forward(
         self,
         *,
-        initial_states: torch.tensor,
-        controls: Union[Dict[str, torch.tensor], torch.tensor]
-    ) -> torch.tensor:
+        initial_states: torch.Tensor,
+        controls: Union[Dict[str, torch.Tensor], torch.Tensor]
+    ) -> torch.Tensor:
         """Dynamics model forward pass, single timestep.
 
         By default, this is implemented by bootstrapping the `forward_loop()`
         method.
 
         Args:
-            initial_states (torch.tensor): Initial states of our system.
-            controls (dict or torch.tensor): Control inputs. Should be either a
+            initial_states (torch.Tensor): Initial states of our system.
+            controls (dict or torch.Tensor): Control inputs. Should be either a
                 dict of tensors or tensor of size `(N, ...)`.
 
         Returns:
-            torch.tensor: Predicted state for each batch element. Shape should
+            torch.Tensor: Predicted state for each batch element. Shape should
             be `(N, state_dim).`
         """
 
@@ -54,7 +54,8 @@ class DynamicsModel(nn.Module, abc.ABC):
     def forward_loop(
         self,
         *,
-        initial_states: torch.tensor, controls: Union[Dict[Any, torch.Tensor], torch.Tensor]
+        initial_states: torch.Tensor,
+        controls: Union[Dict[Any, torch.Tensor], torch.Tensor]
     ) -> torch.Tensor:
         """Dynamics model forward pass, over sequence length `T` and batch size
         `N`.  By default, this is implemented by iteratively calling
@@ -64,13 +65,13 @@ class DynamicsModel(nn.Module, abc.ABC):
         use `register_forward_hook()`.
 
         Args:
-            initial_states (torch.tensor): Initial states to pass to our
+            initial_states (torch.Tensor): Initial states to pass to our
                 dynamics model. Shape should be `(N, state_dim)`.
-            controls (dict or torch.tensor): Control inputs. Should be either a
+            controls (dict or torch.Tensor): Control inputs. Should be either a
                 dict of tensors or tensor of size `(T, N, ...)`.
 
         Returns:
-            torch.tensor: Predicted states at each timestep. Shape should be
+            torch.Tensor: Predicted states at each timestep. Shape should be
             `(T, N, state_dim).`
         """
 

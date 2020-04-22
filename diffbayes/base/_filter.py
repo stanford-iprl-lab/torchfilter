@@ -99,7 +99,7 @@ class Filter(nn.Module, abc.ABC):
             current_estimate = self(observations[t], controls[t])
 
             # Validate & add to output
-            assert current_estimate.shape == (N, state_dim)
+            assert current_estimate.shape == (N, self.state_dim)
             state_predictions[t] = current_estimate
 
         # Return state estimates

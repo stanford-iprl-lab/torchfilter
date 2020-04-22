@@ -44,9 +44,9 @@ def split_trajectories(trajectories, subsequence_length):
         # We iterate over two offsets to generate overlapping subsequences
         for offset in (0, subsequence_length // 2):
             for s, o, c in zip(
-                _split_helper(states, subsequence_length, offset),
-                _split_helper(observations, subsequence_length, offset),
-                _split_helper(controls, subsequence_length, offset),
+                _split_helper(states, subsequence_length, sections, offset),
+                _split_helper(observations, subsequence_length, sections, offset),
+                _split_helper(controls, subsequence_length, sections, offset),
             ):
                 # Numpy => Torch
                 s = fannypack.utils.to_torch(s)
@@ -58,7 +58,7 @@ def split_trajectories(trajectories, subsequence_length):
     return subsequences
 
 
-def _split_helper(x, subsequence_length, offset):
+def _split_helper(x, subsequence_length, sections, offset):
     """Private helper: splits arrays or dicts of arrays of shape `(T, ...)`
     into `(sections, subsequence_length, ...)`.
     """
@@ -77,7 +77,7 @@ def _split_helper(x, subsequence_length, offset):
         # value in the dictionary
         output = {}
         for key, value in x.items():
-            output[key] = _split_helper(value, subsequence_length, offset)
+            output[key] = _split_helper(value, subsequence_length, sections, offset)
 
         # Return a wrapped dictionary; this makes it iterable
         return fannypack.utils.SliceWrapper(output)
