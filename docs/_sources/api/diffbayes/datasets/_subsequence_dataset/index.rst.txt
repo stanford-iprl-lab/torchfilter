@@ -9,7 +9,7 @@
 Module Contents
 ---------------
 
-.. py:class:: SubsequenceDataset(trajectories: List[Tuple], subsequence_length: int)
+.. py:class:: SubsequenceDataset(trajectories: List[types.TrajectoryTupleNumpy], subsequence_length: int)
 
    Bases: :class:`torch.utils.data.Dataset`
 

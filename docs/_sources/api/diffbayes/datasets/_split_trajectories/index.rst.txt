@@ -9,7 +9,7 @@
 Module Contents
 ---------------
 
-.. function:: split_trajectories(trajectories: List[Tuple], subsequence_length: int)
+.. function:: split_trajectories(trajectories: List[types.TrajectoryTupleNumpy], subsequence_length: int) -> List[types.TrajectoryTupleNumpy]
 
    Helper for splitting a list of trajectories into a list of overlapping
    subsequences.

@@ -7,7 +7,7 @@
 Package Contents
 ----------------
 
-.. function:: split_trajectories(trajectories: List[Tuple], subsequence_length: int)
+.. function:: split_trajectories(trajectories: List[types.TrajectoryTupleNumpy], subsequence_length: int) -> List[types.TrajectoryTupleNumpy]
 
    Helper for splitting a list of trajectories into a list of overlapping
    subsequences.
@@ -38,7 +38,7 @@ Package Contents
              numpy arrays with shape ``(subsequence_length, ...)``.
 
 
-.. py:class:: SubsequenceDataset(trajectories: List[Tuple], subsequence_length: int)
+.. py:class:: SubsequenceDataset(trajectories: List[types.TrajectoryTupleNumpy], subsequence_length: int)
 
    Bases: :class:`torch.utils.data.Dataset`
 
@@ -77,7 +77,7 @@ Package Contents
 
 
 
-.. py:class:: SingleStepDataset(trajectories: List[Tuple])
+.. py:class:: SingleStepDataset(trajectories: List[types.TrajectoryTupleNumpy])
 
    Bases: :class:`torch.utils.data.Dataset`
 

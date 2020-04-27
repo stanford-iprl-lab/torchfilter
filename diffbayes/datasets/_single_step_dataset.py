@@ -1,7 +1,11 @@
-from typing import List, Tuple, Union
+from typing import List, Tuple
 
 import numpy as np
 from torch.utils.data import Dataset
+
+import fannypack
+
+from .. import types
 
 
 class SingleStepDataset(Dataset):
@@ -14,13 +18,18 @@ class SingleStepDataset(Dataset):
             either a numpy array or dict of numpy arrays with shape `(T, ...)`.
     """
 
-    def __init__(self, trajectories: List[Tuple]):
+    def __init__(self, trajectories: List[types.TrajectoryTupleNumpy]):
         # Split trajectory into samples:
         #   (initial_state, next_state, observation, control)
         self.samples = []
 
         for trajectory in trajectories:
             states, observations, controls = trajectory
+
+            # Make observations and controls indexable, in case they're dictionaries
+            observations = fannypack.utils.SliceWrapper(observations)
+            controls = fannypack.utils.SliceWrapper(controls)
+
             timesteps = len(states)
             for t in range(timesteps - 1):
                 self.samples.append(
@@ -35,7 +44,10 @@ class SingleStepDataset(Dataset):
     def __getitem__(
         self, index: int
     ) -> Tuple[
-        np.ndarray, np.ndarray, Union[dict, np.ndarray], Union[dict, np.ndarray]
+        types.StatesNumpy,
+        types.StatesNumpy,
+        types.ObservationsNumpy,
+        types.ControlsNumpy,
     ]:
         """Get a single-step prediction sample from our dataset.
 
@@ -48,7 +60,7 @@ class SingleStepDataset(Dataset):
         """
         return self.samples[index]
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Total number of subsequences in the dataset.
 
         Returns:

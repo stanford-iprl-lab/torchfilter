@@ -177,7 +177,7 @@
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diffbayes.datasets.split_trajectories">
-<code class="sig-prename descclassname">diffbayes.datasets.</code><code class="sig-name descname">split_trajectories</code><span class="sig-paren">(</span><em class="sig-param">trajectories: List[Tuple], subsequence_length: int</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.datasets.split_trajectories" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diffbayes.datasets.</code><code class="sig-name descname">split_trajectories</code><span class="sig-paren">(</span><em class="sig-param">trajectories: List[types.TrajectoryTupleNumpy], subsequence_length: int</em><span class="sig-paren">)</span> &#x2192; List[types.TrajectoryTupleNumpy]<a class="headerlink" href="#diffbayes.datasets.split_trajectories" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper for splitting a list of trajectories into a list of overlapping
 subsequences.</p>
 <p>For each trajectory, assuming a subsequence length of 10, this function
@@ -209,7 +209,7 @@ numpy arrays with shape <code class="docutils literal notranslate"><span class="
 
 <dl class="class">
 <dt id="diffbayes.datasets.SubsequenceDataset">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.datasets.</code><code class="sig-name descname">SubsequenceDataset</code><span class="sig-paren">(</span><em class="sig-param">trajectories: List[Tuple], subsequence_length: int</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.datasets.SubsequenceDataset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.datasets.</code><code class="sig-name descname">SubsequenceDataset</code><span class="sig-paren">(</span><em class="sig-param">trajectories: List[types.TrajectoryTupleNumpy], subsequence_length: int</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.datasets.SubsequenceDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
 <p>A data preprocessor for producing training subsequences from
 a list of trajectories.</p>
@@ -256,7 +256,7 @@ numpy array or dict of numpy arrays with shape
 
 <dl class="class">
 <dt id="diffbayes.datasets.SingleStepDataset">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.datasets.</code><code class="sig-name descname">SingleStepDataset</code><span class="sig-paren">(</span><em class="sig-param">trajectories: List[Tuple]</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.datasets.SingleStepDataset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.datasets.</code><code class="sig-name descname">SingleStepDataset</code><span class="sig-paren">(</span><em class="sig-param">trajectories: List[types.TrajectoryTupleNumpy]</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.datasets.SingleStepDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
 <p>A data preprocessor for producing single-step training examples from
 a list of trajectories.</p>
