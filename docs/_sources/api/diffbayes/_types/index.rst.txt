@@ -1,0 +1,46 @@
+:orphan:
+
+:mod:`diffbayes._types`
+=======================
+
+.. py:module:: diffbayes._types
+
+
+Module Contents
+---------------
+
+.. data:: NumpyArray
+   
+
+   
+
+.. data:: NumpyDict
+   
+
+   
+
+.. data:: NumpyArrayOrDict
+   
+
+   
+
+.. data:: StatesNumpy
+   
+
+   
+
+.. data:: ObservationsNumpy
+   
+
+   
+
+.. data:: ControlsNumpy
+   
+
+   
+
+.. data:: TrajectoryTupleNumpy
+   
+
+   
+
