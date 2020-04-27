@@ -1,0 +1,263 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>diffbayes.types._types &mdash; diffbayes  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> diffbayes
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.types._types</span></code></a><ul>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#diffbayes.types._types.NumpyArray">NumpyArray</a></li>
+</ul>
+<ul>
+<li><a class="reference internal" href="#diffbayes.types._types.NumpyDict">NumpyDict</a></li>
+</ul>
+<ul>
+<li><a class="reference internal" href="#diffbayes.types._types.NumpyArrayOrDict">NumpyArrayOrDict</a></li>
+</ul>
+<ul>
+<li><a class="reference internal" href="#diffbayes.types._types.StatesNumpy">StatesNumpy</a></li>
+</ul>
+<ul>
+<li><a class="reference internal" href="#diffbayes.types._types.ObservationsNumpy">ObservationsNumpy</a></li>
+</ul>
+<ul>
+<li><a class="reference internal" href="#diffbayes.types._types.ControlsNumpy">ControlsNumpy</a></li>
+</ul>
+<ul>
+<li><a class="reference internal" href="#diffbayes.types._types.TrajectoryTupleNumpy">TrajectoryTupleNumpy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">diffbayes</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.types._types</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/api/diffbayes/types/_types/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-diffbayes.types._types">
+<span id="diffbayes-types-types"></span><h1><a class="reference internal" href="#module-diffbayes.types._types" title="diffbayes.types._types"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.types._types</span></code></a><a class="headerlink" href="#module-diffbayes.types._types" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<dl class="data">
+<dt id="diffbayes.types._types.NumpyArray">
+<code class="sig-prename descclassname">diffbayes.types._types.</code><code class="sig-name descname">NumpyArray</code><a class="headerlink" href="#diffbayes.types._types.NumpyArray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic typehint for <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> objects.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="diffbayes.types._types.NumpyDict">
+<code class="sig-prename descclassname">diffbayes.types._types.</code><code class="sig-name descname">NumpyDict</code><a class="headerlink" href="#diffbayes.types._types.NumpyDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary from <code class="docutils literal notranslate"><span class="pre">str</span></code> keys to <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> values.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="diffbayes.types._types.NumpyArrayOrDict">
+<code class="sig-prename descclassname">diffbayes.types._types.</code><code class="sig-name descname">NumpyArrayOrDict</code><a class="headerlink" href="#diffbayes.types._types.NumpyArrayOrDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Union of NumpyArray and NumpyDict types.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="diffbayes.types._types.StatesNumpy">
+<code class="sig-prename descclassname">diffbayes.types._types.</code><code class="sig-name descname">StatesNumpy</code><a class="headerlink" href="#diffbayes.types._types.StatesNumpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>State array type hint. Needs to be a raw <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code>.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="diffbayes.types._types.ObservationsNumpy">
+<code class="sig-prename descclassname">diffbayes.types._types.</code><code class="sig-name descname">ObservationsNumpy</code><a class="headerlink" href="#diffbayes.types._types.ObservationsNumpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Observations can be either <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> objects or <code class="docutils literal notranslate"><span class="pre">str-&gt;nd.ndarray</span></code> dictionaries.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="diffbayes.types._types.ControlsNumpy">
+<code class="sig-prename descclassname">diffbayes.types._types.</code><code class="sig-name descname">ControlsNumpy</code><a class="headerlink" href="#diffbayes.types._types.ControlsNumpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Observations can be either <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> objects or <code class="docutils literal notranslate"><span class="pre">str-&gt;np.ndarray</span></code> dictionaries.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="diffbayes.types._types.TrajectoryTupleNumpy">
+<code class="sig-prename descclassname">diffbayes.types._types.</code><code class="sig-name descname">TrajectoryTupleNumpy</code><a class="headerlink" href="#diffbayes.types._types.TrajectoryTupleNumpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trajectories are defined as <code class="docutils literal notranslate"><span class="pre">(States,</span> <span class="pre">Observation,</span> <span class="pre">Controls)</span></code> tuples.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

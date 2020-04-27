@@ -1,0 +1,53 @@
+:orphan:
+
+:mod:`diffbayes.types._types`
+=============================
+
+.. py:module:: diffbayes.types._types
+
+
+Module Contents
+---------------
+
+.. data:: NumpyArray
+   
+
+   Generic typehint for ``np.ndarray`` objects.
+
+
+.. data:: NumpyDict
+   
+
+   Dictionary from ``str`` keys to ``np.ndarray`` values.
+
+
+.. data:: NumpyArrayOrDict
+   
+
+   Union of NumpyArray and NumpyDict types.
+
+
+.. data:: StatesNumpy
+   
+
+   State array type hint. Needs to be a raw ``np.ndarray``.
+
+
+.. data:: ObservationsNumpy
+   
+
+   Observations can be either ``np.ndarray`` objects or ``str->nd.ndarray`` dictionaries.
+
+
+.. data:: ControlsNumpy
+   
+
+   Observations can be either ``np.ndarray`` objects or ``str->np.ndarray`` dictionaries.
+
+
+.. data:: TrajectoryTupleNumpy
+   
+
+   Trajectories are defined as ``(States, Observation, Controls)`` tuples.
+
+

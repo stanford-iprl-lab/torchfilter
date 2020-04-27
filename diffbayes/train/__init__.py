@@ -1,1 +1,1 @@
-from ._train_dynamics import train_dynamics_recurrent
+from ._train_dynamics import train_dynamics_recurrent, train_dynamics_single_step

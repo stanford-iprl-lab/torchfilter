@@ -4,7 +4,7 @@ import numpy as np
 
 import fannypack
 
-from .. import types as types
+from .. import types
 
 
 def split_trajectories(

@@ -13,5 +13,6 @@ Subpackages
    base/index.rst
    datasets/index.rst
    train/index.rst
+   types/index.rst
 
 

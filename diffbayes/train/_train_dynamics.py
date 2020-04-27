@@ -1,6 +1,5 @@
 from typing import Callable
 
-import fannypack
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -8,6 +7,7 @@ from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 
 import diffbayes
+import fannypack
 
 
 def train_dynamics_single_step(
@@ -26,8 +26,8 @@ def train_dynamics_single_step(
         dataloader (DataLoader): Loader for a SingleStepDataset.
 
     Keyword Args:
-        loss_function (callable, optional): Loss function use, from
-            `torch.nn.functional`. Defaults to MSE.
+        loss_function (callable, optional): Loss function, from `torch.nn.functional`.
+            Defaults to MSE.
         log_interval (int, optional): Minibatches between each Tensorboard log.
     """
     # Dataloader should load a SubsequenceDataset
@@ -86,8 +86,8 @@ def train_dynamics_recurrent(
         dataloader (DataLoader): Loader for a SubsequenceDataset.
 
     Keyword Args:
-        loss_function (callable, optional): Loss function use, from
-            `torch.nn.functional`. Defaults to MSE.
+        loss_function (callable, optional): Loss function, from `torch.nn.functional`.
+            Defaults to MSE.
         log_interval (int, optional): Minibatches between each Tensorboard log.
     """
     # Dataloader should load a SubsequenceDataset

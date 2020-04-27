@@ -4,7 +4,7 @@ import numpy as np
 import torch
 from torch.utils.data import Dataset
 
-from .. import types as types
+from .. import types
 from ._split_trajectories import split_trajectories
 
 

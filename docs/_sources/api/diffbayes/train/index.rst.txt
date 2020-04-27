@@ -25,3 +25,21 @@ Package Contents
    :kwtype log_interval: int, optional
 
 
+.. function:: train_dynamics_single_step(buddy: fannypack.utils.Buddy, dynamics_model: diffbayes.base.DynamicsModel, dataloader: DataLoader, *, loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss, log_interval: int = 1) -> None
+
+   Optimizes a dynamics model's single-step prediction accuracy.
+
+   :param buddy: Training helper.
+   :type buddy: fannypack.utils.Buddy
+   :param dynamics_model: Model to train.
+   :type dynamics_model: diffbayes.base.DynamicsModel
+   :param dataloader: Loader for a SingleStepDataset.
+   :type dataloader: DataLoader
+
+   :keyword loss_function: Loss function use, from
+                           ``torch.nn.functional``. Defaults to MSE.
+   :kwtype loss_function: callable, optional
+   :keyword log_interval: Minibatches between each Tensorboard log.
+   :kwtype log_interval: int, optional
+
+
