@@ -87,22 +87,43 @@
 <li><a class="reference internal" href="#diffbayes.types.NumpyArray">NumpyArray</a></li>
 </ul>
 <ul>
+<li><a class="reference internal" href="#diffbayes.types.TorchTensor">TorchTensor</a></li>
+</ul>
+<ul>
 <li><a class="reference internal" href="#diffbayes.types.NumpyDict">NumpyDict</a></li>
+</ul>
+<ul>
+<li><a class="reference internal" href="#diffbayes.types.TorchDict">TorchDict</a></li>
 </ul>
 <ul>
 <li><a class="reference internal" href="#diffbayes.types.NumpyArrayOrDict">NumpyArrayOrDict</a></li>
 </ul>
 <ul>
+<li><a class="reference internal" href="#diffbayes.types.TorchTensorOrDict">TorchTensorOrDict</a></li>
+</ul>
+<ul>
 <li><a class="reference internal" href="#diffbayes.types.StatesNumpy">StatesNumpy</a></li>
+</ul>
+<ul>
+<li><a class="reference internal" href="#diffbayes.types.StatesTorch">StatesTorch</a></li>
 </ul>
 <ul>
 <li><a class="reference internal" href="#diffbayes.types.ObservationsNumpy">ObservationsNumpy</a></li>
 </ul>
 <ul>
+<li><a class="reference internal" href="#diffbayes.types.ObservationsTorch">ObservationsTorch</a></li>
+</ul>
+<ul>
 <li><a class="reference internal" href="#diffbayes.types.ControlsNumpy">ControlsNumpy</a></li>
 </ul>
 <ul>
+<li><a class="reference internal" href="#diffbayes.types.ControlsTorch">ControlsTorch</a></li>
+</ul>
+<ul>
 <li><a class="reference internal" href="#diffbayes.types.TrajectoryTupleNumpy">TrajectoryTupleNumpy</a></li>
+</ul>
+<ul>
+<li><a class="reference internal" href="#diffbayes.types.TrajectoryTupleTorch">TrajectoryTupleTorch</a></li>
 </ul>
 </li>
 </ul>
@@ -173,14 +194,20 @@
             
   <div class="section" id="module-diffbayes.types">
 <span id="diffbayes-types"></span><h1><a class="reference internal" href="#module-diffbayes.types" title="diffbayes.types"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.types</span></code></a><a class="headerlink" href="#module-diffbayes.types" title="Permalink to this headline">¶</a></h1>
-<p><p>Type hints for diffbayes.</p>
+<p><p>Type hint aliases for diffbayes.</p>
 </p>
 <div class="section" id="package-contents">
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Permalink to this headline">¶</a></h2>
 <dl class="data">
 <dt id="diffbayes.types.NumpyArray">
 <code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">NumpyArray</code><a class="headerlink" href="#diffbayes.types.NumpyArray" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generic typehint for <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> objects.</p>
+<dd><p>Type hint for <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> objects. (alias for <code class="docutils literal notranslate"><span class="pre">typing.Any</span></code>)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="diffbayes.types.TorchTensor">
+<code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">TorchTensor</code><a class="headerlink" href="#diffbayes.types.TorchTensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type hint for <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code> objects. (alias for <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code>)</p>
 </dd></dl>
 
 <dl class="data">
@@ -190,9 +217,21 @@
 </dd></dl>
 
 <dl class="data">
+<dt id="diffbayes.types.TorchDict">
+<code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">TorchDict</code><a class="headerlink" href="#diffbayes.types.TorchDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary from <code class="docutils literal notranslate"><span class="pre">str</span></code> keys to <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code> values.</p>
+</dd></dl>
+
+<dl class="data">
 <dt id="diffbayes.types.NumpyArrayOrDict">
 <code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">NumpyArrayOrDict</code><a class="headerlink" href="#diffbayes.types.NumpyArrayOrDict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Union of NumpyArray and NumpyDict types.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="diffbayes.types.TorchTensorOrDict">
+<code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">TorchTensorOrDict</code><a class="headerlink" href="#diffbayes.types.TorchTensorOrDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Union of TorchTensor and TorchDict types.</p>
 </dd></dl>
 
 <dl class="data">
@@ -202,21 +241,45 @@
 </dd></dl>
 
 <dl class="data">
+<dt id="diffbayes.types.StatesTorch">
+<code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">StatesTorch</code><a class="headerlink" href="#diffbayes.types.StatesTorch" title="Permalink to this definition">¶</a></dt>
+<dd><p>State array type hint. Needs to be a raw <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code>.</p>
+</dd></dl>
+
+<dl class="data">
 <dt id="diffbayes.types.ObservationsNumpy">
 <code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">ObservationsNumpy</code><a class="headerlink" href="#diffbayes.types.ObservationsNumpy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Observations can be either <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> objects or <code class="docutils literal notranslate"><span class="pre">str-&gt;nd.ndarray</span></code> dictionaries.</p>
+<dd><p>Observations can be either <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> objects or <code class="docutils literal notranslate"><span class="pre">str-&gt;np.ndarray</span></code> dictionaries.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="diffbayes.types.ObservationsTorch">
+<code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">ObservationsTorch</code><a class="headerlink" href="#diffbayes.types.ObservationsTorch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Observations can be either <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code> objects or <code class="docutils literal notranslate"><span class="pre">str-&gt;torch.Tensor</span></code> dictionaries.</p>
 </dd></dl>
 
 <dl class="data">
 <dt id="diffbayes.types.ControlsNumpy">
 <code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">ControlsNumpy</code><a class="headerlink" href="#diffbayes.types.ControlsNumpy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Observations can be either <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> objects or <code class="docutils literal notranslate"><span class="pre">str-&gt;np.ndarray</span></code> dictionaries.</p>
+<dd><p>Controls can be either <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> objects or <code class="docutils literal notranslate"><span class="pre">str-&gt;np.ndarray</span></code> dictionaries.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="diffbayes.types.ControlsTorch">
+<code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">ControlsTorch</code><a class="headerlink" href="#diffbayes.types.ControlsTorch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Controls can be either <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code> objects or <code class="docutils literal notranslate"><span class="pre">str-&gt;torch.Tensor</span></code> dictionaries.</p>
 </dd></dl>
 
 <dl class="data">
 <dt id="diffbayes.types.TrajectoryTupleNumpy">
 <code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">TrajectoryTupleNumpy</code><a class="headerlink" href="#diffbayes.types.TrajectoryTupleNumpy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Trajectories are defined as <code class="docutils literal notranslate"><span class="pre">(States,</span> <span class="pre">Observation,</span> <span class="pre">Controls)</span></code> tuples.</p>
+<dd><p>Trajectories in Numpy, defined as <code class="docutils literal notranslate"><span class="pre">(States,</span> <span class="pre">Observation,</span> <span class="pre">Controls)</span></code> tuples.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="diffbayes.types.TrajectoryTupleTorch">
+<code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">TrajectoryTupleTorch</code><a class="headerlink" href="#diffbayes.types.TrajectoryTupleTorch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trajectory in PyTorch, defined as <code class="docutils literal notranslate"><span class="pre">(States,</span> <span class="pre">Observation,</span> <span class="pre">Controls)</span></code> tuples.</p>
 </dd></dl>
 
 </div>

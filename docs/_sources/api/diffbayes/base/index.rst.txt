@@ -24,7 +24,7 @@ Package Contents
       :type: int
 
 
-   .. method:: forward(self, *, initial_states: torch.Tensor, controls: Union[Dict[str, torch.Tensor], torch.Tensor])
+   .. method:: forward(self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch)
 
 
       Dynamics model forward pass, single timestep.
@@ -42,7 +42,7 @@ Package Contents
                 be ``(N, state_dim).``
 
 
-   .. method:: forward_loop(self, *, initial_states: torch.Tensor, controls: Union[Dict[Any, torch.Tensor], torch.Tensor])
+   .. method:: forward_loop(self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch)
 
 
       Dynamics model forward pass, over sequence length ``T`` and batch size
@@ -74,7 +74,7 @@ Package Contents
 
 
    * ``initialize_beliefs`` for populating the initial belief of our estimator
-   * ``forward`` or ``forward_loop`` for computing state estimates
+   * ``forward`` or ``forward_loop`` for computing state predictions
 
    .. attribute:: state_dim
       
@@ -84,7 +84,7 @@ Package Contents
       :type: int
 
 
-   .. method:: initialize_beliefs(self, *, mean: torch.Tensor, covariance: torch.Tensor)
+   .. method:: initialize_beliefs(self, *, mean: types.StatesTorch, covariance: torch.Tensor)
       :abstractmethod:
 
 
@@ -98,7 +98,7 @@ Package Contents
       :type covariance: torch.Tensor
 
 
-   .. method:: forward(self, *, observations: Union[Dict[str, torch.Tensor], torch.Tensor], controls: Union[Dict[str, torch.Tensor], torch.Tensor])
+   .. method:: forward(self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch)
 
 
       Filtering forward pass, over a single timestep.
@@ -117,7 +117,7 @@ Package Contents
                 be ``(N, state_dim).``
 
 
-   .. method:: forward_loop(self, *, observations: Union[Dict[str, torch.Tensor], torch.Tensor], controls: Union[Dict[str, torch.Tensor], torch.Tensor])
+   .. method:: forward_loop(self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch)
 
 
       Filtering forward pass, over sequence length ``T`` and batch size ``N``.
@@ -154,7 +154,7 @@ Package Contents
       :type: int
 
 
-   .. method:: forward(self, *, states: torch.Tensor, observations: Union[Dict[str, torch.Tensor], torch.Tensor])
+   .. method:: forward(self, *, states: types.StatesTorch, observations: types.ObservationsTorch)
       :abstractmethod:
 
 
@@ -268,7 +268,7 @@ Package Contents
       :type covariance: torch.Tensor
 
 
-   .. method:: forward(self, *, observations: Union[Dict[str, torch.Tensor], torch.Tensor], controls: Union[Dict[str, torch.Tensor], torch.Tensor])
+   .. method:: forward(self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch)
 
 
       Particle filter forward pass, single timestep.

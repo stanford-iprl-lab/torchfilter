@@ -26,7 +26,7 @@ Module Contents
       :type: int
 
 
-   .. method:: forward(self, *, initial_states: torch.Tensor, controls: Union[Dict[str, torch.Tensor], torch.Tensor])
+   .. method:: forward(self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch)
 
 
       Dynamics model forward pass, single timestep.
@@ -44,7 +44,7 @@ Module Contents
                 be ``(N, state_dim).``
 
 
-   .. method:: forward_loop(self, *, initial_states: torch.Tensor, controls: Union[Dict[Any, torch.Tensor], torch.Tensor])
+   .. method:: forward_loop(self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch)
 
 
       Dynamics model forward pass, over sequence length ``T`` and batch size

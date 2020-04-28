@@ -20,8 +20,8 @@ Module Contents
    :param dataloader: Loader for a SingleStepDataset.
    :type dataloader: DataLoader
 
-   :keyword loss_function: Loss function use, from
-                           ``torch.nn.functional``. Defaults to MSE.
+   :keyword loss_function: Loss function, from ``torch.nn.functional``.
+                           Defaults to MSE.
    :kwtype loss_function: callable, optional
    :keyword log_interval: Minibatches between each Tensorboard log.
    :kwtype log_interval: int, optional
@@ -38,8 +38,8 @@ Module Contents
    :param dataloader: Loader for a SubsequenceDataset.
    :type dataloader: DataLoader
 
-   :keyword loss_function: Loss function use, from
-                           ``torch.nn.functional``. Defaults to MSE.
+   :keyword loss_function: Loss function, from ``torch.nn.functional``.
+                           Defaults to MSE.
    :kwtype loss_function: callable, optional
    :keyword log_interval: Minibatches between each Tensorboard log.
    :kwtype log_interval: int, optional

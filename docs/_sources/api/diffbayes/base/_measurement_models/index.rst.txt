@@ -25,7 +25,7 @@ Module Contents
       :type: int
 
 
-   .. method:: forward(self, *, states: torch.Tensor, observations: Union[Dict[str, torch.Tensor], torch.Tensor])
+   .. method:: forward(self, *, states: types.StatesTorch, observations: types.ObservationsTorch)
       :abstractmethod:
 
 

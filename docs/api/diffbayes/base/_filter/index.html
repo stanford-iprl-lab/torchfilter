@@ -177,7 +177,7 @@
 <p>As a minimum, subclasses should override:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">initialize_beliefs</span></code> for populating the initial belief of our estimator</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">forward</span></code> or <code class="docutils literal notranslate"><span class="pre">forward_loop</span></code> for computing state estimates</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">forward</span></code> or <code class="docutils literal notranslate"><span class="pre">forward_loop</span></code> for computing state predictions</p></li>
 </ul>
 <dl class="attribute">
 <dt id="diffbayes.base._filter.Filter.state_dim">
@@ -192,7 +192,7 @@
 
 <dl class="method">
 <dt id="diffbayes.base._filter.Filter.initialize_beliefs">
-<em class="property">abstract </em><code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">*</em>, <em class="sig-param">mean: torch.Tensor</em>, <em class="sig-param">covariance: torch.Tensor</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._filter.Filter.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">*</em>, <em class="sig-param">mean: types.StatesTorch</em>, <em class="sig-param">covariance: torch.Tensor</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._filter.Filter.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize our filter with a Gaussian prior.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -208,7 +208,7 @@
 
 <dl class="method">
 <dt id="diffbayes.base._filter.Filter.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param">self, *, observations: Union[Dict[str, torch.Tensor], torch.Tensor], controls: Union[Dict[str, torch.Tensor], torch.Tensor]</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._filter.Filter.forward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">*</em>, <em class="sig-param">observations: types.ObservationsTorch</em>, <em class="sig-param">controls: types.ControlsTorch</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._filter.Filter.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filtering forward pass, over a single timestep.</p>
 <p>By default, this is implemented by bootstrapping the <code class="docutils literal notranslate"><span class="pre">forward_loop()</span></code>
 method.</p>
@@ -230,7 +230,7 @@ be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span
 
 <dl class="method">
 <dt id="diffbayes.base._filter.Filter.forward_loop">
-<code class="sig-name descname">forward_loop</code><span class="sig-paren">(</span><em class="sig-param">self, *, observations: Union[Dict[str, torch.Tensor], torch.Tensor], controls: Union[Dict[str, torch.Tensor], torch.Tensor]</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._filter.Filter.forward_loop" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward_loop</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">*</em>, <em class="sig-param">observations: types.ObservationsTorch</em>, <em class="sig-param">controls: types.ControlsTorch</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._filter.Filter.forward_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filtering forward pass, over sequence length <code class="docutils literal notranslate"><span class="pre">T</span></code> and batch size <code class="docutils literal notranslate"><span class="pre">N</span></code>.
 By default, this is implemented by iteratively calling <code class="docutils literal notranslate"><span class="pre">forward()</span></code>.</p>
 <p>To inject code between timesteps (for example, to inspect hidden state),

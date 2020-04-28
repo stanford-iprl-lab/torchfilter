@@ -5,7 +5,7 @@
 
 .. autoapi-nested-parse::
 
-   Type hints for diffbayes.
+   Type hint aliases for diffbayes.
 
 
 
@@ -15,7 +15,13 @@ Package Contents
 .. data:: NumpyArray
    
 
-   Generic typehint for ``np.ndarray`` objects.
+   Type hint for ``np.ndarray`` objects. (alias for ``typing.Any``\ )
+
+
+.. data:: TorchTensor
+   
+
+   Type hint for ``torch.Tensor`` objects. (alias for ``torch.Tensor``\ )
 
 
 .. data:: NumpyDict
@@ -24,10 +30,22 @@ Package Contents
    Dictionary from ``str`` keys to ``np.ndarray`` values.
 
 
+.. data:: TorchDict
+   
+
+   Dictionary from ``str`` keys to ``torch.Tensor`` values.
+
+
 .. data:: NumpyArrayOrDict
    
 
    Union of NumpyArray and NumpyDict types.
+
+
+.. data:: TorchTensorOrDict
+   
+
+   Union of TorchTensor and TorchDict types.
 
 
 .. data:: StatesNumpy
@@ -36,21 +54,45 @@ Package Contents
    State array type hint. Needs to be a raw ``np.ndarray``.
 
 
-.. data:: ObservationsNumpy
+.. data:: StatesTorch
    
 
-   Observations can be either ``np.ndarray`` objects or ``str->nd.ndarray`` dictionaries.
+   State array type hint. Needs to be a raw ``torch.Tensor``.
 
 
-.. data:: ControlsNumpy
+.. data:: ObservationsNumpy
    
 
    Observations can be either ``np.ndarray`` objects or ``str->np.ndarray`` dictionaries.
 
 
+.. data:: ObservationsTorch
+   
+
+   Observations can be either ``torch.Tensor`` objects or ``str->torch.Tensor`` dictionaries.
+
+
+.. data:: ControlsNumpy
+   
+
+   Controls can be either ``np.ndarray`` objects or ``str->np.ndarray`` dictionaries.
+
+
+.. data:: ControlsTorch
+   
+
+   Controls can be either ``torch.Tensor`` objects or ``str->torch.Tensor`` dictionaries.
+
+
 .. data:: TrajectoryTupleNumpy
    
 
-   Trajectories are defined as ``(States, Observation, Controls)`` tuples.
+   Trajectories in Numpy, defined as ``(States, Observation, Controls)`` tuples.
+
+
+.. data:: TrajectoryTupleTorch
+   
+
+   Trajectory in PyTorch, defined as ``(States, Observation, Controls)`` tuples.
 
 

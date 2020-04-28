@@ -309,7 +309,7 @@ log-likelihoods. Shape should be <code class="docutils literal notranslate"><spa
 
 <dl class="method">
 <dt id="diffbayes.base._particle_filter.ParticleFilter.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param">self, *, observations: Union[Dict[str, torch.Tensor], torch.Tensor], controls: Union[Dict[str, torch.Tensor], torch.Tensor]</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._particle_filter.ParticleFilter.forward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">*</em>, <em class="sig-param">observations: types.ObservationsTorch</em>, <em class="sig-param">controls: types.ControlsTorch</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._particle_filter.ParticleFilter.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Particle filter forward pass, single timestep.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

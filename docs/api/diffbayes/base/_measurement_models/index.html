@@ -183,7 +183,7 @@ observation given the state ( <span class="math notranslate nohighlight">\(\log 
 
 <dl class="method">
 <dt id="diffbayes.base._measurement_models.ParticleFilterMeasurementModel.forward">
-<em class="property">abstract </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param">self, *, states: torch.Tensor, observations: Union[Dict[str, torch.Tensor], torch.Tensor]</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._measurement_models.ParticleFilterMeasurementModel.forward" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">*</em>, <em class="sig-param">states: types.StatesTorch</em>, <em class="sig-param">observations: types.ObservationsTorch</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._measurement_models.ParticleFilterMeasurementModel.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Observation model forward pass, over batch size <code class="docutils literal notranslate"><span class="pre">N</span></code>.
 For each member of a batch, we expect <code class="docutils literal notranslate"><span class="pre">M</span></code> separate states (particles)
 and just one unique observation.</p>

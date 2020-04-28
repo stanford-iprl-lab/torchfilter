@@ -103,7 +103,7 @@ Module Contents
       :type covariance: torch.Tensor
 
 
-   .. method:: forward(self, *, observations: Union[Dict[str, torch.Tensor], torch.Tensor], controls: Union[Dict[str, torch.Tensor], torch.Tensor])
+   .. method:: forward(self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch)
 
 
       Particle filter forward pass, single timestep.
