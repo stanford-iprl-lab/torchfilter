@@ -1,9 +1,9 @@
 import abc
-from typing import Dict, Union
 
 import numpy as np
 import torch
 
+from .. import types
 from . import DynamicsModel, Filter, ParticleFilterMeasurementModel
 
 
@@ -96,11 +96,8 @@ class ParticleFilter(Filter):
         assert self.particle_log_weights == (N, M)
 
     def forward(
-        self,
-        *,
-        observations: Union[Dict[str, torch.Tensor], torch.Tensor],
-        controls: Union[Dict[str, torch.Tensor], torch.Tensor],
-    ) -> torch.Tensor:
+        self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch,
+    ) -> types.StatesTorch:
         """Particle filter forward pass, single timestep.
 
         Args:

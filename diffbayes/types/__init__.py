@@ -1,4 +1,4 @@
-"""Type hints for diffbayes.
+"""Type hint aliases for diffbayes.
 """
 
 from ._types import *

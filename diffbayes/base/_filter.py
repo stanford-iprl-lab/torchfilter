@@ -1,9 +1,11 @@
 import abc
-from typing import Dict, Union
 
-import fannypack
 import torch
 import torch.nn as nn
+
+import fannypack
+
+from .. import types
 
 
 class Filter(nn.Module, abc.ABC):
@@ -11,7 +13,7 @@ class Filter(nn.Module, abc.ABC):
 
     As a minimum, subclasses should override:
     - `initialize_beliefs` for populating the initial belief of our estimator
-    - `forward` or `forward_loop` for computing state estimates
+    - `forward` or `forward_loop` for computing state predictions
     """
 
     def __init__(self, *, state_dim: int):
@@ -20,7 +22,9 @@ class Filter(nn.Module, abc.ABC):
         """int: Dimensionality of our state."""
 
     @abc.abstractmethod
-    def initialize_beliefs(self, *, mean: torch.Tensor, covariance: torch.Tensor):
+    def initialize_beliefs(
+        self, *, mean: types.StatesTorch, covariance: torch.Tensor
+    ) -> None:
         """Initialize our filter with a Gaussian prior.
 
         Args:
@@ -32,11 +36,8 @@ class Filter(nn.Module, abc.ABC):
         pass
 
     def forward(
-        self,
-        *,
-        observations: Union[Dict[str, torch.Tensor], torch.Tensor],
-        controls: Union[Dict[str, torch.Tensor], torch.Tensor]
-    ) -> torch.Tensor:
+        self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch
+    ) -> types.StatesTorch:
         """Filtering forward pass, over a single timestep.
 
         By default, this is implemented by bootstrapping the `forward_loop()`
@@ -68,11 +69,8 @@ class Filter(nn.Module, abc.ABC):
         return output[0]
 
     def forward_loop(
-        self,
-        *,
-        observations: Union[Dict[str, torch.Tensor], torch.Tensor],
-        controls: Union[Dict[str, torch.Tensor], torch.Tensor]
-    ) -> torch.Tensor:
+        self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch
+    ) -> types.StatesTorch:
         """Filtering forward pass, over sequence length `T` and batch size `N`.
         By default, this is implemented by iteratively calling `forward()`.
 
@@ -103,15 +101,22 @@ class Filter(nn.Module, abc.ABC):
         assert observations.shape[:2] == (T, N)
 
         # Filtering forward pass
-        state_predictions = torch.zeros((T, N, self.state_dim))
-        for t in range(T):
-            # Compute state estimate for a single timestep
+        # We treat t = 0 as a special case to make it easier to create state_predictions
+        # tensor on the correct device
+        t = 0
+        current_prediction = self(observations[t], controls[t])
+        state_predictions = current_prediction.new_zeros((T, N, self.state_dim))
+        assert current_prediction.shape == (N, self.state_dim)
+        state_predictions[t] = current_prediction
+
+        for t in range(1, T):
+            # Compute state prediction for a single timestep
             # We use __call__ to make sure hooks are dispatched correctly
-            current_estimate = self(observations[t], controls[t])
+            current_prediction = self(observations[t], controls[t])
 
             # Validate & add to output
-            assert current_estimate.shape == (N, self.state_dim)
-            state_predictions[t] = current_estimate
+            assert current_prediction.shape == (N, self.state_dim)
+            state_predictions[t] = current_prediction
 
-        # Return state estimates
+        # Return state predictions
         return state_predictions
