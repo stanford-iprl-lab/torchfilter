@@ -58,7 +58,7 @@ def train_dynamics_single_step(
 
             # Minimize loss
             loss = loss_function(state_predictions, next_states)
-            buddy.minimize(loss)
+            buddy.minimize(loss, optimizer_name="train_dynamics_single_step")
             epoch_loss += fannypack.utils.to_numpy(loss)
 
             # Logging
@@ -124,7 +124,7 @@ def train_dynamics_recurrent(
 
             # Minimize loss
             loss = loss_function(state_predictions, true_states[:, 1:])
-            buddy.minimize(loss)
+            buddy.minimize(loss, optimizer_name="train_dynamics_recurrent")
             epoch_loss += fannypack.utils.to_numpy(loss)
 
             # Logging
