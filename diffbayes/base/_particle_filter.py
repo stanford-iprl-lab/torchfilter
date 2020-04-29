@@ -7,7 +7,7 @@ from .. import types
 from . import DynamicsModel, Filter, ParticleFilterMeasurementModel
 
 
-class ParticleFilter(Filter):
+class ParticleFilter(Filter, abc.ABC):
     """Base class for a generic differentiable particle filter.
     """
 
@@ -59,11 +59,11 @@ class ParticleFilter(Filter):
 
         # "Hidden state" tensors
         self.particle_states: torch.Tensor
-        """torch.tensor: Discrete particles representing our current belief
+        """torch.Tensor: Discrete particles representing our current belief
         distribution. Shape should be `(N, M, state_dim)`.
         """
         self.particle_log_weights: torch.Tensor
-        """torch.tensor: Weights corresponding to each particle, stored as
+        """torch.Tensor: Weights corresponding to each particle, stored as
         log-likelihoods. Shape should be `(N, M)`.
         """
 
@@ -102,9 +102,9 @@ class ParticleFilter(Filter):
 
         Args:
             observations (dict or torch.Tensor): observation inputs. should be
-                either a dict of tensors or tensor of size `(N, ...)`.
+                either a dict of tensors or tensor of shape `(N, ...)`.
             controls (dict or torch.Tensor): control inputs. should be either a
-                dict of tensors or tensor of size `(N, ...)`.
+                dict of tensors or tensor of shape `(N, ...)`.
 
         Returns:
             torch.Tensor: Predicted state for each batch element. Shape should

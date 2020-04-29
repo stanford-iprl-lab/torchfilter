@@ -190,7 +190,7 @@
 <dl class="class">
 <dt id="diffbayes.base._particle_filter.ParticleFilter">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._particle_filter.</code><code class="sig-name descname">ParticleFilter</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">dynamics_model: DynamicsModel</em>, <em class="sig-param">measurement_model: ParticleFilterMeasurementModel</em>, <em class="sig-param">num_particles: int = 100</em>, <em class="sig-param">resample: bool = True</em>, <em class="sig-param">soft_resample_alpha: float = 1.0</em>, <em class="sig-param">estimation_method: str = 'weighted_average'</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._particle_filter.ParticleFilter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../index.html#diffbayes.base.Filter" title="diffbayes.base.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.Filter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../index.html#diffbayes.base.Filter" title="diffbayes.base.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.Filter</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>Base class for a generic differentiable particle filter.</p>
 <dl class="attribute">
 <dt id="diffbayes.base._particle_filter.ParticleFilter.dynamics_model">
@@ -274,7 +274,7 @@ Defaults to 1.0 (disabled).</p>
 distribution. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">M,</span> <span class="pre">state_dim)</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>torch.tensor</p>
+<dd class="field-odd"><p>torch.Tensor</p>
 </dd>
 </dl>
 </dd></dl>
@@ -286,7 +286,7 @@ distribution. Shape should be <code class="docutils literal notranslate"><span c
 log-likelihoods. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">M)</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>torch.tensor</p>
+<dd class="field-odd"><p>torch.Tensor</p>
 </dd>
 </dl>
 </dd></dl>
@@ -315,9 +315,9 @@ log-likelihoods. Shape should be <code class="docutils literal notranslate"><spa
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>observations</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – observation inputs. should be
-either a dict of tensors or tensor of size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p></li>
+either a dict of tensors or tensor of shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p></li>
 <li><p><strong>controls</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – control inputs. should be either a
-dict of tensors or tensor of size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p></li>
+dict of tensors or tensor of shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

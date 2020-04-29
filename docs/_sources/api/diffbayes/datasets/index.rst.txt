@@ -3,6 +3,11 @@
 
 .. py:module:: diffbayes.datasets
 
+.. autoapi-nested-parse::
+
+   Dataset utilities for learning & evaluating state estimators in PyTorch.
+
+
 
 Package Contents
 ----------------

@@ -3,6 +3,15 @@
 
 .. py:module:: diffbayes.train
 
+.. autoapi-nested-parse::
+
+   Reference implementations for training state estimators with learnable parameters.
+
+   These are written with a custom
+   `model manager <https://brentyi.github.io/fannypack/utils/buddy.html>`_ for brevity, but
+   can be easily translated to raw PyTorch.
+
+
 
 Package Contents
 ----------------

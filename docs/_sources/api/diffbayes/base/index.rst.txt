@@ -3,6 +3,11 @@
 
 .. py:module:: diffbayes.base
 
+.. autoapi-nested-parse::
+
+   Abstract Bayesian filter implementations in PyTorch.
+
+
 
 Package Contents
 ----------------
@@ -176,7 +181,7 @@ Package Contents
 
 .. py:class:: ParticleFilter(*, dynamics_model: DynamicsModel, measurement_model: ParticleFilterMeasurementModel, num_particles: int = 100, resample: bool = True, soft_resample_alpha: float = 1.0, estimation_method: str = 'weighted_average')
 
-   Bases: :class:`diffbayes.base.Filter`
+   Bases: :class:`diffbayes.base.Filter`, :class:`abc.ABC`
 
    Base class for a generic differentiable particle filter.
 
@@ -243,7 +248,7 @@ Package Contents
       Discrete particles representing our current belief
       distribution. Shape should be ``(N, M, state_dim)``.
 
-      :type: torch.tensor
+      :type: torch.Tensor
 
 
    .. attribute:: particle_log_weights
@@ -252,7 +257,7 @@ Package Contents
       Weights corresponding to each particle, stored as
       log-likelihoods. Shape should be ``(N, M)``.
 
-      :type: torch.tensor
+      :type: torch.Tensor
 
 
    .. method:: initialize_beliefs(self, *, mean: torch.Tensor, covariance: torch.Tensor)
@@ -274,10 +279,10 @@ Package Contents
       Particle filter forward pass, single timestep.
 
       :param observations: observation inputs. should be
-                           either a dict of tensors or tensor of size ``(N, ...)``.
+                           either a dict of tensors or tensor of shape ``(N, ...)``.
       :type observations: dict or torch.Tensor
       :param controls: control inputs. should be either a
-                       dict of tensors or tensor of size ``(N, ...)``.
+                       dict of tensors or tensor of shape ``(N, ...)``.
       :type controls: dict or torch.Tensor
 
       :returns: *torch.Tensor* -- Predicted state for each batch element. Shape should
