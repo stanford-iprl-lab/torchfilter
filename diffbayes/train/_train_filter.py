@@ -19,7 +19,7 @@ def train_filter(
     loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss,
     log_interval: int = 1,
 ) -> None:
-    """Trains a filter model end-to-end via backpropagation through time.
+    """Trains a filter end-to-end via backpropagation through time.
 
     Args:
         buddy (fannypack.utils.Buddy): Training helper.

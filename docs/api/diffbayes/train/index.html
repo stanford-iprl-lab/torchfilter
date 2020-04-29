@@ -89,6 +89,9 @@
 <ul>
 <li><a class="reference internal" href="#diffbayes.train.train_dynamics_single_step">train_dynamics_single_step</a></li>
 </ul>
+<ul>
+<li><a class="reference internal" href="#diffbayes.train.train_filter">train_filter</a></li>
+</ul>
 </li>
 </ul>
 </li>
@@ -192,6 +195,31 @@ Defaults to MSE.</p></li>
 <li><p><strong>buddy</strong> (<em>fannypack.utils.Buddy</em>) – Training helper.</p></li>
 <li><p><strong>dynamics_model</strong> (<a class="reference internal" href="../base/index.html#diffbayes.base.DynamicsModel" title="diffbayes.base.DynamicsModel"><em>diffbayes.base.DynamicsModel</em></a>) – Model to train.</p></li>
 <li><p><strong>dataloader</strong> (<em>DataLoader</em>) – Loader for a SingleStepDataset.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>loss_function</strong> (<em>callable</em><em>, </em><em>optional</em>) – Loss function, from <code class="docutils literal notranslate"><span class="pre">torch.nn.functional</span></code>.
+Defaults to MSE.</p></li>
+<li><p><strong>log_interval</strong> (<em>int</em><em>, </em><em>optional</em>) – Minibatches between each Tensorboard log.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="diffbayes.train.train_filter">
+<code class="sig-prename descclassname">diffbayes.train.</code><code class="sig-name descname">train_filter</code><span class="sig-paren">(</span><em class="sig-param">buddy: fannypack.utils.Buddy, filter_model: diffbayes.base.Filter, dataloader: DataLoader, initial_covariance: torch.Tensor, *, loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss, log_interval: int = 1</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.train.train_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains a filter end-to-end via backpropagation through time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>buddy</strong> (<em>fannypack.utils.Buddy</em>) – Training helper.</p></li>
+<li><p><strong>filter_model</strong> (<a class="reference internal" href="../base/index.html#diffbayes.base.DynamicsModel" title="diffbayes.base.DynamicsModel"><em>diffbayes.base.DynamicsModel</em></a>) – Model to train.</p></li>
+<li><p><strong>dataloader</strong> (<em>DataLoader</em>) – Loader for a SubsequenceDataset.</p></li>
+<li><p><strong>initial_covariance</strong> (<em>torch.Tensor</em>) – Covariance matrix of error in initial
+posterior, whose mean is sampled from a Gaussian centered at the
+ground-truth start state. Shape should be (state_dim, state_dim).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>

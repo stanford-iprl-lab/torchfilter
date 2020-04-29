@@ -43,3 +43,25 @@ Package Contents
    :kwtype log_interval: int, optional
 
 
+.. function:: train_filter(buddy: fannypack.utils.Buddy, filter_model: diffbayes.base.Filter, dataloader: DataLoader, initial_covariance: torch.Tensor, *, loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss, log_interval: int = 1) -> None
+
+   Trains a filter end-to-end via backpropagation through time.
+
+   :param buddy: Training helper.
+   :type buddy: fannypack.utils.Buddy
+   :param filter_model: Model to train.
+   :type filter_model: diffbayes.base.DynamicsModel
+   :param dataloader: Loader for a SubsequenceDataset.
+   :type dataloader: DataLoader
+   :param initial_covariance: Covariance matrix of error in initial
+                              posterior, whose mean is sampled from a Gaussian centered at the
+                              ground-truth start state. Shape should be (state_dim, state_dim).
+   :type initial_covariance: torch.Tensor
+
+   :keyword loss_function: Loss function, from ``torch.nn.functional``.
+                           Defaults to MSE.
+   :kwtype loss_function: callable, optional
+   :keyword log_interval: Minibatches between each Tensorboard log.
+   :kwtype log_interval: int, optional
+
+
