@@ -43,17 +43,15 @@ def split_trajectories(
         states, observations, controls = trajectory
 
         trajectory_length = len(states)
-        assert len(observations) == trajectory_length
-        assert len(controls) == trajectory_length
-
-        sections = trajectory_length // subsequence_length
+        assert len(fannypack.utils.SliceWrapper(observations)) == trajectory_length
+        assert len(fannypack.utils.SliceWrapper(controls)) == trajectory_length
 
         # We iterate over two offsets to generate overlapping subsequences
         for offset in (0, subsequence_length // 2):
             for s, o, c in zip(
-                _split_helper(states, subsequence_length, sections, offset),
-                _split_helper(observations, subsequence_length, sections, offset),
-                _split_helper(controls, subsequence_length, sections, offset),
+                _split_helper(states, subsequence_length, offset),
+                _split_helper(observations, subsequence_length, offset),
+                _split_helper(controls, subsequence_length, offset),
             ):
                 # Numpy => Torch
                 s = fannypack.utils.to_torch(s)
@@ -66,10 +64,11 @@ def split_trajectories(
 
 
 def _split_helper(
-    x: types.NumpyArrayOrDict, subsequence_length: int, sections: int, offset: int,
+    x: types.NumpyArrayOrDict, subsequence_length: int, offset: int,
 ) -> types.NumpyArrayOrDict:
     """Private helper: splits arrays or dicts of arrays of shape `(T, ...)`
-    into `(sections, subsequence_length, ...)`.
+    into `(sections, subsequence_length, ...)`, where `sections = orig_length //
+    subsequence_length`.
     """
     if type(x) == np.ndarray:
         x = cast(np.ndarray, x)
@@ -78,17 +77,18 @@ def _split_helper(
         x = x[offset:]
 
         # Make sure our array is evenly divisible
-        new_length = (len(x) // subsequence_length) * subsequence_length
+        sections = len(x) // subsequence_length
+        new_length = sections * subsequence_length
         x = x[:new_length]
 
         # Split & return
-        return np.split(x[:new_length], sections)
+        return np.split(x, sections)
     elif type(x) == dict:
         # For dictionary inputs, we split the contents of each
         # value in the dictionary
         output = {}
         for key, value in x.items():
-            output[key] = _split_helper(value, subsequence_length, sections, offset)
+            output[key] = _split_helper(value, subsequence_length, offset)
 
         # Return a wrapped dictionary; this makes it iterable
         return fannypack.utils.SliceWrapper(output)
