@@ -96,15 +96,14 @@ class Filter(nn.Module, abc.ABC):
         controls = fannypack.utils.SliceWrapper(controls)
 
         # Get sequence length (T), batch size (N)
-        T = controls.shape[0]
-        N = controls.shape[1]
+        T, N = controls.shape[:2]
         assert observations.shape[:2] == (T, N)
 
         # Filtering forward pass
         # We treat t = 0 as a special case to make it easier to create state_predictions
         # tensor on the correct device
         t = 0
-        current_prediction = self(observations[t], controls[t])
+        current_prediction = self(observations=observations[t], controls=controls[t])
         state_predictions = current_prediction.new_zeros((T, N, self.state_dim))
         assert current_prediction.shape == (N, self.state_dim)
         state_predictions[t] = current_prediction
@@ -112,7 +111,9 @@ class Filter(nn.Module, abc.ABC):
         for t in range(1, T):
             # Compute state prediction for a single timestep
             # We use __call__ to make sure hooks are dispatched correctly
-            current_prediction = self(observations[t], controls[t])
+            current_prediction = self(
+                observations=observations[t], controls=controls[t]
+            )
 
             # Validate & add to output
             assert current_prediction.shape == (N, self.state_dim)

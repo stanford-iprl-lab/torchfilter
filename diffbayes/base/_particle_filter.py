@@ -3,6 +3,8 @@ import abc
 import numpy as np
 import torch
 
+import fannypack
+
 from .. import types
 from . import DynamicsModel, Filter, ParticleFilterMeasurementModel
 
@@ -21,7 +23,7 @@ class ParticleFilter(Filter, abc.ABC):
         soft_resample_alpha: float = 1.0,
         estimation_method: str = "weighted_average",
     ):
-        # Sanity check for submodules
+        # Check submodule consistency
         assert isinstance(dynamics_model, DynamicsModel)
         assert isinstance(measurement_model, ParticleFilterMeasurementModel)
         assert dynamics_model.state_dim == measurement_model.state_dim
@@ -84,16 +86,16 @@ class ParticleFilter(Filter, abc.ABC):
         # Sample particles
         self.particle_states = (
             torch.distributions.MultivariateNormal(mean, covariance)
-            .sample(M)
+            .sample((M,))
             .transpose(0, 1)
         )
         assert self.particle_states.shape == (N, M, self.state_dim)
 
         # Normalize weights
         self.particle_log_weights = self.particle_states.new_full(
-            (N, M), np.log(M, dtype=np.float32)
+            (N, M), float(-np.log(M, dtype=np.float32))
         )
-        assert self.particle_log_weights == (N, M)
+        assert self.particle_log_weights.shape == (N, M)
 
     def forward(
         self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch,
@@ -119,6 +121,7 @@ class ParticleFilter(Filter, abc.ABC):
         # Get our batch size (N), current particle count (M), & state dimension
         N, M, state_dim = self.particle_states.shape
         assert state_dim == self.state_dim
+        assert len(fannypack.utils.SliceWrapper(controls)) == N
 
         # If we're not resampling and our current particle count doesn't match
         # our desired particle count, we need to either expand or contract our
@@ -155,15 +158,26 @@ class ParticleFilter(Filter, abc.ABC):
 
         # Propagate particles through our dynamics model
         # A bit of extra effort is required for the extra particle dimension
+        # > For our states, we flatten along the N/M axes
+        # > For our controls, we repeat each one `M` times, if M=3:
+        #       [u0 u1 u2] should becomes [u0 u0 u0 u1 u1 u1 u2 u2 u2]
+        #
+        # Currently each of the M particles within a "sample" get the same action, but
+        #  we could also add noise in the action space (a la Jonschkowski et al. 2018)
+        reshaped_states = self.particle_states.reshape(-1, self.state_dim)
+        reshaped_controls = (
+            fannypack.utils.SliceWrapper(controls)
+            .map(lambda tensor: torch.repeat_interleave(tensor, repeats=M, dim=0))
+            .data
+        )
         self.particle_states = self.dynamics_model(
-            initial_states=self.particle_states.view(-1, self.state_dim),
-            controls=controls,
+            initial_states=reshaped_states, controls=reshaped_controls, noisy=True,
         ).view(N, M, self.state_dim)
-        assert self.particle_states == (N, M, self.state_dim)
+        assert self.particle_states.shape == (N, M, self.state_dim)
 
         # Re-weight particles using observations
         self.particle_log_weights = self.particle_log_weights + self.measurement_model(
-            states=self.particle_states, observations=observations
+            states=self.particle_states, observations=observations,
         )
 
         # Normalize particle weights
@@ -184,7 +198,7 @@ class ParticleFilter(Filter, abc.ABC):
                 self.particle_states, dim=1, index=best_indices
             )
         else:
-            assert False, "Invalid estimation method!"
+            assert False, "Unsupported estimation method!"
 
         # Resampling
         if self.resample:
@@ -192,7 +206,7 @@ class ParticleFilter(Filter, abc.ABC):
                 # TODO: port this implementation over!
                 assert False, "Not yet ported"
             else:
-                # Standard particle filter re-sampling -- this kills gradients
+                # Standard particle filter re-sampling -- this stops gradients
                 # This is the most naive flavor of resampling, and not the low
                 # variance approach
                 #
@@ -212,7 +226,7 @@ class ParticleFilter(Filter, abc.ABC):
 
                 # Uniform weights
                 self.particle_log_weights = self.particle_log_weights.new_full(
-                    (N, self.num_particles), np.log(M, dtype=np.float32)
+                    (N, self.num_particles), float(-np.log(M, dtype=np.float32))
                 )
 
         # Post-condition :)

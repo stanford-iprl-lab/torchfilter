@@ -31,7 +31,7 @@ def train_dynamics_single_step(
         log_interval (int, optional): Minibatches between each Tensorboard log.
     """
     # Dataloader should load a SubsequenceDataset
-    assert isinstance(dataloader.dataset, diffbayes.datasets.SingleStepDataset)
+    assert isinstance(dataloader.dataset, diffbayes.data.SingleStepDataset)
 
     # Track mean epoch loss
     epoch_loss = 0.0
@@ -91,7 +91,7 @@ def train_dynamics_recurrent(
         log_interval (int, optional): Minibatches between each Tensorboard log.
     """
     # Dataloader should load a SubsequenceDataset
-    assert isinstance(dataloader.dataset, diffbayes.datasets.SubsequenceDataset)
+    assert isinstance(dataloader.dataset, diffbayes.data.SubsequenceDataset)
 
     # Track mean epoch loss
     epoch_loss = 0.0
@@ -103,16 +103,16 @@ def train_dynamics_recurrent(
             batch_gpu = fannypack.utils.to_device(batch_data, buddy.device)
             true_states, observations, controls = batch_gpu
 
-            # Sanity checks
-            N, sequence_length, state_dim = true_states.shape
+            # Shape checks
+            sequence_length, N, state_dim = true_states.shape
             assert state_dim == dynamics_model.state_dim
             assert fannypack.utils.SliceWrapper(observations).shape[:2] == (
-                N,
                 sequence_length,
+                N,
             )
             assert fannypack.utils.SliceWrapper(controls).shape[:2] == (
-                N,
                 sequence_length,
+                N,
             )
 
             # Forward pass from the first state
@@ -120,10 +120,10 @@ def train_dynamics_recurrent(
             state_predictions = dynamics_model.forward_loop(
                 initial_states=initial_states, controls=controls[1:]
             )
-            assert state_predictions.shape == (N, sequence_length - 1, state_dim)
+            assert state_predictions.shape == (sequence_length - 1, N, state_dim)
 
             # Minimize loss
-            loss = loss_function(state_predictions, true_states[:, 1:])
+            loss = loss_function(state_predictions, true_states[1:])
             buddy.minimize(loss, optimizer_name="train_dynamics_recurrent")
             epoch_loss += fannypack.utils.to_numpy(loss)
 

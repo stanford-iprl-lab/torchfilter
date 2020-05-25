@@ -10,6 +10,12 @@ import diffbayes
 import fannypack
 
 
+def _swap_batch_sequence_axes(tensor):
+    """Converts data formatted as (N, T, ...) to (T, N, ...)
+    """
+    return torch.transpose(tensor, 0, 1)
+
+
 def train_filter(
     buddy: fannypack.utils.Buddy,
     filter_model: diffbayes.base.Filter,
@@ -19,7 +25,8 @@ def train_filter(
     loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss,
     log_interval: int = 1,
 ) -> None:
-    """Trains a filter end-to-end via backpropagation through time.
+    """Trains a filter end-to-end via backpropagation through time for 1 epoch over a
+    subsequence dataset.
 
     Args:
         buddy (fannypack.utils.Buddy): Training helper.
@@ -35,7 +42,7 @@ def train_filter(
         log_interval (int, optional): Minibatches between each Tensorboard log.
     """
     # Dataloader should load a SubsequenceDataset
-    assert isinstance(dataloader.dataset, diffbayes.datasets.SubsequenceDataset)
+    assert isinstance(dataloader.dataset, diffbayes.data.SubsequenceDataset)
     assert initial_covariance.shape == (filter_model.state_dim, filter_model.state_dim)
 
     # Track mean epoch loss
@@ -48,16 +55,29 @@ def train_filter(
             batch_gpu = fannypack.utils.to_device(batch_data, buddy.device)
             true_states, observations, controls = batch_gpu
 
-            # Sanity checks
-            N, sequence_length, state_dim = true_states.shape
+            # Swap batch size, sequence length axes
+            true_states = _swap_batch_sequence_axes(true_states)
+            observations = (
+                fannypack.utils.SliceWrapper(observations)
+                .map(_swap_batch_sequence_axes)
+                .data
+            )
+            controls = (
+                fannypack.utils.SliceWrapper(controls)
+                .map(_swap_batch_sequence_axes)
+                .data
+            )
+
+            # Shape checks
+            sequence_length, N, state_dim = true_states.shape
             assert state_dim == filter_model.state_dim
             assert fannypack.utils.SliceWrapper(observations).shape[:2] == (
-                N,
                 sequence_length,
+                N,
             )
             assert fannypack.utils.SliceWrapper(controls).shape[:2] == (
-                N,
                 sequence_length,
+                N,
             )
 
             # Populate initial filter belief
@@ -65,7 +85,7 @@ def train_filter(
                 (N, state_dim, state_dim)
             )
             initial_states = torch.distributions.MultivariateNormal(
-                true_states[:, 0], initial_states_covariance
+                true_states[0], initial_states_covariance
             ).sample()
             filter_model.initialize_beliefs(
                 mean=initial_states, covariance=initial_states_covariance
@@ -73,12 +93,13 @@ def train_filter(
 
             # Forward pass from the first state
             state_predictions = filter_model.forward_loop(
-                observations=observations[1:], controls=controls[1:]
+                observations=fannypack.utils.SliceWrapper(observations)[1:],
+                controls=fannypack.utils.SliceWrapper(controls)[1:],
             )
-            assert state_predictions.shape == (N, sequence_length - 1, state_dim)
+            assert state_predictions.shape == (sequence_length - 1, N, state_dim,)
 
             # Minimize loss
-            loss = loss_function(state_predictions, true_states[:, 1:])
+            loss = loss_function(state_predictions, true_states[1:])
             buddy.minimize(loss, optimizer_name="train_filter_recurrent")
             epoch_loss += fannypack.utils.to_numpy(loss)
 

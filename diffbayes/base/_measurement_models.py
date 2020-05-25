@@ -13,6 +13,8 @@ class ParticleFilterMeasurementModel(abc.ABC, nn.Module):
     """
 
     def __init__(self, state_dim: int):
+        super().__init__()
+
         self.state_dim = state_dim
         """int: Dimensionality of our state."""
 

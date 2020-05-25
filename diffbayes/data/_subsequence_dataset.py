@@ -12,7 +12,7 @@ class SubsequenceDataset(Dataset):
     """A data preprocessor for producing training subsequences from
     a list of trajectories.
 
-    Thin wrapper around `diffbayes.datasets.split_trajectories()`.
+    Thin wrapper around `diffbayes.data.split_trajectories()`.
 
     Args:
         trajectories (list): list of trajectories, where each is a tuple of

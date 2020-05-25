@@ -1,4 +1,4 @@
-from typing import List, cast
+from typing import Dict, List, cast
 
 import numpy as np
 
@@ -50,8 +50,12 @@ def split_trajectories(
         for offset in (0, subsequence_length // 2):
             for s, o, c in zip(
                 _split_helper(states, subsequence_length, offset),
-                _split_helper(observations, subsequence_length, offset),
-                _split_helper(controls, subsequence_length, offset),
+                fannypack.utils.SliceWrapper(
+                    _split_helper(observations, subsequence_length, offset)
+                ),
+                fannypack.utils.SliceWrapper(
+                    _split_helper(controls, subsequence_length, offset)
+                ),
             ):
                 # Numpy => Torch
                 s = fannypack.utils.to_torch(s)
@@ -90,7 +94,6 @@ def _split_helper(
         for key, value in x.items():
             output[key] = _split_helper(value, subsequence_length, offset)
 
-        # Return a wrapped dictionary; this makes it iterable
-        return fannypack.utils.SliceWrapper(output)
+        return output
     else:
-        assert False, "Invalid trajectory type"
+        assert False, "Unsupported trajectory type"
