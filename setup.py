@@ -9,5 +9,5 @@ setup(
     author_email="brentyi@berkeley.edu",
     license="BSD",
     packages=["diffbayes"],
-    install_requires=["torch", "pytest", "fannypack", "tqdm"],
+    install_requires=["fannypack", "pytest", "scipy", "torch", "tqdm"],
 )

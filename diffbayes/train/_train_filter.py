@@ -69,16 +69,11 @@ def train_filter(
             )
 
             # Shape checks
-            sequence_length, N, state_dim = true_states.shape
+            T, N, state_dim = true_states.shape
             assert state_dim == filter_model.state_dim
-            assert fannypack.utils.SliceWrapper(observations).shape[:2] == (
-                sequence_length,
-                N,
-            )
-            assert fannypack.utils.SliceWrapper(controls).shape[:2] == (
-                sequence_length,
-                N,
-            )
+            assert fannypack.utils.SliceWrapper(observations).shape[:2] == (T, N)
+            assert fannypack.utils.SliceWrapper(controls).shape[:2] == (T, N)
+            assert batch_idx != 0 or N == dataloader.batch_size
 
             # Populate initial filter belief
             initial_states_covariance = initial_covariance[None, :, :].expand(
@@ -96,7 +91,7 @@ def train_filter(
                 observations=fannypack.utils.SliceWrapper(observations)[1:],
                 controls=fannypack.utils.SliceWrapper(controls)[1:],
             )
-            assert state_predictions.shape == (sequence_length - 1, N, state_dim,)
+            assert state_predictions.shape == (T - 1, N, state_dim,)
 
             # Minimize loss
             loss = loss_function(state_predictions, true_states[1:])

@@ -61,18 +61,24 @@ class DynamicsModel(nn.Module, abc.ABC):
         return output[0]
 
     def forward_loop(
-        self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch
+        self,
+        *,
+        initial_states: types.StatesTorch,
+        controls: types.ControlsTorch,
+        noisy: bool,
     ) -> types.StatesTorch:
         """Dynamics model forward pass, over sequence length `T` and batch size
         `N`.  By default, this is implemented by iteratively calling
         `forward()`.
         To inject code between timesteps (for example, to inspect hidden state),
         use `register_forward_hook()`.
+
         Args:
             initial_states (torch.Tensor): Initial states to pass to our
                 dynamics model. Shape should be `(N, state_dim)`.
             controls (dict or torch.Tensor): Control inputs. Should be either a
                 dict of tensors or tensor of size `(T, N, ...)`.
+            noisy (bool): Set to True to add noise to output.
         Returns:
             torch.Tensor: Predicted states at each timestep. Shape should be
             `(T, N, state_dim).`
@@ -96,7 +102,7 @@ class DynamicsModel(nn.Module, abc.ABC):
             # Compute state estimate for a single timestep
             # We use __call__ to make sure hooks are dispatched correctly
             current_estimate = self(
-                initial_states=current_estimate, controls=controls[t],
+                initial_states=current_estimate, controls=controls[t], noisy=noisy
             )
 
             # Validate & add to output

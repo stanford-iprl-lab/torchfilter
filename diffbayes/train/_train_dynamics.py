@@ -10,6 +10,12 @@ import diffbayes
 import fannypack
 
 
+def _swap_batch_sequence_axes(tensor):
+    """Converts data formatted as (N, T, ...) to (T, N, ...)
+    """
+    return torch.transpose(tensor, 0, 1)
+
+
 def train_dynamics_single_step(
     buddy: fannypack.utils.Buddy,
     dynamics_model: diffbayes.base.DynamicsModel,
@@ -30,7 +36,7 @@ def train_dynamics_single_step(
             Defaults to MSE.
         log_interval (int, optional): Minibatches between each Tensorboard log.
     """
-    # Dataloader should load a SubsequenceDataset
+    # Dataloader should load a SingleStepDataset
     assert isinstance(dataloader.dataset, diffbayes.data.SingleStepDataset)
 
     # Track mean epoch loss
@@ -52,7 +58,7 @@ def train_dynamics_single_step(
 
             # Single-step prediction
             state_predictions = dynamics_model(
-                initial_states=initial_states, controls=controls
+                initial_states=initial_states, controls=controls, noisy=False
             )
             assert state_predictions.shape == (N, state_dim)
 
@@ -103,24 +109,32 @@ def train_dynamics_recurrent(
             batch_gpu = fannypack.utils.to_device(batch_data, buddy.device)
             true_states, observations, controls = batch_gpu
 
-            # Shape checks
-            sequence_length, N, state_dim = true_states.shape
-            assert state_dim == dynamics_model.state_dim
-            assert fannypack.utils.SliceWrapper(observations).shape[:2] == (
-                sequence_length,
-                N,
+            # Swap batch size, sequence length axes
+            true_states = _swap_batch_sequence_axes(true_states)
+            observations = (
+                fannypack.utils.SliceWrapper(observations)
+                .map(_swap_batch_sequence_axes)
+                .data
             )
-            assert fannypack.utils.SliceWrapper(controls).shape[:2] == (
-                sequence_length,
-                N,
+            controls = (
+                fannypack.utils.SliceWrapper(controls)
+                .map(_swap_batch_sequence_axes)
+                .data
             )
 
+            # Shape checks
+            T, N, state_dim = true_states.shape
+            assert state_dim == dynamics_model.state_dim
+            assert fannypack.utils.SliceWrapper(observations).shape[:2] == (T, N)
+            assert fannypack.utils.SliceWrapper(controls).shape[:2] == (T, N)
+            assert batch_idx != 0 or N == dataloader.batch_size
+
             # Forward pass from the first state
-            initial_states = true_states[:, 0]
+            initial_states = true_states[0]
             state_predictions = dynamics_model.forward_loop(
-                initial_states=initial_states, controls=controls[1:]
+                initial_states=initial_states, controls=controls[1:], noisy=False
             )
-            assert state_predictions.shape == (sequence_length - 1, N, state_dim)
+            assert state_predictions.shape == (T - 1, N, state_dim)
 
             # Minimize loss
             loss = loss_function(state_predictions, true_states[1:])
