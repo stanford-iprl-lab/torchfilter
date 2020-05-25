@@ -2,8 +2,8 @@ import pytest
 
 
 def test_import():
-    # Checks syntax :)
+    """Smoke test :)"""
     import diffbayes
     import diffbayes.base
-    import diffbayes.datasets
+    import diffbayes.data
     import diffbayes.train
