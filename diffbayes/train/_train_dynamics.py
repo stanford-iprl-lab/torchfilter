@@ -114,12 +114,10 @@ def train_dynamics_recurrent(
             observations = (
                 fannypack.utils.SliceWrapper(observations)
                 .map(_swap_batch_sequence_axes)
-                .data
             )
             controls = (
                 fannypack.utils.SliceWrapper(controls)
                 .map(_swap_batch_sequence_axes)
-                .data
             )
 
             # Shape checks

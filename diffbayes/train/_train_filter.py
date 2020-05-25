@@ -57,15 +57,11 @@ def train_filter(
 
             # Swap batch size, sequence length axes
             true_states = _swap_batch_sequence_axes(true_states)
-            observations = (
-                fannypack.utils.SliceWrapper(observations)
-                .map(_swap_batch_sequence_axes)
-                .data
+            observations = fannypack.utils.SliceWrapper(observations).map(
+                _swap_batch_sequence_axes
             )
-            controls = (
-                fannypack.utils.SliceWrapper(controls)
-                .map(_swap_batch_sequence_axes)
-                .data
+            controls = fannypack.utils.SliceWrapper(controls).map(
+                _swap_batch_sequence_axes
             )
 
             # Shape checks

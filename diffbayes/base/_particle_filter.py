@@ -168,7 +168,6 @@ class ParticleFilter(Filter, abc.ABC):
         reshaped_controls = (
             fannypack.utils.SliceWrapper(controls)
             .map(lambda tensor: torch.repeat_interleave(tensor, repeats=M, dim=0))
-            .data
         )
         self.particle_states = self.dynamics_model(
             initial_states=reshaped_states, controls=reshaped_controls, noisy=True,
