@@ -21,7 +21,7 @@ class DynamicsModel(nn.Module, abc.ABC):
         self.state_dim = state_dim
         """int: Dimensionality of our state."""
 
-        self.Q = Q
+        self.Q = torch.nn.Parameter(Q, requires_grad=False)
         """torch.Tensor: Output covariance."""
 
     def forward(

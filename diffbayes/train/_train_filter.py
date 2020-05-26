@@ -87,7 +87,7 @@ def train_filter(
                 observations=fannypack.utils.SliceWrapper(observations)[1:],
                 controls=fannypack.utils.SliceWrapper(controls)[1:],
             )
-            assert state_predictions.shape == (T - 1, N, state_dim,)
+            assert state_predictions.shape == (T - 1, N, state_dim)
 
             # Minimize loss
             loss = loss_function(state_predictions, true_states[1:])

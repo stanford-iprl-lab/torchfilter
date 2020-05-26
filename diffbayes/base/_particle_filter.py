@@ -165,9 +165,8 @@ class ParticleFilter(Filter, abc.ABC):
         # Currently each of the M particles within a "sample" get the same action, but
         #  we could also add noise in the action space (a la Jonschkowski et al. 2018)
         reshaped_states = self.particle_states.reshape(-1, self.state_dim)
-        reshaped_controls = (
-            fannypack.utils.SliceWrapper(controls)
-            .map(lambda tensor: torch.repeat_interleave(tensor, repeats=M, dim=0))
+        reshaped_controls = fannypack.utils.SliceWrapper(controls).map(
+            lambda tensor: torch.repeat_interleave(tensor, repeats=M, dim=0)
         )
         self.particle_states = self.dynamics_model(
             initial_states=reshaped_states, controls=reshaped_controls, noisy=True,
