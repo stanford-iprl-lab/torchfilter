@@ -135,26 +135,40 @@ class ParticleFilter(Filter, abc.ABC):
         # If we're not resampling and our current particle count doesn't match
         # our desired particle count, we need to either expand or contract our
         # particle set
-        #
-        # This is rarely needed and done fairly naively
         if not resample and self.num_particles != M:
-            new_states = self.particle_states.new_zeros(
-                (N, self.num_particles, state_dim)
-            )
-            new_log_weights = self.particle_log_weights.new_zeros(
-                (N, self.num_particles)
+            indices = self.particle_states.new_zeros(
+                (N, self.num_particles), dtype=torch.long
             )
 
-            # Randomly sample some particles from our input
-            # We sample with replacement only if necessary
-            uniform_logits = torch.ones_like(self.particle_log_weights[0])
-            indices = torch.multinomial(
-                uniform_logits,
-                num_samples=self.num_particles,
-                replacement=(self.num_particles > M),
+            # If output particles > our input particles, for the beginning part we copy
+            # particles directly to reduce variance
+            copy_count = (self.num_particles // M) * M
+            indices[:, :copy_count] = torch.arange(M).repeat(copy_count // M)[None, :]
+
+            # For remaining particles, we sample w/o replacement (also lowers variance)
+            remaining_count = self.num_particles - copy_count
+            assert remaining_count >= 0
+            if remaining_count > 0:
+                uniform_logits = torch.ones_like(self.particle_log_weights[0])
+                indices[:, copy_count:] = torch.stack(
+                    [
+                        torch.multinomial(
+                            uniform_logits,
+                            num_samples=remaining_count,
+                            replacement=False,
+                        )
+                        for _ in range(N)
+                    ],
+                    dim=0,
+                )
+
+            # Gather new particles, weights
+            new_states = self.particle_states.gather(
+                1, indices[:, :, None].expand((N, self.num_particles, state_dim))
             )
-            new_states[i] = self.particle_states[indices]
-            new_log_weights[i] = self.particle_log_weights[indices]
+            new_log_weights = self.particle_log_weights.gather(1, indices)
+            assert new_states.shape == (N, self.num_particles, state_dim)
+            assert new_log_weights.shape == (N, self.num_particles)
 
             # Update particle states and (normalized) weights
             self.particle_states = new_states
