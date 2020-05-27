@@ -44,6 +44,7 @@ def train_filter(
     # Dataloader should load a SubsequenceDataset
     assert isinstance(dataloader.dataset, diffbayes.data.SubsequenceDataset)
     assert initial_covariance.shape == (filter_model.state_dim, filter_model.state_dim)
+    assert filter_model.training, "Model needs to be set to train mode"
 
     # Track mean epoch loss
     epoch_loss = 0.0

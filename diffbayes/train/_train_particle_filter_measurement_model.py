@@ -34,6 +34,7 @@ def train_particle_filter_measurement_model(
     assert isinstance(
         dataloader.dataset, diffbayes.data.ParticleFilterMeasurementDataset
     )
+    assert measurement_model.training, "Model needs to be set to train mode"
 
     # Track mean epoch loss
     epoch_loss = 0.0

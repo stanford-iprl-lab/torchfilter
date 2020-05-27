@@ -38,6 +38,7 @@ def train_dynamics_single_step(
     """
     # Dataloader should load a SingleStepDataset
     assert isinstance(dataloader.dataset, diffbayes.data.SingleStepDataset)
+    assert dynamics_model.training, "Model needs to be set to train mode"
 
     # Track mean epoch loss
     epoch_loss = 0.0

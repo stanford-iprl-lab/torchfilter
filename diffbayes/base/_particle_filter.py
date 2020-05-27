@@ -19,7 +19,7 @@ class ParticleFilter(Filter, abc.ABC):
         dynamics_model: DynamicsModel,
         measurement_model: ParticleFilterMeasurementModel,
         num_particles: int = 100,
-        resample: bool = True,
+        resample: bool = None,
         soft_resample_alpha: float = 1.0,
         estimation_method: str = "weighted_average",
     ):
@@ -43,8 +43,9 @@ class ParticleFilter(Filter, abc.ABC):
         """int: Number of particles to represent our belief distribution.
         Defaults to 100."""
         self.resample = resample
-        """int: If True, we resample particles & normalize weights at each
-        timestep."""
+        """bool: If True, we resample particles & normalize weights at each
+        timestep. If unset (None), we automatically turn resampling on in eval mode
+        and off in train mode."""
 
         self.soft_resample_alpha = soft_resample_alpha
         """float: Tunable constant for differentiable resampling, as described
@@ -123,12 +124,20 @@ class ParticleFilter(Filter, abc.ABC):
         assert state_dim == self.state_dim
         assert len(fannypack.utils.SliceWrapper(controls)) == N
 
+        # Decide whether or not we're resampling
+        resample = self.resample
+        if resample is None:
+            # If not explicitly set, we disable resampling in train mode (to allow
+            # gradients to propagate through time) and enable in eval mode (to prevent
+            # particle deprivation)
+            resample = not self.training
+
         # If we're not resampling and our current particle count doesn't match
         # our desired particle count, we need to either expand or contract our
         # particle set
         #
         # This is rarely needed and done fairly naively
-        if not self.resample and self.num_particles != M:
+        if not resample and self.num_particles != M:
             new_states = self.particle_states.new_zeros(
                 (N, self.num_particles, state_dim)
             )
@@ -139,15 +148,13 @@ class ParticleFilter(Filter, abc.ABC):
             # Randomly sample some particles from our input
             # We sample with replacement only if necessary
             uniform_logits = torch.ones_like(self.particle_log_weights[0])
-            for i in range(N):
-                # TODO: 90% sure this for loop can be factored out
-                indices = torch.multinomial(
-                    uniform_logits,
-                    num_samples=self.num_particles,
-                    replacement=(self.num_particles > M),
-                )
-                new_states[i] = self.particle_states[i][indices]
-                new_log_weights[i] = self.particle_log_weights[i][indices]
+            indices = torch.multinomial(
+                uniform_logits,
+                num_samples=self.num_particles,
+                replacement=(self.num_particles > M),
+            )
+            new_states[i] = self.particle_states[indices]
+            new_log_weights[i] = self.particle_log_weights[indices]
 
             # Update particle states and (normalized) weights
             self.particle_states = new_states
@@ -199,7 +206,7 @@ class ParticleFilter(Filter, abc.ABC):
             assert False, "Unsupported estimation method!"
 
         # Resampling
-        if self.resample:
+        if resample:
             if self.soft_resample_alpha < 1.0:
                 # TODO: port this implementation over!
                 assert False, "Not yet ported"
