@@ -187,12 +187,12 @@
 <span id="diffbayes-base-particle-filter"></span><h1><a class="reference internal" href="#module-diffbayes.base._particle_filter" title="diffbayes.base._particle_filter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._particle_filter</span></code></a><a class="headerlink" href="#module-diffbayes.base._particle_filter" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="diffbayes.base._particle_filter.ParticleFilter">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._particle_filter.</code><code class="sig-name descname">ParticleFilter</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">dynamics_model: DynamicsModel</em>, <em class="sig-param">measurement_model: ParticleFilterMeasurementModel</em>, <em class="sig-param">num_particles: int = 100</em>, <em class="sig-param">resample: bool = True</em>, <em class="sig-param">soft_resample_alpha: float = 1.0</em>, <em class="sig-param">estimation_method: str = 'weighted_average'</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._particle_filter.ParticleFilter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._particle_filter.</code><code class="sig-name descname">ParticleFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">ParticleFilterMeasurementModel</span></em>, <em class="sig-param"><span class="n">num_particles</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">100</span></em>, <em class="sig-param"><span class="n">resample</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">soft_resample_alpha</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">estimation_method</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'weighted_average'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._particle_filter.ParticleFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../index.html#diffbayes.base.Filter" title="diffbayes.base.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.Filter</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>Base class for a generic differentiable particle filter.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="diffbayes.base._particle_filter.ParticleFilter.dynamics_model">
 <code class="sig-name descname">dynamics_model</code><a class="headerlink" href="#diffbayes.base._particle_filter.ParticleFilter.dynamics_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward model.</p>
@@ -203,7 +203,7 @@
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="diffbayes.base._particle_filter.ParticleFilter.measurement_model">
 <code class="sig-name descname">measurement_model</code><a class="headerlink" href="#diffbayes.base._particle_filter.ParticleFilter.measurement_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Observation model.</p>
@@ -214,7 +214,7 @@
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="diffbayes.base._particle_filter.ParticleFilter.num_particles">
 <code class="sig-name descname">num_particles</code><a class="headerlink" href="#diffbayes.base._particle_filter.ParticleFilter.num_particles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of particles to represent our belief distribution.
@@ -226,19 +226,20 @@ Defaults to 100.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="diffbayes.base._particle_filter.ParticleFilter.resample">
 <code class="sig-name descname">resample</code><a class="headerlink" href="#diffbayes.base._particle_filter.ParticleFilter.resample" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True, we resample particles &amp; normalize weights at each
-timestep.</p>
+timestep. If unset (None), we automatically turn resampling on in eval mode
+and off in train mode.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>int</p>
+<dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="diffbayes.base._particle_filter.ParticleFilter.soft_resample_alpha">
 <code class="sig-name descname">soft_resample_alpha</code><a class="headerlink" href="#diffbayes.base._particle_filter.ParticleFilter.soft_resample_alpha" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tunable constant for differentiable resampling, as described
@@ -252,7 +253,7 @@ Defaults to 1.0 (disabled).</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="diffbayes.base._particle_filter.ParticleFilter.estimation_method">
 <code class="sig-name descname">estimation_method</code><a class="headerlink" href="#diffbayes.base._particle_filter.ParticleFilter.estimation_method" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method of producing state estimates. Options include:</p>
@@ -267,7 +268,7 @@ Defaults to 1.0 (disabled).</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="diffbayes.base._particle_filter.ParticleFilter.particle_states">
 <code class="sig-name descname">particle_states</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#diffbayes.base._particle_filter.ParticleFilter.particle_states" title="Permalink to this definition">¶</a></dt>
 <dd><p>Discrete particles representing our current belief
@@ -279,7 +280,7 @@ distribution. Shape should be <code class="docutils literal notranslate"><span c
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="diffbayes.base._particle_filter.ParticleFilter.particle_log_weights">
 <code class="sig-name descname">particle_log_weights</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#diffbayes.base._particle_filter.ParticleFilter.particle_log_weights" title="Permalink to this definition">¶</a></dt>
 <dd><p>Weights corresponding to each particle, stored as
@@ -291,9 +292,9 @@ log-likelihoods. Shape should be <code class="docutils literal notranslate"><spa
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="diffbayes.base._particle_filter.ParticleFilter.initialize_beliefs">
-<code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">*</em>, <em class="sig-param">mean: torch.Tensor</em>, <em class="sig-param">covariance: torch.Tensor</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._particle_filter.ParticleFilter.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mean</span><span class="p">:</span> <span class="n">torch.Tensor</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">torch.Tensor</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._particle_filter.ParticleFilter.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Populates initial particles, which will be normally distributed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -307,9 +308,9 @@ log-likelihoods. Shape should be <code class="docutils literal notranslate"><spa
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="diffbayes.base._particle_filter.ParticleFilter.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">*</em>, <em class="sig-param">observations: types.ObservationsTorch</em>, <em class="sig-param">controls: types.ControlsTorch</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._particle_filter.ParticleFilter.forward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._particle_filter.ParticleFilter.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Particle filter forward pass, single timestep.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

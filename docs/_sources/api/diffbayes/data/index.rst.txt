@@ -1,7 +1,7 @@
-:mod:`diffbayes.datasets`
-=========================
+:mod:`diffbayes.data`
+=====================
 
-.. py:module:: diffbayes.datasets
+.. py:module:: diffbayes.data
 
 .. autoapi-nested-parse::
 
@@ -11,6 +11,59 @@
 
 Package Contents
 ----------------
+
+.. py:class:: ParticleFilterMeasurementDataset(trajectories: List[types.TrajectoryTupleNumpy], *, covariance: np.ndarray, samples_per_pair, **kwargs)
+
+   Bases: :class:`torch.utils.data.Dataset`
+
+   A data preprocessor for pre-training particle filter measurement models.
+
+   .. method:: __getitem__(self, index)
+
+
+      TODO
+
+
+   .. method:: __len__(self)
+
+
+      Total number of samples in the dataset
+
+
+
+.. py:class:: SingleStepDataset(trajectories: List[types.TrajectoryTupleNumpy])
+
+   Bases: :class:`torch.utils.data.Dataset`
+
+   A data preprocessor for producing single-step training examples from
+   a list of trajectories.
+
+   :param trajectories: list of trajectories, where each is a tuple of
+                        ``(states, observations, controls)``. Each tuple member should be
+                        either a numpy array or dict of numpy arrays with shape ``(T, ...)``.
+   :type trajectories: list
+
+   .. method:: __getitem__(self, index: int)
+
+
+      Get a single-step prediction sample from our dataset.
+
+      :param index: Subsequence number in our dataset.
+      :type index: int
+
+      :returns: *tuple* -- ``(initial_state, next_state, observation, control)`` tuple that
+                contains data for a single subsequence. Each tuple member should be either a
+                numpy array or dict of numpy arrays with shape ``(subsequence_length, ...)``.
+
+
+   .. method:: __len__(self)
+
+
+      Total number of subsequences in the dataset.
+
+      :returns: *int* -- Length of dataset.
+
+
 
 .. function:: split_trajectories(trajectories: List[types.TrajectoryTupleNumpy], subsequence_length: int) -> List[types.TrajectoryTupleNumpy]
 
@@ -50,7 +103,7 @@ Package Contents
    A data preprocessor for producing training subsequences from
    a list of trajectories.
 
-   Thin wrapper around ``diffbayes.datasets.split_trajectories()``.
+   Thin wrapper around ``diffbayes.data.split_trajectories()``.
 
    :param trajectories: list of trajectories, where each is a tuple of
                         ``(states, observations, controls)``. Each tuple member should be
@@ -71,40 +124,6 @@ Package Contents
                 data for a single subsequence. Each tuple member should be either a
                 numpy array or dict of numpy arrays with shape
                 ``(subsequence_length, ...)``.
-
-
-   .. method:: __len__(self)
-
-
-      Total number of subsequences in the dataset.
-
-      :returns: *int* -- Length of dataset.
-
-
-
-.. py:class:: SingleStepDataset(trajectories: List[types.TrajectoryTupleNumpy])
-
-   Bases: :class:`torch.utils.data.Dataset`
-
-   A data preprocessor for producing single-step training examples from
-   a list of trajectories.
-
-   :param trajectories: list of trajectories, where each is a tuple of
-                        ``(states, observations, controls)``. Each tuple member should be
-                        either a numpy array or dict of numpy arrays with shape ``(T, ...)``.
-   :type trajectories: list
-
-   .. method:: __getitem__(self, index: int)
-
-
-      Get a single-step prediction sample from our dataset.
-
-      :param index: Subsequence number in our dataset.
-      :type index: int
-
-      :returns: *tuple* -- ``(initial_state, next_state, observation, control)`` tuple that
-                contains data for a single subsequence. Each tuple member should be either a
-                numpy array or dict of numpy arrays with shape ``(subsequence_length, ...)``.
 
 
    .. method:: __len__(self)

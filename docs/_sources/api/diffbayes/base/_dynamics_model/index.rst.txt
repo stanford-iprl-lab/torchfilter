@@ -9,7 +9,7 @@
 Module Contents
 ---------------
 
-.. py:class:: DynamicsModel(*, state_dim: int)
+.. py:class:: DynamicsModel(*, state_dim: int, Q: torch.Tensor)
 
    Bases: :class:`torch.nn.Module`, :class:`abc.ABC`
 
@@ -26,7 +26,15 @@ Module Contents
       :type: int
 
 
-   .. method:: forward(self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch)
+   .. attribute:: Q
+      
+
+      Output covariance.
+
+      :type: torch.Tensor
+
+
+   .. method:: forward(self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch, noisy: bool)
 
 
       Dynamics model forward pass, single timestep.
@@ -39,18 +47,19 @@ Module Contents
       :param controls: Control inputs. Should be either a
                        dict of tensors or tensor of size ``(N, ...)``.
       :type controls: dict or torch.Tensor
+      :param noisy: Set to True to add noise to output.
+      :type noisy: bool
 
       :returns: *torch.Tensor* -- Predicted state for each batch element. Shape should
                 be ``(N, state_dim).``
 
 
-   .. method:: forward_loop(self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch)
+   .. method:: forward_loop(self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch, noisy: bool)
 
 
       Dynamics model forward pass, over sequence length ``T`` and batch size
       ``N``.  By default, this is implemented by iteratively calling
       ``forward()``.
-
       To inject code between timesteps (for example, to inspect hidden state),
       use ``register_forward_hook()``.
 
@@ -60,9 +69,17 @@ Module Contents
       :param controls: Control inputs. Should be either a
                        dict of tensors or tensor of size ``(T, N, ...)``.
       :type controls: dict or torch.Tensor
+      :param noisy: Set to True to add noise to output.
+      :type noisy: bool
 
       :returns: *torch.Tensor* -- Predicted states at each timestep. Shape should be
                 ``(T, N, state_dim).``
+
+
+   .. method:: add_noise(self, *, states: torch.Tensor, enabled: bool)
+
+
+      Protected helper for adding Gaussian noise to a set of states.
 
 
 

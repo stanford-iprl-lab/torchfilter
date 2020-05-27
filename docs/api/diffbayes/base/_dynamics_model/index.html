@@ -88,10 +88,16 @@
 <li><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel.state_dim">state_dim</a></li>
 </ul>
 <ul>
+<li><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel.Q">Q</a></li>
+</ul>
+<ul>
 <li><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel.forward">forward</a></li>
 </ul>
 <ul>
 <li><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel.forward_loop">forward_loop</a></li>
+</ul>
+<ul>
+<li><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel.add_noise">add_noise</a></li>
 </ul>
 </li>
 </ul>
@@ -166,14 +172,14 @@
 <span id="diffbayes-base-dynamics-model"></span><h1><a class="reference internal" href="#module-diffbayes.base._dynamics_model" title="diffbayes.base._dynamics_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._dynamics_model</span></code></a><a class="headerlink" href="#module-diffbayes.base._dynamics_model" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="diffbayes.base._dynamics_model.DynamicsModel">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._dynamics_model.</code><code class="sig-name descname">DynamicsModel</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">state_dim: int</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._dynamics_model.</code><code class="sig-name descname">DynamicsModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">Q</span><span class="p">:</span> <span class="n">torch.Tensor</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>Base class for a generic differentiable dynamics model.</p>
 <p>As a minimum, subclasses should override either <code class="docutils literal notranslate"><span class="pre">forward</span></code> or <code class="docutils literal notranslate"><span class="pre">forward_loop</span></code>
 for computing dynamics estimates.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="diffbayes.base._dynamics_model.DynamicsModel.state_dim">
 <code class="sig-name descname">state_dim</code><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.state_dim" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionality of our state.</p>
@@ -184,9 +190,20 @@ for computing dynamics estimates.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py attribute">
+<dt id="diffbayes.base._dynamics_model.DynamicsModel.Q">
+<code class="sig-name descname">Q</code><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.Q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output covariance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="diffbayes.base._dynamics_model.DynamicsModel.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">*</em>, <em class="sig-param">initial_states: types.StatesTorch</em>, <em class="sig-param">controls: types.ControlsTorch</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.forward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em>, <em class="sig-param"><span class="n">noisy</span><span class="p">:</span> <span class="n">bool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamics model forward pass, single timestep.</p>
 <p>By default, this is implemented by bootstrapping the <code class="docutils literal notranslate"><span class="pre">forward_loop()</span></code>
 method.</p>
@@ -196,6 +213,7 @@ method.</p>
 <li><p><strong>initial_states</strong> (<em>torch.Tensor</em>) – Initial states of our system.</p></li>
 <li><p><strong>controls</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Control inputs. Should be either a
 dict of tensors or tensor of size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p></li>
+<li><p><strong>noisy</strong> (<em>bool</em>) – Set to True to add noise to output.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -205,13 +223,13 @@ be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="diffbayes.base._dynamics_model.DynamicsModel.forward_loop">
-<code class="sig-name descname">forward_loop</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">*</em>, <em class="sig-param">initial_states: types.StatesTorch</em>, <em class="sig-param">controls: types.ControlsTorch</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.forward_loop" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward_loop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em>, <em class="sig-param"><span class="n">noisy</span><span class="p">:</span> <span class="n">bool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.forward_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamics model forward pass, over sequence length <code class="docutils literal notranslate"><span class="pre">T</span></code> and batch size
 <code class="docutils literal notranslate"><span class="pre">N</span></code>.  By default, this is implemented by iteratively calling
-<code class="docutils literal notranslate"><span class="pre">forward()</span></code>.</p>
-<p>To inject code between timesteps (for example, to inspect hidden state),
+<code class="docutils literal notranslate"><span class="pre">forward()</span></code>.
+To inject code between timesteps (for example, to inspect hidden state),
 use <code class="docutils literal notranslate"><span class="pre">register_forward_hook()</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -220,6 +238,7 @@ use <code class="docutils literal notranslate"><span class="pre">register_forwar
 dynamics model. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>.</p></li>
 <li><p><strong>controls</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Control inputs. Should be either a
 dict of tensors or tensor of size <code class="docutils literal notranslate"><span class="pre">(T,</span> <span class="pre">N,</span> <span class="pre">...)</span></code>.</p></li>
+<li><p><strong>noisy</strong> (<em>bool</em>) – Set to True to add noise to output.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -227,6 +246,12 @@ dict of tensors or tensor of size <code class="docutils literal notranslate"><sp
 <code class="docutils literal notranslate"><span class="pre">(T,</span> <span class="pre">N,</span> <span class="pre">state_dim).</span></code></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="diffbayes.base._dynamics_model.DynamicsModel.add_noise">
+<code class="sig-name descname">add_noise</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">states</span><span class="p">:</span> <span class="n">torch.Tensor</span></em>, <em class="sig-param"><span class="n">enabled</span><span class="p">:</span> <span class="n">bool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.add_noise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Protected helper for adding Gaussian noise to a set of states.</p>
 </dd></dl>
 
 </dd></dl>

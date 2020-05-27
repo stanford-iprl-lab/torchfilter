@@ -1,0 +1,30 @@
+:orphan:
+
+:mod:`diffbayes.data._particle_filter_measurement_dataset`
+==========================================================
+
+.. py:module:: diffbayes.data._particle_filter_measurement_dataset
+
+
+Module Contents
+---------------
+
+.. py:class:: ParticleFilterMeasurementDataset(trajectories: List[types.TrajectoryTupleNumpy], *, covariance: np.ndarray, samples_per_pair, **kwargs)
+
+   Bases: :class:`torch.utils.data.Dataset`
+
+   A data preprocessor for pre-training particle filter measurement models.
+
+   .. method:: __getitem__(self, index)
+
+
+      TODO
+
+
+   .. method:: __len__(self)
+
+
+      Total number of samples in the dataset
+
+
+

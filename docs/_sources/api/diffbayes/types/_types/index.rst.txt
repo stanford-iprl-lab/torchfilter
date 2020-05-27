@@ -9,18 +9,6 @@
 Module Contents
 ---------------
 
-.. data:: NumpyArray
-   
-
-   Type hint for ``np.ndarray`` objects. (alias for ``typing.Any``\ )
-
-
-.. data:: TorchTensor
-   
-
-   Type hint for ``torch.Tensor`` objects. (alias for ``torch.Tensor``\ )
-
-
 .. data:: NumpyDict
    
 
@@ -36,13 +24,13 @@ Module Contents
 .. data:: NumpyArrayOrDict
    
 
-   Union of NumpyArray and NumpyDict types.
+   Union of np.ndarray and NumpyDict types.
 
 
 .. data:: TorchTensorOrDict
    
 
-   Union of TorchTensor and TorchDict types.
+   Union of torch.Tensor and TorchDict types.
 
 
 .. data:: StatesNumpy

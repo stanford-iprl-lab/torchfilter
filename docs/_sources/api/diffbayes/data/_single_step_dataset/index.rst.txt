@@ -1,9 +1,9 @@
 :orphan:
 
-:mod:`diffbayes.datasets._single_step_dataset`
-==============================================
+:mod:`diffbayes.data._single_step_dataset`
+==========================================
 
-.. py:module:: diffbayes.datasets._single_step_dataset
+.. py:module:: diffbayes.data._single_step_dataset
 
 
 Module Contents

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diffbayes.datasets._subsequence_dataset &mdash; diffbayes  documentation</title>
+  <title>diffbayes.data._split_trajectories &mdash; diffbayes  documentation</title>
   
 
   
@@ -82,15 +82,9 @@
             
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.datasets._subsequence_dataset</span></code></a><ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._split_trajectories</span></code></a><ul>
 <li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
-<li><a class="reference internal" href="#diffbayes.datasets._subsequence_dataset.SubsequenceDataset">SubsequenceDataset</a><ul>
-<li><a class="reference internal" href="#diffbayes.datasets._subsequence_dataset.SubsequenceDataset.__getitem__">__getitem__</a></li>
-</ul>
-<ul>
-<li><a class="reference internal" href="#diffbayes.datasets._subsequence_dataset.SubsequenceDataset.__len__">__len__</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#diffbayes.data._split_trajectories.split_trajectories">split_trajectories</a></li>
 </ul>
 </li>
 </ul>
@@ -140,13 +134,13 @@
     
       <li><a href="../../../../index.html">Docs</a> &raquo;</li>
         
-      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.datasets._subsequence_dataset</span></code></li>
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._split_trajectories</span></code></li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../../_sources/api/diffbayes/datasets/_subsequence_dataset/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../../_sources/api/diffbayes/data/_split_trajectories/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -159,17 +153,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-diffbayes.datasets._subsequence_dataset">
-<span id="diffbayes-datasets-subsequence-dataset"></span><h1><a class="reference internal" href="#module-diffbayes.datasets._subsequence_dataset" title="diffbayes.datasets._subsequence_dataset"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.datasets._subsequence_dataset</span></code></a><a class="headerlink" href="#module-diffbayes.datasets._subsequence_dataset" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-diffbayes.data._split_trajectories">
+<span id="diffbayes-data-split-trajectories"></span><h1><a class="reference internal" href="#module-diffbayes.data._split_trajectories" title="diffbayes.data._split_trajectories"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._split_trajectories</span></code></a><a class="headerlink" href="#module-diffbayes.data._split_trajectories" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="diffbayes.datasets._subsequence_dataset.SubsequenceDataset">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.datasets._subsequence_dataset.</code><code class="sig-name descname">SubsequenceDataset</code><span class="sig-paren">(</span><em class="sig-param">trajectories: List[types.TrajectoryTupleNumpy], subsequence_length: int</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.datasets._subsequence_dataset.SubsequenceDataset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
-<p>A data preprocessor for producing training subsequences from
-a list of trajectories.</p>
-<p>Thin wrapper around <code class="docutils literal notranslate"><span class="pre">diffbayes.datasets.split_trajectories()</span></code>.</p>
+<dl class="py function">
+<dt id="diffbayes.data._split_trajectories.split_trajectories">
+<code class="sig-prename descclassname">diffbayes.data._split_trajectories.</code><code class="sig-name descname">split_trajectories</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryTupleNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">subsequence_length</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>types.TrajectoryTupleNumpy<span class="p">]</span><a class="headerlink" href="#diffbayes.data._split_trajectories.split_trajectories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper for splitting a list of trajectories into a list of overlapping
+subsequences.</p>
+<p>For each trajectory, assuming a subsequence length of 10, this function
+includes in its output overlapping subsequences corresponding to
+timesteps…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">20</span><span class="p">],</span> <span class="p">[</span><span class="mi">20</span><span class="p">:</span><span class="mi">30</span><span class="p">],</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>as well as…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">15</span><span class="p">],</span> <span class="p">[</span><span class="mi">15</span><span class="p">:</span><span class="mi">25</span><span class="p">],</span> <span class="p">[</span><span class="mi">25</span><span class="p">:</span><span class="mi">30</span><span class="p">],</span> <span class="o">...</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -179,35 +181,12 @@ either a numpy array or dict of numpy arrays with shape <code class="docutils li
 <li><p><strong>subsequence_length</strong> (<em>int</em>) – # of timesteps per subsequence.</p></li>
 </ul>
 </dd>
-</dl>
-<dl class="method">
-<dt id="diffbayes.datasets._subsequence_dataset.SubsequenceDataset.__getitem__">
-<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">index: int</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.datasets._subsequence_dataset.SubsequenceDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a subsequence from our dataset.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – Subsequence number in our dataset.</p>
-</dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>tuple</em> – <code class="docutils literal notranslate"><span class="pre">(states,</span> <span class="pre">observations,</span> <span class="pre">controls)</span></code> tuple that contains
-data for a single subsequence. Each tuple member should be either a
-numpy array or dict of numpy arrays with shape
-<code class="docutils literal notranslate"><span class="pre">(subsequence_length,</span> <span class="pre">...)</span></code>.</p>
+<dd class="field-even"><p><em>list</em> – A list of subsequences, as <code class="docutils literal notranslate"><span class="pre">(states,</span> <span class="pre">observations,</span> <span class="pre">controls)</span></code>
+tuples. Each tuple member should be either a numpy array or dict of
+numpy arrays with shape <code class="docutils literal notranslate"><span class="pre">(subsequence_length,</span> <span class="pre">...)</span></code>.</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="diffbayes.datasets._subsequence_dataset.SubsequenceDataset.__len__">
-<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.datasets._subsequence_dataset.SubsequenceDataset.__len__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Total number of subsequences in the dataset.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><em>int</em> – Length of dataset.</p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 </div>

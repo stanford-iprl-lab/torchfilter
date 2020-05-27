@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diffbayes.datasets._single_step_dataset &mdash; diffbayes  documentation</title>
+  <title>diffbayes.data._single_step_dataset &mdash; diffbayes  documentation</title>
   
 
   
@@ -82,13 +82,13 @@
             
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.datasets._single_step_dataset</span></code></a><ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._single_step_dataset</span></code></a><ul>
 <li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
-<li><a class="reference internal" href="#diffbayes.datasets._single_step_dataset.SingleStepDataset">SingleStepDataset</a><ul>
-<li><a class="reference internal" href="#diffbayes.datasets._single_step_dataset.SingleStepDataset.__getitem__">__getitem__</a></li>
+<li><a class="reference internal" href="#diffbayes.data._single_step_dataset.SingleStepDataset">SingleStepDataset</a><ul>
+<li><a class="reference internal" href="#diffbayes.data._single_step_dataset.SingleStepDataset.__getitem__">__getitem__</a></li>
 </ul>
 <ul>
-<li><a class="reference internal" href="#diffbayes.datasets._single_step_dataset.SingleStepDataset.__len__">__len__</a></li>
+<li><a class="reference internal" href="#diffbayes.data._single_step_dataset.SingleStepDataset.__len__">__len__</a></li>
 </ul>
 </li>
 </ul>
@@ -140,13 +140,13 @@
     
       <li><a href="../../../../index.html">Docs</a> &raquo;</li>
         
-      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.datasets._single_step_dataset</span></code></li>
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._single_step_dataset</span></code></li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../../_sources/api/diffbayes/datasets/_single_step_dataset/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../../_sources/api/diffbayes/data/_single_step_dataset/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -159,13 +159,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-diffbayes.datasets._single_step_dataset">
-<span id="diffbayes-datasets-single-step-dataset"></span><h1><a class="reference internal" href="#module-diffbayes.datasets._single_step_dataset" title="diffbayes.datasets._single_step_dataset"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.datasets._single_step_dataset</span></code></a><a class="headerlink" href="#module-diffbayes.datasets._single_step_dataset" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-diffbayes.data._single_step_dataset">
+<span id="diffbayes-data-single-step-dataset"></span><h1><a class="reference internal" href="#module-diffbayes.data._single_step_dataset" title="diffbayes.data._single_step_dataset"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._single_step_dataset</span></code></a><a class="headerlink" href="#module-diffbayes.data._single_step_dataset" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="diffbayes.datasets._single_step_dataset.SingleStepDataset">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.datasets._single_step_dataset.</code><code class="sig-name descname">SingleStepDataset</code><span class="sig-paren">(</span><em class="sig-param">trajectories: List[types.TrajectoryTupleNumpy]</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.datasets._single_step_dataset.SingleStepDataset" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt id="diffbayes.data._single_step_dataset.SingleStepDataset">
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.data._single_step_dataset.</code><code class="sig-name descname">SingleStepDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryTupleNumpy<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.data._single_step_dataset.SingleStepDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
 <p>A data preprocessor for producing single-step training examples from
 a list of trajectories.</p>
@@ -176,9 +176,9 @@ a list of trajectories.</p>
 either a numpy array or dict of numpy arrays with shape <code class="docutils literal notranslate"><span class="pre">(T,</span> <span class="pre">...)</span></code>.</p>
 </dd>
 </dl>
-<dl class="method">
-<dt id="diffbayes.datasets._single_step_dataset.SingleStepDataset.__getitem__">
-<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">index: int</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.datasets._single_step_dataset.SingleStepDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="diffbayes.data._single_step_dataset.SingleStepDataset.__getitem__">
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.data._single_step_dataset.SingleStepDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a single-step prediction sample from our dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -192,9 +192,9 @@ numpy array or dict of numpy arrays with shape <code class="docutils literal not
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="diffbayes.datasets._single_step_dataset.SingleStepDataset.__len__">
-<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.datasets._single_step_dataset.SingleStepDataset.__len__" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="diffbayes.data._single_step_dataset.SingleStepDataset.__len__">
+<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.data._single_step_dataset.SingleStepDataset.__len__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Total number of subsequences in the dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>

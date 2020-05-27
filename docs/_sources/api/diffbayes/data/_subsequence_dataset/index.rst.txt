@@ -1,9 +1,9 @@
 :orphan:
 
-:mod:`diffbayes.datasets._subsequence_dataset`
-==============================================
+:mod:`diffbayes.data._subsequence_dataset`
+==========================================
 
-.. py:module:: diffbayes.datasets._subsequence_dataset
+.. py:module:: diffbayes.data._subsequence_dataset
 
 
 Module Contents
@@ -16,7 +16,7 @@ Module Contents
    A data preprocessor for producing training subsequences from
    a list of trajectories.
 
-   Thin wrapper around ``diffbayes.datasets.split_trajectories()``.
+   Thin wrapper around ``diffbayes.data.split_trajectories()``.
 
    :param trajectories: list of trajectories, where each is a tuple of
                         ``(states, observations, controls)``. Each tuple member should be

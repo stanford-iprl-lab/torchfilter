@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diffbayes.datasets._split_trajectories &mdash; diffbayes  documentation</title>
+  <title>diffbayes.train._train_particle_filter_measurement_model &mdash; diffbayes  documentation</title>
   
 
   
@@ -82,9 +82,9 @@
             
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.datasets._split_trajectories</span></code></a><ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.train._train_particle_filter_measurement_model</span></code></a><ul>
 <li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
-<li><a class="reference internal" href="#diffbayes.datasets._split_trajectories.split_trajectories">split_trajectories</a></li>
+<li><a class="reference internal" href="#diffbayes.train._train_particle_filter_measurement_model.train_particle_filter_measurement_model">train_particle_filter_measurement_model</a></li>
 </ul>
 </li>
 </ul>
@@ -134,13 +134,13 @@
     
       <li><a href="../../../../index.html">Docs</a> &raquo;</li>
         
-      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.datasets._split_trajectories</span></code></li>
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.train._train_particle_filter_measurement_model</span></code></li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../../_sources/api/diffbayes/datasets/_split_trajectories/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../../_sources/api/diffbayes/train/_train_particle_filter_measurement_model/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -153,38 +153,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-diffbayes.datasets._split_trajectories">
-<span id="diffbayes-datasets-split-trajectories"></span><h1><a class="reference internal" href="#module-diffbayes.datasets._split_trajectories" title="diffbayes.datasets._split_trajectories"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.datasets._split_trajectories</span></code></a><a class="headerlink" href="#module-diffbayes.datasets._split_trajectories" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-diffbayes.train._train_particle_filter_measurement_model">
+<span id="diffbayes-train-train-particle-filter-measurement-model"></span><h1><a class="reference internal" href="#module-diffbayes.train._train_particle_filter_measurement_model" title="diffbayes.train._train_particle_filter_measurement_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.train._train_particle_filter_measurement_model</span></code></a><a class="headerlink" href="#module-diffbayes.train._train_particle_filter_measurement_model" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="diffbayes.datasets._split_trajectories.split_trajectories">
-<code class="sig-prename descclassname">diffbayes.datasets._split_trajectories.</code><code class="sig-name descname">split_trajectories</code><span class="sig-paren">(</span><em class="sig-param">trajectories: List[types.TrajectoryTupleNumpy], subsequence_length: int</em><span class="sig-paren">)</span> &#x2192; List[types.TrajectoryTupleNumpy]<a class="headerlink" href="#diffbayes.datasets._split_trajectories.split_trajectories" title="Permalink to this definition">¶</a></dt>
-<dd><p>Helper for splitting a list of trajectories into a list of overlapping
-subsequences.</p>
-<p>For each trajectory, assuming a subsequence length of 10, this function
-includes in its output overlapping subsequences corresponding to
-timesteps…</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">20</span><span class="p">],</span> <span class="p">[</span><span class="mi">20</span><span class="p">:</span><span class="mi">30</span><span class="p">],</span> <span class="o">...</span>
-</pre></div>
-</div>
-<p>as well as…</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">15</span><span class="p">],</span> <span class="p">[</span><span class="mi">15</span><span class="p">:</span><span class="mi">25</span><span class="p">],</span> <span class="p">[</span><span class="mi">25</span><span class="p">:</span><span class="mi">30</span><span class="p">],</span> <span class="o">...</span>
-</pre></div>
-</div>
+<dl class="py function">
+<dt id="diffbayes.train._train_particle_filter_measurement_model.train_particle_filter_measurement_model">
+<code class="sig-prename descclassname">diffbayes.train._train_particle_filter_measurement_model.</code><code class="sig-name descname">train_particle_filter_measurement_model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buddy</span><span class="p">:</span> <span class="n">fannypack.utils.Buddy</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../base/index.html#diffbayes.base.ParticleFilterMeasurementModel" title="diffbayes.base.ParticleFilterMeasurementModel">diffbayes.base.ParticleFilterMeasurementModel</a></span></em>, <em class="sig-param"><span class="n">dataloader</span><span class="p">:</span> <span class="n">DataLoader</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">loss_function</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span>torch.Tensor<span class="p">, </span>torch.Tensor<span class="p">]</span><span class="p">, </span>torch.Tensor<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">F.mse_loss</span></em>, <em class="sig-param"><span class="n">log_interval</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.train._train_particle_filter_measurement_model.train_particle_filter_measurement_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimizes a dynamics model’s single-step prediction accuracy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>trajectories</strong> (<em>list</em>) – list of trajectories, where each is a tuple of
-<code class="docutils literal notranslate"><span class="pre">(states,</span> <span class="pre">observations,</span> <span class="pre">controls)</span></code>. Each tuple member should be
-either a numpy array or dict of numpy arrays with shape <code class="docutils literal notranslate"><span class="pre">(T,</span> <span class="pre">...)</span></code>.</p></li>
-<li><p><strong>subsequence_length</strong> (<em>int</em>) – # of timesteps per subsequence.</p></li>
+<li><p><strong>buddy</strong> (<em>fannypack.utils.Buddy</em>) – Training helper.</p></li>
+<li><p><strong>dynamics_model</strong> (<a class="reference internal" href="../../base/index.html#diffbayes.base.DynamicsModel" title="diffbayes.base.DynamicsModel"><em>diffbayes.base.DynamicsModel</em></a>) – Model to train.</p></li>
+<li><p><strong>dataloader</strong> (<em>DataLoader</em>) – Loader for a SingleStepDataset.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>list</em> – A list of subsequences, as <code class="docutils literal notranslate"><span class="pre">(states,</span> <span class="pre">observations,</span> <span class="pre">controls)</span></code>
-tuples. Each tuple member should be either a numpy array or dict of
-numpy arrays with shape <code class="docutils literal notranslate"><span class="pre">(subsequence_length,</span> <span class="pre">...)</span></code>.</p>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>loss_function</strong> (<em>callable</em><em>, </em><em>optional</em>) – Loss function, from <code class="docutils literal notranslate"><span class="pre">torch.nn.functional</span></code>.
+Defaults to MSE.</p></li>
+<li><p><strong>log_interval</strong> (<em>int</em><em>, </em><em>optional</em>) – Minibatches between each Tensorboard log.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>

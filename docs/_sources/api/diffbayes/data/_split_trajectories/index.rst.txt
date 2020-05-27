@@ -1,9 +1,9 @@
 :orphan:
 
-:mod:`diffbayes.datasets._split_trajectories`
-=============================================
+:mod:`diffbayes.data._split_trajectories`
+=========================================
 
-.. py:module:: diffbayes.datasets._split_trajectories
+.. py:module:: diffbayes.data._split_trajectories
 
 
 Module Contents

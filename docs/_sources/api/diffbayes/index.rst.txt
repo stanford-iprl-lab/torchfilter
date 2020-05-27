@@ -11,7 +11,7 @@ Subpackages
    :maxdepth: 3
 
    base/index.rst
-   datasets/index.rst
+   data/index.rst
    train/index.rst
    types/index.rst
 

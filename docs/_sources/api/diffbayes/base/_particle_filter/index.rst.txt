@@ -9,7 +9,7 @@
 Module Contents
 ---------------
 
-.. py:class:: ParticleFilter(*, dynamics_model: DynamicsModel, measurement_model: ParticleFilterMeasurementModel, num_particles: int = 100, resample: bool = True, soft_resample_alpha: float = 1.0, estimation_method: str = 'weighted_average')
+.. py:class:: ParticleFilter(*, dynamics_model: DynamicsModel, measurement_model: ParticleFilterMeasurementModel, num_particles: int = 100, resample: bool = None, soft_resample_alpha: float = 1.0, estimation_method: str = 'weighted_average')
 
    Bases: :class:`diffbayes.base.Filter`, :class:`abc.ABC`
 
@@ -44,9 +44,10 @@ Module Contents
       
 
       If True, we resample particles & normalize weights at each
-      timestep.
+      timestep. If unset (None), we automatically turn resampling on in eval mode
+      and off in train mode.
 
-      :type: int
+      :type: bool
 
 
    .. attribute:: soft_resample_alpha
