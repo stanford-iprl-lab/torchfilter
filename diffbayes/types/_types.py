@@ -1,11 +1,10 @@
 from typing import Any, Dict, Tuple, Union
 
+import numpy as np
 import torch
 
 # Make an explicit list of names to expose
 __all__ = [
-    "NumpyArray",
-    "TorchTensor",
     "NumpyDict",
     "TorchDict",
     "NumpyArrayOrDict",
@@ -20,24 +19,19 @@ __all__ = [
     "TrajectoryTupleTorch",
 ]
 
-NumpyArray = Any
-""" Type hint for `np.ndarray` objects. (alias for `typing.Any`) """
-TorchTensor = torch.Tensor
-""" Type hint for `torch.Tensor` objects. (alias for `torch.Tensor`) """
-
-NumpyDict = Dict[str, NumpyArray]
+NumpyDict = Dict[str, np.ndarray]
 """ Dictionary from `str` keys to `np.ndarray` values. """
-TorchDict = Dict[str, TorchTensor]
+TorchDict = Dict[str, torch.Tensor]
 """ Dictionary from `str` keys to `torch.Tensor` values. """
 
-NumpyArrayOrDict = Union[NumpyArray, NumpyDict]
-""" Union of NumpyArray and NumpyDict types. """
-TorchTensorOrDict = Union[TorchTensor, TorchDict]
-""" Union of TorchTensor and TorchDict types. """
+NumpyArrayOrDict = Union[np.ndarray, NumpyDict]
+""" Union of np.ndarray and NumpyDict types. """
+TorchTensorOrDict = Union[torch.Tensor, TorchDict]
+""" Union of torch.Tensor and TorchDict types. """
 
-StatesNumpy = NumpyArray
+StatesNumpy = np.ndarray
 """ State array type hint. Needs to be a raw `np.ndarray`. """
-StatesTorch = TorchTensor
+StatesTorch = torch.Tensor
 """ State array type hint. Needs to be a raw `torch.Tensor`. """
 
 ObservationsNumpy = NumpyArrayOrDict

@@ -58,7 +58,7 @@ class SingleStepDataset(Dataset):
             contains data for a single subsequence. Each tuple member should be either a
             numpy array or dict of numpy arrays with shape `(subsequence_length, ...)`.
         """
-        return fannypack.utils.to_torch(self.samples[index])
+        return self.samples[index]
 
     def __len__(self) -> int:
         """Total number of subsequences in the dataset.

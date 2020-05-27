@@ -75,24 +75,28 @@ def _split_helper(
     subsequence_length`.
     """
     if type(x) == np.ndarray:
-        x = cast(np.ndarray, x)
+        x_array = cast(np.ndarray, x)
 
         # Offset our starting point
-        x = x[offset:]
+        x_array = x_array[offset:]
 
         # Make sure our array is evenly divisible
-        sections = len(x) // subsequence_length
+        sections = len(x_array) // subsequence_length
         new_length = sections * subsequence_length
-        x = x[:new_length]
+        x_array = x_array[:new_length]
 
         # Split & return
-        return np.split(x, sections)
+        return np.split(x_array, sections)
     elif type(x) == dict:
+        x_dict = cast(types.NumpyDict, x)
+
         # For dictionary inputs, we split the contents of each
         # value in the dictionary
-        output = {}
-        for key, value in x.items():
-            output[key] = _split_helper(value, subsequence_length, offset)
+        output: types.NumpyDict = {}
+        for key, value in x_dict.items():
+            output[key] = cast(
+                np.ndarray, _split_helper(value, subsequence_length, offset)
+            )
 
         return output
     else:
