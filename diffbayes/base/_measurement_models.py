@@ -24,7 +24,7 @@ class ParticleFilterMeasurementModel(abc.ABC, nn.Module):
     ) -> types.StatesTorch:
         """Observation model forward pass, over batch size `N`.
         For each member of a batch, we expect `M` separate states (particles)
-        and just one unique observation.
+        and one unique observation.
 
         Args:
             states (torch.Tensor): States to pass to our observation model.

@@ -181,17 +181,22 @@ class ParticleFilter(Filter, abc.ABC):
         # A bit of extra effort is required for the extra particle dimension
         # > For our states, we flatten along the N/M axes
         # > For our controls, we repeat each one `M` times, if M=3:
-        #       [u0 u1 u2] should becomes [u0 u0 u0 u1 u1 u1 u2 u2 u2]
+        #       [u0 u1 u2] should become [u0 u0 u0 u1 u1 u1 u2 u2 u2]
         #
         # Currently each of the M particles within a "sample" get the same action, but
-        #  we could also add noise in the action space (a la Jonschkowski et al. 2018)
+        # we could also add noise in the action space (a la Jonschkowski et al. 2018)
         reshaped_states = self.particle_states.reshape(-1, self.state_dim)
         reshaped_controls = fannypack.utils.SliceWrapper(controls).map(
             lambda tensor: torch.repeat_interleave(tensor, repeats=M, dim=0)
         )
-        self.particle_states = self.dynamics_model(
-            initial_states=reshaped_states, controls=reshaped_controls, noisy=True,
-        ).view(N, M, self.state_dim)
+        predicted_states, covariances = self.dynamics_model(
+            initial_states=reshaped_states, controls=reshaped_controls
+        )
+        self.particle_states = (
+            torch.distributions.MultivariateNormal(predicted_states, covariances)
+            .sample()
+            .view(N, M, self.state_dim)
+        )
         assert self.particle_states.shape == (N, M, self.state_dim)
 
         # Re-weight particles using observations
