@@ -23,7 +23,7 @@ def train_filter(
     initial_covariance: torch.Tensor,
     *,
     loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss,
-    log_interval: int = 1,
+    log_interval: int = 10,
 ) -> None:
     """Trains a filter end-to-end via backpropagation through time for 1 epoch over a
     subsequence dataset.

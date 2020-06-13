@@ -22,7 +22,7 @@ def train_dynamics_single_step(
     dataloader: DataLoader,
     *,
     loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss,
-    log_interval: int = 1,
+    log_interval: int = 10,
 ) -> None:
     """Optimizes a dynamics model's single-step prediction accuracy.
 
@@ -83,7 +83,7 @@ def train_dynamics_recurrent(
     dataloader: DataLoader,
     *,
     loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss,
-    log_interval: int = 1,
+    log_interval: int = 10,
 ) -> None:
     """Trains a dynamics model via backpropagation through time.
 

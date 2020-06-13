@@ -16,7 +16,7 @@ def train_particle_filter_measurement_model(
     dataloader: DataLoader,
     *,
     loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss,
-    log_interval: int = 1,
+    log_interval: int = 10,
 ) -> None:
     """Optimizes a dynamics model's single-step prediction accuracy.
 
