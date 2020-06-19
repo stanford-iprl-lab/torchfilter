@@ -106,27 +106,27 @@ class DynamicsModel(nn.Module, abc.ABC):
         cov_list: List[torch.Tensor] = []
 
         constant_noise = True
-        current_prediction = initial_states
+        prediction = initial_states
 
         for t in range(T):
             # Compute state estimate for a single timestep
             # We use __call__ to make sure hooks are dispatched correctly
-            current_prediction, current_covariance = self(
-                initial_states=current_prediction, controls=controls[t]
+            prediction, covariance = self(
+                initial_states=prediction, controls=controls[t]
             )
 
             # Check if noise is time-varying
             if t >= 1 and (
-                current_covariance.data_ptr() != cov_list[-1].data_ptr()
-                or current_covariance.stride() != cov_list[-1].stride()
+                covariance.data_ptr() != cov_list[-1].data_ptr() # type: ignore
+                or covariance.stride() != cov_list[-1].stride()
             ):
                 constant_noise = False
 
             # Validate & add to output
-            assert current_prediction.shape == (N, self.state_dim)
-            assert current_covariance.shape == (N, self.state_dim, self.state_dim)
-            pred_list.append(current_prediction)
-            cov_list.append(current_covariance)
+            assert prediction.shape == (N, self.state_dim)
+            assert covariance.shape == (N, self.state_dim, self.state_dim)
+            pred_list.append(prediction)
+            cov_list.append(covariance)
 
         # Stack predictions
         predictions = torch.stack(pred_list, dim=0)
