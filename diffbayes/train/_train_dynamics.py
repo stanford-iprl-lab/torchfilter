@@ -74,7 +74,7 @@ def train_dynamics_single_step(
 
     # Print average training loss
     epoch_loss /= len(dataloader)
-    print("Epoch training loss: ", epoch_loss)
+    print("(train_dynamics_single_step) Epoch training loss: ", epoch_loss)
 
 
 def train_dynamics_recurrent(
@@ -144,4 +144,4 @@ def train_dynamics_recurrent(
 
     # Print average training loss
     epoch_loss /= len(dataloader)
-    print("Epoch training loss: ", epoch_loss)
+    print("(train_dynamics_recurrent) Epoch training loss: ", epoch_loss)

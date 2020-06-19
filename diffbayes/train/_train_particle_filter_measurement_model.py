@@ -42,7 +42,7 @@ def train_particle_filter_measurement_model(
     # Train dynamics model for 1 epoch
     with buddy.log_scope("train_measurement"):
         # Train measurement model only for 1 epoch
-        for batch_idx, batch in enumerate(tqdm(dataloader)):
+        for batch in tqdm(dataloader):
             # Transfer to GPU and pull out batch data
             batch_gpu = fannypack.utils.to_device(batch, buddy.device)
             noisy_states, observations, log_likelihoods = batch_gpu
@@ -71,4 +71,4 @@ def train_particle_filter_measurement_model(
 
     # Print average training loss
     epoch_loss /= len(dataloader)
-    print("Epoch training loss: ", epoch_loss)
+    print("(train_particle_filter_measurement_model) Epoch training loss: ", epoch_loss)
