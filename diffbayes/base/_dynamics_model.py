@@ -121,3 +121,29 @@ class DynamicsModel(nn.Module, abc.ABC):
         output = torch.distributions.MultivariateNormal(states, self.Q).sample()
         assert output.shape == (N, state_dim)
         return output
+
+
+class KalmanFilterDynamicsModel(DynamicsModel, abc.ABC):
+    """Base class for a differentiable dynamics model for a Kalman Filter.
+
+    """
+
+    def __init__(self, *, state_dim: int, Q: torch.Tensor) -> None:
+        super().__init__()
+
+        self.state_dim = state_dim
+        """int: Dimensionality of our state."""
+
+        self.Q = torch.nn.Parameter(Q, requires_grad=False)
+        """torch.Tensor: Output covariance."""
+
+    @abc.abstractmethod
+    def get_A_matrix(self):
+        #TODO: make into get function?
+
+        """
+        Returns A matrix. Either the linear forward model or the jacobian of it.
+        :return: torch.Tensor
+        """
+        pass
+

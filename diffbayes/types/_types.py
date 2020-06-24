@@ -17,6 +17,7 @@ __all__ = [
     "ControlsTorch",
     "TrajectoryTupleNumpy",
     "TrajectoryTupleTorch",
+    "CovarianceTorch",
 ]
 
 NumpyDict = Dict[str, np.ndarray]
@@ -33,6 +34,9 @@ StatesNumpy = np.ndarray
 """ State array type hint. Needs to be a raw `np.ndarray`. """
 StatesTorch = torch.Tensor
 """ State array type hint. Needs to be a raw `torch.Tensor`. """
+
+CovarianceTorch = torch.Tensor
+""" Covariance matrix as `torch.Tensor`. Must be positive semi-definite"""
 
 ObservationsNumpy = NumpyArrayOrDict
 """ Observations can be either `np.ndarray` objects or `str->np.ndarray` dictionaries. """
