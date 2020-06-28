@@ -189,11 +189,13 @@ class ParticleFilter(Filter, abc.ABC):
         reshaped_controls = fannypack.utils.SliceWrapper(controls).map(
             lambda tensor: torch.repeat_interleave(tensor, repeats=M, dim=0)
         )
-        predicted_states, covariances = self.dynamics_model(
+        predicted_states, scale_trils = self.dynamics_model(
             initial_states=reshaped_states, controls=reshaped_controls
         )
         self.particle_states = (
-            torch.distributions.MultivariateNormal(predicted_states, covariances)
+            torch.distributions.MultivariateNormal(
+                loc=predicted_states, scale_tril=scale_trils
+            )
             .sample()
             .view(N, M, self.state_dim)
         )

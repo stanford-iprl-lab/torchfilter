@@ -59,7 +59,7 @@ def train_dynamics_single_step(
             assert fannypack.utils.SliceWrapper(controls).shape[:1] == (N,)
 
             # Single-step prediction
-            predictions, covariances = dynamics_model(
+            predictions, scale_trils = dynamics_model(
                 initial_states=initial_states, controls=controls
             )
             assert predictions.shape == (N, state_dim)
@@ -73,7 +73,7 @@ def train_dynamics_single_step(
                 losses["mse"] = F.mse_loss(predictions, next_states)
             if log_flag or loss_function == "nll":
                 log_likelihoods = torch.distributions.MultivariateNormal(
-                    predictions, covariances
+                    loc=predictions, scale_tril=scale_trils
                 ).log_prob(next_states)
                 assert log_likelihoods.shape == (N,)
                 losses["nll"] = -torch.sum(log_likelihoods)
@@ -148,7 +148,7 @@ def train_dynamics_recurrent(
 
             # Forward pass from the first state
             initial_states = true_states[0]
-            predictions, covariances = dynamics_model.forward_loop(
+            predictions, scale_trils = dynamics_model.forward_loop(
                 initial_states=initial_states, controls=controls[1:]
             )
             assert predictions.shape == (T - 1, N, state_dim)
@@ -162,7 +162,7 @@ def train_dynamics_recurrent(
                 losses["mse"] = F.mse_loss(predictions, true_states[1:])
             if log_flag or loss_function == "nll":
                 log_likelihoods = torch.distributions.MultivariateNormal(
-                    predictions, covariances
+                    loc=predictions, scale_tril=scale_trils
                 ).log_prob(true_states[1:])
                 assert log_likelihoods.shape == (T - 1, N)
                 losses["nll"] = -torch.sum(log_likelihoods)
