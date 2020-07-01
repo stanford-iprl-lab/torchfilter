@@ -196,7 +196,7 @@ class ParticleFilter(Filter, abc.ABC):
             torch.distributions.MultivariateNormal(
                 loc=predicted_states, scale_tril=scale_trils
             )
-            .sample()
+            .rsample() # Note that we use `rsample` to make sampling differentiable
             .view(N, M, self.state_dim)
         )
         assert self.particle_states.shape == (N, M, self.state_dim)
