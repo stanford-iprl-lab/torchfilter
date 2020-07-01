@@ -1,4 +1,5 @@
 import abc
+from typing import List, Tuple
 
 import torch
 import torch.nn as nn
@@ -9,29 +10,29 @@ from .. import types
 
 
 class DynamicsModel(nn.Module, abc.ABC):
-    """Base class for a generic differentiable dynamics model.
+    """Base class for a generic differentiable dynamics model, with additive white
+    Gaussian noise.
 
-    As a minimum, subclasses should override either `forward` or `forward_loop`
-    for computing dynamics estimates.
+    Subclasses should override either `forward` or `forward_loop` for computing dynamics
+    estimates.
     """
 
-    def __init__(self, *, state_dim: int, Q: torch.Tensor) -> None:
+    def __init__(self, *, state_dim: int) -> None:
         super().__init__()
 
         self.state_dim = state_dim
         """int: Dimensionality of our state."""
 
-        self.Q = torch.nn.Parameter(Q, requires_grad=False)
-        """torch.Tensor: Output covariance."""
-
     def forward(
-        self,
-        *,
-        initial_states: types.StatesTorch,
-        controls: types.ControlsTorch,
-        noisy: bool,
-    ) -> types.StatesTorch:
+        self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch,
+    ) -> Tuple[types.StatesTorch, torch.Tensor]:
         """Dynamics model forward pass, single timestep.
+
+        Computes both predicted states and uncertainties. Note that uncertainties
+        correspond to the (Cholesky decompositions of the) "Q" matrices in a standard
+        linear dynamical system w/ additive white Gaussian noise. In other words, they
+        should be lower triangular and not accumulate -- the uncertainty at at time `t`
+        should be computed as if the estimate at time `t - 1` is a ground-truth input.
 
         By default, this is implemented by bootstrapping the `forward_loop()`
         method.
@@ -40,11 +41,12 @@ class DynamicsModel(nn.Module, abc.ABC):
             initial_states (torch.Tensor): Initial states of our system.
             controls (dict or torch.Tensor): Control inputs. Should be either a
                 dict of tensors or tensor of size `(N, ...)`.
-            noisy (bool): Set to True to add noise to output.
 
         Returns:
-            torch.Tensor: Predicted state for each batch element. Shape should
-            be `(N, state_dim).`
+            Tuple[torch.Tensor, torch.Tensor]: Predicted states & uncertainties.
+                - States should have shape `(N, state_dim).`
+                - Uncertainties should be lower triangular, and should have shape
+                `(N, state_dim, state_dim).`
         """
 
         # Wrap our control inputs
@@ -54,22 +56,26 @@ class DynamicsModel(nn.Module, abc.ABC):
         controls = fannypack.utils.SliceWrapper(controls)
 
         # Call `forward_loop()` with a single timestep
-        output = self.forward_loop(
-            initial_states=initial_states, controls=controls[None, ...], noisy=noisy
+        predictions, scale_trils = self.forward_loop(
+            initial_states=initial_states, controls=controls[None, ...]
         )
-        assert output.shape[0] == 1
-        return output[0]
+        assert predictions.shape[0] == 1
+        assert scale_trils.shape[0] == 1
+        return predictions[0], scale_trils[0]
 
     def forward_loop(
-        self,
-        *,
-        initial_states: types.StatesTorch,
-        controls: types.ControlsTorch,
-        noisy: bool,
-    ) -> types.StatesTorch:
+        self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch,
+    ) -> Tuple[types.StatesTorch, torch.Tensor]:
         """Dynamics model forward pass, over sequence length `T` and batch size
         `N`.  By default, this is implemented by iteratively calling
         `forward()`.
+
+        Computes both predicted states and uncertainties. Note that uncertainties
+        correspond to the (Cholesky decompositions of the) "Q" matrices in a standard
+        linear dynamical system w/ additive white Gaussian noise. In other words, they
+        should be lower triangular and not accumulate -- the uncertainty at at time `t`
+        should be computed as if the estimate at time `t - 1` is a ground-truth input.
+
         To inject code between timesteps (for example, to inspect hidden state),
         use `register_forward_hook()`.
 
@@ -78,10 +84,11 @@ class DynamicsModel(nn.Module, abc.ABC):
                 dynamics model. Shape should be `(N, state_dim)`.
             controls (dict or torch.Tensor): Control inputs. Should be either a
                 dict of tensors or tensor of size `(T, N, ...)`.
-            noisy (bool): Set to True to add noise to output.
         Returns:
-            torch.Tensor: Predicted states at each timestep. Shape should be
-            `(T, N, state_dim).`
+            Tuple[torch.Tensor, torch.Tensor]: Predicted states & uncertainties.
+                - States should have shape `(T, N, state_dim).`
+                - Uncertainties should be lower triangular, and should have shape
+                `(T, N, state_dim, state_dim).`
         """
 
         # Wrap our control inputs
@@ -94,30 +101,51 @@ class DynamicsModel(nn.Module, abc.ABC):
         T = controls.shape[0]
         N = controls.shape[1]
         assert initial_states.shape == (N, self.state_dim)
+        assert T > 0
 
         # Dynamics forward pass
-        state_predictions = initial_states.new_zeros((T, N, self.state_dim))
-        current_estimate = initial_states
+        predictions_list: List[types.StatesTorch] = []
+        scale_trils_list: List[torch.Tensor] = []
+
+        constant_noise = True
+        prediction = initial_states
+
         for t in range(T):
             # Compute state estimate for a single timestep
             # We use __call__ to make sure hooks are dispatched correctly
-            current_estimate = self(
-                initial_states=current_estimate, controls=controls[t], noisy=noisy
+            prediction, scale_tril = self(
+                initial_states=prediction, controls=controls[t]
             )
 
+            # Check if noise is time-varying
+            if t >= 1 and (
+                scale_tril.data_ptr() != scale_trils_list[-1].data_ptr()  # type: ignore
+                or scale_tril.stride() != scale_trils_list[-1].stride()
+            ):
+                constant_noise = False
+
             # Validate & add to output
-            assert current_estimate.shape == (N, self.state_dim)
-            state_predictions[t] = current_estimate
+            assert prediction.shape == (N, self.state_dim)
+            assert scale_tril.shape == (N, self.state_dim, self.state_dim)
+            predictions_list.append(prediction)
+            scale_trils_list.append(scale_tril)
 
-        # Return state estimates
-        return state_predictions
+        # Stack predictions
+        predictions = torch.stack(predictions_list, dim=0)
 
-    def add_noise(self, *, states: torch.Tensor, enabled: bool):
-        """Protected helper for adding Gaussian noise to a set of states.
-        """
-        if not enabled:
-            return
-        N, state_dim = states.shape
-        output = torch.distributions.MultivariateNormal(states, self.Q).sample()
-        assert output.shape == (N, state_dim)
-        return output
+        # Stack uncertainties
+        if constant_noise:
+            # If our noise is constant, we save memory by returning a strided view of
+            # the first tensor in the list
+            scale_trils = scale_trils_list[0][None, :, :, :].expand(
+                T, N, self.state_dim, self.state_dim
+            )
+        else:
+            # If our noise is time-varying, stack normally
+            scale_trils = torch.stack(scale_trils_list, dim=0)
+            assert False
+
+        # Validate & return state estimates
+        assert predictions.shape == (T, N, self.state_dim)
+        assert scale_trils.shape == (T, N, self.state_dim, self.state_dim)
+        return predictions, scale_trils

@@ -21,7 +21,14 @@ class SingleStepDataset(Dataset):
     def __init__(self, trajectories: List[types.TrajectoryTupleNumpy]):
         # Split trajectory into samples:
         #   (initial_state, next_state, observation, control)
-        self.samples = []
+        self.samples: List[
+            Tuple[
+                types.StatesNumpy,
+                types.StatesNumpy,
+                types.ObservationsNumpy,
+                types.ControlsNumpy,
+            ]
+        ] = []
 
         for trajectory in trajectories:
             states, observations, controls = trajectory
