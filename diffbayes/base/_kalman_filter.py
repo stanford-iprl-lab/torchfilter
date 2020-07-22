@@ -6,7 +6,7 @@ import torch
 import fannypack
 
 from .. import types
-from . import KalmanFilterDynamicsModel, Filter, KalmanFilterMeasurementModel
+from . import DynamicsModel, Filter, KalmanFilterMeasurementModel
 
 
 class KalmanFilter(Filter, abc.ABC):
@@ -17,11 +17,11 @@ class KalmanFilter(Filter, abc.ABC):
     def __init__(
             self,
             *,
-            dynamics_model: KalmanFilterDynamicsModel,
+            dynamics_model: DynamicsModel,
             measurement_model: KalmanFilterMeasurementModel,
     ):
         # Check submodule consistency
-        assert isinstance(dynamics_model, KalmanFilterDynamicsModel)
+        assert isinstance(dynamics_model, DynamicsModel)
         assert isinstance(measurement_model, KalmanFilterMeasurementModel)
         assert dynamics_model.state_dim == measurement_model.state_dim
 
@@ -31,14 +31,12 @@ class KalmanFilter(Filter, abc.ABC):
 
         # Assign submodules
         self.dynamics_model = dynamics_model
-        """diffbayes.base.KalmanFilterDynamicsModel: Forward model."""
+        """diffbayes.base.DynamicsModel: Forward model."""
         self.measurement_model = measurement_model
         """diffbayes.base.KalmanFilterMeasurementModel: Observation model."""
 
     def forward(
             self, *, observations: types.ObservationsTorch,
-            states_prev: types.StatesTorch,
-            states_sigma_prev: types.CovarianceTorch,
             controls: types.ControlsTorch,
     ) -> (types.StatesTorch, types.CovarianceTorch):
         """Kalman filter forward pass, single timestep.
@@ -49,44 +47,40 @@ class KalmanFilter(Filter, abc.ABC):
             controls (dict or torch.Tensor): control inputs. should be either a
                 dict of tensors or tensor of shape `(N, ...)`.
 
-            TODO: EDIT DOC STRING
-
         Returns:
             torch.Tensor: Predicted state for each batch element. Shape should
             be `(N, state_dim).`
             torch.Tensor: Predicted state covariance for each batch element. Shape should
             be `(N, state_dim, state_dim).`
         """
+        assert (
+                self.state_prev != None and self.states_cov_prev != None
+        ), "Kalman filter not initialized!"
 
-        N, state_dim = states_prev.shape
+        N, state_dim = self.state_prev.shape
+
+
         # Dynamics prediction step
-        dynamics_pred = self.dynamics_model(states_prev)
+        dynamics_pred = self.dynamics_model(self.states_prev)
         states_pred = self.dynamics_model.add_noise(dynamics_pred)
-        dynamics_pred_Q = self.dynamics_model.Q
+        dynamics_covariance = self.dynamics_model.covariance
 
-        dynamics_A_matrix = self.dynamics_model.get_A_matrix()
+        dynamics_A_matrix = self.dynamics_model.jacobian()
 
         assert dynamics_A_matrix.shape == (N, state_dim, state_dim)
 
         # Calculating the sigma_t+1|t
-        states_sigma_pred = dynamics_A_matrix.bmm(states_sigma_prev).bmm(dynamics_A_matrix.transpose(-1, -2)) \
+        states_sigma_pred = dynamics_A_matrix.bmm(self.states_cov_prev).bmm(dynamics_A_matrix.transpose(-1, -2)) \
                             + dynamics_pred_Q
 
-        # TODO: Probably should have R logic be in measurement model instead of here
-        z, R = self.measurement_model(observations)
-
-        if self.measurement_model.R is not None:
-            R = torch.eye(state_dim).repeat(N, 1, 1).to(z.device) * self.R
+        measurement_state, measurement_covariance = self.measurement_model(observations)
 
         # Kalman Gain
-        measurement_C_matrix = self.measurement_model.get_C_matrix()
-        #todo: add C matrix to generalize
-        K_update = states_sigma_pred.bmm(torch.inverse(states_sigma_pred + R))
+        K_update = states_sigma_pred.bmm(torch.inverse(states_sigma_pred + measurement_covariance))
 
         # Updating
-        #todo: add C matrix to generalize
         states_update = torch.unsqueeze(states_pred, -1) \
-            + torch.bmm(K_update, torch.unsqueeze((z - states_pred), -1))
+            + torch.bmm(K_update, torch.unsqueeze((measurement_state - states_pred), -1))
         states_update = states_update.squeeze()
         states_sigma_update = \
             (torch.eye(K_update.shape[-1]).to(K_update.device) - K_update).bmm(states_sigma_pred)
