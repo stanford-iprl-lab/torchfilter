@@ -101,4 +101,4 @@ def train_filter(
 
     # Print average training loss
     epoch_loss /= len(dataloader)
-    print("Epoch training loss: ", epoch_loss)
+    print("(train_filter) Epoch training loss: ", epoch_loss)
