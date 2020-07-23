@@ -33,6 +33,12 @@ class DynamicsModel(nn.Module, abc.ABC):
         should be lower triangular and not accumulate -- the uncertainty at at time `t`
         should be computed as if the estimate at time `t - 1` is a ground-truth input.
 
+        Computes both predicted states and uncertainties. Note that uncertainties
+        correspond to the (Cholesky decompositions of the) "Q" matrices in a standard
+        linear dynamical system w/ additive white Gaussian noise. In other words, they
+        should be lower triangular and not accumulate -- the uncertainty at at time `t`
+        should be computed as if the estimate at time `t - 1` is a ground-truth input.
+
         By default, this is implemented by bootstrapping the `forward_loop()`
         method.
         Args:
@@ -181,4 +187,3 @@ class DynamicsModel(nn.Module, abc.ABC):
         jac = torch.autograd.grad(y, x, mask, create_graph=True)
 
         return jac[0]
-
