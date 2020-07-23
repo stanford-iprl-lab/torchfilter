@@ -21,7 +21,7 @@ def train_dynamics_single_step(
     dynamics_model: diffbayes.base.DynamicsModel,
     dataloader: DataLoader,
     *,
-    loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss,
+    loss_function: str = "nll",
     log_interval: int = 10,
 ) -> None:
     """Optimizes a dynamics model's single-step prediction accuracy.
@@ -32,12 +32,13 @@ def train_dynamics_single_step(
         dataloader (DataLoader): Loader for a SingleStepDataset.
 
     Keyword Args:
-        loss_function (callable, optional): Loss function, from `torch.nn.functional`.
-            Defaults to MSE.
+        loss_function (str, optional): Either "nll" for negative log-likelihood or "mse"
+            for mean-squared error. Defaults to "nll".
         log_interval (int, optional): Minibatches between each Tensorboard log.
     """
-    # Dataloader should load a SingleStepDataset
+    # Input validation
     assert isinstance(dataloader.dataset, diffbayes.data.SingleStepDataset)
+    assert loss_function in ("nll", "mse")
     assert dynamics_model.training, "Model needs to be set to train mode"
 
     # Track mean epoch loss
@@ -58,23 +59,40 @@ def train_dynamics_single_step(
             assert fannypack.utils.SliceWrapper(controls).shape[:1] == (N,)
 
             # Single-step prediction
-            state_predictions = dynamics_model(
-                initial_states=initial_states, controls=controls, noisy=False
+            predictions, scale_trils = dynamics_model(
+                initial_states=initial_states, controls=controls
             )
-            assert state_predictions.shape == (N, state_dim)
+            assert predictions.shape == (N, state_dim)
+
+            # Check if we want to log
+            log_flag = batch_idx % log_interval == 0
 
             # Minimize loss
-            loss = loss_function(state_predictions, next_states)
-            buddy.minimize(loss, optimizer_name="train_dynamics_single_step")
-            epoch_loss += fannypack.utils.to_numpy(loss)
+            losses = {}
+            if log_flag or loss_function == "mse":
+                losses["mse"] = F.mse_loss(predictions, next_states)
+            if log_flag or loss_function == "nll":
+                log_likelihoods = torch.distributions.MultivariateNormal(
+                    loc=predictions, scale_tril=scale_trils
+                ).log_prob(next_states)
+                assert log_likelihoods.shape == (N,)
+                losses["nll"] = -torch.sum(log_likelihoods)
+
+            buddy.minimize(
+                losses[loss_function], optimizer_name="train_dynamics_single_step"
+            )
+            epoch_loss += fannypack.utils.to_numpy(losses[loss_function])
 
             # Logging
-            if batch_idx % log_interval == 0:
-                buddy.log("loss", loss)
+            if log_flag:
+                buddy.log("MSE loss", losses["mse"])
+                buddy.log("NLL loss", losses["nll"])
 
     # Print average training loss
     epoch_loss /= len(dataloader)
-    print("(train_dynamics_single_step) Epoch training loss: ", epoch_loss)
+    print(
+        f"(train_dynamics_single_step) Epoch training loss ({loss_function}): {epoch_loss}"
+    )
 
 
 def train_dynamics_recurrent(
@@ -82,7 +100,7 @@ def train_dynamics_recurrent(
     dynamics_model: diffbayes.base.DynamicsModel,
     dataloader: DataLoader,
     *,
-    loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss,
+    loss_function: str = "nll",
     log_interval: int = 10,
 ) -> None:
     """Trains a dynamics model via backpropagation through time.
@@ -93,12 +111,14 @@ def train_dynamics_recurrent(
         dataloader (DataLoader): Loader for a SubsequenceDataset.
 
     Keyword Args:
-        loss_function (callable, optional): Loss function, from `torch.nn.functional`.
-            Defaults to MSE.
+        loss_function (str, optional): Either "nll" for negative log-likelihood or "mse"
+            for mean-squared error. Defaults to "nll".
         log_interval (int, optional): Minibatches between each Tensorboard log.
     """
-    # Dataloader should load a SubsequenceDataset
+    # Input validation
     assert isinstance(dataloader.dataset, diffbayes.data.SubsequenceDataset)
+    assert loss_function in ("nll", "mse")
+    assert dynamics_model.training, "Model needs to be set to train mode"
 
     # Track mean epoch loss
     epoch_loss = 0.0
@@ -128,20 +148,37 @@ def train_dynamics_recurrent(
 
             # Forward pass from the first state
             initial_states = true_states[0]
-            state_predictions = dynamics_model.forward_loop(
-                initial_states=initial_states, controls=controls[1:], noisy=False
+            predictions, scale_trils = dynamics_model.forward_loop(
+                initial_states=initial_states, controls=controls[1:]
             )
-            assert state_predictions.shape == (T - 1, N, state_dim)
+            assert predictions.shape == (T - 1, N, state_dim)
+
+            # Check if we want to log
+            log_flag = batch_idx % log_interval == 0
 
             # Minimize loss
-            loss = loss_function(state_predictions, true_states[1:])
-            buddy.minimize(loss, optimizer_name="train_dynamics_recurrent")
-            epoch_loss += fannypack.utils.to_numpy(loss)
+            losses = {}
+            if log_flag or loss_function == "mse":
+                losses["mse"] = F.mse_loss(predictions, true_states[1:])
+            if log_flag or loss_function == "nll":
+                log_likelihoods = torch.distributions.MultivariateNormal(
+                    loc=predictions, scale_tril=scale_trils
+                ).log_prob(true_states[1:])
+                assert log_likelihoods.shape == (T - 1, N)
+                losses["nll"] = -torch.sum(log_likelihoods)
+
+            buddy.minimize(
+                losses[loss_function], optimizer_name="train_dynamics_recurrent"
+            )
+            epoch_loss += fannypack.utils.to_numpy(losses[loss_function])
 
             # Logging
-            if batch_idx % log_interval == 0:
-                buddy.log("loss", loss)
+            if log_flag:
+                buddy.log("MSE loss", losses["mse"])
+                buddy.log("NLL loss", losses["nll"])
 
     # Print average training loss
     epoch_loss /= len(dataloader)
-    print("(train_dynamics_recurrent) Epoch training loss: ", epoch_loss)
+    print(
+        f"(train_dynamics_recurrent) Epoch training loss ({loss_function}): {epoch_loss}"
+    )
