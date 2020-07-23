@@ -24,7 +24,7 @@ class ParticleFilterMeasurementModel(abc.ABC, nn.Module):
     ) -> types.StatesTorch:
         """Observation model forward pass, over batch size `N`.
         For each member of a batch, we expect `M` separate states (particles)
-        and just one unique observation.
+        and one unique observation.
 
         Args:
             states (torch.Tensor): States to pass to our observation model.
@@ -45,14 +45,15 @@ class KalmanFilterMeasurementModel(abc.ABC, nn.Module):
     TODO: This is technically a virtual sensor instead of a measurement model.
     """
 
-    def __init__(self, state_dim: int, covariance: torch.Tensor= None):
+    def __init__(self, state_dim: int, noise_R_tril: torch.Tensor= None):
         super().__init__()
 
         self.state_dim = state_dim
         """int: Dimensionality of our state."""
 
-        if covariance is not None:
-            self.covariance = torch.nn.Parameter(covariance, requires_grad=False)
+        if noise_R_tril is not None:
+            self.noise_R_tril = torch.nn.Parameter(noise_R,
+                                              requires_grad=False)
 
     @abc.abstractmethod
     def forward(

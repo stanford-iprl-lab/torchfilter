@@ -10,7 +10,7 @@ from . import DynamicsModel, Filter, KalmanFilterMeasurementModel
 
 
 class KalmanFilter(Filter, abc.ABC):
-    """Base class for a generic differentiable particle filter.
+    """Base class for a generic differentiable extended kalman filter.
         We assume measurement model gives us the state directly.
     """
 
@@ -35,6 +35,9 @@ class KalmanFilter(Filter, abc.ABC):
         self.measurement_model = measurement_model
         """diffbayes.base.KalmanFilterMeasurementModel: Observation model."""
 
+        self.states_prev = None
+        self.states_covariance_prev = None
+
     def forward(
             self, *, observations: types.ObservationsTorch,
             controls: types.ControlsTorch,
@@ -54,35 +57,60 @@ class KalmanFilter(Filter, abc.ABC):
             be `(N, state_dim, state_dim).`
         """
         assert (
-                self.state_prev != None and self.states_cov_prev != None
+                self.state_prev is not None and self.state_covariance_prev is not None
         ), "Kalman filter not initialized!"
 
-        N, state_dim = self.state_prev.shape
-
+        N, state_dim = self.states_prev.shape
 
         # Dynamics prediction step
-        dynamics_pred = self.dynamics_model(self.states_prev)
-        states_pred = self.dynamics_model.add_noise(dynamics_pred)
-        dynamics_covariance = self.dynamics_model.covariance
-
+        predicted_states, dynamics_tril = self.dynamics_model(self.states_prev, controls)
+        dynamics_noise = dynamics_tril.bmm(dynamics_tril.transpose(-1, -2))
         dynamics_A_matrix = self.dynamics_model.jacobian()
-
         assert dynamics_A_matrix.shape == (N, state_dim, state_dim)
-
         # Calculating the sigma_t+1|t
-        states_sigma_pred = dynamics_A_matrix.bmm(self.states_cov_prev).bmm(dynamics_A_matrix.transpose(-1, -2)) \
-                            + dynamics_pred_Q
+        predicted_covariances = dynamics_A_matrix.bmm(self.state_covariance_prev).bmm(
+                                dynamics_A_matrix.transpose(-1, -2)) + dynamics_noise
 
-        measurement_state, measurement_covariance = self.measurement_model(observations)
+        measurement_prediction, measurement_covariance = self.measurement_model(observations)
 
         # Kalman Gain
-        K_update = states_sigma_pred.bmm(torch.inverse(states_sigma_pred + measurement_covariance))
+        kalman_update = predicted_covariances.bmm(torch.inverse(predicted_covariances +
+                                                                measurement_covariance))
 
         # Updating
-        states_update = torch.unsqueeze(states_pred, -1) \
-            + torch.bmm(K_update, torch.unsqueeze((measurement_state - states_pred), -1))
-        states_update = states_update.squeeze()
-        states_sigma_update = \
-            (torch.eye(K_update.shape[-1]).to(K_update.device) - K_update).bmm(states_sigma_pred)
+        states_estimate = torch.unsqueeze(predicted_states, -1) \
+            + torch.bmm(kalman_update, torch.unsqueeze((measurement_prediction - predicted_states), -1))
+        states_estimate = states_estimate.squeeze()
+        states_covariance_estimate = (torch.eye(kalman_update.shape[-1]).to(
+            kalman_update.device) - kalman_update).bmm(
+            predicted_covariances)
 
-        return states_update, states_sigma_update
+        self.states_prev = states_estimate
+        self.states_covariance_prev = states_covariance_estimate
+
+        return states_estimate, states_covariance_estimate
+
+    def initialize_beliefs(self, *, mean: torch.Tensor, covariance: torch.Tensor):
+        """Set kalman state prediction and state covariance to mean and covariance.
+
+        Args:
+            mean (torch.Tensor): Mean of belief. Shape should be
+                `(N, state_dim)`.
+            covariance (torch.Tensor): Covariance of belief. Shape should be
+                `(N, state_dim, state_dim)`.
+        """
+        N = mean.shape[0]
+        assert mean.shape == (N, self.state_dim)
+        assert covariance.shape == (N, self.state_dim, self.state_dim)
+        self.states_prev = mean
+        self.states_covariance_prev = covariance
+
+    def measurement_initialize_beliefs(self, *, observations: types.ObservationsTorch,):
+        """Use measurement model to intialize belief.
+
+        Args:
+            observations (dict or torch.Tensor): observation inputs. should be
+                either a dict of tensors or tensor of shape `(N, ...)`
+        """
+        measurement_prediction, measurement_covariance = self.measurement_model(observations)
+        self.initialize_beliefs(mean=measurement_prediction, covariance=measurement_covariance)
