@@ -1,4 +1,5 @@
 import abc
+from typing import List, Tuple
 
 import torch
 import torch.nn as nn
@@ -11,6 +12,7 @@ from .. import types
 class DynamicsModel(nn.Module, abc.ABC):
     """Base class for a generic differentiable dynamics model, with additive white
     Gaussian noise.
+
     Subclasses should override either `forward` or `forward_loop` for computing dynamics
     estimates.
     """
@@ -30,12 +32,14 @@ class DynamicsModel(nn.Module, abc.ABC):
         linear dynamical system w/ additive white Gaussian noise. In other words, they
         should be lower triangular and not accumulate -- the uncertainty at at time `t`
         should be computed as if the estimate at time `t - 1` is a ground-truth input.
+
         By default, this is implemented by bootstrapping the `forward_loop()`
         method.
         Args:
             initial_states (torch.Tensor): Initial states of our system.
             controls (dict or torch.Tensor): Control inputs. Should be either a
                 dict of tensors or tensor of size `(N, ...)`.
+
         Returns:
             Tuple[torch.Tensor, torch.Tensor]: Predicted states & uncertainties.
                 - States should have shape `(N, state_dim).`
@@ -63,11 +67,13 @@ class DynamicsModel(nn.Module, abc.ABC):
         """Dynamics model forward pass, over sequence length `T` and batch size
         `N`.  By default, this is implemented by iteratively calling
         `forward()`.
+
         Computes both predicted states and uncertainties. Note that uncertainties
         correspond to the (Cholesky decompositions of the) "Q" matrices in a standard
         linear dynamical system w/ additive white Gaussian noise. In other words, they
         should be lower triangular and not accumulate -- the uncertainty at at time `t`
         should be computed as if the estimate at time `t - 1` is a ground-truth input.
+
         To inject code between timesteps (for example, to inspect hidden state),
         use `register_forward_hook()`.
         Args:
@@ -167,12 +173,12 @@ class DynamicsModel(nn.Module, abc.ABC):
         controls = controls.unsqueeze(1)
         controls = controls.repeat(1, ndim, 1)
         x.requires_grad_(True)
-        y = self.forward(x, controls)
+        y = self(x, controls)
 
         mask = torch.eye(ndim).repeat(N, 1, 1).to(x.device)
-
+        if type(y) is tuple:
+            y = y[0] # assume dynamics model returns state first
         jac = torch.autograd.grad(y, x, mask, create_graph=True)
 
         return jac[0]
-
 
