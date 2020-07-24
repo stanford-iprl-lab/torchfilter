@@ -57,21 +57,24 @@ class KalmanFilter(Filter, abc.ABC):
             be `(N, state_dim, state_dim).`
         """
         assert (
-                self.state_prev is not None and self.state_covariance_prev is not None
+                self.states_prev is not None and self.states_covariance_prev is not None
         ), "Kalman filter not initialized!"
 
         N, state_dim = self.states_prev.shape
 
         # Dynamics prediction step
-        predicted_states, dynamics_tril = self.dynamics_model(self.states_prev, controls)
+        predicted_states, dynamics_tril = self.dynamics_model(initial_states=self.states_prev,
+                                                              controls=controls)
         dynamics_noise = dynamics_tril.bmm(dynamics_tril.transpose(-1, -2))
-        dynamics_A_matrix = self.dynamics_model.jacobian()
+        dynamics_A_matrix = self.dynamics_model.jacobian(self.states_prev,
+                                                         controls,
+                                                         self.dynamics_model)
         assert dynamics_A_matrix.shape == (N, state_dim, state_dim)
         # Calculating the sigma_t+1|t
-        predicted_covariances = dynamics_A_matrix.bmm(self.state_covariance_prev).bmm(
+        predicted_covariances = dynamics_A_matrix.bmm(self.states_covariance_prev).bmm(
                                 dynamics_A_matrix.transpose(-1, -2)) + dynamics_noise
 
-        measurement_prediction, measurement_covariance = self.measurement_model(observations)
+        measurement_prediction, measurement_covariance = self.measurement_model(observations=observations)
 
         # Kalman Gain
         kalman_update = predicted_covariances.bmm(torch.inverse(predicted_covariances +
@@ -92,7 +95,7 @@ class KalmanFilter(Filter, abc.ABC):
 
     @property
     def state_covariance_estimate(self):
-        return self._states_covariance_prev
+        return self.states_covariance_prev
 
     def initialize_beliefs(self, *, mean: torch.Tensor, covariance: torch.Tensor):
         """Set kalman state prediction and state covariance to mean and covariance.
