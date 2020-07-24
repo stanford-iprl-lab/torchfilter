@@ -52,8 +52,10 @@ class KalmanFilterMeasurementModel(abc.ABC, nn.Module):
         """int: Dimensionality of our state."""
 
         if noise_R_tril is not None:
-            self.noise_R_tril = torch.nn.Parameter(noise_R,
+            self.noise_R_tril = torch.nn.Parameter(noise_R_tril,
                                               requires_grad=False)
+        else:
+            self.noise_R_tril = None
 
     @abc.abstractmethod
     def forward(

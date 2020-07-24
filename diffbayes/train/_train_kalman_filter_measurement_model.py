@@ -32,7 +32,7 @@ def train_kalman_filter_measurement_model(
     """
     # Dataloader should load a SingleStepDataset
     assert isinstance(
-        dataloader.dataset, diffbayes.data.diffbayes.data.SingleStepDataset
+        dataloader.dataset, diffbayes.data.SingleStepDataset
     )
     assert measurement_model.training, "Model needs to be set to train mode"
 
