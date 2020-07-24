@@ -10,3 +10,7 @@ from ._train_filter import train_filter
 from ._train_particle_filter_measurement_model import (
     train_particle_filter_measurement_model,
 )
+
+from ._train_kalman_filter_measurement_model import (
+    train_kalman_filter_measurement_model
+)

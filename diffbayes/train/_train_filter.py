@@ -24,6 +24,7 @@ def train_filter(
     *,
     loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss,
     log_interval: int = 10,
+    measurement_initialize=False,
 ) -> None:
     """Trains a filter end-to-end via backpropagation through time for 1 epoch over a
     subsequence dataset.
@@ -73,15 +74,18 @@ def train_filter(
             assert batch_idx != 0 or N == dataloader.batch_size
 
             # Populate initial filter belief
-            initial_states_covariance = initial_covariance[None, :, :].expand(
-                (N, state_dim, state_dim)
-            )
-            initial_states = torch.distributions.MultivariateNormal(
-                true_states[0], initial_states_covariance
-            ).sample()
-            filter_model.initialize_beliefs(
-                mean=initial_states, covariance=initial_states_covariance
-            )
+            if measurement_initialize and hasattr(filter_model, 'measurement_initialize_belief'):
+                filter_model.measurement_initialize_belief(fannypack.utils.SliceWrapper(observations)[0])
+            else:
+                initial_states_covariance = initial_covariance[None, :, :].expand(
+                    (N, state_dim, state_dim)
+                )
+                initial_states = torch.distributions.MultivariateNormal(
+                    true_states[0], initial_states_covariance
+                ).sample()
+                filter_model.initialize_beliefs(
+                    mean=initial_states, covariance=initial_states_covariance
+                )
 
             # Forward pass from the first state
             state_predictions = filter_model.forward_loop(
