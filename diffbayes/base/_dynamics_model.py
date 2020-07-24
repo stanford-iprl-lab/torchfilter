@@ -155,7 +155,8 @@ class DynamicsModel(nn.Module, abc.ABC):
 
     def jacobian(self,
         states: types.StatesTorch,
-        controls: types.ControlsTorch,):
+        controls: types.ControlsTorch,
+        net: torch.nn.Module):
 
         """Returns jacobian of the dynamics model.
         Args:
@@ -179,7 +180,8 @@ class DynamicsModel(nn.Module, abc.ABC):
         controls = controls.unsqueeze(1)
         controls = controls.repeat(1, ndim, 1)
         x.requires_grad_(True)
-        y = self(x, controls)
+        controls.requires_grad_(True)
+        y = net(initial_states=x, controls=controls)
 
         mask = torch.eye(ndim).repeat(N, 1, 1).to(x.device)
         if type(y) is tuple:
