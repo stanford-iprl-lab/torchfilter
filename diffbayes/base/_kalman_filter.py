@@ -88,7 +88,11 @@ class KalmanFilter(Filter, abc.ABC):
         self.states_prev = states_estimate
         self.states_covariance_prev = states_covariance_estimate
 
-        return states_estimate, states_covariance_estimate
+        return states_estimate
+
+    @property
+    def state_covariance_estimate(self):
+        return self._states_covariance_prev
 
     def initialize_beliefs(self, *, mean: torch.Tensor, covariance: torch.Tensor):
         """Set kalman state prediction and state covariance to mean and covariance.
