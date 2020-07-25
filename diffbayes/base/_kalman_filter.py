@@ -61,6 +61,7 @@ class KalmanFilter(Filter, abc.ABC):
         ), "Kalman filter not initialized!"
 
         N, state_dim = self.states_prev.shape
+        assert controls.shape[0] == N
 
         # Dynamics prediction step
         predicted_states, dynamics_tril = self.dynamics_model(initial_states=self.states_prev,
@@ -83,7 +84,7 @@ class KalmanFilter(Filter, abc.ABC):
         # Updating
         states_estimate = torch.unsqueeze(predicted_states, -1) \
             + torch.bmm(kalman_update, torch.unsqueeze((measurement_prediction - predicted_states), -1))
-        states_estimate = states_estimate.squeeze()
+        states_estimate = states_estimate.squeeze(-1)
         states_covariance_estimate = (torch.eye(kalman_update.shape[-1]).to(
             kalman_update.device) - kalman_update).bmm(
             predicted_covariances)

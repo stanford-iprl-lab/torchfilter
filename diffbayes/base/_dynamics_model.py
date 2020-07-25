@@ -169,23 +169,21 @@ class DynamicsModel(nn.Module, abc.ABC):
             torch.Tensor: jacobian, size `(N, state_dim, state_dim)`
 
         """
+        with torch.enable_grad():
+            x = states.detach().clone()
 
-        x = states.detach().clone()
-        x = x.squeeze()
+            N, ndim = x.shape
+            assert ndim == self.state_dim
+            x = x.unsqueeze(1)
+            x = x.repeat(1, ndim, 1)
+            controls = controls.unsqueeze(1)
+            controls = controls.repeat(1, ndim, 1)
+            x.requires_grad_(True)
+            y = net(initial_states=x, controls=controls)
 
-        N, ndim = x.shape
-        assert ndim == self.state_dim
-        x = x.unsqueeze(1)
-        x = x.repeat(1, ndim, 1)
-        controls = controls.unsqueeze(1)
-        controls = controls.repeat(1, ndim, 1)
-        x.requires_grad_(True)
-        controls.requires_grad_(True)
-        y = net(initial_states=x, controls=controls)
-
-        mask = torch.eye(ndim).repeat(N, 1, 1).to(x.device)
-        if type(y) is tuple:
-            y = y[0] # assume dynamics model returns state first
-        jac = torch.autograd.grad(y, x, mask, create_graph=True)
+            mask = torch.eye(ndim).repeat(N, 1, 1).to(x.device)
+            if type(y) is tuple:
+                y = y[0] # assume dynamics model returns state first
+            jac = torch.autograd.grad(y, x, mask, create_graph=True)
 
         return jac[0]
