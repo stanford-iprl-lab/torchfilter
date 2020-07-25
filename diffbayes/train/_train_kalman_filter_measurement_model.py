@@ -17,6 +17,7 @@ def train_kalman_filter_measurement_model(
     *,
     loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss,
     log_interval: int = 10,
+    optimizer_name="train_measurement",
 ) -> None:
     """Optimizes a kalman measurement model prediction accuracy.
 
@@ -54,7 +55,7 @@ def train_kalman_filter_measurement_model(
             loss = loss_function(next_states, measurement_prediction)
             epoch_loss += fannypack.utils.to_numpy(loss)
 
-            buddy.minimize(loss, optimizer_name="train_measurement")
+            buddy.minimize(loss, optimizer_name=optimizer_name)
 
             if buddy.optimizer_steps % log_interval == 0:
                 buddy.log("Training loss", loss)

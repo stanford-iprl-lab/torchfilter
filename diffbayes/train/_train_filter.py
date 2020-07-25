@@ -25,6 +25,7 @@ def train_filter(
     loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss,
     log_interval: int = 10,
     measurement_initialize=False,
+    optimizer_name="train_filter_recurrent",
 ) -> None:
     """Trains a filter end-to-end via backpropagation through time for 1 epoch over a
     subsequence dataset.
@@ -80,8 +81,9 @@ def train_filter(
                 initial_states_covariance = initial_covariance[None, :, :].expand(
                     (N, state_dim, state_dim)
                 )
+                scale_tril = torch.sqrt(initial_states_covariance)
                 initial_states = torch.distributions.MultivariateNormal(
-                    true_states[0], initial_states_covariance
+                    true_states[0], scale_tril=scale_tril,
                 ).sample()
                 filter_model.initialize_beliefs(
                     mean=initial_states, covariance=initial_states_covariance
@@ -96,7 +98,7 @@ def train_filter(
 
             # Minimize loss
             loss = loss_function(state_predictions, true_states[1:])
-            buddy.minimize(loss, optimizer_name="train_filter_recurrent")
+            buddy.minimize(loss, optimizer_name=optimizer_name)
             epoch_loss += fannypack.utils.to_numpy(loss)
 
             # Logging
