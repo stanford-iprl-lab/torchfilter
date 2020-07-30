@@ -146,17 +146,18 @@ class DynamicsModel(nn.Module, abc.ABC):
         else:
             # If our noise is time-varying, stack normally
             scale_trils = torch.stack(scale_trils_list, dim=0)
-            assert False
 
         # Validate & return state estimates
         assert predictions.shape == (T, N, self.state_dim)
         assert scale_trils.shape == (T, N, self.state_dim, self.state_dim)
         return predictions, scale_trils
 
-    def jacobian(self,
+    def jacobian(
+        self,
         states: types.StatesTorch,
         controls: types.ControlsTorch,
-        net: torch.nn.Module):
+        net: torch.nn.Module,
+    ):
 
         """Returns jacobian of the dynamics model.
         Args:
@@ -183,7 +184,7 @@ class DynamicsModel(nn.Module, abc.ABC):
 
             mask = torch.eye(ndim).repeat(N, 1, 1).to(x.device)
             if type(y) is tuple:
-                y = y[0] # assume dynamics model returns state first
+                y = y[0]  # assume dynamics model returns state first
             jac = torch.autograd.grad(y, x, mask, create_graph=True)
 
         return jac[0]
