@@ -17,7 +17,7 @@ class ParticleFilterMeasurementDataset(torch.utils.data.Dataset):
 
     def __init__(
         self,
-        trajectories: List[types.TrajectoryTupleNumpy],
+        trajectories: List[types.TrajectoryNumpy],
         *,
         covariance: np.ndarray,
         samples_per_pair,
@@ -30,24 +30,21 @@ class ParticleFilterMeasurementDataset(torch.utils.data.Dataset):
         self.samples_per_pair = samples_per_pair
         self.dataset = []
 
-        # TODO: we can probably get rid of this for loop and just access trajectories
+        # TODO: we can probably get rid of this for loop and access trajectories
         # directly in __getitem__
-        for i, trajectory in enumerate(tqdm(trajectories)):
-            assert len(trajectory) == 3
-            states, observations, controls = trajectory
-
-            timesteps = len(states)
-            assert type(observations) == dict
-            assert len(controls) == timesteps
+        for i, traj in enumerate(tqdm(trajectories)):
+            timesteps = len(traj.states)
+            assert type(traj.observations) == dict
+            assert len(traj.controls) == timesteps
 
             for t in range(0, timesteps):
                 # Pull out data & labels
-                state = states[t]
-                observation = fannypack.utils.SliceWrapper(observations)[t]
+                state = traj.states[t]
+                observation = fannypack.utils.SliceWrapper(traj.observations)[t]
                 self.dataset.append((state, observation))
 
-        self.controls = controls
-        self.observations = observations
+        self.controls = traj.controls
+        self.observations = traj.observations
 
         print("Loaded {} points".format(len(self.dataset)))
 

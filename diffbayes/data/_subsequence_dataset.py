@@ -1,7 +1,5 @@
-from typing import List
+from typing import List, Tuple
 
-import numpy as np
-import torch
 from torch.utils.data import Dataset
 
 from .. import types
@@ -22,14 +20,16 @@ class SubsequenceDataset(Dataset):
     """
 
     def __init__(
-        self, trajectories: List[types.TrajectoryTupleNumpy], subsequence_length: int
+        self, trajectories: List[types.TrajectoryNumpy], subsequence_length: int
     ):
         # Split trajectory into overlapping subsequences
-        self.subsequences: List[types.TrajectoryTupleNumpy] = split_trajectories(
+        self.subsequences: List[types.TrajectoryNumpy] = split_trajectories(
             trajectories, subsequence_length
         )
 
-    def __getitem__(self, index: int) -> types.TrajectoryTupleNumpy:
+    def __getitem__(
+        self, index: int
+    ) -> Tuple[types.StatesNumpy, types.ObservationsNumpy, types.ControlsNumpy]:
         """Get a subsequence from our dataset.
 
         Args:
@@ -40,8 +40,8 @@ class SubsequenceDataset(Dataset):
             numpy array or dict of numpy arrays with shape
             `(subsequence_length, ...)`.
         """
-        states, observation, controls = self.subsequences[index]
-        return states, observation, controls
+        traj = self.subsequences[index]
+        return traj.states, traj.observations, traj.controls
 
     def __len__(self):
         """Total number of subsequences in the dataset.

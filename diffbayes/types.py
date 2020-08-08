@@ -1,7 +1,7 @@
 """Semantic typehints for filtering.
 """
-
-from typing import Any, Dict, Tuple, Union
+import dataclasses
+from typing import Dict, Tuple, Union
 
 import numpy as np
 import torch
@@ -20,10 +20,9 @@ __all__ = [
     "ObservationsNoDictTorch",
     "ControlsNumpy",
     "ControlsTorch",
-    "TrajectoryTupleNumpy",
-    "TrajectoryTupleTorch",
     "CovarianceTorch",
     "ScaleTrilTorch",
+    "TrajectoryNumpy",
 ]
 
 NumpyDict = Dict[str, np.ndarray]
@@ -56,12 +55,25 @@ ControlsNumpy = NumpyArrayOrDict
 ControlsTorch = TorchTensorOrDict
 """Controls can be either `torch.Tensor` objects or `str->torch.Tensor` dictionaries."""
 
-TrajectoryTupleNumpy = Tuple[StatesNumpy, ObservationsNumpy, ControlsNumpy]
-"""Trajectories in Numpy, defined as `(States, Observation, Controls)` tuples."""
-TrajectoryTupleTorch = Tuple[StatesTorch, ObservationsTorch, ControlsTorch]
-"""Trajectory in PyTorch, defined as `(States, Observation, Controls)` tuples."""
-
 CovarianceTorch = torch.Tensor
 """Covariance matrix as `torch.Tensor`. Must be positive semi-definite."""
 ScaleTrilTorch = torch.Tensor
 """Lower-triangular cholesky decomposition of covariance matrix as `torch.Tensor`."""
+
+
+@dataclasses.dataclass
+class TrajectoryNumpy:
+    """A single trajectory, represented with NumPy arrays.
+    """
+
+    states: StatesNumpy
+    """np.ndarray: State array. Shape should be `(T, state_dim)`.
+    """
+
+    observations: ObservationsNumpy
+    """Union[np.ndarray, Dict[str, np.ndarray]]: Observations. Shape(s) should be
+    `(T, ...)`."""
+
+    controls: ControlsNumpy
+    """Union[np.ndarray, Dict[str, np.ndarray]]: Controls. Shape(s) should be
+    `(T, ...)`."""
