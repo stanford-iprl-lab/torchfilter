@@ -1,5 +1,5 @@
 import abc
-from typing import List, Tuple
+from typing import List, Tuple, cast
 
 import torch
 import torch.nn as nn
@@ -153,23 +153,23 @@ class DynamicsModel(nn.Module, abc.ABC):
         return predictions, scale_trils
 
     def jacobian(
-        self,
-        states: types.StatesTorch,
-        controls: types.ControlsTorch,
-        net: torch.nn.Module,
-    ):
+        self, states: types.StatesTorch, controls: types.ControlsTorch,
+    ) -> torch.Tensor:
 
-        """Returns jacobian of the dynamics model.
+        """Returns Jacobian of the dynamics model.
         Args:
-            states (torch.Tensor): Current state, size `(N, state_dim)`
-            The current state.
+            states (torch.Tensor): Current state, size `(N, state_dim)`.
             controls (dict or torch.Tensor): Control inputs. Should be either a
-                dict of tensors or tensor of size `(N, ...)`.        B - Batch size
+                dict of tensors or tensor of size `(N, ...)`.
 
         Returns:
-            torch.Tensor: jacobian, size `(N, state_dim, state_dim)`
-
+            torch.Tensor: Jacobian, size `(N, state_dim, state_dim)`
         """
+
+        assert isinstance(
+            controls, torch.Tensor
+        ), "To compute jacobian, `controls` must be tensor!"
+        controls = cast(torch.Tensor, controls)
         with torch.enable_grad():
             x = states.detach().clone()
 
@@ -180,11 +180,10 @@ class DynamicsModel(nn.Module, abc.ABC):
             controls = controls.unsqueeze(1)
             controls = controls.repeat(1, ndim, 1)
             x.requires_grad_(True)
-            y = net(initial_states=x, controls=controls)
+            y = self(initial_states=x, controls=controls)
 
             mask = torch.eye(ndim).repeat(N, 1, 1).to(x.device)
-            if type(y) is tuple:
-                y = y[0]  # assume dynamics model returns state first
+            y = y[0]  # dynamics model returns state first
             jac = torch.autograd.grad(y, x, mask, create_graph=True)
 
         return jac[0]

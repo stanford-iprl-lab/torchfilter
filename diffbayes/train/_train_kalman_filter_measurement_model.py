@@ -12,7 +12,7 @@ import fannypack
 
 def train_kalman_filter_measurement_model(
     buddy: fannypack.utils.Buddy,
-    measurement_model: diffbayes.base.KalmanFilterMeasurementModel,
+    measurement_model: diffbayes.base.VirtualSensorModel,
     dataloader: DataLoader,
     *,
     loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss,

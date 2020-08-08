@@ -13,42 +13,52 @@ __all__ = [
     "StatesTorch",
     "ObservationsNumpy",
     "ObservationsTorch",
+    "ObservationsNoDictNumpy",
+    "ObservationsNoDictTorch",
     "ControlsNumpy",
     "ControlsTorch",
     "TrajectoryTupleNumpy",
     "TrajectoryTupleTorch",
     "CovarianceTorch",
+    "ScaleTrilTorch",
 ]
 
 NumpyDict = Dict[str, np.ndarray]
-""" Dictionary from `str` keys to `np.ndarray` values. """
+"""Dictionary from `str` keys to `np.ndarray` values."""
 TorchDict = Dict[str, torch.Tensor]
-""" Dictionary from `str` keys to `torch.Tensor` values. """
+"""Dictionary from `str` keys to `torch.Tensor` values."""
 
 NumpyArrayOrDict = Union[np.ndarray, NumpyDict]
-""" Union of np.ndarray and NumpyDict types. """
+"""Union of np.ndarray and NumpyDict types."""
 TorchTensorOrDict = Union[torch.Tensor, TorchDict]
-""" Union of torch.Tensor and TorchDict types. """
+"""Union of torch.Tensor and TorchDict types."""
 
 StatesNumpy = np.ndarray
-""" State array type hint. Needs to be a raw `np.ndarray`. """
+"""State array type hint. Needs to be a raw `np.ndarray`."""
 StatesTorch = torch.Tensor
-""" State array type hint. Needs to be a raw `torch.Tensor`. """
-
-CovarianceTorch = torch.Tensor
-""" Covariance matrix as `torch.Tensor`. Must be positive semi-definite"""
+"""State array type hint. Needs to be a raw `torch.Tensor`."""
 
 ObservationsNumpy = NumpyArrayOrDict
-""" Observations can be either `np.ndarray` objects or `str->np.ndarray` dictionaries. """
+"""Observations can be either `np.ndarray` objects or `str->np.ndarray` dictionaries."""
 ObservationsTorch = TorchTensorOrDict
-""" Observations can be either `torch.Tensor` objects or `str->torch.Tensor` dictionaries. """
+"""Observations can be either `torch.Tensor` objects or `str->torch.Tensor` dictionaries."""
+
+ObservationsNoDictNumpy = np.ndarray
+"""Same as `ObservationsNumpy`, but no dictionaries."""
+ObservationsNoDictTorch = torch.Tensor
+"""Same as `ObservationsTorch`, but no dictionaries."""
 
 ControlsNumpy = NumpyArrayOrDict
-""" Controls can be either `np.ndarray` objects or `str->np.ndarray` dictionaries. """
+"""Controls can be either `np.ndarray` objects or `str->np.ndarray` dictionaries."""
 ControlsTorch = TorchTensorOrDict
-""" Controls can be either `torch.Tensor` objects or `str->torch.Tensor` dictionaries. """
+"""Controls can be either `torch.Tensor` objects or `str->torch.Tensor` dictionaries."""
 
 TrajectoryTupleNumpy = Tuple[StatesNumpy, ObservationsNumpy, ControlsNumpy]
-""" Trajectories in Numpy, defined as `(States, Observation, Controls)` tuples. """
+"""Trajectories in Numpy, defined as `(States, Observation, Controls)` tuples."""
 TrajectoryTupleTorch = Tuple[StatesTorch, ObservationsTorch, ControlsTorch]
-""" Trajectory in PyTorch, defined as `(States, Observation, Controls)` tuples. """
+"""Trajectory in PyTorch, defined as `(States, Observation, Controls)` tuples."""
+
+CovarianceTorch = torch.Tensor
+"""Covariance matrix as `torch.Tensor`. Must be positive semi-definite."""
+ScaleTrilTorch = torch.Tensor
+"""Cholesky decomposition of covariance matrix as `torch.Tensor`."""

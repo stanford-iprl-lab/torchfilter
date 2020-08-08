@@ -1,13 +1,14 @@
 from typing import Optional, Tuple, cast
 
+import numpy as np
 import torch
 
 from .. import types
 
 
 class UnscentedTransform:
-    """ Helper class for performing (differentiable) unscented transforms, as described
-    by [1].
+    """ Helper class for performing (batched, differentiable) unscented transforms, with
+    sigma point selection parameters described by [1].
 
     [1] http://www.gatsby.ucl.ac.uk/~byron/nlds/merwe2003a.pdf
 
@@ -21,12 +22,7 @@ class UnscentedTransform:
     """
 
     def __init__(
-        self,
-        *,
-        dim: int,
-        alpha = 1e-3,
-        kappa :float= 0.0,
-        beta :float = 2.0,
+        self, *, dim: int, alpha=1e-3, kappa: float = 0.0, beta: float = 2.0,
     ):
         self._dim = dim
 
@@ -40,6 +36,20 @@ class UnscentedTransform:
         self._weights_c: Optional[torch.Tensor] = None
         self._weights_m: Optional[torch.Tensor] = None
         self._weights_device: Optional[torch.device] = None
+
+    @property
+    def weights_m(self) -> torch.Tensor:
+        """Sigma point covariance weights. Instantiated on the first call to
+        `compute_distribution()`."""
+        assert self._weights_m is not None, "Weights not initialized!"
+        return self._weights_m
+
+    @property
+    def weights_c(self) -> torch.Tensor:
+        """Sigma point mean weights. Instantiated on the first call to
+        `compute_distribution()`. Values should sum to `1`."""
+        assert self._weights_c is not None, "Weights not initialized!"
+        return self._weights_c
 
     def select_sigma_points(
         self, input_mean: torch.Tensor, input_covariance: types.CovarianceTorch,
@@ -60,8 +70,8 @@ class UnscentedTransform:
 
         # Compute matrix root, offsets for sigma points
         #
-        # Note that we offset with the row vectors, so we need an
-        # upper-triangular cholesky decomposition [1].
+        # Note that we offset with the row vectors, so we need an upper-triangular
+        # cholesky decomposition [1].
         #
         # [1] https://www.cs.ubc.ca/~murphyk/Papers/Julier_Uhlmann_mar04.pdf
         matrix_root = torch.cholesky((dim + self._lambd) * input_covariance, upper=True)
@@ -79,7 +89,15 @@ class UnscentedTransform:
     def compute_distribution(
         self, sigma_points: torch.Tensor,
     ) -> Tuple[torch.Tensor, types.CovarianceTorch]:
-        """Estimate a distribution from selected sigma points
+        """Estimate a distribution from selected sigma points.
+
+        Args:
+            sigma_points (torch.Tensor): Sigma points, with shape
+                `(N, 2 * dim + 1, dim)`.
+
+        Returns:
+            Tuple[torch.Tensor, torch.Tensor]: Mean and covariance, with shapes
+            `(N, dim)` and `(N, dim, dim)` respectively.
         """
         # Lazy sigma weight initialization
         self._init_sigma_weights(sigma_points.device)
@@ -128,3 +146,6 @@ class UnscentedTransform:
             1.0 - self._alpha ** 2 + self._beta
         )
         self._weights_m[0] = self._lambd / (self._dim + self._lambd)
+
+        assert np.allclose(np.sum(self._weights_m.detach().numpy()), 1.0)
+        assert not np.allclose(np.sum(self._weights_c.detach().numpy()), 1.0)

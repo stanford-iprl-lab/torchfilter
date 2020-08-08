@@ -6,7 +6,9 @@ import torch
 import fannypack
 
 from .. import types
-from . import DynamicsModel, Filter, ParticleFilterMeasurementModel
+from ._dynamics_model import DynamicsModel
+from ._filter import Filter
+from ._measurement_models import ParticleFilterMeasurementModel
 
 
 class ParticleFilter(Filter, abc.ABC):
@@ -196,7 +198,7 @@ class ParticleFilter(Filter, abc.ABC):
             torch.distributions.MultivariateNormal(
                 loc=predicted_states, scale_tril=scale_trils
             )
-            .rsample() # Note that we use `rsample` to make sampling differentiable
+            .rsample()  # Note that we use `rsample` to make sampling differentiable
             .view(N, M, self.state_dim)
         )
         assert self.particle_states.shape == (N, M, self.state_dim)
