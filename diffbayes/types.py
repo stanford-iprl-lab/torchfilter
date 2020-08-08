@@ -1,3 +1,6 @@
+"""Semantic typehints for filtering.
+"""
+
 from typing import Any, Dict, Tuple, Union
 
 import numpy as np
@@ -61,4 +64,4 @@ TrajectoryTupleTorch = Tuple[StatesTorch, ObservationsTorch, ControlsTorch]
 CovarianceTorch = torch.Tensor
 """Covariance matrix as `torch.Tensor`. Must be positive semi-definite."""
 ScaleTrilTorch = torch.Tensor
-"""Cholesky decomposition of covariance matrix as `torch.Tensor`."""
+"""Lower-triangular cholesky decomposition of covariance matrix as `torch.Tensor`."""

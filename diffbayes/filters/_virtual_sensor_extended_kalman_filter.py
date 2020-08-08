@@ -4,15 +4,15 @@ from typing import Tuple, cast
 import torch
 
 from .. import types
-from ._dynamics_model import DynamicsModel
+from ..base._dynamics_model import DynamicsModel
+from ..base._kalman_filter_base import KalmanFilterBase
+from ..base._virtual_sensor_model import VirtualSensorModel
 from ._extended_kalman_filter import ExtendedKalmanFilter
-from ._kalman_filter_base import KalmanFilterBase
-from ._measurement_models import VirtualSensorModel
 
 
-class VirtualSensorExtendedKalmanFilter(KalmanFilterBase, abc.ABC):
-    """Base class for a generic differentiable EKF with a virtual sensor model for
-    mapping raw observations to predicted states.
+class VirtualSensorExtendedKalmanFilter(KalmanFilterBase):
+    """Generic, BackpropKF-style EKF with a virtual sensor model for mapping raw
+    observations to predicted states.
 
     Assumes measurement model is identity.
     """
@@ -55,21 +55,21 @@ class VirtualSensorExtendedKalmanFilter(KalmanFilterBase, abc.ABC):
         # Extract inputs
         pred_mu, pred_cov = predict_outputs
 
-        # Use virtual sensor for measurement + covariance
-        measurement_mu, measurement_tril = self.virtual_sensor_model(
+        # Use virtual sensor for observation + covariance
+        observations_mu, observations_tril = self.virtual_sensor_model(
             observations=observations
         )
-        measurement_cov = measurement_tril @ measurement_tril.transpose(-1, -2)
-        pred_measurement = pred_mu
+        observations_cov = observations_tril @ observations_tril.transpose(-1, -2)
+        pred_observations = pred_mu
 
         # Check shapes
-        N, measurement_dim = measurement_mu.shape
-        assert measurement_cov.shape == (N, measurement_dim, measurement_dim)
-        assert measurement_mu.shape == pred_mu.shape
+        N, observation_dim = observations_mu.shape
+        assert observations_cov.shape == (N, observation_dim, observation_dim)
+        assert observations_mu.shape == pred_mu.shape
 
         # Compute Kalman Gain, innovation
-        innovation = measurement_mu - pred_measurement
-        innovation_covariance = pred_cov + measurement_cov
+        innovation = observations_mu - pred_observations
+        innovation_covariance = pred_cov + observations_cov
         kalman_gain = pred_cov @ torch.inverse(innovation_covariance)
 
         # Get mu_{t+1|t+1}, Sigma_{t+1|t+1}

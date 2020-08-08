@@ -25,7 +25,7 @@ class DynamicsModel(nn.Module, abc.ABC):
 
     def forward(
         self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch,
-    ) -> Tuple[types.StatesTorch, torch.Tensor]:
+    ) -> Tuple[types.StatesTorch, types.ScaleTrilTorch]:
         """Dynamics model forward pass, single timestep.
         Computes both predicted states and uncertainties. Note that uncertainties
         correspond to the (Cholesky decompositions of the) "Q" matrices in a standard

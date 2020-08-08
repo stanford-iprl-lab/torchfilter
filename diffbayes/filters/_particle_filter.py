@@ -6,13 +6,13 @@ import torch
 import fannypack
 
 from .. import types
-from ._dynamics_model import DynamicsModel
-from ._filter import Filter
-from ._measurement_models import ParticleFilterMeasurementModel
+from ..base._dynamics_model import DynamicsModel
+from ..base._filter import Filter
+from ..base._measurement_models import ParticleFilterMeasurementModel
 
 
-class ParticleFilter(Filter, abc.ABC):
-    """Base class for a generic differentiable particle filter.
+class ParticleFilter(Filter):
+    """Generic differentiable particle filter.
     """
 
     def __init__(
