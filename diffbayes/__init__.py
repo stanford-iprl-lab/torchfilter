@@ -1,3 +1,3 @@
-from . import base, data, train, types, utils
+from . import base, data, filters, train, types, utils
 
-__all__ = ["base", "data", "train", "types", "utils"]
+__all__ = ["base", "data", "filters", "train", "types", "utils"]

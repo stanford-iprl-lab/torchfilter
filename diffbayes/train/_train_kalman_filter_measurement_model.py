@@ -32,9 +32,7 @@ def train_kalman_filter_measurement_model(
         log_interval (int, optional): Minibatches between each Tensorboard log.
     """
     # Dataloader should load a SingleStepDataset
-    assert isinstance(
-        dataloader.dataset, diffbayes.data.SingleStepDataset
-    )
+    assert isinstance(dataloader.dataset, diffbayes.data.SingleStepDataset)
     assert measurement_model.training, "Model needs to be set to train mode"
 
     # Track mean epoch loss

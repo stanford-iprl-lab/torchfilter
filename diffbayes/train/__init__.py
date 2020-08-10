@@ -12,5 +12,5 @@ from ._train_particle_filter_measurement_model import (
 )
 
 from ._train_kalman_filter_measurement_model import (
-    train_kalman_filter_measurement_model
+    train_kalman_filter_measurement_model,
 )

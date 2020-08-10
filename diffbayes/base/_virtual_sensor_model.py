@@ -24,15 +24,19 @@ class VirtualSensorModel(abc.ABC, nn.Module):
     @abc.abstractmethod
     def forward(
         self, *, observations: types.ObservationsTorch
-    ) -> Tuple[types.StatesTorch, types.CovarianceTorch]:
-        """Predicts states from observation inputs.
+    ) -> Tuple[types.StatesTorch, types.ScaleTrilTorch]:
+        """Predicts states and uncertainties from observation inputs.
+
+        Uncertainties should be lower-triangular Cholesky decompositions of covariance
+        matrices.
 
         Args:
             observations (dict or torch.Tensor): Measurement inputs. Should be
                 either a dict of tensors or tensor of size `(N, ...)`.
         Returns:
-            Tuple[torch.Tensor, torch.Tensor]: tuple containing a state estimate and a
-            covariance. Shapes should be `(N, state_dim)` and
-            `(N, state_dim, state_dim)` respectively.
+            Tuple[torch.Tensor, torch.Tensor]: Predicted states & uncertainties.
+                - States should have shape `(N, state_dim).`
+                - Uncertainties should be lower triangular, and should have shape
+                `(N, state_dim, state_dim).`
         """
         pass

@@ -40,28 +40,28 @@ class ExtendedKalmanFilter(KalmanFilterBase):
         self, *, controls: types.ControlsTorch,
     ) -> Tuple[types.StatesTorch, types.CovarianceTorch]:
         # Get previous belief
-        prev_mu = cast(torch.Tensor, self.belief_mu)
-        prev_cov = cast(torch.Tensor, self.belief_cov)
-        N, state_dim = prev_mu.shape
+        prev_mean = cast(torch.Tensor, self.belief_mean)
+        prev_covariance = cast(torch.Tensor, self.belief_covariance)
+        N, state_dim = prev_mean.shape
 
         # Compute mu_{t+1|t}, covariance, and Jacobian
-        pred_mu, dynamics_tril = self.dynamics_model(
-            initial_states=prev_mu, controls=controls
+        pred_mean, dynamics_tril = self.dynamics_model(
+            initial_states=prev_mean, controls=controls
         )
         dynamics_covariance = dynamics_tril @ dynamics_tril.transpose(-1, -2)
         dynamics_A_matrix = self.dynamics_model.jacobian(
-            states=prev_mu, controls=controls
+            states=prev_mean, controls=controls
         )
         assert dynamics_covariance.shape == (N, state_dim, state_dim)
         assert dynamics_A_matrix.shape == (N, state_dim, state_dim)
 
         # Calculate Sigma_{t+1|t}
-        pred_cov = (
-            dynamics_A_matrix @ prev_cov @ dynamics_A_matrix.transpose(-1, -2)
+        pred_covariance = (
+            dynamics_A_matrix @ prev_covariance @ dynamics_A_matrix.transpose(-1, -2)
             + dynamics_covariance
         )
 
-        return pred_mu, pred_cov
+        return pred_mean, pred_covariance
 
     def _update_step(
         self,
@@ -75,37 +75,42 @@ class ExtendedKalmanFilter(KalmanFilterBase):
             observations, types.ObservationsNoDictTorch
         ), "For standard EKF, observations must be tensor!"
         observations = cast(types.ObservationsNoDictTorch, observations)
-        pred_mu, pred_cov = predict_outputs
+        pred_mean, pred_covariance = predict_outputs
 
         # Measurement model forward pass, Jacobian
-        observations_mu = observations
-        pred_observations, observations_tril = self.measurement_model(states=pred_mu)
-        observations_cov = observations_tril @ observations_tril.transpose(-1, -2)
-        C_matrix = self.measurement_model.jacobian(states=pred_mu)
-        assert observations_mu.shape == pred_observations.shape
+        observations_mean = observations
+        pred_observations, observations_tril = self.measurement_model(states=pred_mean)
+        observations_covariance = observations_tril @ observations_tril.transpose(
+            -1, -2
+        )
+        C_matrix = self.measurement_model.jacobian(states=pred_mean)
+        assert observations_mean.shape == pred_observations.shape
 
         # Check shapes
-        N, observation_dim = observations_mu.shape
-        assert observations_cov.shape == (N, observation_dim, observation_dim)
-        assert observations_mu.shape == pred_mu.shape
+        N, observation_dim = observations_mean.shape
+        assert observations_covariance.shape == (N, observation_dim, observation_dim)
+        assert observations_mean.shape == pred_mean.shape
 
         # Compute Kalman Gain, innovation
-        innovation = observations_mu - pred_observations
+        innovation = observations_mean - pred_observations
         innovation_covariance = (
-            C_matrix @ pred_cov @ C_matrix.transpose(-1, -2) + observations_cov
+            C_matrix @ pred_covariance @ C_matrix.transpose(-1, -2)
+            + observations_covariance
         )
         kalman_gain = (
-            pred_cov @ C_matrix.transpose(-1, -2) @ torch.inverse(innovation_covariance)
+            pred_covariance
+            @ C_matrix.transpose(-1, -2)
+            @ torch.inverse(innovation_covariance)
         )
 
         # Get mu_{t+1|t+1}, Sigma_{t+1|t+1}
-        corrected_mu = pred_mu + (kalman_gain @ innovation[:, :, -1]).unsqueeze(-1)
-        assert pred_mu.shape == (N, self.state_dim)
+        corrected_mean = pred_mean + (kalman_gain @ innovation[:, :, -1]).unsqueeze(-1)
+        assert pred_mean.shape == (N, self.state_dim)
 
         identity = torch.eye(kalman_gain.shape[-1], device=kalman_gain.device)
-        corrected_cov = (identity - kalman_gain) @ pred_cov
-        assert corrected_cov.shape == (N, self.state_dim, self.state_dim)
+        corrected_covariance = (identity - kalman_gain) @ pred_covariance
+        assert corrected_covariance.shape == (N, self.state_dim, self.state_dim)
 
         # Update internal state
-        self.belief_mu = corrected_mu
-        self.belief_cov = corrected_cov
+        self.belief_mean = corrected_mean
+        self.belief_covariance = corrected_covariance

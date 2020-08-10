@@ -19,9 +19,9 @@ class KalmanFilterBase(Filter, abc.ABC):
     def __init__(self, *, state_dim: int):
         super().__init__(state_dim=state_dim)
 
-        self.belief_mu: Optional[torch.Tensor] = None
+        self.belief_mean: Optional[torch.Tensor] = None
         """torch.Tensor: Estimated state mean."""
-        self.belief_cov: Optional[torch.Tensor] = None
+        self.belief_covariance: Optional[torch.Tensor] = None
         """torch.Tensor: Estimated state covariance."""
 
     def forward(
@@ -41,11 +41,11 @@ class KalmanFilterBase(Filter, abc.ABC):
         """
         # Check initialization
         assert (
-            self.belief_mu is not None and self.belief_cov is not None
+            self.belief_mean is not None and self.belief_covariance is not None
         ), "Kalman filter not initialized!"
 
         # Validate inputs
-        N, state_dim = self.belief_mu.shape
+        N, state_dim = self.belief_mean.shape
         assert fp.utils.SliceWrapper(observations).shape[0] == N
         assert fp.utils.SliceWrapper(controls).shape[0] == N
 
@@ -59,10 +59,10 @@ class KalmanFilterBase(Filter, abc.ABC):
         self._update_step(predict_outputs=predict_outputs, observations=observations)
 
         # Validate belief
-        assert self.belief_mu.shape == (N, state_dim)
-        assert self.belief_cov.shape == (N, state_dim, state_dim)
+        assert self.belief_mean.shape == (N, state_dim)
+        assert self.belief_covariance.shape == (N, state_dim, state_dim)
 
-        return self.belief_mu
+        return self.belief_mean
 
     def initialize_beliefs(self, *, mean: torch.Tensor, covariance: torch.Tensor):
         """Set filter belief to a given mean and covariance.
@@ -76,8 +76,8 @@ class KalmanFilterBase(Filter, abc.ABC):
         N = mean.shape[0]
         assert mean.shape == (N, self.state_dim)
         assert covariance.shape == (N, self.state_dim, self.state_dim)
-        self.belief_mu = mean
-        self.belief_cov = covariance
+        self.belief_mean = mean
+        self.belief_covariance = covariance
 
     @abc.abstractmethod
     def _predict_step(self, *, controls: types.ControlsTorch) -> Any:
@@ -103,7 +103,7 @@ class KalmanFilterBase(Filter, abc.ABC):
         Nominally, computes $\mu_{t | t}$, $\Sigma_{t | t}$ from $\mu_{t | t - 1}$,
         $\Sigma_{t | t - 1}$.
 
-        Updates `self.belief_mu` and `self.belief_cov`.
+        Updates `self.belief_mean` and `self.belief_covariance`.
 
         Keyword Args:
             predict_outputs (Any): Outputs from predict step.

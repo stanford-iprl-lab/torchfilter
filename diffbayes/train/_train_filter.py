@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, cast
 
 import numpy as np
 import torch
@@ -36,7 +36,7 @@ def train_filter(
         dataloader (DataLoader): Loader for a SubsequenceDataset.
         initial_covariance (torch.Tensor): Covariance matrix of error in initial
             posterior, whose mean is sampled from a Gaussian centered at the
-            ground-truth start state. Shape should be (state_dim, state_dim).
+            ground-truth start state. Shape should be `(state_dim, state_dim)`.
 
     Keyword Args:
         loss_function (callable, optional): Loss function, from `torch.nn.functional`.
@@ -75,16 +75,26 @@ def train_filter(
             assert batch_idx != 0 or N == dataloader.batch_size
 
             # Populate initial filter belief
-            if measurement_initialize and hasattr(filter_model, 'measurement_initialize_belief'):
-                filter_model.measurement_initialize_belief(fannypack.utils.SliceWrapper(observations)[0])
+            if measurement_initialize:
+                assert isinstance(
+                    filter_model, diffbayes.filters.VirtualSensorExtendedKalmanFilter
+                ), "Only supported for virtual sensor EKFs!"
+
+                # Initialize belief using virtual sensor
+                cast(
+                    diffbayes.filters.VirtualSensorExtendedKalmanFilter, filter_model
+                ).virtual_sensor_initialize_beliefs(
+                    fannypack.utils.SliceWrapper(observations)[0]
+                )
             else:
+                # Initialize belief using `initial_covariance`
                 initial_states_covariance = initial_covariance[None, :, :].expand(
                     (N, state_dim, state_dim)
                 )
-                scale_tril = torch.sqrt(initial_states_covariance)
                 initial_states = torch.distributions.MultivariateNormal(
-                    true_states[0], scale_tril=scale_tril,
+                    true_states[0], covariance_matrix=initial_states_covariance
                 ).sample()
+
                 filter_model.initialize_beliefs(
                     mean=initial_states, covariance=initial_states_covariance
                 )

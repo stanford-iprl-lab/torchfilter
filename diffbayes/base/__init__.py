@@ -1,4 +1,4 @@
-"""Abstract classes.
+"""Abstract classes for filtering.
 """
 
 from ._dynamics_model import DynamicsModel

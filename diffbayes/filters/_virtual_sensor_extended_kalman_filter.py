@@ -34,6 +34,7 @@ class VirtualSensorExtendedKalmanFilter(KalmanFilterBase):
         # Assign submodules
         self.dynamics_model = dynamics_model
         """diffbayes.base.DynamicsModel: Forward model."""
+
         self.virtual_sensor_model = virtual_sensor_model
         """diffbayes.base.VirtualSensorModel: Virtual sensor model."""
 
@@ -51,38 +52,39 @@ class VirtualSensorExtendedKalmanFilter(KalmanFilterBase):
         predict_outputs: Tuple[types.StatesTorch, types.CovarianceTorch],
         observations: types.ObservationsTorch,
     ) -> None:
-
         # Extract inputs
-        pred_mu, pred_cov = predict_outputs
+        pred_mean, pred_covariance = predict_outputs
 
         # Use virtual sensor for observation + covariance
-        observations_mu, observations_tril = self.virtual_sensor_model(
+        observations_mean, observations_tril = self.virtual_sensor_model(
             observations=observations
         )
-        observations_cov = observations_tril @ observations_tril.transpose(-1, -2)
-        pred_observations = pred_mu
+        observations_covariance = observations_tril @ observations_tril.transpose(
+            -1, -2
+        )
+        pred_observations = pred_mean
 
         # Check shapes
-        N, observation_dim = observations_mu.shape
-        assert observations_cov.shape == (N, observation_dim, observation_dim)
-        assert observations_mu.shape == pred_mu.shape
+        N, observation_dim = observations_mean.shape
+        assert observations_covariance.shape == (N, observation_dim, observation_dim)
+        assert observations_mean.shape == pred_mean.shape
 
         # Compute Kalman Gain, innovation
-        innovation = observations_mu - pred_observations
-        innovation_covariance = pred_cov + observations_cov
-        kalman_gain = pred_cov @ torch.inverse(innovation_covariance)
+        innovation = observations_mean - pred_observations
+        innovation_covariance = pred_covariance + observations_covariance
+        kalman_gain = pred_covariance @ torch.inverse(innovation_covariance)
 
         # Get mu_{t+1|t+1}, Sigma_{t+1|t+1}
-        corrected_mu = pred_mu + (kalman_gain @ innovation[:, :, -1]).unsqueeze(-1)
-        assert pred_mu.shape == (N, self.state_dim)
+        corrected_mean = pred_mean + (kalman_gain @ innovation[:, :, -1]).unsqueeze(-1)
+        assert pred_mean.shape == (N, self.state_dim)
 
         identity = torch.eye(kalman_gain.shape[-1], device=kalman_gain.device)
-        corrected_cov = (identity - kalman_gain) @ pred_cov
-        assert corrected_cov.shape == (N, self.state_dim, self.state_dim)
+        corrected_covariance = (identity - kalman_gain) @ pred_covariance
+        assert corrected_covariance.shape == (N, self.state_dim, self.state_dim)
 
         # Update internal state
-        self.belief_mu = corrected_mu
-        self.belief_cov = corrected_cov
+        self.belief_mean = corrected_mean
+        self.belief_covariance = corrected_covariance
 
     def virtual_sensor_initialize_beliefs(
         self, *, observations: types.ObservationsTorch,
@@ -93,5 +95,6 @@ class VirtualSensorExtendedKalmanFilter(KalmanFilterBase):
             observations (dict or torch.Tensor): observation inputs. should be
                 either a dict of tensors or tensor of shape `(N, ...)`
         """
-        mean, covariance = self.virtual_sensor_model(observations)
+        mean, scale_tril = self.virtual_sensor_model(observations)
+        covariance = scale_tril @ scale_tril.transpose(-1, -2)
         self.initialize_beliefs(mean=mean, covariance=covariance)

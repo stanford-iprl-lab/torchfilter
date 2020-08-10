@@ -43,8 +43,8 @@ def split_trajectories(
         for offset in (0, subsequence_length // 2):
 
             def split_fn(x: np.ndarray) -> np.ndarray:
-                """Private helper: splits arrays of arrays of shape `(T, ...)` into
-                `(sections, subsequence_length, ...)`, where `sections = orig_length //
+                """Helper: splits arrays of shape `(T, ...)` into `(sections,
+                subsequence_length, ...)`, where `sections = orig_length //
                 subsequence_length`."""
                 # Offset our starting point
                 x = x[offset:]
@@ -57,8 +57,14 @@ def split_trajectories(
                 # Split & return
                 return np.split(x, sections)
 
+            s: types.StatesNumpy
+            o: types.ObservationsNumpy
+            c: types.ControlsNumpy
             for s, o, c in zip(
+                # States are always raw arrays
                 split_fn(traj.states),
+                # Observations and controls can be dictionaries, so we have to jump
+                # through some hoops
                 fp.utils.SliceWrapper(
                     fp.utils.SliceWrapper(traj.observations).map(split_fn)
                 ),
