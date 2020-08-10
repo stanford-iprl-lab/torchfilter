@@ -1,5 +1,5 @@
 import abc
-from typing import Any, Optional, Tuple
+from typing import Any, Optional
 
 import torch
 
@@ -64,7 +64,9 @@ class KalmanFilterBase(Filter, abc.ABC):
 
         return self.belief_mean
 
-    def initialize_beliefs(self, *, mean: torch.Tensor, covariance: torch.Tensor):
+    def initialize_beliefs(
+        self, *, mean: torch.Tensor, covariance: torch.Tensor
+    ) -> None:
         """Set filter belief to a given mean and covariance.
 
         Args:

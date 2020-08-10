@@ -9,7 +9,7 @@ from .. import types
 class VirtualSensorModel(abc.ABC, nn.Module):
     """Virtual sensor base class for our differentiable Kalman filters.
 
-    Maps each observation input to a predicted state and covariance, in the style of
+    Maps each observation input to a predicted state and uncertainty, in the style of
     BackpropKF. This is often necessary for complex observation spaces like images or
     point clouds, where it's not possible to learn a standard state->observation
     measurement model.

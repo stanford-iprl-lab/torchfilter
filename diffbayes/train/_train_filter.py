@@ -1,6 +1,5 @@
 from typing import Callable, cast
 
-import numpy as np
 import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
@@ -52,68 +51,66 @@ def train_filter(
     epoch_loss = 0.0
 
     # Train filter model for 1 epoch
-    with buddy.log_scope("train_filter_recurrent"):
-        for batch_idx, batch_data in enumerate(tqdm(dataloader)):
-            # Move data
-            batch_gpu = fannypack.utils.to_device(batch_data, buddy.device)
-            true_states, observations, controls = batch_gpu
+    for batch_idx, batch_data in enumerate(tqdm(dataloader)):
+        # Move data
+        batch_gpu = fannypack.utils.to_device(batch_data, buddy.device)
+        true_states, observations, controls = batch_gpu
 
-            # Swap batch size, sequence length axes
-            true_states = _swap_batch_sequence_axes(true_states)
-            observations = fannypack.utils.SliceWrapper(observations).map(
-                _swap_batch_sequence_axes
+        # Swap batch size, sequence length axes
+        true_states = _swap_batch_sequence_axes(true_states)
+        observations = fannypack.utils.SliceWrapper(observations).map(
+            _swap_batch_sequence_axes
+        )
+        controls = fannypack.utils.SliceWrapper(controls).map(_swap_batch_sequence_axes)
+
+        # Shape checks
+        T, N, state_dim = true_states.shape
+        assert state_dim == filter_model.state_dim
+        assert fannypack.utils.SliceWrapper(observations).shape[:2] == (T, N)
+        assert fannypack.utils.SliceWrapper(controls).shape[:2] == (T, N)
+        assert batch_idx != 0 or N == dataloader.batch_size
+
+        # Populate initial filter belief
+        if measurement_initialize:
+            assert isinstance(
+                filter_model, diffbayes.filters.VirtualSensorExtendedKalmanFilter
+            ), "Only supported for virtual sensor EKFs!"
+
+            # Initialize belief using virtual sensor
+            cast(
+                diffbayes.filters.VirtualSensorExtendedKalmanFilter, filter_model
+            ).virtual_sensor_initialize_beliefs(
+                observations=fannypack.utils.SliceWrapper(observations)[0]
             )
-            controls = fannypack.utils.SliceWrapper(controls).map(
-                _swap_batch_sequence_axes
+        else:
+            # Initialize belief using `initial_covariance`
+            initial_states_covariance = initial_covariance[None, :, :].expand(
+                (N, state_dim, state_dim)
+            )
+            initial_states = torch.distributions.MultivariateNormal(
+                true_states[0], covariance_matrix=initial_states_covariance
+            ).sample()
+
+            filter_model.initialize_beliefs(
+                mean=initial_states, covariance=initial_states_covariance
             )
 
-            # Shape checks
-            T, N, state_dim = true_states.shape
-            assert state_dim == filter_model.state_dim
-            assert fannypack.utils.SliceWrapper(observations).shape[:2] == (T, N)
-            assert fannypack.utils.SliceWrapper(controls).shape[:2] == (T, N)
-            assert batch_idx != 0 or N == dataloader.batch_size
+        # Forward pass from the first state
+        state_predictions = filter_model.forward_loop(
+            observations=fannypack.utils.SliceWrapper(observations)[1:],
+            controls=fannypack.utils.SliceWrapper(controls)[1:],
+        )
+        assert state_predictions.shape == (T - 1, N, state_dim)
 
-            # Populate initial filter belief
-            if measurement_initialize:
-                assert isinstance(
-                    filter_model, diffbayes.filters.VirtualSensorExtendedKalmanFilter
-                ), "Only supported for virtual sensor EKFs!"
+        # Minimize loss
+        loss = loss_function(state_predictions, true_states[1:])
+        buddy.minimize(loss, optimizer_name=optimizer_name)
+        epoch_loss += fannypack.utils.to_numpy(loss)
 
-                # Initialize belief using virtual sensor
-                cast(
-                    diffbayes.filters.VirtualSensorExtendedKalmanFilter, filter_model
-                ).virtual_sensor_initialize_beliefs(
-                    fannypack.utils.SliceWrapper(observations)[0]
-                )
-            else:
-                # Initialize belief using `initial_covariance`
-                initial_states_covariance = initial_covariance[None, :, :].expand(
-                    (N, state_dim, state_dim)
-                )
-                initial_states = torch.distributions.MultivariateNormal(
-                    true_states[0], covariance_matrix=initial_states_covariance
-                ).sample()
-
-                filter_model.initialize_beliefs(
-                    mean=initial_states, covariance=initial_states_covariance
-                )
-
-            # Forward pass from the first state
-            state_predictions = filter_model.forward_loop(
-                observations=fannypack.utils.SliceWrapper(observations)[1:],
-                controls=fannypack.utils.SliceWrapper(controls)[1:],
-            )
-            assert state_predictions.shape == (T - 1, N, state_dim)
-
-            # Minimize loss
-            loss = loss_function(state_predictions, true_states[1:])
-            buddy.minimize(loss, optimizer_name=optimizer_name)
-            epoch_loss += fannypack.utils.to_numpy(loss)
-
-            # Logging
-            if batch_idx % log_interval == 0:
-                buddy.log("loss", loss)
+        # Logging
+        if batch_idx % log_interval == 0:
+            with buddy.log_scope("train_filter_recurrent"):
+                buddy.log_scalar("loss", loss)
 
     # Print average training loss
     epoch_loss /= len(dataloader)

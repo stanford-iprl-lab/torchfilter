@@ -1,5 +1,3 @@
-import abc
-
 import numpy as np
 import torch
 
@@ -118,7 +116,7 @@ class ParticleFilter(Filter):
 
         # Make sure our particle filter's been initialized
         assert (
-            self.particle_states != None and self.particle_log_weights != None
+            self.particle_states is not None and self.particle_log_weights is not None
         ), "Particle filter not initialized!"
 
         # Get our batch size (N), current particle count (M), & state dimension

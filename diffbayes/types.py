@@ -1,7 +1,7 @@
 """Semantic typehints for filtering.
 """
 import dataclasses
-from typing import Dict, Tuple, Union
+from typing import Dict, Union
 
 import numpy as np
 import torch

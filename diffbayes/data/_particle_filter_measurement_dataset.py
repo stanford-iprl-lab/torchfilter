@@ -3,7 +3,6 @@ from typing import List
 import numpy as np
 import scipy.stats
 import torch
-from torch.utils.data import Dataset
 from tqdm.auto import tqdm
 
 import fannypack

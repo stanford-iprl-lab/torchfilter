@@ -1,6 +1,5 @@
 from typing import List, Tuple
 
-import numpy as np
 from torch.utils.data import Dataset
 
 import fannypack as fp
