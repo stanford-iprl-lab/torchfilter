@@ -7,7 +7,7 @@ from .. import types
 
 
 class UnscentedTransform:
-    """ Helper class for performing (batched, differentiable) unscented transforms, with
+    """Helper class for performing (batched, differentiable) unscented transforms, with
     sigma point selection parameters described by [1].
 
     [1] http://www.gatsby.ucl.ac.uk/~byron/nlds/merwe2003a.pdf
@@ -32,24 +32,36 @@ class UnscentedTransform:
         self._beta: float = beta
         self._kappa: float = kappa
 
-        # Sigma weights: we instantiate these lazily
-        self._weights_c: Optional[torch.Tensor] = None
-        self._weights_m: Optional[torch.Tensor] = None
-        self._weights_device: Optional[torch.device] = None
+        # Sigma weights
+        weights_c, weights_m = self._init_sigma_weights()
+        self.weights_c: torch.Tensor = weights_c
+        """torch.Tensor: Unscented transform covariance weights. Note that this will be
+        initially instantiated on the CPU, and moved in `compute_distribution()`."""
+        self.weights_m: torch.Tensor = weights_m
+        """torch.Tensor: Unscented transform mean weights. Note that this will be
+        initially instantiated on the CPU, and moved in `compute_distribution()`."""
 
-    @property
-    def weights_m(self) -> torch.Tensor:
-        """Sigma point covariance weights. Instantiated on the first call to
-        `compute_distribution()`."""
-        assert self._weights_m is not None, "Weights not initialized!"
-        return self._weights_m
+    def _init_sigma_weights(self) -> Tuple[torch.Tensor, torch.Tensor]:
+        """Helper for initializing sigma weights. Does nothing if weights already exist.
+        """
 
-    @property
-    def weights_c(self) -> torch.Tensor:
-        """Sigma point mean weights. Instantiated on the first call to
-        `compute_distribution()`. Values should sum to `1`."""
-        assert self._weights_c is not None, "Weights not initialized!"
-        return self._weights_c
+        # Create covariance weights
+        weights_c = torch.full(
+            size=(2 * self._dim + 1,),
+            fill_value=1.0 / (2.0 * (self._dim + self._lambd)),
+        )
+        weights_c[0] = self._lambd / (self._dim + self._lambd) + (
+            1.0 - self._alpha ** 2 + self._beta
+        )
+
+        # Mean weights should be identical, except for the first weight
+        weights_m = weights_c.clone()
+        weights_m[0] = self._lambd / (self._dim + self._lambd)
+
+        # Validate and return
+        assert np.allclose(np.sum(weights_m.detach().numpy()), 1.0)
+        assert not np.allclose(np.sum(weights_c.detach().numpy()), 1.0)
+        return weights_c, weights_m
 
     def select_sigma_points(
         self, input_mean: torch.Tensor, input_covariance: types.CovarianceTorch,
@@ -99,22 +111,25 @@ class UnscentedTransform:
             Tuple[torch.Tensor, torch.Tensor]: Mean and covariance, with shapes
             `(N, dim)` and `(N, dim, dim)` respectively.
         """
-        # Lazy sigma weight initialization
-        self._init_sigma_weights(sigma_points.device)
-        weights_m = cast(torch.Tensor, self._weights_m)
-        weights_c = cast(torch.Tensor, self._weights_c)
+        # Make sure devices match
+        device = sigma_points.device
+        if self.weights_c.device != device:
+            self.weights_c = self.weights_c.to(device)
+            self.weights_m = self.weights_m.to(device)
 
         # Check shapes
         N, sigma_point_count, dim = sigma_points.shape
-        assert weights_m.shape == weights_c.shape == (sigma_point_count,)
+        assert self.weights_m.shape == self.weights_c.shape == (sigma_point_count,)
 
         # Compute transformed mean, covariance
-        transformed_mean = torch.sum(weights_m[None, :, None] * sigma_points, dim=1)
+        transformed_mean = torch.sum(
+            self.weights_m[None, :, None] * sigma_points, dim=1
+        )
         assert transformed_mean.shape == (N, dim)
 
         sigma_points_centered = sigma_points - transformed_mean[:, None, :]
         transformed_covariance = torch.sum(
-            weights_c[None, :, None, None]
+            self.weights_c[None, :, None, None]
             * (
                 sigma_points_centered[:, :, :, None]
                 @ sigma_points_centered[:, :, None, :]
@@ -123,29 +138,3 @@ class UnscentedTransform:
         )
         assert transformed_covariance.shape == (N, dim, dim)
         return transformed_mean, transformed_covariance
-
-    def _init_sigma_weights(self, device: torch.device):
-        """Helper for initializing sigma weights on a given device. Does nothing if
-        weights already exist.
-
-        Args:
-            device (torch.device): Device to create weights on.
-        """
-        if self._weights_device == device:
-            # Do nothing if weights already exist
-            return
-
-        self._weights_device = device
-        self._weights_c = torch.full(
-            size=(2 * self._dim + 1,),
-            fill_value=1.0 / (2.0 * (self._dim + self._lambd)),
-            device=device,
-        )
-        self._weights_m = self._weights_c.clone()
-        self._weights_c[0] = self._lambd / (self._dim + self._lambd) + (
-            1.0 - self._alpha ** 2 + self._beta
-        )
-        self._weights_m[0] = self._lambd / (self._dim + self._lambd)
-
-        assert np.allclose(np.sum(self._weights_m.detach().numpy()), 1.0)
-        assert not np.allclose(np.sum(self._weights_c.detach().numpy()), 1.0)
