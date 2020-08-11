@@ -6,7 +6,7 @@ import fannypack
 from .. import types
 from ..base._dynamics_model import DynamicsModel
 from ..base._filter import Filter
-from ..base._measurement_models import ParticleFilterMeasurementModel
+from ..base._particle_filter_measurement_model import ParticleFilterMeasurementModel
 
 
 class ParticleFilter(Filter):
@@ -70,7 +70,9 @@ class ParticleFilter(Filter):
         log-likelihoods. Shape should be `(N, M)`.
         """
 
-    def initialize_beliefs(self, *, mean: torch.Tensor, covariance: torch.Tensor):
+    def initialize_beliefs(
+        self, *, mean: torch.Tensor, covariance: types.CovarianceTorch
+    ):
         """Populates initial particles, which will be normally distributed.
 
         Args:

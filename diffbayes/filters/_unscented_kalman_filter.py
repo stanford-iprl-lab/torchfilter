@@ -5,7 +5,7 @@ import torch
 from .. import types, utils
 from ..base._dynamics_model import DynamicsModel
 from ..base._kalman_filter_base import KalmanFilterBase
-from ..base._measurement_models import KalmanFilterMeasurementModel
+from ..base._kalman_filter_measurement_model import KalmanFilterMeasurementModel
 
 
 class UnscentedKalmanFilter(KalmanFilterBase):
@@ -17,7 +17,7 @@ class UnscentedKalmanFilter(KalmanFilterBase):
         *,
         dynamics_model: DynamicsModel,
         measurement_model: KalmanFilterMeasurementModel,
-        unscented_transform_params: Dict[str, float],
+        unscented_transform_params: Dict[str, float] = {},
     ):
         # Check submodule consistency
         assert isinstance(dynamics_model, DynamicsModel)
@@ -69,14 +69,28 @@ class UnscentedKalmanFilter(KalmanFilterBase):
         sigma_point_count = state_dim * 2 + 1
         assert sigma_points.shape == (N, sigma_point_count, state_dim)
 
-        # Propagate through dynamics, then measurement models
+        # Flatten sigma points and propagate through dynamics, then measurement models
         pred_sigma_points, pred_sigma_tril = self.dynamics_model(
-            initial_states=sigma_points.reshape((N, -1)), controls=controls
+            initial_states=sigma_points.reshape((-1, state_dim)),
+            controls=torch.repeat_interleave(
+                controls, repeats=sigma_point_count, dim=0
+            ),
         )
         pred_sigma_observations, pred_sigma_observations_tril = self.measurement_model(
-            pred_sigma_points
-        ).reshape((N, sigma_point_count, self.measurement_model.observation_dim))
+            states=pred_sigma_points
+        )
+
+        # Add sigma dimension back into everything
         pred_sigma_points = pred_sigma_points.reshape(sigma_points.shape)
+        pred_sigma_tril = pred_sigma_tril.reshape(
+            (N, sigma_point_count, state_dim, state_dim)
+        )
+        pred_sigma_observations = pred_sigma_observations.reshape(
+            (N, sigma_point_count, observation_dim)
+        )
+        pred_sigma_observations_tril = pred_sigma_observations_tril.reshape(
+            (N, sigma_point_count, observation_dim, observation_dim)
+        )
 
         # Compute predicted distribution
         pred_mean, pred_covariance = self._unscented_transform.compute_distribution(
@@ -86,15 +100,9 @@ class UnscentedKalmanFilter(KalmanFilterBase):
         assert pred_covariance.shape == (N, state_dim, state_dim)
 
         # Compute weighted covariances (see helper docstring for explanation)
-        dynamics_covariance = self._weighted_covariance(
-            pred_sigma_tril.reshape((N, sigma_point_count, state_dim, state_dim))
-        )
+        dynamics_covariance = self._weighted_covariance(pred_sigma_tril)
         assert dynamics_covariance.shape == (N, state_dim, state_dim)
-        measurement_covariance = self._weighted_covariance(
-            pred_sigma_observations_tril.reshape(
-                (N, sigma_point_count, observation_dim, observation_dim)
-            )
-        )
+        measurement_covariance = self._weighted_covariance(pred_sigma_observations_tril)
         assert measurement_covariance.shape == (N, observation_dim, observation_dim)
 
         # Add dynamics uncertainty
@@ -134,7 +142,7 @@ class UnscentedKalmanFilter(KalmanFilterBase):
         ) = predict_outputs
 
         # Check shapes
-        N, sigma_point_count, state_dim = pred_sigma_points
+        N, sigma_point_count, state_dim = pred_sigma_points.shape
         observation_dim = self.measurement_model.observation_dim
         assert pred_mean.shape == (N, state_dim)
         assert pred_covariance.shape == (N, state_dim, state_dim)
@@ -163,11 +171,14 @@ class UnscentedKalmanFilter(KalmanFilterBase):
             pred_sigma_observations - pred_observations[:, None, :]
         )
         cross_covariance = torch.sum(
-            self._unscented_transform.weights_c
-            * (centered_sigma_points @ centered_sigma_observations.transpose(-1, -2)),
+            self._unscented_transform.weights_c[None, :, None, None]
+            * (
+                centered_sigma_points[:, :, :, None]
+                @ centered_sigma_observations[:, :, None, :]
+            ),
             dim=1,
         )
-        assert cross_covariance.shape == (N, state_dim, observation_dim)
+        assert cross_covariance.shape == (N, state_dim, observation_dim,)
 
         # Kalman gain, innovation
         K = cross_covariance @ torch.inverse(pred_observations_covariance)
@@ -176,7 +187,7 @@ class UnscentedKalmanFilter(KalmanFilterBase):
         innovations = observations - pred_observations
 
         # Update internal state with corrected beliefs
-        self.belief_mean = pred_mean + K @ innovations
+        self.belief_mean = pred_mean + (K @ innovations[:, :, None]).squeeze(-1)
         self.belief_covariance = (
             pred_covariance - K @ pred_observations_covariance @ K.transpose(-1, -2)
         )
@@ -188,18 +199,22 @@ class UnscentedKalmanFilter(KalmanFilterBase):
 
         (note that the mean weights are used because they sum to 1)
         """
-        N, sigma_point_count, dim, _ = sigma_trils.shape
+        N, sigma_point_count, dim, dim_alt = sigma_trils.shape
+        assert dim == dim_alt
 
         if sigma_trils.stride()[:2] == (0, 0):
             # All covariances identical => we can do less math
-            output_covariance = sigma_trils[0] @ sigma_trils[0].transpose(-1, -2)
-            assert output_covariance.shape == (dim, dim)
+            output_covariance = sigma_trils[0, 0] @ sigma_trils[0, 0].transpose(-1, -2)
+            assert output_covariance.shape == (dim, dim), output_covariance.shape
             output_covariance = output_covariance[None, :, :].expand((N, dim, dim))
         else:
+            # Otherwise, compute weighted covariance
+            # Note that there's no guarantee that our sigma weights sum to 1.0
             pred_sigma_tril = sigma_trils.reshape((N, sigma_point_count, dim, dim))
             pred_sigma_covariance = pred_sigma_tril @ pred_sigma_tril.transpose(-1, -2)
             output_covariance = torch.sum(
                 self._unscented_transform.weights_m[None, :, None, None]
+                / torch.sum(self._unscented_transform.weights_m)
                 * pred_sigma_covariance,
                 dim=1,
             )

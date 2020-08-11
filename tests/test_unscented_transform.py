@@ -20,7 +20,9 @@ def test_unscented_transform_identity(dim: int):
     input_covariance = input_covariance_root @ input_covariance_root.transpose(-1, -2)
 
     # Perform unscented transform; we use a big spread value for numerical precision
-    unscented_transform = diffbayes.utils.UnscentedTransform(dim=dim, alpha=1.0)
+    unscented_transform = diffbayes.utils.UnscentedTransform(
+        dim=dim, alpha=0.8, epsilon=0.0
+    )
     sigma_points = unscented_transform.select_sigma_points(input_mean, input_covariance)
     output_mean, output_covariance = unscented_transform.compute_distribution(
         sigma_points
@@ -51,7 +53,9 @@ def test_unscented_transform_linear(dim: int):
     A = torch.randn((N, dim, dim))
 
     # Perform unscented transform; we use a big spread value for numerical precision
-    unscented_transform = diffbayes.utils.UnscentedTransform(dim=dim, alpha=1.0)
+    unscented_transform = diffbayes.utils.UnscentedTransform(
+        dim=dim, alpha=0.8, epsilon=0.0
+    )
     sigma_points = unscented_transform.select_sigma_points(input_mean, input_covariance)
     sigma_points = (A[:, None, :, :] @ sigma_points[:, :, :, None]).squeeze(-1)
     output_mean, output_covariance = unscented_transform.compute_distribution(

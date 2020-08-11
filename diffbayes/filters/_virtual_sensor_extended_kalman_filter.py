@@ -66,7 +66,7 @@ class VirtualSensorExtendedKalmanFilter(KalmanFilterBase):
         # Check shapes
         N, observation_dim = observations_mean.shape
         assert observations_covariance.shape == (N, observation_dim, observation_dim)
-        assert observations_mean.shape == pred_mean.shape
+        assert observations_mean.shape == (N, observation_dim)
 
         # Compute Kalman Gain, innovation
         innovation = observations_mean - pred_observations
@@ -74,10 +74,10 @@ class VirtualSensorExtendedKalmanFilter(KalmanFilterBase):
         kalman_gain = pred_covariance @ torch.inverse(innovation_covariance)
 
         # Get mu_{t+1|t+1}, Sigma_{t+1|t+1}
-        corrected_mean = pred_mean + (kalman_gain @ innovation[:, :, -1]).unsqueeze(-1)
-        assert pred_mean.shape == (N, self.state_dim)
+        corrected_mean = pred_mean + (kalman_gain @ innovation[:, :, None]).squeeze(-1)
+        assert corrected_mean.shape == (N, self.state_dim)
 
-        identity = torch.eye(kalman_gain.shape[-1], device=kalman_gain.device)
+        identity = torch.eye(self.state_dim, device=kalman_gain.device)
         corrected_covariance = (identity - kalman_gain) @ pred_covariance
         assert corrected_covariance.shape == (N, self.state_dim, self.state_dim)
 

@@ -38,7 +38,6 @@ class Filter(nn.Module, abc.ABC):
     def forward(
         self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch
     ) -> types.StatesTorch:
-
         """Filtering forward pass, over a single timestep.
 
         By default, this is implemented by bootstrapping the `forward_loop()`

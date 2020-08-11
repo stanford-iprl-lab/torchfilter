@@ -55,6 +55,11 @@ ControlsNumpy = NumpyArrayOrDict
 ControlsTorch = TorchTensorOrDict
 """Controls can be either `torch.Tensor` objects or `str->torch.Tensor` dictionaries."""
 
+ControlsNoDictNumpy = np.ndarray
+"""Same as `ControlsNumpy`, but no dictionaries."""
+ControlsNoDictTorch = torch.Tensor
+"""Same as `ObservationsTorch`, but no dictionaries."""
+
 CovarianceTorch = torch.Tensor
 """Covariance matrix as `torch.Tensor`. Must be positive semi-definite."""
 ScaleTrilTorch = torch.Tensor

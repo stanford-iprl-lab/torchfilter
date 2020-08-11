@@ -1,5 +1,5 @@
 import abc
-from typing import List, Tuple, cast
+from typing import List, Tuple
 
 import torch
 import torch.nn as nn
@@ -42,7 +42,8 @@ class DynamicsModel(nn.Module, abc.ABC):
         By default, this is implemented by bootstrapping the `forward_loop()`
         method.
         Args:
-            initial_states (torch.Tensor): Initial states of our system.
+            initial_states (torch.Tensor): Initial states of our system. Shape should be
+                `(N, state_dim)`.
             controls (dict or torch.Tensor): Control inputs. Should be either a
                 dict of tensors or tensor of size `(N, ...)`.
 
@@ -68,7 +69,7 @@ class DynamicsModel(nn.Module, abc.ABC):
         return predictions[0], scale_trils[0]
 
     def forward_loop(
-        self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch,
+        self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch
     ) -> Tuple[types.StatesTorch, torch.Tensor]:
         """Dynamics model forward pass, over sequence length `T` and batch size
         `N`.  By default, this is implemented by iteratively calling
@@ -155,8 +156,8 @@ class DynamicsModel(nn.Module, abc.ABC):
     def jacobian(
         self, states: types.StatesTorch, controls: types.ControlsTorch,
     ) -> torch.Tensor:
-
         """Returns Jacobian of the dynamics model.
+
         Args:
             states (torch.Tensor): Current state, size `(N, state_dim)`.
             controls (dict or torch.Tensor): Control inputs. Should be either a
@@ -165,25 +166,20 @@ class DynamicsModel(nn.Module, abc.ABC):
         Returns:
             torch.Tensor: Jacobian, size `(N, state_dim, state_dim)`
         """
-
-        assert isinstance(
-            controls, torch.Tensor
-        ), "To compute jacobian, `controls` must be tensor!"
-        controls = cast(torch.Tensor, controls)
         with torch.enable_grad():
             x = states.detach().clone()
 
             N, ndim = x.shape
             assert ndim == self.state_dim
-            x = x.unsqueeze(1)
-            x = x.repeat(1, ndim, 1)
-            controls = controls.unsqueeze(1)
-            controls = controls.repeat(1, ndim, 1)
+            x = x[:, None, :].expand((N, ndim, ndim))
+            controls = fannypack.utils.SliceWrapper(controls).map(
+                lambda t: torch.repeat_interleave(t, repeats=ndim, dim=0)
+            )
             x.requires_grad_(True)
-            y = self(initial_states=x, controls=controls)
-
-            mask = torch.eye(ndim).repeat(N, 1, 1).to(x.device)
-            y = y[0]  # dynamics model returns state first
+            y = self(initial_states=x.reshape((-1, ndim)), controls=controls)[
+                0
+            ].reshape((N, ndim, ndim))
+            mask = torch.eye(ndim, device=x.device).repeat(N, 1, 1)
             jac = torch.autograd.grad(y, x, mask, create_graph=True)
 
         return jac[0]

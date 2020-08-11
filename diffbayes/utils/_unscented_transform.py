@@ -1,6 +1,6 @@
-from typing import Optional, Tuple, cast
+import warnings
+from typing import Optional, Tuple
 
-import numpy as np
 import torch
 
 from .. import types
@@ -14,23 +14,43 @@ class UnscentedTransform:
 
     Keyword Args:
         dim (int): Input dimension.
-        alpha (float, optional): Spread parameter. Defaults to `1e-3`.
+        alpha (float, optional): Spread parameter. Defaults to `1e-2`.
         kappa (float, optional): Secondary scaling parameter, which is typically set to
-            `0.0` or `3 - dim`. Defaults to `0.0`.
+            `0.0` or `3 - dim`. Defaults to `3 - dim`.
         beta (float, optional): Extra sigma parameter. Defaults to `2` (optimal for
             Gaussians, as per [1]).
+        epsilon (float, optional): Additive term for numerical stability. Defaults to
+            `1e-8`.
     """
 
     def __init__(
-        self, *, dim: int, alpha=1e-3, kappa: float = 0.0, beta: float = 2.0,
+        self,
+        *,
+        dim: int,
+        alpha=1e-2,
+        kappa: Optional[float] = None,
+        beta: float = 2.0,
+        epsilon: float = 1e-8,
     ):
         self._dim = dim
+
+        if kappa is None:
+            kappa = 3 - dim
 
         # Sigma parameters
         self._lambd: float = (alpha ** 2) * (dim + kappa) - dim
         self._alpha: float = alpha
         self._beta: float = beta
         self._kappa: float = kappa
+        self._epsilon: float = epsilon
+
+        if self._lambd + dim < 1e-3:
+            warnings.warn(
+                "Unscented transform parameters may result in a very small "
+                "matrix root; consider tuning `alpha`",
+                RuntimeWarning,
+                stacklevel=1,
+            )
 
         # Sigma weights
         weights_c, weights_m = self._init_sigma_weights()
@@ -58,9 +78,6 @@ class UnscentedTransform:
         weights_m = weights_c.clone()
         weights_m[0] = self._lambd / (self._dim + self._lambd)
 
-        # Validate and return
-        assert np.allclose(np.sum(weights_m.detach().numpy()), 1.0)
-        assert not np.allclose(np.sum(weights_c.detach().numpy()), 1.0)
         return weights_c, weights_m
 
     def select_sigma_points(
@@ -86,7 +103,11 @@ class UnscentedTransform:
         # cholesky decomposition [1].
         #
         # [1] https://www.cs.ubc.ca/~murphyk/Papers/Julier_Uhlmann_mar04.pdf
-        matrix_root = torch.cholesky((dim + self._lambd) * input_covariance, upper=True)
+        matrix_root = torch.cholesky(
+            (dim + self._lambd) * input_covariance
+            + self._epsilon * torch.eye(dim)[None, :, :],
+            upper=True,
+        )
         assert matrix_root.shape == (N, dim, dim)
 
         sigma_point_offsets = input_mean.new_zeros((N, 2 * dim + 1, dim))
@@ -127,7 +148,8 @@ class UnscentedTransform:
         )
         assert transformed_mean.shape == (N, dim)
 
-        sigma_points_centered = sigma_points - transformed_mean[:, None, :]
+        # sigma_points_centered = sigma_points - transformed_mean[:, None, :]
+        sigma_points_centered = sigma_points - sigma_points[:, 0:1, :]
         transformed_covariance = torch.sum(
             self.weights_c[None, :, None, None]
             * (

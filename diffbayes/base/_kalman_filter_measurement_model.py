@@ -7,38 +7,6 @@ import torch.nn as nn
 from .. import types
 
 
-class ParticleFilterMeasurementModel(abc.ABC, nn.Module):
-    """Observation model base class for a generic differentiable particle
-    filter; maps (state, observation) pairs to the log-likelihood of the
-    observation given the state ( $\\log p(z | x)$ ).
-    """
-
-    def __init__(self, state_dim: int):
-        super().__init__()
-
-        self.state_dim = state_dim
-        """int: Dimensionality of our state."""
-
-    @abc.abstractmethod
-    def forward(
-        self, *, states: types.StatesTorch, observations: types.ObservationsTorch
-    ) -> types.StatesTorch:
-        """Observation model forward pass, over batch size `N`.
-        For each member of a batch, we expect `M` separate states (particles)
-        and one unique observation.
-
-        Args:
-            states (torch.Tensor): States to pass to our observation model.
-                Shape should be `(N, M, state_dim)`.
-            observations (dict or torch.Tensor): Measurement inputs. Should be
-                either a dict of tensors or tensor of size `(N, ...)`.
-        Returns:
-            torch.Tensor: Log-likelihoods of each state, conditioned on a
-            corresponding observation. Shape should be `(N, M)`.
-        """
-        pass
-
-
 class KalmanFilterMeasurementModel(abc.ABC, nn.Module):
     def __init__(self, *, state_dim, observation_dim):
         super().__init__()
@@ -71,18 +39,16 @@ class KalmanFilterMeasurementModel(abc.ABC, nn.Module):
         Returns:
             torch.Tensor: Jacobian, size `(N, observation_dim, state_dim)`
         """
+        observation_dim = self.observation_dim
         with torch.enable_grad():
             x = states.detach().clone()
 
             N, ndim = x.shape
             assert ndim == self.state_dim
-            x = x.unsqueeze(1)
-            x = x.repeat(1, ndim, 1)
+            x = x[:, None, :].expand((N, observation_dim, ndim))
             x.requires_grad_(True)
-            y = self(states=x)
-
-            mask = torch.eye(ndim).repeat(N, 1, 1).to(x.device)
-            y = y[0]  # measurement model returns measurement first
+            y = self(states=x.reshape((-1, ndim)))[0].reshape((N, -1, observation_dim))
+            mask = torch.eye(observation_dim, device=x.device).repeat(N, 1, 1)
             jac = torch.autograd.grad(y, x, mask, create_graph=True)
 
         return jac[0]
