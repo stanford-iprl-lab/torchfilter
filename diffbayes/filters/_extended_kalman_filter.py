@@ -50,7 +50,7 @@ class ExtendedKalmanFilter(KalmanFilterBase):
         )
         dynamics_covariance = dynamics_tril @ dynamics_tril.transpose(-1, -2)
         dynamics_A_matrix = self.dynamics_model.jacobian(
-            states=prev_mean, controls=controls
+            initial_states=prev_mean, controls=controls
         )
         assert dynamics_covariance.shape == (N, state_dim, state_dim)
         assert dynamics_A_matrix.shape == (N, state_dim, state_dim)

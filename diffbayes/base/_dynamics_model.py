@@ -154,7 +154,7 @@ class DynamicsModel(nn.Module, abc.ABC):
         return predictions, scale_trils
 
     def jacobian(
-        self, states: types.StatesTorch, controls: types.ControlsTorch,
+        self, initial_states: types.StatesTorch, controls: types.ControlsTorch,
     ) -> torch.Tensor:
         """Returns Jacobian of the dynamics model.
 
@@ -167,7 +167,7 @@ class DynamicsModel(nn.Module, abc.ABC):
             torch.Tensor: Jacobian, size `(N, state_dim, state_dim)`
         """
         with torch.enable_grad():
-            x = states.detach().clone()
+            x = initial_states.detach().clone()
 
             N, ndim = x.shape
             assert ndim == self.state_dim
