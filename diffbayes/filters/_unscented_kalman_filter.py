@@ -1,6 +1,8 @@
-from typing import Dict, Tuple, cast
+from typing import Dict, Optional, Tuple, cast
 
 import torch
+
+import fannypack
 
 from .. import types, utils
 from ..base._dynamics_model import DynamicsModel
@@ -17,7 +19,7 @@ class UnscentedKalmanFilter(KalmanFilterBase):
         *,
         dynamics_model: DynamicsModel,
         measurement_model: KalmanFilterMeasurementModel,
-        unscented_transform_params: Dict[str, float] = {},
+        sigma_point_strategy: Optional[utils.SigmaPointStrategy] = None,
     ):
         # Check submodule consistency
         assert isinstance(dynamics_model, DynamicsModel)
@@ -29,7 +31,7 @@ class UnscentedKalmanFilter(KalmanFilterBase):
 
         # Unscented transform setup
         self._unscented_transform = utils.UnscentedTransform(
-            dim=state_dim, **unscented_transform_params
+            dim=state_dim, sigma_point_strategy=sigma_point_strategy
         )
 
         # Assign submodules
@@ -72,8 +74,10 @@ class UnscentedKalmanFilter(KalmanFilterBase):
         # Flatten sigma points and propagate through dynamics, then measurement models
         pred_sigma_points, pred_sigma_tril = self.dynamics_model(
             initial_states=sigma_points.reshape((-1, state_dim)),
-            controls=torch.repeat_interleave(
-                controls, repeats=sigma_point_count, dim=0
+            controls=fannypack.utils.SliceWrapper(controls).map(
+                lambda tensor: torch.repeat_interleave(
+                    tensor, repeats=sigma_point_count, dim=0
+                )
             ),
         )
         pred_sigma_observations, pred_sigma_observations_tril = self.measurement_model(

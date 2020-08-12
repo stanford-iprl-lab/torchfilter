@@ -6,9 +6,9 @@ import torch
 import diffbayes
 from diffbayes import types
 
-state_dim = 5
-control_dim = 2
-observation_dim = 2
+state_dim = 10
+control_dim = 3
+observation_dim = 3
 
 A = torch.empty(size=(state_dim, state_dim))
 torch.nn.init.orthogonal_(A, gain=1.0)

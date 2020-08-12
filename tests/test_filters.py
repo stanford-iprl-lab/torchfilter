@@ -9,6 +9,7 @@ from linear_system_models import (
     LinearKalmanFilterMeasurementModel,
     LinearParticleFilterMeasurementModel,
     generated_data,
+    state_dim,
 )
 
 
@@ -37,7 +38,19 @@ def test_unscented_kalman_filter(generated_data):
         diffbayes.filters.UnscentedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
             measurement_model=LinearKalmanFilterMeasurementModel(),
-            unscented_transform_params={"alpha": 0.2},
+        ),
+        generated_data,
+    )
+
+
+def test_unscented_kalman_filter_merwe(generated_data):
+    _filter_smoke_test(
+        diffbayes.filters.UnscentedKalmanFilter(
+            dynamics_model=LinearDynamicsModel(),
+            measurement_model=LinearKalmanFilterMeasurementModel(),
+            sigma_point_strategy=diffbayes.utils.MerweSigmaPointStrategy(
+                dim=state_dim, alpha=1e-1
+            ),
         ),
         generated_data,
     )

@@ -173,7 +173,7 @@ class DynamicsModel(nn.Module, abc.ABC):
             assert ndim == self.state_dim
             x = x[:, None, :].expand((N, ndim, ndim))
             controls = fannypack.utils.SliceWrapper(controls).map(
-                lambda t: torch.repeat_interleave(t, repeats=ndim, dim=0)
+                lambda tensor: torch.repeat_interleave(tensor, repeats=ndim, dim=0)
             )
             x.requires_grad_(True)
             y = self(initial_states=x.reshape((-1, ndim)), controls=controls)[
