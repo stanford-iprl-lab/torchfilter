@@ -71,7 +71,7 @@ class ParticleFilter(Filter):
         """
 
     def initialize_beliefs(
-        self, *, mean: torch.Tensor, covariance: types.CovarianceTorch
+        self, *, mean: types.StatesTorch, covariance: types.CovarianceTorch
     ):
         """Populates initial particles, which will be normally distributed.
 

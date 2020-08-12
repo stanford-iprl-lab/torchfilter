@@ -65,7 +65,7 @@ class KalmanFilterBase(Filter, abc.ABC):
         return self.belief_mean
 
     def initialize_beliefs(
-        self, *, mean: torch.Tensor, covariance: torch.Tensor
+        self, *, mean: types.StatesTorch, covariance: types.CovarianceTorch
     ) -> None:
         """Set filter belief to a given mean and covariance.
 
