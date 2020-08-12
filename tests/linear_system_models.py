@@ -8,7 +8,7 @@ from diffbayes import types
 
 state_dim = 5
 control_dim = 3
-observation_dim = 3
+observation_dim = 7
 
 torch.random.manual_seed(0)
 A = torch.empty(size=(state_dim, state_dim))
@@ -16,6 +16,7 @@ torch.nn.init.orthogonal_(A, gain=1.0)
 
 B = torch.randn(size=(state_dim, control_dim))
 C = torch.randn(size=(observation_dim, state_dim))
+C_pinv = torch.pinverse(C)
 Q_tril = torch.eye(state_dim) * 0.02
 R_tril = torch.eye(observation_dim) * 0.05
 
@@ -85,6 +86,43 @@ class LinearKalmanFilterMeasurementModel(diffbayes.base.KalmanFilterMeasurementM
         )
 
 
+class LinearVirtualSensorModel(diffbayes.base.VirtualSensorModel):
+    def __init__(self):
+        super().__init__(state_dim=state_dim)
+
+    def forward(
+        self, *, observations: types.ObservationsTorch
+    ) -> Tuple[types.StatesTorch, types.ScaleTrilTorch]:
+        """Predicts states and uncertainties from observation inputs.
+
+        Uncertainties should be lower-triangular Cholesky decompositions of covariance
+        matrices.
+
+        Args:
+            observations (dict or torch.Tensor): Measurement inputs. Should be
+                either a dict of tensors or tensor of size `(N, ...)`.
+        Returns:
+            Tuple[torch.Tensor, torch.Tensor]: Predicted states & uncertainties.
+                - States should have shape `(N, state_dim).`
+                - Uncertainties should be lower triangular, and should have shape
+                `(N, state_dim, state_dim).`
+        """
+        # Observations should be tensor, not dictionary
+        assert isinstance(observations, torch.Tensor)
+        observations = cast(torch.Tensor, observations)
+        N = observations.shape[0]
+
+        # Compute/return predicted state and uncertainty values
+        # Note that for square C_pinv matrices, we can compute scale_tril as simply
+        # C_pinv @ R_tril. In the general case, we transform the full covariance and
+        # then take the cholesky decomposition.
+        predicted_states = (C_pinv[None, :, :] @ observations[:, :, None]).squeeze(-1)
+        scale_tril = torch.cholesky(
+            C_pinv @ R_tril @ R_tril.transpose(-1, -2) @ C_pinv.transpose(-1, -2)
+        )[None, :, :].expand((N, state_dim, state_dim))
+        return predicted_states, scale_tril
+
+
 class LinearParticleFilterMeasurementModel(
     diffbayes.base.WrappedParticleFilterMeasurementModel
 ):
@@ -100,7 +138,7 @@ def generated_data() -> Tuple[
 ]:
     torch.random.manual_seed(0)
     N = 5
-    timesteps = 100
+    timesteps = 2
 
     dynamics_model = LinearDynamicsModel()
     measurement_model = LinearKalmanFilterMeasurementModel()
