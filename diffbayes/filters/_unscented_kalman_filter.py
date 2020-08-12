@@ -1,4 +1,4 @@
-from typing import Dict, Optional, Tuple, cast
+from typing import Optional, Tuple, cast
 
 import torch
 
@@ -213,12 +213,10 @@ class UnscentedKalmanFilter(KalmanFilterBase):
             output_covariance = output_covariance[None, :, :].expand((N, dim, dim))
         else:
             # Otherwise, compute weighted covariance
-            # Note that there's no guarantee that our sigma weights sum to 1.0
             pred_sigma_tril = sigma_trils.reshape((N, sigma_point_count, dim, dim))
             pred_sigma_covariance = pred_sigma_tril @ pred_sigma_tril.transpose(-1, -2)
             output_covariance = torch.sum(
                 self._unscented_transform.weights_m[None, :, None, None]
-                / torch.sum(self._unscented_transform.weights_m)
                 * pred_sigma_covariance,
                 dim=1,
             )

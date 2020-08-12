@@ -6,17 +6,18 @@ import torch
 import diffbayes
 from diffbayes import types
 
-state_dim = 10
+state_dim = 5
 control_dim = 3
 observation_dim = 3
 
+torch.random.manual_seed(0)
 A = torch.empty(size=(state_dim, state_dim))
 torch.nn.init.orthogonal_(A, gain=1.0)
 
 B = torch.randn(size=(state_dim, control_dim))
 C = torch.randn(size=(observation_dim, state_dim))
-Q_tril = torch.eye(state_dim) * 0.1
-R_tril = torch.eye(observation_dim) * 0.1
+Q_tril = torch.eye(state_dim) * 0.02
+R_tril = torch.eye(observation_dim) * 0.05
 
 
 class LinearDynamicsModel(diffbayes.base.DynamicsModel):
@@ -97,8 +98,9 @@ class LinearParticleFilterMeasurementModel(
 def generated_data() -> Tuple[
     types.StatesTorch, types.ObservationsNoDictTorch, types.ControlsNoDictTorch
 ]:
-    N = 2
-    timesteps = 200
+    torch.random.manual_seed(0)
+    N = 5
+    timesteps = 100
 
     dynamics_model = LinearDynamicsModel()
     measurement_model = LinearKalmanFilterMeasurementModel()

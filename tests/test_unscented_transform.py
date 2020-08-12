@@ -26,7 +26,7 @@ def test_unscented_transform_julier_identity(dim: int):
     """
     input_mean, input_covariance = _gen_test_data(dim=dim)
 
-    # Perform unscented transform; we use a big spread value for numerical precision
+    # Perform unscented transform
     unscented_transform = diffbayes.utils.UnscentedTransform(dim=dim)
     sigma_points = unscented_transform.select_sigma_points(input_mean, input_covariance)
     output_mean, output_covariance = unscented_transform.compute_distribution(
@@ -49,7 +49,7 @@ def test_unscented_transform_julier_linear(dim: int):
     # Sample linear transformation matrix
     A = torch.randn(input_covariance.shape)
 
-    # Perform unscented transform; we use a big spread value for numerical precision
+    # Perform unscented transform
     unscented_transform = diffbayes.utils.UnscentedTransform(dim=dim)
     sigma_points = unscented_transform.select_sigma_points(input_mean, input_covariance)
     sigma_points = (A[:, None, :, :] @ sigma_points[:, :, :, None]).squeeze(-1)
@@ -72,7 +72,7 @@ def test_unscented_transform_merwe_identity(dim: int):
     """
     input_mean, input_covariance = _gen_test_data(dim=dim)
 
-    # Perform unscented transform; we use a big spread value for numerical precision
+    # Perform unscented transform
     unscented_transform = diffbayes.utils.UnscentedTransform(
         dim=dim,
         sigma_point_strategy=diffbayes.utils.MerweSigmaPointStrategy(
@@ -100,7 +100,7 @@ def test_unscented_transform_merwe_linear(dim: int):
     # Sample linear transformation matrix
     A = torch.randn(input_covariance.shape)
 
-    # Perform unscented transform; we use a big spread value for numerical precision
+    # Perform unscented transform
     unscented_transform = diffbayes.utils.UnscentedTransform(
         dim=dim,
         sigma_point_strategy=diffbayes.utils.MerweSigmaPointStrategy(
