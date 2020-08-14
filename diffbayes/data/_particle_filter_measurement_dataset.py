@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple, Union
 
 import numpy as np
 import scipy.stats
@@ -11,7 +11,19 @@ from .. import types
 
 
 class ParticleFilterMeasurementDataset(torch.utils.data.Dataset):
-    """A data preprocessor for pre-training particle filter measurement models.
+    """A dataset interface for pre-training particle filter measurement models.
+
+    Centers Gaussian distributions around our ground-truth states, and provides examples
+    for learning the log-likelihood.
+
+    Args:
+        trajectories (List[diffbayes.types.TrajectoryNumpy]): List of trajectories.
+
+    Keyword Args:
+        covariance (np.ndarray): Covariance of Gaussian PDFs.
+        samples_per_pair (int): Number of training examples to provide for each
+            state/observation pair. Half of these will typically be generated close
+            to the example, and the other half far away.
     """
 
     def __init__(
@@ -19,12 +31,9 @@ class ParticleFilterMeasurementDataset(torch.utils.data.Dataset):
         trajectories: List[types.TrajectoryNumpy],
         *,
         covariance: np.ndarray,
-        samples_per_pair,
+        samples_per_pair: int,
         **kwargs
     ):
-        """TODO
-        """
-
         self.covariance = covariance
         self.samples_per_pair = samples_per_pair
         self.dataset = []
@@ -47,8 +56,17 @@ class ParticleFilterMeasurementDataset(torch.utils.data.Dataset):
 
         print("Loaded {} points".format(len(self.dataset)))
 
-    def __getitem__(self, index):
-        """TODO
+    def __getitem__(
+        self, index
+    ) -> Tuple[types.StatesNumpy, types.ObservationsNumpy, float]:
+        """Get a state/observation/log-likelihood sample from our dataset. Nominally, we
+        want our measurement model to predict the returned log-likelihood as the PDF of
+        the `p(observation | state)` distribution.
+
+        Args:
+            index (int): Subsequence number in our dataset.
+        Returns:
+            tuple: `(state, observation, log-likelihood)` tuple.
         """
 
         state, observation = self.dataset[index // self.samples_per_pair]
@@ -62,15 +80,20 @@ class ParticleFilterMeasurementDataset(torch.utils.data.Dataset):
                 mean=state, cov=self.covariance * 5
             )
 
-        log_likelihood = np.asarray(
-            scipy.stats.multivariate_normal.logpdf(
-                noisy_state, mean=state, cov=self.covariance
+        log_likelihood = float(
+            np.asarray(
+                scipy.stats.multivariate_normal.logpdf(
+                    noisy_state, mean=state, cov=self.covariance
+                )
             )
         )
 
-        return fannypack.utils.to_torch((noisy_state, observation, log_likelihood))
+        return noisy_state, observation, log_likelihood
 
     def __len__(self):
-        """Total number of samples in the dataset
+        """Total number of samples in the dataset.
+
+        Returns:
+            int: Length of dataset.
         """
         return len(self.dataset) * self.samples_per_pair
