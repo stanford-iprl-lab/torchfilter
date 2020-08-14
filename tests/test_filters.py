@@ -26,6 +26,19 @@ def test_particle_filter(generated_data):
     )
 
 
+def test_particle_filter_resample(generated_data):
+    """Smoke test for particle filter with resampling.
+    """
+    _run_filter(
+        diffbayes.filters.ParticleFilter(
+            dynamics_model=LinearDynamicsModel(),
+            measurement_model=LinearParticleFilterMeasurementModel(),
+            resample=True,
+        ),
+        generated_data,
+    )
+
+
 def test_extended_kalman_filter(generated_data):
     """Smoke test for EKF.
     """
