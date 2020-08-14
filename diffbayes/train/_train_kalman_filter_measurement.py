@@ -9,7 +9,7 @@ import diffbayes
 import fannypack
 
 
-def train_kalman_filter_measurement_model(
+def train_kalman_filter_measurement(
     buddy: fannypack.utils.Buddy,
     measurement_model: diffbayes.base.KalmanFilterMeasurementModel,
     dataloader: DataLoader,

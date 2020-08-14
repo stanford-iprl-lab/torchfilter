@@ -59,7 +59,7 @@ def test_train_virtual_sensor(single_step_dataloader, buddy):
     initial_error = _get_error(virtual_sensor_model)
 
     buddy.attach_model(virtual_sensor_model)
-    diffbayes.train.train_virtual_sensor_model(
+    diffbayes.train.train_virtual_sensor(
         buddy, virtual_sensor_model, single_step_dataloader
     )
     assert _get_error(virtual_sensor_model) < initial_error
@@ -72,7 +72,7 @@ def test_train_kalman_filter_measurement(single_step_dataloader, buddy):
     initial_error = _get_error(measurement_model)
 
     buddy.attach_model(measurement_model)
-    diffbayes.train.train_kalman_filter_measurement_model(
+    diffbayes.train.train_kalman_filter_measurement(
         buddy, measurement_model, single_step_dataloader
     )
     assert _get_error(measurement_model) < initial_error
@@ -91,7 +91,7 @@ def test_train_particle_filter_measurement(
     )
 
     buddy.attach_model(particle_filter_measurement_model)
-    diffbayes.train.train_particle_filter_measurement_model(
+    diffbayes.train.train_particle_filter_measurement(
         buddy, particle_filter_measurement_model, particle_filter_measurement_dataloader
     )
     assert (

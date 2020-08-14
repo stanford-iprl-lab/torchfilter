@@ -9,7 +9,7 @@ import diffbayes
 import fannypack
 
 
-def train_virtual_sensor_model(
+def train_virtual_sensor(
     buddy: fannypack.utils.Buddy,
     virtual_sensor_model: diffbayes.base.VirtualSensorModel,
     dataloader: DataLoader,
