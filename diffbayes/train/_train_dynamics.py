@@ -21,7 +21,9 @@ def train_dynamics_single_step(
     loss_function: str = "nll",
     log_interval: int = 10,
 ) -> None:
-    """Optimizes a dynamics model's single-step prediction accuracy.
+    """Optimizes a dynamics model's single-step prediction accuracy. This is roughly
+    equivalent to training with `train_dynamics_recurrent()` with a subsequence length
+    of 2.
 
     Args:
         buddy (fannypack.utils.Buddy): Training helper.
@@ -167,8 +169,8 @@ def train_dynamics_recurrent(
         # Logging
         if log_flag:
             with buddy.log_scope("train_dynamics_recurrent"):
-                buddy.log("MSE loss", losses["mse"])
-                buddy.log("NLL loss", losses["nll"])
+                buddy.log_scalar("MSE loss", losses["mse"])
+                buddy.log_scalar("NLL loss", losses["nll"])
 
     # Print average training loss
     epoch_loss /= len(dataloader)

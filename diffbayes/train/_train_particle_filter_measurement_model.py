@@ -18,12 +18,14 @@ def train_particle_filter_measurement_model(
     loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss,
     log_interval: int = 10,
 ) -> None:
-    """Optimizes a dynamics model's single-step prediction accuracy.
+    """Reference implementation for pre-training a particle filter measurement model.
+    Minimizes prediction error for log-likelihood outputs from (state, observation)
+    pairs.
 
     Args:
         buddy (fannypack.utils.Buddy): Training helper.
-        dynamics_model (diffbayes.base.DynamicsModel): Model to train.
-        dataloader (DataLoader): Loader for a SingleStepDataset.
+        measurement_model (diffbayes.base.ParticleFilterMeasurementModel): Model.
+        dataloader (DataLoader): Loader for a ParticleFilterMeasurementDataset.
 
     Keyword Args:
         loss_function (callable, optional): Loss function, from `torch.nn.functional`.

@@ -1,6 +1,7 @@
 from typing import Tuple, cast
 
 import torch
+import torch.nn as nn
 
 import diffbayes
 from diffbayes import types
@@ -21,8 +22,14 @@ R_tril = torch.eye(observation_dim) * 0.05
 
 
 class LinearDynamicsModel(diffbayes.base.DynamicsModel):
-    def __init__(self):
+    def __init__(self, trainable: bool = False):
         super().__init__(state_dim=state_dim)
+
+        # For training tests: if we want to learn this model, add an output bias
+        # parameter so there's something to compute gradients for
+        self.trainable = trainable
+        if trainable:
+            self.output_bias = nn.Parameter(torch.FloatTensor([1.0]))
 
     def forward(
         self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch,
@@ -44,7 +51,6 @@ class LinearDynamicsModel(diffbayes.base.DynamicsModel):
         # Controls should be tensor, not dictionary
         assert isinstance(controls, torch.Tensor)
         controls = cast(torch.Tensor, controls)
-
         # Check shapes
         N, state_dim = initial_states.shape
         N_alt, control_dim = controls.shape
@@ -55,12 +61,23 @@ class LinearDynamicsModel(diffbayes.base.DynamicsModel):
         predicted_states = (A[None, :, :] @ initial_states[:, :, None]).squeeze(-1) + (
             B[None, :, :] @ controls[:, :, None]
         ).squeeze(-1)
+
+        # Add output bias if trainable
+        if self.trainable:
+            predicted_states += self.output_bias
+
         return predicted_states, Q_tril[None, :, :].expand((N, state_dim, state_dim))
 
 
 class LinearKalmanFilterMeasurementModel(diffbayes.base.KalmanFilterMeasurementModel):
-    def __init__(self):
+    def __init__(self, trainable: bool = False):
         super().__init__(state_dim=state_dim, observation_dim=observation_dim)
+
+        # For training tests: if we want to learn this model, add an output bias
+        # parameter so there's something to compute gradients for
+        self.trainable = trainable
+        if trainable:
+            self.output_bias = nn.Parameter(torch.FloatTensor([1.0]))
 
     def forward(
         self, *, states: types.StatesTorch
@@ -78,16 +95,27 @@ class LinearKalmanFilterMeasurementModel(diffbayes.base.KalmanFilterMeasurementM
         N = states.shape[0]
         assert states.shape == (N, state_dim)
 
+        # Compute output
+        observations = (C[None, :, :] @ states[:, :, None]).squeeze(-1)
+        scale_tril = R_tril[None, :, :].expand((N, observation_dim, observation_dim))
+
+        # Add output bias if trainable
+        if self.trainable:
+            observations += self.output_bias
+
         # Compute/return predicted measurement and noise values
-        return (
-            (C[None, :, :] @ states[:, :, None]).squeeze(-1),
-            R_tril[None, :, :].expand((N, observation_dim, observation_dim)),
-        )
+        return observations, scale_tril
 
 
 class LinearVirtualSensorModel(diffbayes.base.VirtualSensorModel):
-    def __init__(self):
+    def __init__(self, trainable: bool = False):
         super().__init__(state_dim=state_dim)
+
+        # For training tests: if we want to learn this model, add an output bias
+        # parameter so there's something to compute gradients for
+        self.trainable = trainable
+        if trainable:
+            self.output_bias = nn.Parameter(torch.FloatTensor([1.0]))
 
     def forward(
         self, *, observations: types.ObservationsTorch
@@ -119,13 +147,20 @@ class LinearVirtualSensorModel(diffbayes.base.VirtualSensorModel):
         scale_tril = torch.cholesky(
             C_pinv @ R_tril @ R_tril.transpose(-1, -2) @ C_pinv.transpose(-1, -2)
         )[None, :, :].expand((N, state_dim, state_dim))
+
+        # Add output bias if trainable
+        if self.trainable:
+            predicted_states += self.output_bias
+
         return predicted_states, scale_tril
 
 
 class LinearParticleFilterMeasurementModel(
     diffbayes.base.WrappedParticleFilterMeasurementModel
 ):
-    def __init__(self):
+    def __init__(self, trainable: bool = False):
         super().__init__(
-            kalman_filter_measurement_model=LinearKalmanFilterMeasurementModel()
+            kalman_filter_measurement_model=LinearKalmanFilterMeasurementModel(
+                trainable=trainable
+            )
         )

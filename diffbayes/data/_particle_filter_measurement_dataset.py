@@ -1,4 +1,4 @@
-from typing import List, Tuple, Union
+from typing import List, Tuple
 
 import numpy as np
 import scipy.stats
@@ -34,15 +34,13 @@ class ParticleFilterMeasurementDataset(torch.utils.data.Dataset):
         samples_per_pair: int,
         **kwargs
     ):
-        self.covariance = covariance
+        self.covariance = covariance.astype(np.float32)
         self.samples_per_pair = samples_per_pair
         self.dataset = []
+        self.rng = np.random.default_rng()
 
-        # TODO: we can probably get rid of this for loop and access trajectories
-        # directly in __getitem__
         for i, traj in enumerate(tqdm(trajectories)):
             timesteps = len(traj.states)
-            assert type(traj.observations) == dict
             assert len(traj.controls) == timesteps
 
             for t in range(0, timesteps):
@@ -58,7 +56,7 @@ class ParticleFilterMeasurementDataset(torch.utils.data.Dataset):
 
     def __getitem__(
         self, index
-    ) -> Tuple[types.StatesNumpy, types.ObservationsNumpy, float]:
+    ) -> Tuple[types.StatesNumpy, types.ObservationsNumpy, np.ndarray]:
         """Get a state/observation/log-likelihood sample from our dataset. Nominally, we
         want our measurement model to predict the returned log-likelihood as the PDF of
         the `p(observation | state)` distribution.
@@ -74,18 +72,19 @@ class ParticleFilterMeasurementDataset(torch.utils.data.Dataset):
         # Generate half of our samples close to the mean, and the other half
         # far away
         if index % self.samples_per_pair < self.samples_per_pair * 0.5:
-            noisy_state = np.random.multivariate_normal(mean=state, cov=self.covariance)
+            noisy_state = self.rng.multivariate_normal(
+                mean=state, cov=self.covariance
+            ).astype(np.float32)
         else:
-            noisy_state = np.random.multivariate_normal(
+            noisy_state = self.rng.multivariate_normal(
                 mean=state, cov=self.covariance * 5
-            )
+            ).astype(np.float32)
 
-        log_likelihood = float(
-            np.asarray(
-                scipy.stats.multivariate_normal.logpdf(
-                    noisy_state, mean=state, cov=self.covariance
-                )
-            )
+        log_likelihood = np.asarray(
+            scipy.stats.multivariate_normal.logpdf(
+                noisy_state, mean=state, cov=self.covariance
+            ),
+            dtype=np.float32,
         )
 
         return noisy_state, observation, log_likelihood
