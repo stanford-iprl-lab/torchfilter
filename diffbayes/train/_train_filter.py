@@ -110,7 +110,7 @@ def train_filter(
         # Logging
         if batch_idx % log_interval == 0:
             with buddy.log_scope("train_filter_recurrent"):
-                buddy.log_scalar("loss", loss)
+                buddy.log_scalar("Training loss", loss)
 
     # Print average training loss
     epoch_loss /= len(dataloader)

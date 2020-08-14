@@ -65,6 +65,19 @@ def test_train_virtual_sensor(single_step_dataloader, buddy):
     assert _get_error(virtual_sensor_model) < initial_error
 
 
+def test_train_kalman_filter_measurement(single_step_dataloader, buddy):
+    """Check that our Kalman filter measurement training drops model error.
+    """
+    measurement_model = LinearKalmanFilterMeasurementModel(trainable=True)
+    initial_error = _get_error(measurement_model)
+
+    buddy.attach_model(measurement_model)
+    diffbayes.train.train_kalman_filter_measurement_model(
+        buddy, measurement_model, single_step_dataloader
+    )
+    assert _get_error(measurement_model) < initial_error
+
+
 def test_train_particle_filter_measurement(
     particle_filter_measurement_dataloader, buddy
 ):

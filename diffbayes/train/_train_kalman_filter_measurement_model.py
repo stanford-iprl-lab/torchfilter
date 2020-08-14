@@ -9,21 +9,21 @@ import diffbayes
 import fannypack
 
 
-def train_virtual_sensor_model(
+def train_kalman_filter_measurement_model(
     buddy: fannypack.utils.Buddy,
-    virtual_sensor_model: diffbayes.base.VirtualSensorModel,
+    measurement_model: diffbayes.base.KalmanFilterMeasurementModel,
     dataloader: DataLoader,
     *,
     loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss,
     log_interval: int = 10,
-    optimizer_name="train_measurement",
+    optimizer_name="train_kalman_filter_measurement",
 ) -> None:
-    """Optimizes a virtual sensor model's prediction accuracy. Minimizes output mean
-    error only; does not define a loss on uncertainty.
+    """Optimizes a Kalman filter measurement model's prediction accuracy. Minimizes
+    output mean error only; does not define a loss on uncertainty.
 
     Args:
         buddy (fannypack.utils.Buddy): Training helper.
-        measurement_model (diffbayes.base.VirtualSensorModel): Model to train.
+        measurement_model (diffbayes.base.KalmanFilterMeasurementModel): Model to train.
         dataloader (DataLoader): Loader for a SingleStepDataset.
 
     Keyword Args:
@@ -33,36 +33,36 @@ def train_virtual_sensor_model(
     """
     # Dataloader should load a SingleStepDataset
     assert isinstance(dataloader.dataset, diffbayes.data.SingleStepDataset)
-    assert virtual_sensor_model.training, "Model needs to be set to train mode"
+    assert measurement_model.training, "Model needs to be set to train mode"
 
     # Track mean epoch loss
     epoch_loss = 0.0
 
-    # Train virtual sensor model for 1 epoch
+    # Train measurement model for 1 epoch
     for batch in tqdm(dataloader):
         # Transfer to GPU and pull out batch data
         batch_gpu = fannypack.utils.to_device(batch, buddy.device)
         previous_states, states, observations, controls = batch_gpu
 
-        virtual_observation, _virtual_observation_scale_tril = virtual_sensor_model(
-            observations=observations
+        predicted_observations, _predicted_observations_scale_tril = measurement_model(
+            states=states
         )
 
-        loss = loss_function(states, virtual_observation)
+        loss = loss_function(observations, predicted_observations)
         epoch_loss += fannypack.utils.to_numpy(loss)
 
         buddy.minimize(loss, optimizer_name=optimizer_name)
 
         if buddy.optimizer_steps % log_interval == 0:
-            with buddy.log_scope("train_virtual_sensor"):
+            with buddy.log_scope("train_measurement"):
                 buddy.log("Training loss", loss)
 
-                buddy.log("Pred likelihoods mean", virtual_observation.mean())
-                buddy.log("Pred likelihoods std", virtual_observation.std())
+                buddy.log("Pred likelihoods mean", predicted_observations.mean())
+                buddy.log("Pred likelihoods std", predicted_observations.std())
 
                 buddy.log("Label likelihoods mean", states.mean())
                 buddy.log("Label likelihoods std", states.std())
 
     # Print average training loss
     epoch_loss /= len(dataloader)
-    print("(train_virtual_sensor_model) Epoch training loss: ", epoch_loss)
+    print("(train_kalman_filter_measurement_model) Epoch training loss: ", epoch_loss)

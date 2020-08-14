@@ -47,18 +47,18 @@ def train_dynamics_single_step(
     for batch_idx, batch_data in enumerate(tqdm(dataloader)):
         # Move data
         batch_gpu = fannypack.utils.to_device(batch_data, buddy.device)
-        initial_states, next_states, observations, controls = batch_gpu
+        previous_states, states, observations, controls = batch_gpu
 
         # Sanity checks
-        N, state_dim = initial_states.shape
-        assert next_states.shape == initial_states.shape
+        N, state_dim = previous_states.shape
+        assert states.shape == previous_states.shape
         assert state_dim == dynamics_model.state_dim
         assert fannypack.utils.SliceWrapper(observations).shape[:1] == (N,)
         assert fannypack.utils.SliceWrapper(controls).shape[:1] == (N,)
 
         # Single-step prediction
         predictions, scale_trils = dynamics_model(
-            initial_states=initial_states, controls=controls
+            initial_states=previous_states, controls=controls
         )
         assert predictions.shape == (N, state_dim)
 
@@ -68,11 +68,11 @@ def train_dynamics_single_step(
         # Minimize loss
         losses = {}
         if log_flag or loss_function == "mse":
-            losses["mse"] = F.mse_loss(predictions, next_states)
+            losses["mse"] = F.mse_loss(predictions, states)
         if log_flag or loss_function == "nll":
             log_likelihoods = torch.distributions.MultivariateNormal(
                 loc=predictions, scale_tril=scale_trils
-            ).log_prob(next_states)
+            ).log_prob(states)
             assert log_likelihoods.shape == (N,)
             losses["nll"] = -torch.sum(log_likelihoods)
 
