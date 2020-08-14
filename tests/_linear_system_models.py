@@ -1,6 +1,5 @@
 from typing import Tuple, cast
 
-import pytest
 import torch
 
 import diffbayes
@@ -113,9 +112,9 @@ class LinearVirtualSensorModel(diffbayes.base.VirtualSensorModel):
         N = observations.shape[0]
 
         # Compute/return predicted state and uncertainty values
-        # Note that for square C_pinv matrices, we can compute scale_tril as simply
-        # C_pinv @ R_tril. In the general case, we transform the full covariance and
-        # then take the cholesky decomposition.
+        # Note that for square C_pinv matrices, we can compute scale_tril as C_pinv @
+        # R_tril. In the general case, we transform the full covariance and then take
+        # the cholesky decomposition.
         predicted_states = (C_pinv[None, :, :] @ observations[:, :, None]).squeeze(-1)
         scale_tril = torch.cholesky(
             C_pinv @ R_tril @ R_tril.transpose(-1, -2) @ C_pinv.transpose(-1, -2)
@@ -130,46 +129,3 @@ class LinearParticleFilterMeasurementModel(
         super().__init__(
             kalman_filter_measurement_model=LinearKalmanFilterMeasurementModel()
         )
-
-
-@pytest.fixture
-def generated_data() -> Tuple[
-    types.StatesTorch, types.ObservationsNoDictTorch, types.ControlsNoDictTorch
-]:
-    torch.random.manual_seed(0)
-    N = 5
-    timesteps = 2
-
-    dynamics_model = LinearDynamicsModel()
-    measurement_model = LinearKalmanFilterMeasurementModel()
-
-    # Initialize empty states, observations
-    states = torch.zeros((timesteps, N, state_dim))
-    observations = torch.zeros((timesteps, N, observation_dim))
-
-    # Generate random control inputs
-    controls = torch.randn(size=(timesteps, N, control_dim))
-
-    for t in range(timesteps):
-        if t == 0:
-            # Initialize random initial state
-            states[0, :, :] = torch.randn(size=(N, state_dim))
-        else:
-            # Update state and add noise
-            pred_states, Q_tril = dynamics_model(
-                initial_states=states[t - 1, :, :], controls=controls[t, :, :]
-            )
-            assert pred_states.shape == (N, state_dim)
-            assert Q_tril.shape == (N, state_dim, state_dim)
-
-            states[t, :, :] = pred_states + (
-                Q_tril @ torch.randn(size=(N, state_dim, 1))
-            ).squeeze(-1)
-
-        # Compute observations and add noise
-        pred_observations, R_tril = measurement_model(states=states[t, :, :])
-        observations[t, :, :] = pred_observations + (
-            R_tril @ torch.randn(size=(N, observation_dim, 1))
-        ).squeeze(-1)
-
-    return states, observations, controls

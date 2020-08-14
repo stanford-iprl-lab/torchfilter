@@ -1,6 +1,6 @@
 import torch
 
-from linear_system_models import (
+from _linear_system_models import (
     A,
     C,
     LinearDynamicsModel,

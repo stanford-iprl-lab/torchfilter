@@ -3,15 +3,15 @@ from typing import Tuple
 import torch
 
 import diffbayes
-from diffbayes import types
-from linear_system_models import (
+from _linear_system_fixtures import generated_data
+from _linear_system_models import (
     LinearDynamicsModel,
     LinearKalmanFilterMeasurementModel,
     LinearParticleFilterMeasurementModel,
     LinearVirtualSensorModel,
-    generated_data,
     state_dim,
 )
+from diffbayes import types
 
 
 def test_particle_filter(generated_data):
