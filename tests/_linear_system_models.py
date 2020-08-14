@@ -156,7 +156,7 @@ class LinearVirtualSensorModel(diffbayes.base.VirtualSensorModel):
 
 
 class LinearParticleFilterMeasurementModel(
-    diffbayes.base.WrappedParticleFilterMeasurementModel
+    diffbayes.base.ParticleFilterMeasurementModelWrapper
 ):
     def __init__(self, trainable: bool = False):
         super().__init__(

@@ -40,7 +40,7 @@ class ParticleFilterMeasurementModel(abc.ABC, nn.Module):
         pass
 
 
-class WrappedParticleFilterMeasurementModel(ParticleFilterMeasurementModel):
+class ParticleFilterMeasurementModelWrapper(ParticleFilterMeasurementModel):
     """Helper class for creating a particle filter measurement model (states,
     observations -> log-likelihoods) from a Kalman filter one (states -> observations).
 

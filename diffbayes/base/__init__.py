@@ -7,7 +7,7 @@ from ._kalman_filter_base import KalmanFilterBase
 from ._kalman_filter_measurement_model import KalmanFilterMeasurementModel
 from ._particle_filter_measurement_model import (
     ParticleFilterMeasurementModel,
-    WrappedParticleFilterMeasurementModel,
+    ParticleFilterMeasurementModelWrapper,
 )
 from ._virtual_sensor_model import VirtualSensorModel
 
