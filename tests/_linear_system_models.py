@@ -22,6 +22,13 @@ R_tril = torch.eye(observation_dim) * 0.05
 
 
 class LinearDynamicsModel(diffbayes.base.DynamicsModel):
+    """Forward model for our linear system. Maps (initial_states, controls) pairs to
+    (predicted_state, uncertainty) pairs.
+
+    Args:
+        trainable (bool, optional): Set `True` to add a trainable bias to our outputs.
+    """
+
     def __init__(self, trainable: bool = False):
         super().__init__(state_dim=state_dim)
 
@@ -70,6 +77,13 @@ class LinearDynamicsModel(diffbayes.base.DynamicsModel):
 
 
 class LinearKalmanFilterMeasurementModel(diffbayes.base.KalmanFilterMeasurementModel):
+    """Kalman filter measurement model for our linear system. Maps states to
+    (observation, uncertainty) pairs.
+
+    Args:
+        trainable (bool, optional): Set `True` to add a trainable bias to our outputs.
+    """
+
     def __init__(self, trainable: bool = False):
         super().__init__(state_dim=state_dim, observation_dim=observation_dim)
 
@@ -108,6 +122,13 @@ class LinearKalmanFilterMeasurementModel(diffbayes.base.KalmanFilterMeasurementM
 
 
 class LinearVirtualSensorModel(diffbayes.base.VirtualSensorModel):
+    """Virtual sensor model for our linear system. Maps raw sensor readings to predicted
+    states and uncertainties.
+
+    Args:
+        trainable (bool, optional): Set `True` to add a trainable bias to our outputs.
+    """
+
     def __init__(self, trainable: bool = False):
         super().__init__(state_dim=state_dim)
 
@@ -158,9 +179,37 @@ class LinearVirtualSensorModel(diffbayes.base.VirtualSensorModel):
 class LinearParticleFilterMeasurementModel(
     diffbayes.base.ParticleFilterMeasurementModelWrapper
 ):
+    """Particle filter measurement model. Defined by wrapping our Kalman filter one.
+
+    Distinction: the particle filter measurement model maps (state, observation) pairs
+    to log-likelihoods (log particle weights), while the kalman filter measurement model
+    maps states to (observation, uncertainty) pairs.
+
+    Args:
+        trainable (bool, optional): Set `True` to add a trainable bias to our outputs.
+    """
+
     def __init__(self, trainable: bool = False):
         super().__init__(
             kalman_filter_measurement_model=LinearKalmanFilterMeasurementModel(
                 trainable=trainable
             )
         )
+
+
+def get_trainable_model_error(model) -> float:
+    """Get the error of our toy trainable models, which all output the correct output +
+    a trainable output bias.
+
+    Returns:
+        float: Error. Computed as the absolute value of the output bias.
+    """
+
+    # Check model validity -- see above for implementation details
+    assert hasattr(model, "trainable")
+    assert model.trainable is True
+    assert hasattr(model, "output_bias")
+    assert model.output_bias.shape == (1,)
+
+    # The error is just absolute value of our scalar output bias
+    return abs(float(model.output_bias[0]))

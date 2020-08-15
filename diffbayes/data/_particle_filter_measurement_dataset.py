@@ -40,10 +40,10 @@ class ParticleFilterMeasurementDataset(torch.utils.data.Dataset):
         self.rng = np.random.default_rng()
 
         for i, traj in enumerate(tqdm(trajectories)):
-            timesteps = len(traj.states)
-            assert len(traj.controls) == timesteps
+            T = len(traj.states)
+            assert len(traj.controls) == T
 
-            for t in range(0, timesteps):
+            for t in range(T):
                 # Pull out data & labels
                 state = traj.states[t]
                 observation = fannypack.utils.SliceWrapper(traj.observations)[t]
@@ -89,7 +89,7 @@ class ParticleFilterMeasurementDataset(torch.utils.data.Dataset):
 
         return noisy_state, observation, log_likelihood
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Total number of samples in the dataset.
 
         Returns:

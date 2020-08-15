@@ -7,7 +7,7 @@ import diffbayes
 import fannypack
 
 
-def _swap_batch_sequence_axes(tensor):
+def _swap_batch_sequence_axes(tensor: torch.Tensor) -> torch.Tensor:
     """Converts data formatted as (N, T, ...) to (T, N, ...)
     """
     return torch.transpose(tensor, 0, 1)

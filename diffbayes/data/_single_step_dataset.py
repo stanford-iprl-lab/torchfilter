@@ -28,8 +28,8 @@ class SingleStepDataset(Dataset):
         ] = []
 
         for traj in trajectories:
-            timesteps = len(traj.states)
-            for t in range(timesteps - 1):
+            T = len(traj.states)
+            for t in range(T - 1):
                 self.samples.append(
                     (
                         traj.states[t],  # previous_state

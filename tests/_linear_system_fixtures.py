@@ -29,20 +29,24 @@ def generated_data() -> Tuple[
             be `N`.
     """
     torch.random.manual_seed(0)
+
+    # Batch size
     N = 5
-    timesteps = 100
+
+    # Timesteps
+    T = 100
 
     dynamics_model = LinearDynamicsModel()
     measurement_model = LinearKalmanFilterMeasurementModel()
 
     # Initialize empty states, observations
-    states = torch.zeros((timesteps, N, state_dim))
-    observations = torch.zeros((timesteps, N, observation_dim))
+    states = torch.zeros((T, N, state_dim))
+    observations = torch.zeros((T, N, observation_dim))
 
     # Generate random control inputs
-    controls = torch.randn(size=(timesteps, N, control_dim))
+    controls = torch.randn(size=(T, N, control_dim))
 
-    for t in range(timesteps):
+    for t in range(T):
         if t == 0:
             # Initialize random initial state
             states[0, :, :] = torch.randn(size=(N, state_dim))
@@ -99,6 +103,15 @@ def generated_data_numpy_list(
 def subsequence_dataloader(
     generated_data_numpy_list: List[types.TrajectoryNumpy],
 ) -> torch.utils.data.DataLoader:
+    """Fixture for creating a dataloader that returns batches of trajectory
+    subsequences.
+
+    Args:
+        generated_data_numpy_list (List[types.TrajectoryNumpy]): Input trajectories.
+
+    Returns:
+        torch.utils.data.DataLoader: Loader for a `diffbayes.data.SubsequenceDataset`.
+    """
     dataset = diffbayes.data.SubsequenceDataset(
         generated_data_numpy_list, subsequence_length=10
     )
@@ -109,6 +122,15 @@ def subsequence_dataloader(
 def single_step_dataloader(
     generated_data_numpy_list: List[types.TrajectoryNumpy],
 ) -> torch.utils.data.DataLoader:
+    """Fixture for creating a dataloader that returns batches of single-step state
+    transition/observation/control tuples.
+
+    Args:
+        generated_data_numpy_list (List[types.TrajectoryNumpy]): Input trajectories.
+
+    Returns:
+        torch.utils.data.DataLoader: Loader for a `diffbayes.data.SingleStepDataset`.
+    """
     dataset = diffbayes.data.SingleStepDataset(generated_data_numpy_list)
     return torch.utils.data.DataLoader(dataset, batch_size=16)
 
@@ -117,6 +139,16 @@ def single_step_dataloader(
 def particle_filter_measurement_dataloader(
     generated_data_numpy_list: List[types.TrajectoryNumpy],
 ) -> torch.utils.data.DataLoader:
+    """Fixture for creating a dataloader that returns batches of
+    state/observation/log-likelihood tuples.
+
+    Args:
+        generated_data_numpy_list (List[types.TrajectoryNumpy]): Input trajectories.
+
+    Returns:
+        torch.utils.data.DataLoader: Loader for a
+        `diffbayes.data.ParticleFilterMeasurementDataset`.
+    """
     dataset = diffbayes.data.ParticleFilterMeasurementDataset(
         generated_data_numpy_list,
         covariance=np.identity(state_dim) * 0.05,
@@ -127,7 +159,8 @@ def particle_filter_measurement_dataloader(
 
 @pytest.fixture()
 def buddy():
-    """Fixture for setting up a Buddy, as well as some dummy training data.
+    """Fixture that sets up a Buddy (experiment manager), yields, then deletes any
+    saved logs, checkpoints, and metadata.
     """
     # Construct and yield a training buddy
     yield fp.utils.Buddy(

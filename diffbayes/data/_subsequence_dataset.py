@@ -43,7 +43,7 @@ class SubsequenceDataset(Dataset):
         traj = self.subsequences[index]
         return traj.states, traj.observations, traj.controls
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Total number of subsequences in the dataset.
 
         Returns:

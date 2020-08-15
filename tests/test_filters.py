@@ -146,17 +146,34 @@ def _run_filter(
         types.StatesTorch, types.ObservationsNoDictTorch, types.ControlsNoDictTorch
     ],
 ) -> torch.Tensor:
-    states, observations, controls = data
-    timesteps, N, state_dim = states.shape
+    """Helper for running a filter and returning estimated states.
 
+    Args:
+        filter_model (diffbayes.base.Filter): Filter to run.
+        data (Tuple[
+            types.StatesTorch, types.ObservationsNoDictTorch, types.ControlsNoDictTorch
+        ]): Data to run on. Shapes of all inputs should be `(T, N, *)`.
+
+    Returns:
+        torch.Tensor: Estimated states. Shape should be `(T - 1, N, state_dim)`.
+    """
+
+    # Get data
+    states, observations, controls = data
+    T, N, state_dim = states.shape
+
+    # Initialize the filter belief to match the first timestep
     filter_model.initialize_beliefs(
         mean=states[0],
         covariance=torch.zeros(size=(N, state_dim, state_dim))
         + torch.eye(state_dim)[None, :, :] * 0.1,
     )
+
+    # Run the filter on the remaining `T - 1` timesteps
     estimated_states = filter_model.forward_loop(
         observations=observations[1:], controls=controls[1:]
     )
-    assert estimated_states.shape == (timesteps - 1, N, state_dim)
 
+    # Check output and return
+    assert estimated_states.shape == (T - 1, N, state_dim)
     return estimated_states

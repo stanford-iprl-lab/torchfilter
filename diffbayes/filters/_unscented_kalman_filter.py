@@ -196,7 +196,9 @@ class UnscentedKalmanFilter(KalmanFilterBase):
             pred_covariance - K @ pred_observations_covariance @ K.transpose(-1, -2)
         )
 
-    def _weighted_covariance(self, sigma_trils: torch.Tensor):
+    def _weighted_covariance(
+        self, sigma_trils: types.ScaleTrilTorch
+    ) -> types.CovarianceTorch:
         """For heteroscedastic covariances, we apply the weighted average approach
         described by Kloss et al:
         https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf
