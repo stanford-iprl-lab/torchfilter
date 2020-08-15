@@ -69,6 +69,7 @@ class ParticleFilter(Filter):
         """torch.Tensor: Weights corresponding to each particle, stored as
         log-likelihoods. Shape should be `(N, M)`.
         """
+        self._initialized = False
 
     def initialize_beliefs(
         self, *, mean: types.StatesTorch, covariance: types.CovarianceTorch
@@ -100,6 +101,9 @@ class ParticleFilter(Filter):
         )
         assert self.particle_log_weights.shape == (N, M)
 
+        # Set initialized flag
+        self._initialized = True
+
     def forward(
         self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch,
     ) -> types.StatesTorch:
@@ -117,9 +121,7 @@ class ParticleFilter(Filter):
         """
 
         # Make sure our particle filter's been initialized
-        assert (
-            self.particle_states is not None and self.particle_log_weights is not None
-        ), "Particle filter not initialized!"
+        assert self._initialized, "Particle filter not initialized!"
 
         # Get our batch size (N), current particle count (M), & state dimension
         N, M, state_dim = self.particle_states.shape

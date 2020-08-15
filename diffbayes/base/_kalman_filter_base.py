@@ -19,10 +19,12 @@ class KalmanFilterBase(Filter, abc.ABC):
     def __init__(self, *, state_dim: int):
         super().__init__(state_dim=state_dim)
 
-        self.belief_mean: Optional[torch.Tensor] = None
+        self.belief_mean: torch.Tensor
         """torch.Tensor: Estimated state mean."""
-        self.belief_covariance: Optional[torch.Tensor] = None
+        self.belief_covariance: torch.Tensor
         """torch.Tensor: Estimated state covariance."""
+
+        self._initialized = False
 
     def forward(
         self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch,
@@ -40,9 +42,7 @@ class KalmanFilterBase(Filter, abc.ABC):
             be `(N, state_dim).`
         """
         # Check initialization
-        assert (
-            self.belief_mean is not None and self.belief_covariance is not None
-        ), "Kalman filter not initialized!"
+        assert self._initialized, "Kalman filter not initialized!"
 
         # Validate inputs
         N, state_dim = self.belief_mean.shape
@@ -80,6 +80,7 @@ class KalmanFilterBase(Filter, abc.ABC):
         assert covariance.shape == (N, self.state_dim, self.state_dim)
         self.belief_mean = mean
         self.belief_covariance = covariance
+        self._initialized = True
 
     @abc.abstractmethod
     def _predict_step(self, *, controls: types.ControlsTorch) -> Any:

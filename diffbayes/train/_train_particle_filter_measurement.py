@@ -63,13 +63,13 @@ def train_particle_filter_measurement(
             buddy.minimize(loss, optimizer_name="train_measurement")
 
             if buddy.optimizer_steps % log_interval == 0:
-                buddy.log("Training loss", loss)
+                buddy.log_scalar("Training loss", loss)
 
-                buddy.log("Pred likelihoods mean", pred_likelihoods.mean())
-                buddy.log("Pred likelihoods std", pred_likelihoods.std())
+                buddy.log_scalar("Pred likelihoods mean", pred_likelihoods.mean())
+                buddy.log_scalar("Pred likelihoods std", pred_likelihoods.std())
 
-                buddy.log("Label likelihoods mean", log_likelihoods.mean())
-                buddy.log("Label likelihoods std", log_likelihoods.std())
+                buddy.log_scalar("Label likelihoods mean", log_likelihoods.mean())
+                buddy.log_scalar("Label likelihoods std", log_likelihoods.std())
 
     # Print average training loss
     epoch_loss /= len(dataloader)

@@ -55,13 +55,13 @@ def train_kalman_filter_measurement(
 
         if buddy.optimizer_steps % log_interval == 0:
             with buddy.log_scope("train_measurement"):
-                buddy.log("Training loss", loss)
+                buddy.log_scalar("Training loss", loss)
 
-                buddy.log("Pred likelihoods mean", predicted_observations.mean())
-                buddy.log("Pred likelihoods std", predicted_observations.std())
+                buddy.log_scalar("Pred likelihoods mean", predicted_observations.mean())
+                buddy.log_scalar("Pred likelihoods std", predicted_observations.std())
 
-                buddy.log("Label likelihoods mean", states.mean())
-                buddy.log("Label likelihoods std", states.std())
+                buddy.log_scalar("Label likelihoods mean", states.mean())
+                buddy.log_scalar("Label likelihoods std", states.std())
 
     # Print average training loss
     epoch_loss /= len(dataloader)

@@ -59,8 +59,8 @@ class UnscentedKalmanFilter(KalmanFilterBase):
         - Observation sigma points
         - Measurement model covariances
         """
-        prev_mean = cast(torch.Tensor, self.belief_mean)
-        prev_covariance = cast(torch.Tensor, self.belief_covariance)
+        prev_mean = self.belief_mean
+        prev_covariance = self.belief_covariance
         N, state_dim = prev_mean.shape
         observation_dim = self.measurement_model.observation_dim
 
