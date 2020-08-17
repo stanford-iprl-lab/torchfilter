@@ -25,7 +25,7 @@ class SigmaPointStrategy(abc.ABC):
 
     @abc.abstractmethod
     def compute_sigma_weights(self) -> Tuple[torch.Tensor, torch.Tensor]:
-        """Helper for initializing sigma weights. Does nothing if weights already exist.
+        """Helper for computing sigma weights.
 
         Returns:
             Tuple[torch.Tensor, torch.Tensor]: Covariance and mean weights. We expect 1D
@@ -104,13 +104,18 @@ class MerweSigmaPointStrategy(SigmaPointStrategy):
         super().__init__(dim=dim, lambd=lambd)
 
     def compute_sigma_weights(self) -> Tuple[torch.Tensor, torch.Tensor]:
-        """Helper for initializing sigma weights. Does nothing if weights already exist.
+        """Helper for computing sigma weights.
+
+        Returns:
+            Tuple[torch.Tensor, torch.Tensor]: Covariance and mean weights. We expect 1D
+                float32 tensors on the CPU.
         """
 
         # Create covariance weights
         weights_c = torch.full(
             size=(2 * self._dim + 1,),
             fill_value=1.0 / (2.0 * (self._dim + self._lambd)),
+            dtype=torch.float32,
         )
         weights_c[0] = self._lambd / (self._dim + self._lambd) + (
             1.0 - self._alpha ** 2 + self._beta
@@ -143,13 +148,18 @@ class JulierSigmaPointStrategy(SigmaPointStrategy):
         super().__init__(dim=dim, lambd=lambd)
 
     def compute_sigma_weights(self) -> Tuple[torch.Tensor, torch.Tensor]:
-        """Helper for initializing sigma weights. Does nothing if weights already exist.
+        """Helper for computing sigma weights.
+
+        Returns:
+            Tuple[torch.Tensor, torch.Tensor]: Covariance and mean weights. We expect 1D
+                float32 tensors on the CPU.
         """
 
         # Create covariance weights
         weights_c = torch.full(
             size=(2 * self._dim + 1,),
             fill_value=1.0 / (2.0 * (self._dim + self._lambd)),
+            dtype=torch.float32,
         )
         weights_c[0] = self._lambd / (self._dim + self._lambd)
 

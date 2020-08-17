@@ -107,7 +107,9 @@ def test_train_virtual_sensor_ekf_e2e(subsequence_dataloader, buddy):
 
     # Check that errors dropped
     assert get_trainable_model_error(dynamics_model) < initial_dynamics_error
-    assert get_trainable_model_error(virtual_sensor_model) < initial_virtual_sensor_error
+    assert (
+        get_trainable_model_error(virtual_sensor_model) < initial_virtual_sensor_error
+    )
 
 
 def test_train_pf_e2e(subsequence_dataloader, buddy):

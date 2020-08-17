@@ -117,6 +117,8 @@ def test_train_particle_filter_measurement(
 
     # Check that error dropped
     assert (
-        get_trainable_model_error(particle_filter_measurement_model.kalman_filter_measurement_model)
+        get_trainable_model_error(
+            particle_filter_measurement_model.kalman_filter_measurement_model
+        )
         < initial_error
     )
