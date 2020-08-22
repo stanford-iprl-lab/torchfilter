@@ -48,7 +48,7 @@ class KalmanFilterBase(Filter, abc.ABC):
         assert self._initialized, "Kalman filter not initialized!"
 
         # Validate inputs
-        N, state_dim = self._belief_mean.shape
+        N, state_dim = self.belief_mean.shape
         assert fp.utils.SliceWrapper(observations).shape[0] == N
         assert fp.utils.SliceWrapper(controls).shape[0] == N
 
@@ -61,11 +61,8 @@ class KalmanFilterBase(Filter, abc.ABC):
         # Update step
         self._update_step(predict_outputs=predict_outputs, observations=observations)
 
-        # Validate belief
-        assert self._belief_mean.shape == (N, state_dim)
-        assert self._belief_covariance.shape == (N, state_dim, state_dim)
-
-        return self._belief_mean
+        # Return mean
+        return self.belief_mean
 
     def initialize_beliefs(
         self, *, mean: types.StatesTorch, covariance: types.CovarianceTorch
@@ -81,8 +78,8 @@ class KalmanFilterBase(Filter, abc.ABC):
         N = mean.shape[0]
         assert mean.shape == (N, self.state_dim)
         assert covariance.shape == (N, self.state_dim, self.state_dim)
-        self._belief_mean = mean
-        self._belief_covariance = covariance
+        self.belief_mean = mean
+        self.belief_covariance = covariance
         self._initialized = True
 
     @property

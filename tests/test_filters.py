@@ -88,6 +88,31 @@ def test_unscented_kalman_filter_merwe(generated_data):
     )
 
 
+def test_square_root_unscented_kalman_filter(generated_data):
+    """Smoke test for SRUKF w/ Julier-style sigma points.
+    """
+    _run_filter(
+        diffbayes.filters.SquareRootUnscentedKalmanFilter(
+            dynamics_model=LinearDynamicsModel(),
+            measurement_model=LinearKalmanFilterMeasurementModel(),
+        ),
+        generated_data,
+    )
+
+
+def test_square_root_unscented_kalman_filter_merwe(generated_data):
+    """Smoke test for SRUKF w/ Merwe-style sigma points.
+    """
+    _run_filter(
+        diffbayes.filters.SquareRootUnscentedKalmanFilter(
+            dynamics_model=LinearDynamicsModel(),
+            measurement_model=LinearKalmanFilterMeasurementModel(),
+            sigma_point_strategy=diffbayes.utils.MerweSigmaPointStrategy(alpha=1e-1),
+        ),
+        generated_data,
+    )
+
+
 def test_virtual_sensor_ekf_consistency(generated_data):
     """Check that our Virtual Sensor EKF and standard EKF produce consistent results for
     a linear system.
@@ -135,6 +160,31 @@ def test_ukf_ekf_consistency(generated_data):
     torch.testing.assert_allclose(ekf.belief_mean, ukf.belief_mean)
     torch.testing.assert_allclose(
         ekf.belief_covariance, ukf.belief_covariance, rtol=1e-4, atol=5e-4
+    )
+
+
+def test_ukf_srukf_consistency(generated_data):
+    """Check that our UKF and SRUKF produce consistent results for a linear system.
+    (they should be identical)
+    """
+    # Create filters
+    srukf = diffbayes.filters.SquareRootUnscentedKalmanFilter(
+        dynamics_model=LinearDynamicsModel(),
+        measurement_model=LinearKalmanFilterMeasurementModel(),
+    )
+    ukf = diffbayes.filters.UnscentedKalmanFilter(
+        dynamics_model=LinearDynamicsModel(),
+        measurement_model=LinearKalmanFilterMeasurementModel(),
+    )
+
+    # Run over data
+    _run_filter(srukf, generated_data)
+    _run_filter(ukf, generated_data)
+
+    # Check final beliefs
+    torch.testing.assert_allclose(srukf.belief_mean, ukf.belief_mean)
+    torch.testing.assert_allclose(
+        srukf.belief_covariance, ukf.belief_covariance, rtol=1e-4, atol=5e-4
     )
 
 

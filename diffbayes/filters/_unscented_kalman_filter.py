@@ -12,6 +12,11 @@ from ..base._kalman_filter_measurement_model import KalmanFilterMeasurementModel
 
 class UnscentedKalmanFilter(KalmanFilterBase):
     """Generic (naive) UKF.
+
+    From Algorithm 2.1 of Merwe et al. [1]
+
+    [1] The square-root unscented Kalman filter for state and parameter-estimation.
+    https://ieeexplore.ieee.org/document/940586/
     """
 
     def __init__(
@@ -75,7 +80,7 @@ class UnscentedKalmanFilter(KalmanFilterBase):
         assert sigma_points.shape == (N, sigma_point_count, state_dim)
 
         # Flatten sigma points and propagate through dynamics, then measurement models
-        pred_sigma_points, pred_sigma_tril = self.dynamics_model(
+        pred_sigma_points, pred_sigma_points_dynamics_tril = self.dynamics_model(
             initial_states=sigma_points.reshape((-1, state_dim)),
             controls=fannypack.utils.SliceWrapper(controls).map(
                 lambda tensor: torch.repeat_interleave(
@@ -83,19 +88,20 @@ class UnscentedKalmanFilter(KalmanFilterBase):
                 )
             ),
         )
-        pred_sigma_observations, pred_sigma_observations_tril = self.measurement_model(
-            states=pred_sigma_points
-        )
+        (
+            pred_sigma_points_observations,
+            pred_sigma_points_observations_tril,
+        ) = self.measurement_model(states=pred_sigma_points)
 
         # Add sigma dimension back into everything
         pred_sigma_points = pred_sigma_points.reshape(sigma_points.shape)
-        pred_sigma_tril = pred_sigma_tril.reshape(
+        pred_sigma_points_dynamics_tril = pred_sigma_points_dynamics_tril.reshape(
             (N, sigma_point_count, state_dim, state_dim)
         )
-        pred_sigma_observations = pred_sigma_observations.reshape(
+        pred_sigma_points_observations = pred_sigma_points_observations.reshape(
             (N, sigma_point_count, observation_dim)
         )
-        pred_sigma_observations_tril = pred_sigma_observations_tril.reshape(
+        pred_sigma_points_observations_tril = pred_sigma_points_observations_tril.reshape(
             (N, sigma_point_count, observation_dim, observation_dim)
         )
 
@@ -107,9 +113,11 @@ class UnscentedKalmanFilter(KalmanFilterBase):
         assert pred_covariance.shape == (N, state_dim, state_dim)
 
         # Compute weighted covariances (see helper docstring for explanation)
-        dynamics_covariance = self._weighted_covariance(pred_sigma_tril)
+        dynamics_covariance = self._weighted_covariance(pred_sigma_points_dynamics_tril)
         assert dynamics_covariance.shape == (N, state_dim, state_dim)
-        measurement_covariance = self._weighted_covariance(pred_sigma_observations_tril)
+        measurement_covariance = self._weighted_covariance(
+            pred_sigma_points_observations_tril
+        )
         assert measurement_covariance.shape == (N, observation_dim, observation_dim)
 
         # Add dynamics uncertainty
@@ -119,7 +127,7 @@ class UnscentedKalmanFilter(KalmanFilterBase):
             pred_mean,
             pred_covariance,
             pred_sigma_points,
-            pred_sigma_observations,
+            pred_sigma_points_observations,
             measurement_covariance,
         )
 
