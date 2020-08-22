@@ -145,3 +145,40 @@ def test_unscented_transform_merwe_square_root(dim: int):
     expected_output_covariance = input_covariance
     torch.testing.assert_allclose(output_mean, expected_output_mean)
     torch.testing.assert_allclose(output_covariance, expected_output_covariance)
+
+
+@hypothesis.given(dim=st.integers(min_value=1, max_value=20))
+def test_unscented_transform_merwe_square_root_additive_nosie(dim: int):
+    """Check unscented transform square root formulation on multivariate Gaussians, with
+    additive noise.
+    """
+    input_mean, input_covariance = _gen_test_data(dim=dim)
+    N, _dim = input_mean.shape
+    assert _dim == dim
+
+    additive_noise_scale_tril = torch.tril(torch.randn((N, dim, dim)))
+    additive_noise_covariance = (
+        additive_noise_scale_tril @ additive_noise_scale_tril.transpose(-1, -2)
+    )
+
+    # Perform unscented transform
+    unscented_transform = diffbayes.utils.UnscentedTransform(
+        dim=dim,
+        sigma_point_strategy=diffbayes.utils.MerweSigmaPointStrategy(alpha=2e-1),
+    )
+    sigma_points = unscented_transform.select_sigma_points_square_root(
+        input_mean, torch.cholesky(input_covariance)
+    )
+    (
+        output_mean,
+        output_scale_tril,
+    ) = unscented_transform.compute_distribution_square_root(
+        sigma_points, additive_noise_scale_tril=additive_noise_scale_tril,
+    )
+
+    # Check outputs
+    output_covariance = output_scale_tril @ output_scale_tril.transpose(-1, -2)
+    expected_output_mean = input_mean
+    expected_output_covariance = input_covariance + additive_noise_covariance
+    torch.testing.assert_allclose(output_mean, expected_output_mean)
+    torch.testing.assert_allclose(output_covariance, expected_output_covariance)
