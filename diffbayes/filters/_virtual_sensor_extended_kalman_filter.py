@@ -1,4 +1,4 @@
-from typing import Tuple, cast
+from typing import cast
 
 import torch
 
@@ -37,22 +37,16 @@ class VirtualSensorExtendedKalmanFilter(KalmanFilterBase):
         self.virtual_sensor_model = virtual_sensor_model
         """diffbayes.base.VirtualSensorModel: Virtual sensor model."""
 
-    def _predict_step(
-        self, *, controls: types.ControlsTorch,
-    ) -> Tuple[types.StatesTorch, types.CovarianceTorch]:
+    def _predict_step(self, *, controls: types.ControlsTorch,) -> None:
         # Same as normal EKF
-        return ExtendedKalmanFilter._predict_step(
+        ExtendedKalmanFilter._predict_step(
             cast(ExtendedKalmanFilter, self), controls=controls,
         )
 
-    def _update_step(
-        self,
-        *,
-        predict_outputs: Tuple[types.StatesTorch, types.CovarianceTorch],
-        observations: types.ObservationsTorch,
-    ) -> None:
+    def _update_step(self, *, observations: types.ObservationsTorch) -> None:
         # Extract inputs
-        pred_mean, pred_covariance = predict_outputs
+        pred_mean = self._belief_mean
+        pred_covariance = self._belief_covariance
 
         # Use virtual sensor for observation + covariance
         observations_mean, observations_tril = self.virtual_sensor_model(

@@ -1,4 +1,4 @@
-from typing import Optional, Tuple, cast
+from typing import Optional, cast
 
 import torch
 
@@ -8,7 +8,6 @@ from .. import types, utils
 from ..base._dynamics_model import DynamicsModel
 from ..base._kalman_filter_base import KalmanFilterBase
 from ..base._kalman_filter_measurement_model import KalmanFilterMeasurementModel
-from ._unscented_kalman_filter import UnscentedKalmanFilter
 
 
 class SquareRootUnscentedKalmanFilter(KalmanFilterBase):
@@ -50,6 +49,10 @@ class SquareRootUnscentedKalmanFilter(KalmanFilterBase):
         self.measurement_model = measurement_model
         """diffbayes.base.KalmanFilterMeasurementModel: Measurement model."""
 
+        # Cache for sigma points; if set, this should always correspond to the current
+        # belief distribution
+        self._sigma_point_cache: Optional[types.StatesTorch] = None
+
         # Parameterize posterior uncertainty with lower-triangular covariance root
         self._belief_scale_tril: types.ScaleTrilTorch
 
@@ -62,40 +65,21 @@ class SquareRootUnscentedKalmanFilter(KalmanFilterBase):
         self._belief_scale_tril = torch.cholesky(covariance)
         self._belief_covariance = covariance
 
-    def _predict_step(
-        self, *, controls: types.ControlsTorch,
-    ) -> Tuple[
-        types.StatesTorch,
-        types.ScaleTrilTorch,
-        types.StatesTorch,
-        types.ObservationsNoDictTorch,
-        types.ScaleTrilTorch,
-    ]:
+    def _predict_step(self, *, controls: types.ControlsTorch) -> None:
         """Predict step.
-
-        Outputs...
-        - Predicted mean
-        - Predicted covariance (square root)
-        - State sigma points
-        - Observation sigma points
-        - Measurement model covariances (square root)
         """
-        # self._belief_covariance = (
-        #     self._belief_scale_tril @ self._belief_scale_tril.transpose(-1, -2)
-        # )
-        self._weighted_covariance = lambda sigma_trils: UnscentedKalmanFilter._weighted_covariance(
-            self, sigma_trils
-        )
-
-        x_k_minus_1 = self.belief_mean
+        # See Merwe paper [1] for notation
+        x_k_minus_1 = self._belief_mean
         S_k_minus_1 = self._belief_scale_tril
-        N, state_dim = x_k_minus_1.shape
-        observation_dim = self.measurement_model.observation_dim
+        X_k_minus_1 = self._sigma_point_cache
 
-        # Grab sigma points
-        X_k_minus_1 = self._unscented_transform.select_sigma_points_square_root(
-            x_k_minus_1, S_k_minus_1
-        )
+        N, state_dim = x_k_minus_1.shape
+
+        # Grab sigma points (use cached if available)
+        if X_k_minus_1 is None:
+            X_k_minus_1 = self._unscented_transform.select_sigma_points_square_root(
+                x_k_minus_1, S_k_minus_1
+            )
         sigma_point_count = state_dim * 2 + 1
         assert X_k_minus_1.shape == (N, sigma_point_count, state_dim)
 
@@ -108,16 +92,11 @@ class SquareRootUnscentedKalmanFilter(KalmanFilterBase):
                 )
             ),
         )
-        Y_k_pred, measurement_scale_tril = self.measurement_model(states=X_k_pred)
 
         # Add sigma dimension back into everything
         X_k_pred = X_k_pred.reshape(X_k_minus_1.shape)
         dynamics_scale_tril = dynamics_scale_tril.reshape(
             (N, sigma_point_count, state_dim, state_dim)
-        )
-        Y_k_pred = Y_k_pred.reshape((N, sigma_point_count, observation_dim))
-        measurement_scale_tril = measurement_scale_tril.reshape(
-            (N, sigma_point_count, observation_dim, observation_dim)
         )
 
         # Compute predicted distribution
@@ -125,83 +104,81 @@ class SquareRootUnscentedKalmanFilter(KalmanFilterBase):
         # Note that we use only the noise term from the first sigma point -- this is
         # slightly different from our standard UKF implementation, which takes a
         # weighted average across all sigma points
-        (
-            x_k_pred,
-            S_x_pred_k,
-        ) = self._unscented_transform.compute_distribution_square_root(
-            X_k_pred, additive_noise_scale_tril=dynamics_scale_tril[:, 0, :, :],
+        x_k_pred, S_k_pred = self._unscented_transform.compute_distribution_square_root(
+            X_k_pred, additive_noise_scale_tril=dynamics_scale_tril[:, 0, :, :]
         )
         assert x_k_pred.shape == (N, state_dim)
+        assert S_k_pred.shape == (N, state_dim, state_dim)
 
-        return (
-            x_k_pred,
-            S_x_pred_k,
-            X_k_pred,
-            Y_k_pred,
-            measurement_scale_tril[:, 0, :, :],
-        )
+        # Update internal state
+        self._belief_mean = x_k_pred
+        self._belief_scale_tril = S_k_pred
+        self._sigma_point_cache = X_k_pred
 
-    def _update_step(
-        self,
-        *,
-        predict_outputs: Tuple[
-            types.StatesTorch,
-            types.ScaleTrilTorch,
-            types.StatesTorch,
-            types.ObservationsNoDictTorch,
-            types.ScaleTrilTorch,
-        ],
-        observations: types.ObservationsTorch,
-    ) -> None:
+    def _update_step(self, *, observations: types.ObservationsTorch) -> None:
+        """Update step.
+        """
         # Extract inputs
         assert isinstance(
             observations, types.ObservationsNoDictTorch
         ), "For UKF, observations must be tensor!"
         observations = cast(types.ObservationsNoDictTorch, observations)
-        (
-            x_k_pred,
-            S_x_pred_k,
-            X_k_pred,
-            Y_k_pred,
-            measurement_scale_tril,
-        ) = predict_outputs
+        x_k_pred = self._belief_mean
+        S_k_pred = self._belief_scale_tril
+        X_k_pred = self._sigma_point_cache
+        if X_k_pred is None:
+            X_k_pred = self._unscented_transform.select_sigma_points_square_root(
+                x_k_pred, S_k_pred
+            )
 
         # Check shapes
         N, sigma_point_count, state_dim = X_k_pred.shape
         observation_dim = self.measurement_model.observation_dim
         assert x_k_pred.shape == (N, state_dim)
-        assert S_x_pred_k.shape == (N, state_dim, state_dim)
-        assert Y_k_pred.shape == (N, sigma_point_count, observation_dim,)
+        assert S_k_pred.shape == (N, state_dim, state_dim)
+
+        # Propagate sigma points through observation model
+        Y_k_pred, measurement_scale_tril = self.measurement_model(
+            states=X_k_pred.reshape((-1, state_dim))
+        )
+        Y_k_pred = Y_k_pred.reshape((N, sigma_point_count, observation_dim))
+        measurement_scale_tril = measurement_scale_tril.reshape(
+            (N, sigma_point_count, observation_dim, observation_dim)
+        )
+        assert Y_k_pred.shape == (N, sigma_point_count, observation_dim)
+        assert measurement_scale_tril.shape == (
+            N,
+            sigma_point_count,
+            observation_dim,
+            observation_dim,
+        )
 
         # Compute observation distribution
         (
             y_k_pred,
-            S_y_pred_k,
+            S_y_k_pred,
         ) = self._unscented_transform.compute_distribution_square_root(
-            Y_k_pred, additive_noise_scale_tril=measurement_scale_tril
+            Y_k_pred, additive_noise_scale_tril=measurement_scale_tril[:, 0, :, :]
         )
         assert y_k_pred.shape == (N, observation_dim)
-        assert S_y_pred_k.shape == (N, observation_dim, observation_dim,)
+        assert S_y_k_pred.shape == (N, observation_dim, observation_dim)
 
         # Compute cross-covariance
-        centered_sigma_points = X_k_pred - x_k_pred[:, None, :]
-        centered_sigma_observations = Y_k_pred - y_k_pred[:, None, :]
-        P_x_k_y_k = torch.sum(
+        X_k_pred_centered = X_k_pred - x_k_pred[:, None, :]
+        Y_k_pred_centered = Y_k_pred - y_k_pred[:, None, :]
+        P_xy = torch.sum(
             self._unscented_transform.weights_c[None, :, None, None]
-            * (
-                centered_sigma_points[:, :, :, None]
-                @ centered_sigma_observations[:, :, None, :]
-            ),
+            * (X_k_pred_centered[:, :, :, None] @ Y_k_pred_centered[:, :, None, :]),
             dim=1,
         )
-        assert P_x_k_y_k.shape == (N, state_dim, observation_dim,)
+        assert P_xy.shape == (N, state_dim, observation_dim)
 
-        # Kalman gain, innovation
+        # Kalman gain
         # In MATLAB:
-        # > K = (P_x_k_y_k / S_y_pred_k.T) / S_y_k
+        # > K = (P_x_k_y_k / S_y_k_pred.T) / S_y_k
         K = torch.solve(
-            torch.solve(P_x_k_y_k.transpose(-1, -2), S_y_pred_k).solution,
-            S_y_pred_k.transpose(-1, -2),
+            torch.solve(P_xy.transpose(-1, -2), S_y_k_pred).solution,
+            S_y_k_pred.transpose(-1, -2),
         ).solution.transpose(-1, -2)
         assert K.shape == (N, state_dim, observation_dim)
 
@@ -210,13 +187,14 @@ class SquareRootUnscentedKalmanFilter(KalmanFilterBase):
         x_k = x_k_pred + (K @ innovations[:, :, None]).squeeze(-1)
 
         # Correct uncertainty
-        U = K @ S_y_pred_k
-        S_x_k = S_x_pred_k
+        U = K @ S_y_k_pred
+        S_k = S_k_pred
         for i in range(U.shape[2]):
-            S_x_k = fannypack.utils.cholupdate(
-                S_x_k, U[:, :, i], weight=torch.tensor(-1.0, device=U.device),
+            S_k = fannypack.utils.cholupdate(
+                S_k, U[:, :, i], weight=torch.tensor(-1.0, device=U.device),
             )
 
         # Update internal state with corrected beliefs
         self._belief_mean = x_k
-        self._belief_scale_tril = S_x_k
+        self._belief_scale_tril = S_k
+        self._sigma_point_cache = None

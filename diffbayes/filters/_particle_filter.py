@@ -222,7 +222,7 @@ class ParticleFilter(Filter):
                 * self.particle_states,
                 dim=1,
             )
-        elif self.estimattion_method == "argmax":
+        elif self.estimation_method == "argmax":
             best_indices = torch.argmax(self.particle_log_weights, dim=1)
             state_estimates = torch.gather(
                 self.particle_states, dim=1, index=best_indices

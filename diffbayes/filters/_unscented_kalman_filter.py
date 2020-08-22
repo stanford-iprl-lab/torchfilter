@@ -1,4 +1,4 @@
-from typing import Optional, Tuple, cast
+from typing import Optional, cast
 
 import torch
 
@@ -11,12 +11,15 @@ from ..base._kalman_filter_measurement_model import KalmanFilterMeasurementModel
 
 
 class UnscentedKalmanFilter(KalmanFilterBase):
-    """Generic (naive) UKF.
+    """Standard UKF.
 
-    From Algorithm 2.1 of Merwe et al. [1]
+    From Algorithm 2.1 of Merwe et al. [1]. For working with heteroscedastic noise
+    models, we use the weighting approach described in [2].
 
     [1] The square-root unscented Kalman filter for state and parameter-estimation.
     https://ieeexplore.ieee.org/document/940586/
+    [2] How to Train Your Differentiable Filter
+    https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf
     """
 
     def __init__(
@@ -49,163 +52,124 @@ class UnscentedKalmanFilter(KalmanFilterBase):
         self.measurement_model = measurement_model
         """diffbayes.base.KalmanFilterMeasurementModel: Measurement model."""
 
-    def _predict_step(
-        self, *, controls: types.ControlsTorch,
-    ) -> Tuple[
-        types.StatesTorch,
-        types.CovarianceTorch,
-        types.StatesTorch,
-        types.ObservationsNoDictTorch,
-        types.CovarianceTorch,
-    ]:
+        # Cache for sigma points; if set, this should always correspond to the current
+        # belief distribution
+        self._sigma_point_cache: Optional[types.StatesTorch] = None
+
+    def _predict_step(self, *, controls: types.ControlsTorch) -> None:
         """Predict step.
-
-        Outputs...
-        - Predicted mean
-        - Predicted covariance
-        - State sigma points
-        - Observation sigma points
-        - Measurement model covariances
         """
-        prev_mean = self._belief_mean
-        prev_covariance = self._belief_covariance
-        N, state_dim = prev_mean.shape
-        observation_dim = self.measurement_model.observation_dim
+        # See Merwe paper [1] for notation
+        x_k_minus_1 = self._belief_mean
+        P_k_minus_1 = self._belief_covariance
+        X_k_minus_1 = self._sigma_point_cache
 
-        # Grab sigma points
-        sigma_points = self._unscented_transform.select_sigma_points(
-            prev_mean, prev_covariance
-        )
+        N, state_dim = x_k_minus_1.shape
+
+        # Grab sigma points (use cached if available)
+        if X_k_minus_1 is None:
+            X_k_minus_1 = self._unscented_transform.select_sigma_points(
+                x_k_minus_1, P_k_minus_1
+            )
         sigma_point_count = state_dim * 2 + 1
-        assert sigma_points.shape == (N, sigma_point_count, state_dim)
+        assert X_k_minus_1.shape == (N, sigma_point_count, state_dim)
 
         # Flatten sigma points and propagate through dynamics, then measurement models
-        pred_sigma_points, pred_sigma_points_dynamics_tril = self.dynamics_model(
-            initial_states=sigma_points.reshape((-1, state_dim)),
+        X_k_pred, dynamics_scale_tril = self.dynamics_model(
+            initial_states=X_k_minus_1.reshape((-1, state_dim)),
             controls=fannypack.utils.SliceWrapper(controls).map(
                 lambda tensor: torch.repeat_interleave(
                     tensor, repeats=sigma_point_count, dim=0
                 )
             ),
         )
-        (
-            pred_sigma_points_observations,
-            pred_sigma_points_observations_tril,
-        ) = self.measurement_model(states=pred_sigma_points)
 
         # Add sigma dimension back into everything
-        pred_sigma_points = pred_sigma_points.reshape(sigma_points.shape)
-        pred_sigma_points_dynamics_tril = pred_sigma_points_dynamics_tril.reshape(
+        X_k_pred = X_k_pred.reshape(X_k_minus_1.shape)
+        dynamics_scale_tril = dynamics_scale_tril.reshape(
             (N, sigma_point_count, state_dim, state_dim)
-        )
-        pred_sigma_points_observations = pred_sigma_points_observations.reshape(
-            (N, sigma_point_count, observation_dim)
-        )
-        pred_sigma_points_observations_tril = pred_sigma_points_observations_tril.reshape(
-            (N, sigma_point_count, observation_dim, observation_dim)
         )
 
         # Compute predicted distribution
-        pred_mean, pred_covariance = self._unscented_transform.compute_distribution(
-            pred_sigma_points
-        )
-        assert pred_mean.shape == (N, state_dim)
-        assert pred_covariance.shape == (N, state_dim, state_dim)
+        x_k_pred, P_k_pred = self._unscented_transform.compute_distribution(X_k_pred)
+        assert x_k_pred.shape == (N, state_dim)
+        assert P_k_pred.shape == (N, state_dim, state_dim)
 
         # Compute weighted covariances (see helper docstring for explanation)
-        dynamics_covariance = self._weighted_covariance(pred_sigma_points_dynamics_tril)
+        dynamics_covariance = self._weighted_covariance(dynamics_scale_tril)
         assert dynamics_covariance.shape == (N, state_dim, state_dim)
-        measurement_covariance = self._weighted_covariance(
-            pred_sigma_points_observations_tril
-        )
-        assert measurement_covariance.shape == (N, observation_dim, observation_dim)
 
         # Add dynamics uncertainty
-        pred_covariance = pred_covariance + dynamics_covariance
+        P_k_pred = P_k_pred + dynamics_covariance
 
-        return (
-            pred_mean,
-            pred_covariance,
-            pred_sigma_points,
-            pred_sigma_points_observations,
-            measurement_covariance,
-        )
+        # Update internal state
+        self._belief_mean = x_k_pred
+        self._belief_covariance = P_k_pred
+        self._sigma_point_cache = X_k_pred
 
-    def _update_step(
-        self,
-        *,
-        predict_outputs: Tuple[
-            types.StatesTorch,
-            types.CovarianceTorch,
-            types.StatesTorch,
-            types.ObservationsNoDictTorch,
-            types.CovarianceTorch,
-        ],
-        observations: types.ObservationsTorch,
-    ) -> None:
+    def _update_step(self, *, observations: types.ObservationsTorch) -> None:
+        """Update step.
+        """
         # Extract inputs
         assert isinstance(
             observations, types.ObservationsNoDictTorch
         ), "For UKF, observations must be tensor!"
         observations = cast(types.ObservationsNoDictTorch, observations)
-        (
-            pred_mean,
-            pred_covariance,
-            pred_sigma_points,
-            pred_sigma_observations,
-            measurement_covariance,
-        ) = predict_outputs
+        x_k_pred = self._belief_mean
+        P_k_pred = self._belief_covariance
+        X_k_pred = self._sigma_point_cache
+        if X_k_pred is None:
+            X_k_pred = self._unscented_transform.select_sigma_points(x_k_pred, P_k_pred)
 
         # Check shapes
-        N, sigma_point_count, state_dim = pred_sigma_points.shape
+        N, sigma_point_count, state_dim = X_k_pred.shape
         observation_dim = self.measurement_model.observation_dim
-        assert pred_mean.shape == (N, state_dim)
-        assert pred_covariance.shape == (N, state_dim, state_dim)
-        assert pred_sigma_observations.shape == (N, sigma_point_count, observation_dim,)
+        assert x_k_pred.shape == (N, state_dim)
+        assert P_k_pred.shape == (N, state_dim, state_dim)
+
+        # Propagate sigma points through observation model
+        Y_k_pred, measurement_scale_tril = self.measurement_model(
+            states=X_k_pred.reshape((-1, state_dim))
+        )
+        Y_k_pred = Y_k_pred.reshape((N, sigma_point_count, observation_dim))
+        measurement_scale_tril = measurement_scale_tril.reshape(
+            (N, sigma_point_count, observation_dim, observation_dim)
+        )
+        measurement_covariance = self._weighted_covariance(measurement_scale_tril)
+        assert Y_k_pred.shape == (N, sigma_point_count, observation_dim)
+        assert measurement_covariance.shape == (N, observation_dim, observation_dim)
 
         # Compute observation distribution
-        (
-            pred_observations,
-            pred_observations_covariance,
-        ) = self._unscented_transform.compute_distribution(pred_sigma_observations)
-        assert pred_observations.shape == (N, observation_dim)
-        assert pred_observations_covariance.shape == (
-            N,
-            observation_dim,
-            observation_dim,
-        )
-
-        # Add measurement model uncertainty
-        pred_observations_covariance = (
-            pred_observations_covariance + measurement_covariance
-        )
+        y_k_pred, P_y_k_pred = self._unscented_transform.compute_distribution(Y_k_pred)
+        P_y_k_pred = P_y_k_pred + measurement_covariance
+        assert y_k_pred.shape == (N, observation_dim)
+        assert P_y_k_pred.shape == (N, observation_dim, observation_dim)
 
         # Compute cross-covariance
-        centered_sigma_points = pred_sigma_points - pred_mean[:, None, :]
-        centered_sigma_observations = (
-            pred_sigma_observations - pred_observations[:, None, :]
-        )
-        cross_covariance = torch.sum(
+        X_k_pred_centered = X_k_pred - x_k_pred[:, None, :]
+        Y_k_pred_centered = Y_k_pred - y_k_pred[:, None, :]
+        P_xy = torch.sum(
             self._unscented_transform.weights_c[None, :, None, None]
-            * (
-                centered_sigma_points[:, :, :, None]
-                @ centered_sigma_observations[:, :, None, :]
-            ),
+            * (X_k_pred_centered[:, :, :, None] @ Y_k_pred_centered[:, :, None, :]),
             dim=1,
         )
-        assert cross_covariance.shape == (N, state_dim, observation_dim,)
+        assert P_xy.shape == (N, state_dim, observation_dim)
 
         # Kalman gain, innovation
-        K = cross_covariance @ torch.inverse(pred_observations_covariance)
+        K = P_xy @ torch.inverse(P_y_k_pred)
         assert K.shape == (N, state_dim, observation_dim)
 
-        innovations = observations - pred_observations
+        # Correct mean
+        innovations = observations - y_k_pred
+        x_k = x_k_pred + (K @ innovations[:, :, None]).squeeze(-1)
+
+        # Correct covariance
+        P_k = P_k_pred - K @ P_y_k_pred @ K.transpose(-1, -2)
 
         # Update internal state with corrected beliefs
-        self._belief_mean = pred_mean + (K @ innovations[:, :, None]).squeeze(-1)
-        self._belief_covariance = (
-            pred_covariance - K @ pred_observations_covariance @ K.transpose(-1, -2)
-        )
+        self._belief_mean = x_k
+        self._belief_covariance = P_k
+        self._sigma_point_cache = None
 
     def _weighted_covariance(
         self, sigma_trils: types.ScaleTrilTorch

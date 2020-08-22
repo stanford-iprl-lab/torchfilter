@@ -1,5 +1,4 @@
 import abc
-from typing import Any, Optional
 
 import torch
 
@@ -53,13 +52,10 @@ class KalmanFilterBase(Filter, abc.ABC):
         assert fp.utils.SliceWrapper(controls).shape[0] == N
 
         # Predict step
-        # It's unfortunately not possible to make these helpers more functional, because
-        # the requirements of each filter are pretty different. (particularly for UKFs,
-        # square root formulations, etc)
-        predict_outputs = self._predict_step(controls=controls)
+        self._predict_step(controls=controls)
 
         # Update step
-        self._update_step(predict_outputs=predict_outputs, observations=observations)
+        self._update_step(observations=observations)
 
         # Return mean
         return self.belief_mean
@@ -103,7 +99,7 @@ class KalmanFilterBase(Filter, abc.ABC):
         self._belief_covariance = covariance
 
     @abc.abstractmethod
-    def _predict_step(self, *, controls: types.ControlsTorch) -> Any:
+    def _predict_step(self, *, controls: types.ControlsTorch) -> None:
         r"""Kalman filter predict step.
 
         Computes $\mu_{t | t - 1}$, $\Sigma_{t | t - 1}$ from $\mu_{t - 1 | t - 1}$,
@@ -111,16 +107,11 @@ class KalmanFilterBase(Filter, abc.ABC):
 
         Keyword Args:
             controls (dict or torch.Tensor): Control inputs.
-
-        Returns:
-            Any: Predict outputs, to pass to update step.
         """
         pass
 
     @abc.abstractmethod
-    def _update_step(
-        self, *, predict_outputs: Any, observations: types.ObservationsTorch
-    ) -> None:
+    def _update_step(self, *, observations: types.ObservationsTorch) -> None:
         r"""Kalman filter measurement update step.
 
         Nominally, computes $\mu_{t | t}$, $\Sigma_{t | t}$ from $\mu_{t | t - 1}$,
@@ -129,7 +120,6 @@ class KalmanFilterBase(Filter, abc.ABC):
         Updates `self.belief_mean` and `self.belief_covariance`.
 
         Keyword Args:
-            predict_outputs (Any): Outputs from predict step.
             observations (dict or torch.Tensor): Observation inputs.
         """
         pass

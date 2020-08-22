@@ -36,9 +36,7 @@ class ExtendedKalmanFilter(KalmanFilterBase):
         self.measurement_model = measurement_model
         """diffbayes.base.KalmanFilterMeasurementModel: Measurement model."""
 
-    def _predict_step(
-        self, *, controls: types.ControlsTorch,
-    ) -> Tuple[types.StatesTorch, types.CovarianceTorch]:
+    def _predict_step(self, *, controls: types.ControlsTorch) -> None:
         # Get previous belief
         prev_mean = self._belief_mean
         prev_covariance = self._belief_covariance
@@ -61,21 +59,18 @@ class ExtendedKalmanFilter(KalmanFilterBase):
             + dynamics_covariance
         )
 
-        return pred_mean, pred_covariance
+        # Update internal state
+        self._belief_mean = pred_mean
+        self._belief_covariance = pred_covariance
 
-    def _update_step(
-        self,
-        *,
-        predict_outputs: Tuple[types.StatesTorch, types.CovarianceTorch],
-        observations: types.ObservationsTorch,
-    ) -> None:
-
+    def _update_step(self, *, observations: types.ObservationsTorch) -> None:
         # Extract/validate inputs
         assert isinstance(
             observations, types.ObservationsNoDictTorch
         ), "For standard EKF, observations must be tensor!"
         observations = cast(types.ObservationsNoDictTorch, observations)
-        pred_mean, pred_covariance = predict_outputs
+        pred_mean = self._belief_mean
+        pred_covariance = self._belief_covariance
 
         # Measurement model forward pass, Jacobian
         observations_mean = observations
