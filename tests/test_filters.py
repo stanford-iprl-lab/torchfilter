@@ -82,9 +82,7 @@ def test_unscented_kalman_filter_merwe(generated_data):
         diffbayes.filters.UnscentedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
             measurement_model=LinearKalmanFilterMeasurementModel(),
-            sigma_point_strategy=diffbayes.utils.MerweSigmaPointStrategy(
-                dim=state_dim, alpha=1e-1
-            ),
+            sigma_point_strategy=diffbayes.utils.MerweSigmaPointStrategy(alpha=1e-1),
         ),
         generated_data,
     )

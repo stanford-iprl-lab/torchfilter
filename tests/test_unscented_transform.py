@@ -75,9 +75,7 @@ def test_unscented_transform_merwe_identity(dim: int):
     # Perform unscented transform
     unscented_transform = diffbayes.utils.UnscentedTransform(
         dim=dim,
-        sigma_point_strategy=diffbayes.utils.MerweSigmaPointStrategy(
-            dim=dim, alpha=2e-1
-        ),
+        sigma_point_strategy=diffbayes.utils.MerweSigmaPointStrategy(alpha=2e-1),
     )
     sigma_points = unscented_transform.select_sigma_points(input_mean, input_covariance)
     output_mean, output_covariance = unscented_transform.compute_distribution(
@@ -103,9 +101,7 @@ def test_unscented_transform_merwe_linear(dim: int):
     # Perform unscented transform
     unscented_transform = diffbayes.utils.UnscentedTransform(
         dim=dim,
-        sigma_point_strategy=diffbayes.utils.MerweSigmaPointStrategy(
-            dim=dim, alpha=2e-1
-        ),
+        sigma_point_strategy=diffbayes.utils.MerweSigmaPointStrategy(alpha=2e-1),
     )
     sigma_points = unscented_transform.select_sigma_points(input_mean, input_covariance)
     sigma_points = (A[:, None, :, :] @ sigma_points[:, :, :, None]).squeeze(-1)
@@ -133,9 +129,7 @@ def test_unscented_transform_merwe_square_root(dim: int):
     # Perform unscented transform
     unscented_transform = diffbayes.utils.UnscentedTransform(
         dim=dim,
-        sigma_point_strategy=diffbayes.utils.MerweSigmaPointStrategy(
-            dim=dim, alpha=2e-1
-        ),
+        sigma_point_strategy=diffbayes.utils.MerweSigmaPointStrategy(alpha=2e-1),
     )
     sigma_points = unscented_transform.select_sigma_points_square_root(
         input_mean, torch.cholesky(input_covariance)

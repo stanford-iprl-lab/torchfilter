@@ -1,5 +1,7 @@
+import warnings
 from typing import Optional, Tuple
 
+import numpy as np
 import torch
 
 import fannypack
@@ -21,18 +23,13 @@ class UnscentedTransform:
     """
 
     def __init__(
-        self, *, dim: int, sigma_point_strategy: Optional[SigmaPointStrategy] = None,
+        self,
+        *,
+        dim: int,
+        sigma_point_strategy: SigmaPointStrategy = JulierSigmaPointStrategy(),
     ):
-        self._dim = dim
-
-        if sigma_point_strategy is None:
-            sigma_point_strategy = JulierSigmaPointStrategy(dim=dim)
-        self.sigma_point_strategy: SigmaPointStrategy = sigma_point_strategy
-        """diffbayes.utils.SigmaPointStrategy: Strategy to use for sigma point
-        selection. Defaults to Julier."""
-
         # Sigma weights
-        weights_c, weights_m = sigma_point_strategy.compute_sigma_weights()
+        weights_c, weights_m = sigma_point_strategy.compute_sigma_weights(dim=dim)
 
         self.weights_c: torch.Tensor = weights_c
         """torch.Tensor: Unscented transform covariance weights. Note that this will be
@@ -40,6 +37,20 @@ class UnscentedTransform:
         self.weights_m: torch.Tensor = weights_m
         """torch.Tensor: Unscented transform mean weights. Note that this will be
         initially instantiated on the CPU, and moved in `compute_distribution()`."""
+
+        # State dimensionality
+        self._dim = dim
+
+        # Sigma point spread parameter
+        self._lambd = sigma_point_strategy.compute_lambda(dim=dim)
+
+        if self._lambd + dim < 1e-3:
+            warnings.warn(
+                "Unscented transform parameters may result in a very small matrix root;"
+                " consider tuning.",
+                RuntimeWarning,
+                stacklevel=1,
+            )
 
     def select_sigma_points(
         self, input_mean: torch.Tensor, input_covariance: types.CovarianceTorch,
@@ -53,14 +64,18 @@ class UnscentedTransform:
         Returns:
             torch.Tensor: Selected sigma points, with shape `(N, 2 * dim + 1, dim)`.
         """
-        return self.sigma_point_strategy.select_sigma_points(
-            input_mean=input_mean, input_covariance=input_covariance
+
+        N, dim = input_mean.shape
+        assert input_covariance.shape == (N, dim, dim)
+        assert dim == self._dim
+        return self.select_sigma_points_square_root(
+            input_mean, input_scale_tril=torch.cholesky(input_covariance)
         )
 
     def select_sigma_points_square_root(
         self, input_mean: torch.Tensor, input_scale_tril: types.ScaleTrilTorch,
     ) -> torch.Tensor:
-        """Select sigma points.
+        """Select sigma points using square root of covariance.
 
         Args:
             input_mean (torch.Tensor): Distribution mean. Shape should be `(N, dim)`.
@@ -69,9 +84,28 @@ class UnscentedTransform:
         Returns:
             torch.Tensor: Selected sigma points, with shape `(N, 2 * dim + 1, dim)`.
         """
-        return self.sigma_point_strategy.select_sigma_points_square_root(
-            input_mean=input_mean, input_scale_tril=input_scale_tril
-        )
+
+        N, dim = input_mean.shape
+        assert input_scale_tril.shape == (N, dim, dim)
+        assert dim == self._dim
+
+        # Compute matrix root, offsets for sigma points
+        #
+        # Note that we offset with the row vectors, so we need an upper-triangular
+        # cholesky decomposition [1].
+        #
+        # [1] https://www.cs.ubc.ca/~murphyk/Papers/Julier_Uhlmann_mar04.pdf
+        matrix_root = np.sqrt(dim + self._lambd) * input_scale_tril.transpose(-1, -2)
+        assert matrix_root.shape == (N, dim, dim)
+
+        sigma_point_offsets = input_mean.new_zeros((N, 2 * dim + 1, dim))
+        sigma_point_offsets[:, 1 : 1 + dim] = matrix_root
+        sigma_point_offsets[:, 1 + dim :] = -matrix_root
+
+        # Create & return matrix of sigma points
+        sigma_points: torch.Tensor = input_mean[:, None, :] + sigma_point_offsets
+        assert sigma_points.shape == (N, 2 * dim + 1, dim)
+        return sigma_points
 
     def compute_distribution(
         self, sigma_points: torch.Tensor,

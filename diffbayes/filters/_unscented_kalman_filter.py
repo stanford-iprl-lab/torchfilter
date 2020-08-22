@@ -30,9 +30,12 @@ class UnscentedKalmanFilter(KalmanFilterBase):
         super().__init__(state_dim=state_dim)
 
         # Unscented transform setup
-        self._unscented_transform = utils.UnscentedTransform(
-            dim=state_dim, sigma_point_strategy=sigma_point_strategy
-        )
+        if sigma_point_strategy is None:
+            self._unscented_transform = utils.UnscentedTransform(dim=state_dim)
+        else:
+            self._unscented_transform = utils.UnscentedTransform(
+                dim=state_dim, sigma_point_strategy=sigma_point_strategy
+            )
 
         # Assign submodules
         self.dynamics_model = dynamics_model
