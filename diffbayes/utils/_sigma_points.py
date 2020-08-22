@@ -2,6 +2,7 @@ import abc
 import warnings
 from typing import Optional, Tuple
 
+import numpy as np
 import torch
 
 from .. import types
@@ -49,6 +50,26 @@ class SigmaPointStrategy(abc.ABC):
         N, dim = input_mean.shape
         assert input_covariance.shape == (N, dim, dim)
         assert dim == self._dim
+        return self.select_sigma_points_square_root(
+            input_mean, input_scale_tril=torch.cholesky(input_covariance)
+        )
+
+    def select_sigma_points_square_root(
+        self, input_mean: torch.Tensor, input_scale_tril: types.ScaleTrilTorch,
+    ) -> torch.Tensor:
+        """Select sigma points using square root of covariance.
+
+        Args:
+            input_mean (torch.Tensor): Distribution mean. Shape should be `(N, dim)`.
+            input_scale_tril (torch.Tensor): Cholesky decomposition of distribution
+                covariance. Shape should be `(N, dim, dim)`.
+        Returns:
+            torch.Tensor: Selected sigma points, with shape `(N, 2 * dim + 1, dim)`.
+        """
+
+        N, dim = input_mean.shape
+        assert input_scale_tril.shape == (N, dim, dim)
+        assert dim == self._dim
 
         # Compute matrix root, offsets for sigma points
         #
@@ -56,9 +77,7 @@ class SigmaPointStrategy(abc.ABC):
         # cholesky decomposition [1].
         #
         # [1] https://www.cs.ubc.ca/~murphyk/Papers/Julier_Uhlmann_mar04.pdf
-        matrix_root = torch.cholesky(
-            (dim + self._lambd) * input_covariance, upper=True,
-        )
+        matrix_root = np.sqrt(dim + self._lambd) * input_scale_tril.transpose(-1, -2)
         assert matrix_root.shape == (N, dim, dim)
 
         sigma_point_offsets = input_mean.new_zeros((N, 2 * dim + 1, dim))

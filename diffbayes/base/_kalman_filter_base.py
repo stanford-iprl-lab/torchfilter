@@ -19,11 +19,14 @@ class KalmanFilterBase(Filter, abc.ABC):
     def __init__(self, *, state_dim: int):
         super().__init__(state_dim=state_dim)
 
-        self.belief_mean: torch.Tensor
-        """torch.Tensor: Estimated state mean."""
-        self.belief_covariance: torch.Tensor
-        """torch.Tensor: Estimated state covariance."""
+        # Protected attributes for posterior distribution: these should be accessed
+        # through the public `.belief_mean` and `.belief_covariance` properties
+        #
+        # `_belief_covariance` is unused for square-root filters
+        self._belief_mean: torch.Tensor
+        self._belief_covariance: torch.Tensor
 
+        # Throw an error if our filter is used before `.initialize_beliefs()` is called
         self._initialized = False
 
     def forward(
@@ -45,7 +48,7 @@ class KalmanFilterBase(Filter, abc.ABC):
         assert self._initialized, "Kalman filter not initialized!"
 
         # Validate inputs
-        N, state_dim = self.belief_mean.shape
+        N, state_dim = self._belief_mean.shape
         assert fp.utils.SliceWrapper(observations).shape[0] == N
         assert fp.utils.SliceWrapper(controls).shape[0] == N
 
@@ -59,10 +62,10 @@ class KalmanFilterBase(Filter, abc.ABC):
         self._update_step(predict_outputs=predict_outputs, observations=observations)
 
         # Validate belief
-        assert self.belief_mean.shape == (N, state_dim)
-        assert self.belief_covariance.shape == (N, state_dim, state_dim)
+        assert self._belief_mean.shape == (N, state_dim)
+        assert self._belief_covariance.shape == (N, state_dim, state_dim)
 
-        return self.belief_mean
+        return self._belief_mean
 
     def initialize_beliefs(
         self, *, mean: types.StatesTorch, covariance: types.CovarianceTorch
@@ -78,9 +81,29 @@ class KalmanFilterBase(Filter, abc.ABC):
         N = mean.shape[0]
         assert mean.shape == (N, self.state_dim)
         assert covariance.shape == (N, self.state_dim, self.state_dim)
-        self.belief_mean = mean
-        self.belief_covariance = covariance
+        self._belief_mean = mean
+        self._belief_covariance = covariance
         self._initialized = True
+
+    @property
+    def belief_mean(self) -> types.StatesTorch:
+        """Posterior mean. Shape should be `(N, state_dim)`.
+        """
+        return self._belief_mean
+
+    @belief_mean.setter
+    def belief_mean(self, mean: types.StatesTorch):
+        self._belief_mean = mean
+
+    @property
+    def belief_covariance(self) -> types.CovarianceTorch:
+        """Posterior covariance. Shape should be `(N, state_dim, state_dim)`.
+        """
+        return self._belief_covariance
+
+    @belief_covariance.setter
+    def belief_covariance(self, covariance: types.CovarianceTorch):
+        self._belief_covariance = covariance
 
     @abc.abstractmethod
     def _predict_step(self, *, controls: types.ControlsTorch) -> Any:

@@ -59,8 +59,8 @@ class UnscentedKalmanFilter(KalmanFilterBase):
         - Observation sigma points
         - Measurement model covariances
         """
-        prev_mean = self.belief_mean
-        prev_covariance = self.belief_covariance
+        prev_mean = self._belief_mean
+        prev_covariance = self._belief_covariance
         N, state_dim = prev_mean.shape
         observation_dim = self.measurement_model.observation_dim
 
@@ -191,8 +191,8 @@ class UnscentedKalmanFilter(KalmanFilterBase):
         innovations = observations - pred_observations
 
         # Update internal state with corrected beliefs
-        self.belief_mean = pred_mean + (K @ innovations[:, :, None]).squeeze(-1)
-        self.belief_covariance = (
+        self._belief_mean = pred_mean + (K @ innovations[:, :, None]).squeeze(-1)
+        self._belief_covariance = (
             pred_covariance - K @ pred_observations_covariance @ K.transpose(-1, -2)
         )
 

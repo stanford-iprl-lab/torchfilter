@@ -82,8 +82,8 @@ class VirtualSensorExtendedKalmanFilter(KalmanFilterBase):
         assert corrected_covariance.shape == (N, self.state_dim, self.state_dim)
 
         # Update internal state
-        self.belief_mean = corrected_mean
-        self.belief_covariance = corrected_covariance
+        self._belief_mean = corrected_mean
+        self._belief_covariance = corrected_covariance
 
     def virtual_sensor_initialize_beliefs(
         self, *, observations: types.ObservationsTorch,

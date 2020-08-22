@@ -40,8 +40,8 @@ class ExtendedKalmanFilter(KalmanFilterBase):
         self, *, controls: types.ControlsTorch,
     ) -> Tuple[types.StatesTorch, types.CovarianceTorch]:
         # Get previous belief
-        prev_mean = self.belief_mean
-        prev_covariance = self.belief_covariance
+        prev_mean = self._belief_mean
+        prev_covariance = self._belief_covariance
         N, state_dim = prev_mean.shape
 
         # Compute mu_{t+1|t}, covariance, and Jacobian
@@ -112,5 +112,5 @@ class ExtendedKalmanFilter(KalmanFilterBase):
         assert corrected_covariance.shape == (N, self.state_dim, self.state_dim)
 
         # Update internal state
-        self.belief_mean = corrected_mean
-        self.belief_covariance = corrected_covariance
+        self._belief_mean = corrected_mean
+        self._belief_covariance = corrected_covariance

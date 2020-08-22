@@ -2,6 +2,8 @@ from typing import Optional, Tuple
 
 import torch
 
+import fannypack
+
 from .. import types
 from ._sigma_points import JulierSigmaPointStrategy, SigmaPointStrategy
 
@@ -55,6 +57,22 @@ class UnscentedTransform:
             input_mean=input_mean, input_covariance=input_covariance
         )
 
+    def select_sigma_points_square_root(
+        self, input_mean: torch.Tensor, input_scale_tril: types.ScaleTrilTorch,
+    ) -> torch.Tensor:
+        """Select sigma points.
+
+        Args:
+            input_mean (torch.Tensor): Distribution mean. Shape should be `(N, dim)`.
+            input_scale_tril (torch.Tensor): Cholesky decomposition of distribution
+                covariance. Shape should be `(N, dim, dim)`.
+        Returns:
+            torch.Tensor: Selected sigma points, with shape `(N, 2 * dim + 1, dim)`.
+        """
+        return self.sigma_point_strategy.select_sigma_points_square_root(
+            input_mean=input_mean, input_scale_tril=input_scale_tril
+        )
+
     def compute_distribution(
         self, sigma_points: torch.Tensor,
     ) -> Tuple[torch.Tensor, types.CovarianceTorch]:
@@ -84,8 +102,8 @@ class UnscentedTransform:
         )
         assert transformed_mean.shape == (N, dim)
 
-        # sigma_points_centered = sigma_points - transformed_mean[:, None, :]
-        sigma_points_centered = sigma_points - sigma_points[:, 0:1, :]
+        sigma_points_centered = sigma_points - transformed_mean[:, None, :]
+        # sigma_points_centered = sigma_points - sigma_points[:, 0:1, :]
         transformed_covariance = torch.sum(
             self.weights_c[None, :, None, None]
             * (
@@ -96,3 +114,64 @@ class UnscentedTransform:
         )
         assert transformed_covariance.shape == (N, dim, dim)
         return transformed_mean, transformed_covariance
+
+    def compute_distribution_square_root(
+        self,
+        sigma_points: torch.Tensor,
+        additive_noise_scale_tril: Optional[types.ScaleTrilTorch] = None,
+    ) -> Tuple[torch.Tensor, types.ScaleTrilTorch]:
+        """Estimate a distribution from selected sigma points; square root formulation.
+
+        Args:
+            sigma_points (torch.Tensor): Sigma points, with shape
+                `(N, 2 * dim + 1, dim)`.
+            additive_noise_scale_tril (torch.Tensor, optional): Parameterizes an
+                additive Gaussian noise term. Should be lower-trinagular, with shape
+                `(N, dim, dim)`.
+
+        Returns:
+            Tuple[torch.Tensor, torch.Tensor]: Mean and square root of covariance, with
+            shapes `(N, dim)` and `(N, dim, dim)` respectively.
+        """
+        # Make sure devices match
+        device = sigma_points.device
+        if self.weights_c.device != device:
+            self.weights_c = self.weights_c.to(device)
+            self.weights_m = self.weights_m.to(device)
+
+        # Check shapes
+        N, sigma_point_count, dim = sigma_points.shape
+        assert self.weights_m.shape == self.weights_c.shape == (sigma_point_count,)
+
+        # Default: no additive noise
+        if additive_noise_scale_tril is None:
+            additive_noise_scale_tril = sigma_points.new_zeros((N, dim, dim))
+        else:
+            assert additive_noise_scale_tril.shape == (N, dim, dim)
+
+        # Compute transformed mean, covariance
+        transformed_mean = torch.sum(
+            self.weights_m[None, :, None] * sigma_points, dim=1
+        )
+        assert transformed_mean.shape == (N, dim)
+
+        sigma_points_centered = sigma_points - transformed_mean[:, None, :]
+        # sigma_points_centered = sigma_points - sigma_points[:, 0:1, :]
+
+        concatenated = torch.cat(
+            [
+                sigma_points_centered[:, 1:, :] * torch.sqrt(self.weights_c[1]),
+                additive_noise_scale_tril.transpose(-1, -2),
+            ],
+            dim=1,
+        )
+        _unused_Q, R = torch.qr(concatenated, some=False)
+        L = R[:, :dim, :].transpose(-1, -2)
+        assert L.shape == (N, dim, dim)
+
+        transformed_scale_tril = fannypack.utils.cholupdate(
+            L=L, x=sigma_points_centered[:, 0, :], weight=self.weights_c[0],
+        )
+
+        assert transformed_scale_tril.shape == (N, dim, dim)
+        return transformed_mean, transformed_scale_tril
