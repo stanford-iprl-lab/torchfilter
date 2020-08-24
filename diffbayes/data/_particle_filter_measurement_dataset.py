@@ -1,11 +1,10 @@
 from typing import List, Tuple
 
+import fannypack
 import numpy as np
 import scipy.stats
 import torch
 from tqdm.auto import tqdm
-
-import fannypack
 
 from .. import types
 

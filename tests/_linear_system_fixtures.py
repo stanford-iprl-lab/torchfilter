@@ -2,12 +2,10 @@ import os
 import shutil
 from typing import List, Tuple
 
+import fannypack as fp
 import numpy as np
 import pytest
 import torch
-
-import diffbayes
-import fannypack as fp
 from _linear_system_models import (
     LinearDynamicsModel,
     LinearKalmanFilterMeasurementModel,
@@ -15,6 +13,8 @@ from _linear_system_models import (
     observation_dim,
     state_dim,
 )
+
+import diffbayes
 from diffbayes import types
 
 

@@ -1,10 +1,9 @@
 import warnings
 from typing import Optional, Tuple
 
+import fannypack
 import numpy as np
 import torch
-
-import fannypack
 
 from .. import types
 from ._sigma_points import JulierSigmaPointStrategy, SigmaPointStrategy

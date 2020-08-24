@@ -1,5 +1,4 @@
 import torch
-
 from _linear_system_models import (
     A,
     C,

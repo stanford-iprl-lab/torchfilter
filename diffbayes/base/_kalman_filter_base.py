@@ -1,11 +1,12 @@
 import abc
 
+import fannypack as fp
 import torch
 
-import fannypack as fp
-
 from .. import types
+from ._dynamics_model import DynamicsModel
 from ._filter import Filter
+from ._kalman_filter_measurement_model import KalmanFilterMeasurementModel
 
 
 class KalmanFilterBase(Filter, abc.ABC):
@@ -15,8 +16,25 @@ class KalmanFilterBase(Filter, abc.ABC):
     Subclasses should override _predict_step() and _update_step().
     """
 
-    def __init__(self, *, state_dim: int):
-        super().__init__(state_dim=state_dim)
+    def __init__(
+        self,
+        *,
+        dynamics_model: DynamicsModel,
+        measurement_model: KalmanFilterMeasurementModel,
+        **unused_kwargs,  # For type-checking
+    ):
+        super().__init__(state_dim=dynamics_model.state_dim)
+
+        # Check submodule consistency
+        assert isinstance(dynamics_model, DynamicsModel)
+        assert isinstance(measurement_model, KalmanFilterMeasurementModel)
+
+        # Assign submodules
+        self.dynamics_model = dynamics_model
+        """diffbayes.base.DynamicsModel: Forward model."""
+
+        self.measurement_model = measurement_model
+        """diffbayes.base.KalmanFilterMeasurementModel: Measurement model."""
 
         # Protected attributes for posterior distribution: these should be accessed
         # through the public `.belief_mean` and `.belief_covariance` properties

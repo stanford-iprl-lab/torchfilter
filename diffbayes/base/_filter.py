@@ -1,9 +1,7 @@
 import abc
 
-import torch
-import torch.nn as nn
-
 import fannypack
+import torch.nn as nn
 
 from .. import types
 

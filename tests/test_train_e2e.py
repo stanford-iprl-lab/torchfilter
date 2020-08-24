@@ -1,10 +1,8 @@
 from typing import List
 
+import fannypack
 import pytest
 import torch
-
-import diffbayes
-import fannypack
 from _linear_system_fixtures import (
     buddy,
     generated_data,
@@ -20,6 +18,8 @@ from _linear_system_models import (
     get_trainable_model_error,
     state_dim,
 )
+
+import diffbayes
 from diffbayes import types
 
 

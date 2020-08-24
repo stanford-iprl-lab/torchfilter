@@ -1,8 +1,7 @@
 from typing import Optional, cast
 
-import torch
-
 import fannypack
+import torch
 
 from .. import types, utils
 from ..base._dynamics_model import DynamicsModel
@@ -29,28 +28,17 @@ class UnscentedKalmanFilter(KalmanFilterBase):
         measurement_model: KalmanFilterMeasurementModel,
         sigma_point_strategy: Optional[utils.SigmaPointStrategy] = None,
     ):
-        # Check submodule consistency
-        assert isinstance(dynamics_model, DynamicsModel)
-        assert isinstance(measurement_model, KalmanFilterMeasurementModel)
-
-        # Initialize state dimension
-        state_dim = dynamics_model.state_dim
-        super().__init__(state_dim=state_dim)
+        super().__init__(
+            dynamics_model=dynamics_model, measurement_model=measurement_model
+        )
 
         # Unscented transform setup
         if sigma_point_strategy is None:
-            self._unscented_transform = utils.UnscentedTransform(dim=state_dim)
+            self._unscented_transform = utils.UnscentedTransform(dim=self.state_dim)
         else:
             self._unscented_transform = utils.UnscentedTransform(
-                dim=state_dim, sigma_point_strategy=sigma_point_strategy
+                dim=self.state_dim, sigma_point_strategy=sigma_point_strategy
             )
-
-        # Assign submodules
-        self.dynamics_model = dynamics_model
-        """diffbayes.base.DynamicsModel: Forward model."""
-
-        self.measurement_model = measurement_model
-        """diffbayes.base.KalmanFilterMeasurementModel: Measurement model."""
 
         # Cache for sigma points; if set, this should always correspond to the current
         # belief distribution

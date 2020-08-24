@@ -1,7 +1,6 @@
+import fannypack
 import numpy as np
 import torch
-
-import fannypack
 
 from .. import types
 from ..base._dynamics_model import DynamicsModel

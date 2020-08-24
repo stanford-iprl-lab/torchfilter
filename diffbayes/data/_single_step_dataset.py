@@ -1,8 +1,7 @@
 from typing import List, Tuple
 
-from torch.utils.data import Dataset
-
 import fannypack as fp
+from torch.utils.data import Dataset
 
 from .. import types
 

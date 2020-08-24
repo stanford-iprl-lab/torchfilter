@@ -1,12 +1,12 @@
 from typing import Callable, cast
 
+import fannypack
 import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 
 import diffbayes
-import fannypack
 
 
 def _swap_batch_sequence_axes(tensor: torch.Tensor) -> torch.Tensor:

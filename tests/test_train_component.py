@@ -1,4 +1,3 @@
-import diffbayes
 import fannypack
 from _linear_system_fixtures import (
     buddy,
@@ -16,6 +15,8 @@ from _linear_system_models import (
     get_trainable_model_error,
     state_dim,
 )
+
+import diffbayes
 
 
 def test_train_dynamics_recurrent(subsequence_dataloader, buddy):

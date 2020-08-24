@@ -1,10 +1,9 @@
 import abc
 from typing import List, Tuple
 
+import fannypack
 import torch
 import torch.nn as nn
-
-import fannypack
 
 from .. import types
 

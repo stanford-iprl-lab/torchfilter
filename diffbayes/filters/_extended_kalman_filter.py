@@ -1,11 +1,9 @@
-from typing import Tuple, cast
+from typing import cast
 
 import torch
 
 from .. import types
-from ..base._dynamics_model import DynamicsModel
 from ..base._kalman_filter_base import KalmanFilterBase
-from ..base._kalman_filter_measurement_model import KalmanFilterMeasurementModel
 
 
 class ExtendedKalmanFilter(KalmanFilterBase):
@@ -14,27 +12,6 @@ class ExtendedKalmanFilter(KalmanFilterBase):
     For building estimators with more complex observation spaces (eg images), see
     `VirtualSensorExtendedKalmanFilter`.
     """
-
-    def __init__(
-        self,
-        *,
-        dynamics_model: DynamicsModel,
-        measurement_model: KalmanFilterMeasurementModel,
-    ):
-        # Check submodule consistency
-        assert isinstance(dynamics_model, DynamicsModel)
-        assert isinstance(measurement_model, KalmanFilterMeasurementModel)
-
-        # Initialize state dimension
-        state_dim = dynamics_model.state_dim
-        super().__init__(state_dim=state_dim)
-
-        # Assign submodules
-        self.dynamics_model = dynamics_model
-        """diffbayes.base.DynamicsModel: Forward model."""
-
-        self.measurement_model = measurement_model
-        """diffbayes.base.KalmanFilterMeasurementModel: Measurement model."""
 
     def _predict_step(self, *, controls: types.ControlsTorch) -> None:
         # Get previous belief

@@ -1,8 +1,6 @@
 from typing import Tuple
 
 import torch
-
-import diffbayes
 from _linear_system_fixtures import generated_data
 from _linear_system_models import (
     LinearDynamicsModel,
@@ -11,6 +9,8 @@ from _linear_system_models import (
     LinearVirtualSensorModel,
     state_dim,
 )
+
+import diffbayes
 from diffbayes import types
 
 
@@ -39,7 +39,7 @@ def test_particle_filter_resample(generated_data):
     )
 
 
-def test_extended_kalman_filter(generated_data):
+def test_ekf(generated_data):
     """Smoke test for EKF.
     """
     _run_filter(
@@ -51,7 +51,7 @@ def test_extended_kalman_filter(generated_data):
     )
 
 
-def test_virtual_sensor_extended_kalman_filter(generated_data):
+def test_virtual_sensor_ekf(generated_data):
     """Smoke test for EKF w/ virtual sensor.
     """
     _run_filter(
@@ -63,7 +63,7 @@ def test_virtual_sensor_extended_kalman_filter(generated_data):
     )
 
 
-def test_unscented_kalman_filter(generated_data):
+def test_ukf(generated_data):
     """Smoke test for UKF w/ Julier-style sigma points.
     """
     _run_filter(
@@ -75,7 +75,7 @@ def test_unscented_kalman_filter(generated_data):
     )
 
 
-def test_unscented_kalman_filter_merwe(generated_data):
+def test_ukf_merwe(generated_data):
     """Smoke test for UKF w/ Merwe-style sigma points.
     """
     _run_filter(
@@ -88,7 +88,20 @@ def test_unscented_kalman_filter_merwe(generated_data):
     )
 
 
-def test_square_root_unscented_kalman_filter(generated_data):
+def test_virtual_sensor_ukf(generated_data):
+    """Smoke test for virtual sensor UKF w/ Julier-style sigma points.
+    """
+    _run_filter(
+        diffbayes.filters.VirtualSensorUnscentedKalmanFilter(
+            dynamics_model=LinearDynamicsModel(),
+            virtual_sensor_model=LinearVirtualSensorModel(),
+            sigma_point_strategy=diffbayes.utils.JulierSigmaPointStrategy(),  # optional
+        ),
+        generated_data,
+    )
+
+
+def test_srukf(generated_data):
     """Smoke test for SRUKF w/ Julier-style sigma points.
     """
     _run_filter(
@@ -100,7 +113,7 @@ def test_square_root_unscented_kalman_filter(generated_data):
     )
 
 
-def test_square_root_unscented_kalman_filter_merwe(generated_data):
+def test_srukf_merwe(generated_data):
     """Smoke test for SRUKF w/ Merwe-style sigma points.
     """
     _run_filter(
@@ -108,6 +121,19 @@ def test_square_root_unscented_kalman_filter_merwe(generated_data):
             dynamics_model=LinearDynamicsModel(),
             measurement_model=LinearKalmanFilterMeasurementModel(),
             sigma_point_strategy=diffbayes.utils.MerweSigmaPointStrategy(alpha=1e-1),
+        ),
+        generated_data,
+    )
+
+
+def test_virtual_sensor_srukf(generated_data):
+    """Smoke test for virtual sensor SRUKF w/ Julier-style sigma points.
+    """
+    _run_filter(
+        diffbayes.filters.VirtualSensorSquareRootUnscentedKalmanFilter(
+            dynamics_model=LinearDynamicsModel(),
+            virtual_sensor_model=LinearVirtualSensorModel(),
+            sigma_point_strategy=diffbayes.utils.JulierSigmaPointStrategy(),  # optional
         ),
         generated_data,
     )
@@ -135,6 +161,62 @@ def test_virtual_sensor_ekf_consistency(generated_data):
     torch.testing.assert_allclose(ekf.belief_mean, virtual_sensor_ekf.belief_mean)
     torch.testing.assert_allclose(
         ekf.belief_covariance, virtual_sensor_ekf.belief_covariance,
+    )
+
+
+def test_virtual_sensor_ukf_consistency(generated_data):
+    """Check that our Virtual Sensor UKF and standard EKF produce consistent results for
+    a linear system.
+    """
+    # Create filters
+    ekf = diffbayes.filters.ExtendedKalmanFilter(
+        dynamics_model=LinearDynamicsModel(),
+        measurement_model=LinearKalmanFilterMeasurementModel(),
+    )
+    virtual_sensor_ukf = diffbayes.filters.VirtualSensorUnscentedKalmanFilter(
+        dynamics_model=LinearDynamicsModel(),
+        virtual_sensor_model=LinearVirtualSensorModel(),
+    )
+
+    # Run over data
+    _run_filter(ekf, generated_data)
+    _run_filter(virtual_sensor_ukf, generated_data)
+
+    # Check final beliefs
+    torch.testing.assert_allclose(ekf.belief_mean, virtual_sensor_ukf.belief_mean)
+    torch.testing.assert_allclose(
+        ekf.belief_covariance,
+        virtual_sensor_ukf.belief_covariance,
+        rtol=1e-4,
+        atol=5e-4,
+    )
+
+
+def test_virtual_sensor_srukf_consistency(generated_data):
+    """Check that our Virtual Sensor SRUKF and standard EKF produce consistent results for
+    a linear system.
+    """
+    # Create filters
+    ekf = diffbayes.filters.ExtendedKalmanFilter(
+        dynamics_model=LinearDynamicsModel(),
+        measurement_model=LinearKalmanFilterMeasurementModel(),
+    )
+    virtual_sensor_srukf = diffbayes.filters.VirtualSensorSquareRootUnscentedKalmanFilter(
+        dynamics_model=LinearDynamicsModel(),
+        virtual_sensor_model=LinearVirtualSensorModel(),
+    )
+
+    # Run over data
+    _run_filter(ekf, generated_data)
+    _run_filter(virtual_sensor_srukf, generated_data)
+
+    # Check final beliefs
+    torch.testing.assert_allclose(ekf.belief_mean, virtual_sensor_srukf.belief_mean)
+    torch.testing.assert_allclose(
+        ekf.belief_covariance,
+        virtual_sensor_srukf.belief_covariance,
+        rtol=1e-4,
+        atol=5e-4,
     )
 
 
