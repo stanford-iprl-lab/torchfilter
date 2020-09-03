@@ -1,5 +1,6 @@
 from typing import Callable
 
+import fannypack
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -7,10 +8,9 @@ from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 
 import diffbayes
-import fannypack
 
 
-def train_particle_filter_measurement_model(
+def train_particle_filter_measurement(
     buddy: fannypack.utils.Buddy,
     measurement_model: diffbayes.base.ParticleFilterMeasurementModel,
     dataloader: DataLoader,
@@ -18,12 +18,14 @@ def train_particle_filter_measurement_model(
     loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss,
     log_interval: int = 10,
 ) -> None:
-    """Optimizes a dynamics model's single-step prediction accuracy.
+    """Reference implementation for pre-training a particle filter measurement model.
+    Minimizes prediction error for log-likelihood outputs from (state, observation)
+    pairs.
 
     Args:
         buddy (fannypack.utils.Buddy): Training helper.
-        dynamics_model (diffbayes.base.DynamicsModel): Model to train.
-        dataloader (DataLoader): Loader for a SingleStepDataset.
+        measurement_model (diffbayes.base.ParticleFilterMeasurementModel): Model.
+        dataloader (DataLoader): Loader for a ParticleFilterMeasurementDataset.
 
     Keyword Args:
         loss_function (callable, optional): Loss function, from `torch.nn.functional`.
@@ -61,13 +63,13 @@ def train_particle_filter_measurement_model(
             buddy.minimize(loss, optimizer_name="train_measurement")
 
             if buddy.optimizer_steps % log_interval == 0:
-                buddy.log("Training loss", loss)
+                buddy.log_scalar("Training loss", loss)
 
-                buddy.log("Pred likelihoods mean", pred_likelihoods.mean())
-                buddy.log("Pred likelihoods std", pred_likelihoods.std())
+                buddy.log_scalar("Pred likelihoods mean", pred_likelihoods.mean())
+                buddy.log_scalar("Pred likelihoods std", pred_likelihoods.std())
 
-                buddy.log("Label likelihoods mean", log_likelihoods.mean())
-                buddy.log("Label likelihoods std", log_likelihoods.std())
+                buddy.log_scalar("Label likelihoods mean", log_likelihoods.mean())
+                buddy.log_scalar("Label likelihoods std", log_likelihoods.std())
 
     # Print average training loss
     epoch_loss /= len(dataloader)

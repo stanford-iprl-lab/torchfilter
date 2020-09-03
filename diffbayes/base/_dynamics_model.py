@@ -1,10 +1,9 @@
 import abc
 from typing import List, Tuple
 
+import fannypack
 import torch
 import torch.nn as nn
-
-import fannypack
 
 from .. import types
 
@@ -25,8 +24,13 @@ class DynamicsModel(nn.Module, abc.ABC):
 
     def forward(
         self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch,
-    ) -> Tuple[types.StatesTorch, torch.Tensor]:
+    ) -> Tuple[types.StatesTorch, types.ScaleTrilTorch]:
         """Dynamics model forward pass, single timestep.
+        Computes both predicted states and uncertainties. Note that uncertainties
+        correspond to the (Cholesky decompositions of the) "Q" matrices in a standard
+        linear dynamical system w/ additive white Gaussian noise. In other words, they
+        should be lower triangular and not accumulate -- the uncertainty at at time `t`
+        should be computed as if the estimate at time `t - 1` is a ground-truth input.
 
         Computes both predicted states and uncertainties. Note that uncertainties
         correspond to the (Cholesky decompositions of the) "Q" matrices in a standard
@@ -36,9 +40,9 @@ class DynamicsModel(nn.Module, abc.ABC):
 
         By default, this is implemented by bootstrapping the `forward_loop()`
         method.
-
         Args:
-            initial_states (torch.Tensor): Initial states of our system.
+            initial_states (torch.Tensor): Initial states of our system. Shape should be
+                `(N, state_dim)`.
             controls (dict or torch.Tensor): Control inputs. Should be either a
                 dict of tensors or tensor of size `(N, ...)`.
 
@@ -64,7 +68,7 @@ class DynamicsModel(nn.Module, abc.ABC):
         return predictions[0], scale_trils[0]
 
     def forward_loop(
-        self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch,
+        self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch
     ) -> Tuple[types.StatesTorch, torch.Tensor]:
         """Dynamics model forward pass, over sequence length `T` and batch size
         `N`.  By default, this is implemented by iteratively calling
@@ -78,7 +82,6 @@ class DynamicsModel(nn.Module, abc.ABC):
 
         To inject code between timesteps (for example, to inspect hidden state),
         use `register_forward_hook()`.
-
         Args:
             initial_states (torch.Tensor): Initial states to pass to our
                 dynamics model. Shape should be `(N, state_dim)`.
@@ -143,9 +146,39 @@ class DynamicsModel(nn.Module, abc.ABC):
         else:
             # If our noise is time-varying, stack normally
             scale_trils = torch.stack(scale_trils_list, dim=0)
-            assert False
 
         # Validate & return state estimates
         assert predictions.shape == (T, N, self.state_dim)
         assert scale_trils.shape == (T, N, self.state_dim, self.state_dim)
         return predictions, scale_trils
+
+    def jacobian(
+        self, initial_states: types.StatesTorch, controls: types.ControlsTorch,
+    ) -> torch.Tensor:
+        """Returns Jacobian of the dynamics model.
+
+        Args:
+            states (torch.Tensor): Current state, size `(N, state_dim)`.
+            controls (dict or torch.Tensor): Control inputs. Should be either a
+                dict of tensors or tensor of size `(N, ...)`.
+
+        Returns:
+            torch.Tensor: Jacobian, size `(N, state_dim, state_dim)`
+        """
+        with torch.enable_grad():
+            x = initial_states.detach().clone()
+
+            N, ndim = x.shape
+            assert ndim == self.state_dim
+            x = x[:, None, :].expand((N, ndim, ndim))
+            controls = fannypack.utils.SliceWrapper(controls).map(
+                lambda tensor: torch.repeat_interleave(tensor, repeats=ndim, dim=0)
+            )
+            x.requires_grad_(True)
+            y = self(initial_states=x.reshape((-1, ndim)), controls=controls)[
+                0
+            ].reshape((N, ndim, ndim))
+            mask = torch.eye(ndim, device=x.device).repeat(N, 1, 1)
+            jac = torch.autograd.grad(y, x, mask, create_graph=True)
+
+        return jac[0]

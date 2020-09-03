@@ -1,15 +1,14 @@
-from typing import Dict, List, cast
+from typing import List
 
+import fannypack as fp
 import numpy as np
-
-import fannypack
 
 from .. import types
 
 
 def split_trajectories(
-    trajectories: List[types.TrajectoryTupleNumpy], subsequence_length: int
-) -> List[types.TrajectoryTupleNumpy]:
+    trajectories: List[types.TrajectoryNumpy], subsequence_length: int
+) -> List[types.TrajectoryNumpy]:
     """Helper for splitting a list of trajectories into a list of overlapping
     subsequences.
 
@@ -25,79 +24,55 @@ def split_trajectories(
     ```
 
     Args:
-        trajectories (list): list of trajectories, where each is a tuple of
-            `(states, observations, controls)`. Each tuple member should be
-            either a numpy array or dict of numpy arrays with shape `(T, ...)`.
+        trajectories (List[diffbayes.base.TrajectoryNumpy]): List of trajectories.
         subsequence_length (int): # of timesteps per subsequence.
     Returns:
-        list: A list of subsequences, as `(states, observations, controls)`
-        tuples. Each tuple member should be either a numpy array or dict of
-        numpy arrays with shape `(subsequence_length, ...)`.
+        List[diffbayes.base.TrajectoryNumpy]: List of subsequences.
     """
 
     subsequences = []
 
-    for trajectory in trajectories:
+    for traj in trajectories:
         # Chop up each trajectory into overlapping subsequences
-        assert len(trajectory) == 3
-        states, observations, controls = trajectory
-
-        trajectory_length = len(states)
-        assert len(fannypack.utils.SliceWrapper(observations)) == trajectory_length
-        assert len(fannypack.utils.SliceWrapper(controls)) == trajectory_length
+        trajectory_length = len(traj.states)
+        assert len(fp.utils.SliceWrapper(traj.observations)) == trajectory_length
+        assert len(fp.utils.SliceWrapper(traj.controls)) == trajectory_length
 
         # We iterate over two offsets to generate overlapping subsequences
         for offset in (0, subsequence_length // 2):
+
+            def split_fn(x: np.ndarray) -> np.ndarray:
+                """Helper: splits arrays of shape `(T, ...)` into `(sections,
+                subsequence_length, ...)`, where `sections = orig_length //
+                subsequence_length`."""
+                # Offset our starting point
+                x = x[offset:]
+
+                # Make sure our array is evenly divisible
+                sections = len(x) // subsequence_length
+                new_length = sections * subsequence_length
+                x = x[:new_length]
+
+                # Split & return
+                return np.split(x, sections)
+
+            s: types.StatesNumpy
+            o: types.ObservationsNumpy
+            c: types.ControlsNumpy
             for s, o, c in zip(
-                _split_helper(states, subsequence_length, offset),
-                fannypack.utils.SliceWrapper(
-                    _split_helper(observations, subsequence_length, offset)
+                # States are always raw arrays
+                split_fn(traj.states),
+                # Observations and controls can be dictionaries, so we have to jump
+                # through some hoops
+                fp.utils.SliceWrapper(
+                    fp.utils.SliceWrapper(traj.observations).map(split_fn)
                 ),
-                fannypack.utils.SliceWrapper(
-                    _split_helper(controls, subsequence_length, offset)
+                fp.utils.SliceWrapper(
+                    fp.utils.SliceWrapper(traj.controls).map(split_fn)
                 ),
             ):
-                # Numpy => Torch
-                s = fannypack.utils.to_torch(s)
-                o = fannypack.utils.to_torch(o)
-                c = fannypack.utils.to_torch(c)
-
                 # Add to subsequences
-                subsequences.append((s, o, c))
+                subsequences.append(
+                    types.TrajectoryNumpy(states=s, observations=o, controls=c)
+                )
     return subsequences
-
-
-def _split_helper(
-    x: types.NumpyArrayOrDict, subsequence_length: int, offset: int,
-) -> types.NumpyArrayOrDict:
-    """Private helper: splits arrays or dicts of arrays of shape `(T, ...)`
-    into `(sections, subsequence_length, ...)`, where `sections = orig_length //
-    subsequence_length`.
-    """
-    if type(x) == np.ndarray:
-        x_array = cast(np.ndarray, x)
-
-        # Offset our starting point
-        x_array = x_array[offset:]
-
-        # Make sure our array is evenly divisible
-        sections = len(x_array) // subsequence_length
-        new_length = sections * subsequence_length
-        x_array = x_array[:new_length]
-
-        # Split & return
-        return np.split(x_array, sections)
-    elif type(x) == dict:
-        x_dict = cast(types.NumpyDict, x)
-
-        # For dictionary inputs, we split the contents of each
-        # value in the dictionary
-        output: types.NumpyDict = {}
-        for key, value in x_dict.items():
-            output[key] = cast(
-                np.ndarray, _split_helper(value, subsequence_length, offset)
-            )
-
-        return output
-    else:
-        assert False, "Unsupported trajectory type"

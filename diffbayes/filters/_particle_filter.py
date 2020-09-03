@@ -1,16 +1,15 @@
-import abc
-
+import fannypack
 import numpy as np
 import torch
 
-import fannypack
-
 from .. import types
-from . import DynamicsModel, Filter, ParticleFilterMeasurementModel
+from ..base._dynamics_model import DynamicsModel
+from ..base._filter import Filter
+from ..base._particle_filter_measurement_model import ParticleFilterMeasurementModel
 
 
-class ParticleFilter(Filter, abc.ABC):
-    """Base class for a generic differentiable particle filter.
+class ParticleFilter(Filter):
+    """Generic differentiable particle filter.
     """
 
     def __init__(
@@ -69,8 +68,11 @@ class ParticleFilter(Filter, abc.ABC):
         """torch.Tensor: Weights corresponding to each particle, stored as
         log-likelihoods. Shape should be `(N, M)`.
         """
+        self._initialized = False
 
-    def initialize_beliefs(self, *, mean: torch.Tensor, covariance: torch.Tensor):
+    def initialize_beliefs(
+        self, *, mean: types.StatesTorch, covariance: types.CovarianceTorch
+    ):
         """Populates initial particles, which will be normally distributed.
 
         Args:
@@ -98,6 +100,9 @@ class ParticleFilter(Filter, abc.ABC):
         )
         assert self.particle_log_weights.shape == (N, M)
 
+        # Set initialized flag
+        self._initialized = True
+
     def forward(
         self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch,
     ) -> types.StatesTorch:
@@ -115,9 +120,7 @@ class ParticleFilter(Filter, abc.ABC):
         """
 
         # Make sure our particle filter's been initialized
-        assert (
-            self.particle_states != None and self.particle_log_weights != None
-        ), "Particle filter not initialized!"
+        assert self._initialized, "Particle filter not initialized!"
 
         # Get our batch size (N), current particle count (M), & state dimension
         N, M, state_dim = self.particle_states.shape
@@ -196,7 +199,7 @@ class ParticleFilter(Filter, abc.ABC):
             torch.distributions.MultivariateNormal(
                 loc=predicted_states, scale_tril=scale_trils
             )
-            .rsample() # Note that we use `rsample` to make sampling differentiable
+            .rsample()  # Note that we use `rsample` to make sampling differentiable
             .view(N, M, self.state_dim)
         )
         assert self.particle_states.shape == (N, M, self.state_dim)
@@ -218,7 +221,7 @@ class ParticleFilter(Filter, abc.ABC):
                 * self.particle_states,
                 dim=1,
             )
-        elif self.estimattion_method == "argmax":
+        elif self.estimation_method == "argmax":
             best_indices = torch.argmax(self.particle_log_weights, dim=1)
             state_estimates = torch.gather(
                 self.particle_states, dim=1, index=best_indices

@@ -1,26 +1,22 @@
 from typing import List, Tuple
 
-import numpy as np
+import fannypack as fp
 from torch.utils.data import Dataset
-
-import fannypack
 
 from .. import types
 
 
 class SingleStepDataset(Dataset):
-    """A data preprocessor for producing single-step training examples from
-    a list of trajectories.
+    """A dataset interface that returns single-step training examples:
+    `(previous_state, state, observation, control)`
+
+    By default, extracts these examples from a list of trajectories.
 
     Args:
-        trajectories (list): list of trajectories, where each is a tuple of
-            `(states, observations, controls)`. Each tuple member should be
-            either a numpy array or dict of numpy arrays with shape `(T, ...)`.
+        trajectories (List[diffbayes.types.TrajectoryNumpy]): List of trajectories.
     """
 
-    def __init__(self, trajectories: List[types.TrajectoryTupleNumpy]):
-        # Split trajectory into samples:
-        #   (initial_state, next_state, observation, control)
+    def __init__(self, trajectories: List[types.TrajectoryNumpy]):
         self.samples: List[
             Tuple[
                 types.StatesNumpy,
@@ -30,21 +26,15 @@ class SingleStepDataset(Dataset):
             ]
         ] = []
 
-        for trajectory in trajectories:
-            states, observations, controls = trajectory
-
-            # Make observations and controls indexable, in case they're dictionaries
-            observations = fannypack.utils.SliceWrapper(observations)
-            controls = fannypack.utils.SliceWrapper(controls)
-
-            timesteps = len(states)
-            for t in range(timesteps - 1):
+        for traj in trajectories:
+            T = len(traj.states)
+            for t in range(T - 1):
                 self.samples.append(
                     (
-                        states[t],  # initial_state
-                        states[t + 1],  # next_state
-                        observations[t + 1],  # observation
-                        controls[t + 1],  # control
+                        traj.states[t],  # previous_state
+                        traj.states[t + 1],  # state
+                        fp.utils.SliceWrapper(traj.observations)[t + 1],  # observation
+                        fp.utils.SliceWrapper(traj.controls)[t + 1],  # control
                     )
                 )
 
@@ -61,11 +51,11 @@ class SingleStepDataset(Dataset):
         Args:
             index (int): Subsequence number in our dataset.
         Returns:
-            tuple: `(initial_state, next_state, observation, control)` tuple that
+            tuple: `(previous_state, state, observation, control)` tuple that
             contains data for a single subsequence. Each tuple member should be either a
             numpy array or dict of numpy arrays with shape `(subsequence_length, ...)`.
         """
-        return fannypack.utils.to_torch(self.samples[index])
+        return self.samples[index]
 
     def __len__(self) -> int:
         """Total number of subsequences in the dataset.

@@ -1,9 +1,7 @@
 import abc
 
-import torch
-import torch.nn as nn
-
 import fannypack
+import torch.nn as nn
 
 from .. import types
 
@@ -23,7 +21,7 @@ class Filter(nn.Module, abc.ABC):
 
     @abc.abstractmethod
     def initialize_beliefs(
-        self, *, mean: types.StatesTorch, covariance: torch.Tensor
+        self, *, mean: types.StatesTorch, covariance: types.CovarianceTorch
     ) -> None:
         """Initialize our filter with a Gaussian prior.
 

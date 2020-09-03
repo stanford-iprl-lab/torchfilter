@@ -1,0 +1,24 @@
+[report]
+exclude_lines =
+    # Have to re-enable the standard pragma
+    pragma: no cover
+
+    # Don't compute coverage for abstract methods, properties
+    @abstract
+    @abc\.abstract
+
+    # or warnings
+    warnings
+
+    # or empty function bodies
+    pass
+    \.\.\.
+
+    # or cuda stuff
+    cuda
+
+    # or typing imports
+    TYPE_CHECKING
+
+    # or assert statements
+    assert
