@@ -126,24 +126,24 @@ def train_dynamics_recurrent(
     for batch_idx, batch_data in enumerate(tqdm(dataloader)):
         # Move data
         batch_gpu = fannypack.utils.to_device(batch_data, buddy.device)
-        true_states, observations, controls = batch_gpu
+        states_label, observations, controls = batch_gpu
 
         # Swap batch size, sequence length axes
-        true_states = _swap_batch_sequence_axes(true_states)
+        states_label = _swap_batch_sequence_axes(states_label)
         observations = fannypack.utils.SliceWrapper(observations).map(
             _swap_batch_sequence_axes
         )
         controls = fannypack.utils.SliceWrapper(controls).map(_swap_batch_sequence_axes)
 
         # Shape checks
-        T, N, state_dim = true_states.shape
+        T, N, state_dim = states_label.shape
         assert state_dim == dynamics_model.state_dim
         assert fannypack.utils.SliceWrapper(observations).shape[:2] == (T, N)
         assert fannypack.utils.SliceWrapper(controls).shape[:2] == (T, N)
         assert batch_idx != 0 or N == dataloader.batch_size
 
         # Forward pass from the first state
-        initial_states = true_states[0]
+        initial_states = states_label[0]
         predictions, scale_trils = dynamics_model.forward_loop(
             initial_states=initial_states, controls=controls[1:]
         )
@@ -155,11 +155,11 @@ def train_dynamics_recurrent(
         # Minimize loss
         losses = {}
         if log_flag or loss_function == "mse":
-            losses["mse"] = F.mse_loss(predictions, true_states[1:])
+            losses["mse"] = F.mse_loss(predictions, states_label[1:])
         if log_flag or loss_function == "nll":
             log_likelihoods = torch.distributions.MultivariateNormal(
                 loc=predictions, scale_tril=scale_trils
-            ).log_prob(true_states[1:])
+            ).log_prob(states_label[1:])
             assert log_likelihoods.shape == (T - 1, N)
             losses["nll"] = -torch.sum(log_likelihoods)
 

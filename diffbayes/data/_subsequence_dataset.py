@@ -27,9 +27,7 @@ class SubsequenceDataset(Dataset):
             trajectories, subsequence_length
         )
 
-    def __getitem__(
-        self, index: int
-    ) -> Tuple[types.StatesNumpy, types.ObservationsNumpy, types.ControlsNumpy]:
+    def __getitem__(self, index: int) -> types.TrajectoryNumpy:
         """Get a subsequence from our dataset.
 
         Args:
@@ -40,8 +38,7 @@ class SubsequenceDataset(Dataset):
             numpy array or dict of numpy arrays with shape
             `(subsequence_length, ...)`.
         """
-        traj = self.subsequences[index]
-        return traj.states, traj.observations, traj.controls
+        return self.subsequences[index]
 
     def __len__(self) -> int:
         """Total number of subsequences in the dataset.

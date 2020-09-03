@@ -51,20 +51,24 @@ def train_filter(
     epoch_loss = 0.0
 
     # Train filter model for 1 epoch
+    batch_data: diffbayes.types.TrajectoryTorch
     for batch_idx, batch_data in enumerate(tqdm(dataloader)):
-        # Move data
+        # Move & unpack data
         batch_gpu = fannypack.utils.to_device(batch_data, buddy.device)
-        true_states, observations, controls = batch_gpu
+
+        states_labels = batch_gpu.states
+        observations = batch_gpu.observations
+        controls = batch_gpu.controls
 
         # Swap batch size, sequence length axes
-        true_states = _swap_batch_sequence_axes(true_states)
+        states_labels = _swap_batch_sequence_axes(states_labels)
         observations = fannypack.utils.SliceWrapper(observations).map(
             _swap_batch_sequence_axes
         )
         controls = fannypack.utils.SliceWrapper(controls).map(_swap_batch_sequence_axes)
 
         # Shape checks
-        T, N, state_dim = true_states.shape
+        T, N, state_dim = states_labels.shape
         assert state_dim == filter_model.state_dim
         assert fannypack.utils.SliceWrapper(observations).shape[:2] == (T, N)
         assert fannypack.utils.SliceWrapper(controls).shape[:2] == (T, N)
@@ -88,7 +92,7 @@ def train_filter(
                 (N, state_dim, state_dim)
             )
             initial_states = torch.distributions.MultivariateNormal(
-                true_states[0], covariance_matrix=initial_states_covariance
+                states_labels[0], covariance_matrix=initial_states_covariance
             ).sample()
 
             filter_model.initialize_beliefs(
@@ -103,7 +107,7 @@ def train_filter(
         assert state_predictions.shape == (T - 1, N, state_dim)
 
         # Minimize loss
-        loss = loss_function(state_predictions, true_states[1:])
+        loss = loss_function(state_predictions, states_labels[1:])
         buddy.minimize(loss, optimizer_name=optimizer_name)
         epoch_loss += fannypack.utils.to_numpy(loss)
 
