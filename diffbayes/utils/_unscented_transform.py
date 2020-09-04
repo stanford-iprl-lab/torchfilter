@@ -10,10 +10,7 @@ from ._sigma_points import JulierSigmaPointStrategy, SigmaPointStrategy
 
 
 class UnscentedTransform:
-    """Helper class for performing (batched, differentiable) unscented transforms, with
-    sigma point selection parameters described by [1].
-
-    [1] http://www.gatsby.ucl.ac.uk/~byron/nlds/merwe2003a.pdf
+    """Helper class for performing (batched, differentiable) unscented transforms.
 
     Keyword Args:
         dim (int): Input dimension.

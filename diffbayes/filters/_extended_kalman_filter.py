@@ -1,6 +1,7 @@
 from typing import cast
 
 import torch
+from overrides import overrides
 
 from .. import types
 from ..base._kalman_filter_base import KalmanFilterBase
@@ -13,6 +14,7 @@ class ExtendedKalmanFilter(KalmanFilterBase):
     `VirtualSensorExtendedKalmanFilter`.
     """
 
+    @overrides
     def _predict_step(self, *, controls: types.ControlsTorch) -> None:
         # Get previous belief
         prev_mean = self._belief_mean
@@ -40,6 +42,7 @@ class ExtendedKalmanFilter(KalmanFilterBase):
         self._belief_mean = pred_mean
         self._belief_covariance = pred_covariance
 
+    @overrides
     def _update_step(self, *, observations: types.ObservationsTorch) -> None:
         # Extract/validate inputs
         assert isinstance(

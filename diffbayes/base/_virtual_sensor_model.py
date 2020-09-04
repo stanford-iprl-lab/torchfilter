@@ -2,6 +2,7 @@ import abc
 from typing import Tuple
 
 import torch.nn as nn
+from overrides import overrides
 
 from .. import types
 
@@ -22,6 +23,7 @@ class VirtualSensorModel(abc.ABC, nn.Module):
         """int: Dimensionality of our state."""
 
     @abc.abstractmethod
+    @overrides
     def forward(
         self, *, observations: types.ObservationsTorch
     ) -> Tuple[types.StatesTorch, types.ScaleTrilTorch]:

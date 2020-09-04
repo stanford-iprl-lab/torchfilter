@@ -3,6 +3,7 @@ from typing import cast
 
 import torch
 import torch.nn as nn
+from overrides import overrides
 
 from .. import types
 from ._kalman_filter_measurement_model import KalmanFilterMeasurementModel
@@ -21,6 +22,7 @@ class ParticleFilterMeasurementModel(abc.ABC, nn.Module):
         """int: Dimensionality of our state."""
 
     @abc.abstractmethod
+    @overrides
     def forward(
         self, *, states: types.StatesTorch, observations: types.ObservationsTorch
     ) -> types.StatesTorch:
@@ -53,6 +55,7 @@ class ParticleFilterMeasurementModelWrapper(ParticleFilterMeasurementModel):
         super().__init__(state_dim=kalman_filter_measurement_model.state_dim)
         self.kalman_filter_measurement_model = kalman_filter_measurement_model
 
+    @overrides
     def forward(
         self, *, states: types.StatesTorch, observations: types.ObservationsTorch
     ) -> types.StatesTorch:

@@ -2,6 +2,7 @@ from typing import Optional, cast
 
 import fannypack
 import torch
+from overrides import overrides
 
 from .. import types, utils
 from ..base._dynamics_model import DynamicsModel
@@ -44,15 +45,18 @@ class SquareRootUnscentedKalmanFilter(KalmanFilterBase):
         # Parameterize posterior uncertainty with lower-triangular covariance root
         self._belief_scale_tril: types.ScaleTrilTorch
 
+    # overrides
     @property
     def belief_covariance(self) -> types.CovarianceTorch:
         return self._belief_scale_tril @ self._belief_scale_tril.transpose(-1, -2)
 
+    # overrides
     @belief_covariance.setter
     def belief_covariance(self, covariance: types.CovarianceTorch):
         self._belief_scale_tril = torch.cholesky(covariance)
         self._belief_covariance = covariance
 
+    @overrides
     def _predict_step(self, *, controls: types.ControlsTorch) -> None:
         """Predict step.
         """

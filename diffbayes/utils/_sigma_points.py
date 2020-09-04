@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from typing import Optional, Tuple
 
 import torch
+from overrides import overrides
 
 
 class SigmaPointStrategy(abc.ABC):
@@ -53,6 +54,7 @@ class MerweSigmaPointStrategy(SigmaPointStrategy):
     beta: float = 2.0
     kappa: Optional[float] = None
 
+    @overrides
     def compute_lambda(self, dim: int) -> float:
         """Compute sigma point scaling parameter.
 
@@ -65,6 +67,7 @@ class MerweSigmaPointStrategy(SigmaPointStrategy):
         kappa = 3.0 - dim if self.kappa is None else self.kappa
         return (self.alpha ** 2) * (dim + kappa) - dim
 
+    @overrides
     def compute_sigma_weights(self, dim: int) -> Tuple[torch.Tensor, torch.Tensor]:
         """Helper for computing sigma weights.
 
@@ -106,6 +109,7 @@ class JulierSigmaPointStrategy(SigmaPointStrategy):
 
     lambd: Optional[float] = None
 
+    @overrides
     def compute_lambda(self, dim: int) -> float:
         """Compute sigma point scaling parameter.
 
@@ -117,6 +121,7 @@ class JulierSigmaPointStrategy(SigmaPointStrategy):
         """
         return 3.0 - dim if self.lambd is None else self.lambd
 
+    @overrides
     def compute_sigma_weights(self, dim: int) -> Tuple[torch.Tensor, torch.Tensor]:
         """Helper for computing sigma weights.
 

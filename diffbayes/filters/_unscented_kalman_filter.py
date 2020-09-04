@@ -2,6 +2,7 @@ from typing import Optional, cast
 
 import fannypack
 import torch
+from overrides import overrides
 
 from .. import types, utils
 from ..base._dynamics_model import DynamicsModel
@@ -44,6 +45,7 @@ class UnscentedKalmanFilter(KalmanFilterBase):
         # belief distribution
         self._sigma_point_cache: Optional[types.StatesTorch] = None
 
+    @overrides
     def _predict_step(self, *, controls: types.ControlsTorch) -> None:
         """Predict step.
         """
@@ -95,6 +97,7 @@ class UnscentedKalmanFilter(KalmanFilterBase):
         self._belief_covariance = P_k_pred
         self._sigma_point_cache = X_k_pred
 
+    @overrides
     def _update_step(self, *, observations: types.ObservationsTorch) -> None:
         """Update step.
         """

@@ -4,6 +4,7 @@ from typing import List, Tuple
 import fannypack
 import torch
 import torch.nn as nn
+from overrides import overrides
 
 from .. import types
 
@@ -22,6 +23,7 @@ class DynamicsModel(nn.Module, abc.ABC):
         self.state_dim = state_dim
         """int: Dimensionality of our state."""
 
+    @overrides
     def forward(
         self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch,
     ) -> Tuple[types.StatesTorch, types.ScaleTrilTorch]:

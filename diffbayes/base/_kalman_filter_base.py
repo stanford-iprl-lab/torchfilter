@@ -2,6 +2,7 @@ import abc
 
 import fannypack as fp
 import torch
+from overrides import overrides
 
 from .. import types
 from ._dynamics_model import DynamicsModel
@@ -46,6 +47,7 @@ class KalmanFilterBase(Filter, abc.ABC):
         # Throw an error if our filter is used before `.initialize_beliefs()` is called
         self._initialized = False
 
+    @overrides
     def forward(
         self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch,
     ) -> types.StatesTorch:
@@ -78,6 +80,7 @@ class KalmanFilterBase(Filter, abc.ABC):
         # Return mean
         return self.belief_mean
 
+    @overrides
     def initialize_beliefs(
         self, *, mean: types.StatesTorch, covariance: types.CovarianceTorch
     ) -> None:

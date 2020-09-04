@@ -2,6 +2,7 @@ import abc
 
 import fannypack
 import torch.nn as nn
+from overrides import overrides
 
 from .. import types
 
@@ -33,6 +34,7 @@ class Filter(nn.Module, abc.ABC):
         """
         pass
 
+    @overrides
     def forward(
         self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch
     ) -> types.StatesTorch:

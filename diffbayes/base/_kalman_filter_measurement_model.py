@@ -3,6 +3,7 @@ from typing import Tuple
 
 import torch
 import torch.nn as nn
+from overrides import overrides
 
 from .. import types
 
@@ -16,6 +17,7 @@ class KalmanFilterMeasurementModel(abc.ABC, nn.Module):
         """int: Observation dimensionality."""
 
     @abc.abstractmethod
+    @overrides
     def forward(
         self, *, states: types.StatesTorch
     ) -> Tuple[types.ObservationsNoDictTorch, types.ScaleTrilTorch]:

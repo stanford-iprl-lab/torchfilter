@@ -1,6 +1,7 @@
 from typing import Optional, Tuple
 
 import torch
+from overrides import overrides
 
 from .. import types, utils
 from ..base._dynamics_model import DynamicsModel
@@ -27,6 +28,7 @@ class _IdentityMeasurementModel(KalmanFilterMeasurementModel):
 
         super().__init__(state_dim=state_dim, observation_dim=state_dim)
 
+    @overrides
     def forward(
         self, *, states: types.StatesTorch
     ) -> Tuple[types.ObservationsNoDictTorch, types.ScaleTrilTorch]:
@@ -65,6 +67,7 @@ class _IdentityMeasurementModel(KalmanFilterMeasurementModel):
         virtual_observations = states
         return virtual_observations, scale_tril
 
+    @overrides
     def jacobian(self, *, states: types.StatesTorch) -> torch.Tensor:
         """To avoid using autograd for computing our models Jacobian, we can directly
         return identity matrices.
@@ -107,6 +110,7 @@ class _VirtualSensorKalmanFilterMixin(
         self.virtual_sensor_model = virtual_sensor_model
         """diffbayes.base.VirtualSensorModel: Virtual sensor model."""
 
+    @overrides
     def _update_step(self, *, observations: types.ObservationsTorch) -> None:
         (
             virtual_observations,
@@ -162,6 +166,7 @@ class VirtualSensorUnscentedKalmanFilter(
 
     # Redefine constructor to add explicit sigma_point_strategy kwarg
     # This is for better static checking, makes language servers a little more useful
+    @overrides
     def __init__(
         self,
         *,
@@ -187,6 +192,7 @@ class VirtualSensorSquareRootUnscentedKalmanFilter(
 
     # Redefine constructor to add explicit sigma_point_strategy kwarg
     # This is for better static checking, makes language servers a little more useful
+    @overrides
     def __init__(
         self,
         *,

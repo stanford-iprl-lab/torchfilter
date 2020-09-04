@@ -1,6 +1,7 @@
 import fannypack
 import numpy as np
 import torch
+from overrides import overrides
 
 from .. import types
 from ..base._dynamics_model import DynamicsModel
@@ -70,6 +71,7 @@ class ParticleFilter(Filter):
         """
         self._initialized = False
 
+    @overrides
     def initialize_beliefs(
         self, *, mean: types.StatesTorch, covariance: types.CovarianceTorch
     ):
@@ -103,6 +105,7 @@ class ParticleFilter(Filter):
         # Set initialized flag
         self._initialized = True
 
+    @overrides
     def forward(
         self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch,
     ) -> types.StatesTorch:
