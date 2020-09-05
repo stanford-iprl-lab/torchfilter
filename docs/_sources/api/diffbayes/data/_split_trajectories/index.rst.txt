@@ -1,3 +1,5 @@
+:orphan:
+
 :mod:`diffbayes.data._split_trajectories`
 =========================================
 

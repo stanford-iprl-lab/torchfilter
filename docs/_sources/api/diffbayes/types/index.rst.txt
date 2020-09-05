@@ -113,7 +113,6 @@ Classes
 
    .. autoapi-inheritance-diagram:: diffbayes.types.Trajectory
       :parts: 1
-      :private-bases:
 
    Named tuple containing states, observations, and controls.
 
@@ -139,7 +138,6 @@ Classes
 
    .. autoapi-inheritance-diagram:: diffbayes.types.TrajectoryNumpy
       :parts: 1
-      :private-bases:
 
    Named tuple containing states, observations, and controls represented in NumPy.
 
@@ -165,7 +163,6 @@ Classes
 
    .. autoapi-inheritance-diagram:: diffbayes.types.TrajectoryTorch
       :parts: 1
-      :private-bases:
 
    Named tuple containing states, observations, and controls represented in Torch.
 

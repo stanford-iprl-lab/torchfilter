@@ -1,3 +1,5 @@
+:orphan:
+
 :mod:`diffbayes.filters._square_root_unscented_kalman_filter`
 =============================================================
 
@@ -27,7 +29,6 @@ Classes
 
    .. autoapi-inheritance-diagram:: diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter
       :parts: 1
-      :private-bases:
 
    Square-root formulation of UKF.
 
@@ -40,16 +41,6 @@ Classes
       :property:
 
       Posterior covariance. Shape should be ``(N, state_dim, state_dim)``.
-
-
-   .. method:: _predict_step(self, *, controls: types.ControlsTorch) -> None
-
-      Predict step.
-
-
-   .. method:: _update_step(self, *, observations: types.ObservationsTorch) -> None
-
-      Update step.
 
 
 

@@ -87,11 +87,7 @@
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.filters._extended_kalman_filter</span></code></a><ul>
 <li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
-<li><a class="reference internal" href="#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter">ExtendedKalmanFilter</a><ul>
-<li><a class="reference internal" href="#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter._predict_step">_predict_step</a></li>
-<li><a class="reference internal" href="#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter._update_step">_update_step</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter">ExtendedKalmanFilter</a></li>
 </ul>
 </li>
 </ul>
@@ -185,41 +181,14 @@
 <dt id="diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.filters._extended_kalman_filter.</code><code class="sig-name descname">ExtendedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">unused_kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../base/index.html#diffbayes.base.KalmanFilterBase" title="diffbayes.base.KalmanFilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.KalmanFilterBase</span></code></a></p>
-<div class="graphviz"><img src="../../../../_images/inheritance-6d530b1bb3bf484976bbe261d4588f9113743250.png" alt="Inheritance diagram of diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter" usemap="#inheritance681cc3ce4a" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../../_images/inheritance-4d03852de002f6af104216b87635c342b03b6233.png" alt="Inheritance diagram of diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter" usemap="#inheritance681cc3ce4a" class="inheritance graphviz" /></div>
 <map id="inheritance681cc3ce4a" name="inheritance681cc3ce4a">
-<area shape="rect" id="node3" href="../../base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,29,383,55"/>
-<area shape="rect" id="node4" href="../../base/_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,55,197,80"/>
-<area shape="rect" id="node2" href="#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter" target="_top" title="Generic differentiable EKF." alt="" coords="431,29,597,55"/>
+<area shape="rect" id="node3" href="../../base/index.html#diffbayes.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,29,383,55"/>
+<area shape="rect" id="node4" href="../../base/index.html#diffbayes.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,55,197,80"/>
+<area shape="rect" id="node2" href="../index.html#diffbayes.filters.ExtendedKalmanFilter" target="_top" title="Generic differentiable EKF." alt="" coords="431,29,597,55"/>
 </map><p>Generic differentiable EKF.</p>
 <p>For building estimators with more complex observation spaces (eg images), see
 <code class="docutils literal notranslate"><span class="pre">VirtualSensorExtendedKalmanFilter</span></code>.</p>
-<dl class="py method">
-<dt id="diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter._predict_step">
-<code class="sig-name descname">_predict_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter._predict_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Kalman filter predict step.</p>
-<p>Computes $mu<em>{t | t - 1}$, $Sigma</em>{t | t - 1}$ from $mu<em>{t - 1 | t - 1}$,
-$Sigma</em>{t - 1 | t - 1}$.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><p><strong>controls</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Control inputs.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter._update_step">
-<code class="sig-name descname">_update_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter._update_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Kalman filter measurement update step.</p>
-<p>Nominally, computes $mu<em>{t | t}$, $Sigma</em>{t | t}$ from $mu<em>{t | t - 1}$,
-$Sigma</em>{t | t - 1}$.</p>
-<p>Updates <code class="docutils literal notranslate"><span class="pre">self.belief_mean</span></code> and <code class="docutils literal notranslate"><span class="pre">self.belief_covariance</span></code>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><p><strong>observations</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Observation inputs.</p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 </div>

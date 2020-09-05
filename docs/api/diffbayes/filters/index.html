@@ -85,14 +85,9 @@
               <!-- Local TOC -->
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.filters</span></code></a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#package-contents">Package Contents</a><ul>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
-<li><a class="reference internal" href="#diffbayes.filters.ExtendedKalmanFilter">ExtendedKalmanFilter</a><ul>
-<li><a class="reference internal" href="#diffbayes.filters.ExtendedKalmanFilter._predict_step">_predict_step</a></li>
-<li><a class="reference internal" href="#diffbayes.filters.ExtendedKalmanFilter._update_step">_update_step</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#diffbayes.filters.ExtendedKalmanFilter">ExtendedKalmanFilter</a></li>
 <li><a class="reference internal" href="#diffbayes.filters.ParticleFilter">ParticleFilter</a><ul>
 <li><a class="reference internal" href="#diffbayes.filters.ParticleFilter.dynamics_model">dynamics_model</a></li>
 <li><a class="reference internal" href="#diffbayes.filters.ParticleFilter.measurement_model">measurement_model</a></li>
@@ -108,16 +103,9 @@
 </li>
 <li><a class="reference internal" href="#diffbayes.filters.SquareRootUnscentedKalmanFilter">SquareRootUnscentedKalmanFilter</a><ul>
 <li><a class="reference internal" href="#diffbayes.filters.SquareRootUnscentedKalmanFilter.belief_covariance">belief_covariance</a></li>
-<li><a class="reference internal" href="#diffbayes.filters.SquareRootUnscentedKalmanFilter._predict_step">_predict_step</a></li>
-<li><a class="reference internal" href="#diffbayes.filters.SquareRootUnscentedKalmanFilter._update_step">_update_step</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#diffbayes.filters.UnscentedKalmanFilter">UnscentedKalmanFilter</a><ul>
-<li><a class="reference internal" href="#diffbayes.filters.UnscentedKalmanFilter._predict_step">_predict_step</a></li>
-<li><a class="reference internal" href="#diffbayes.filters.UnscentedKalmanFilter._update_step">_update_step</a></li>
-<li><a class="reference internal" href="#diffbayes.filters.UnscentedKalmanFilter._weighted_covariance">_weighted_covariance</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#diffbayes.filters.UnscentedKalmanFilter">UnscentedKalmanFilter</a></li>
 <li><a class="reference internal" href="#diffbayes.filters.VirtualSensorExtendedKalmanFilter">VirtualSensorExtendedKalmanFilter</a></li>
 <li><a class="reference internal" href="#diffbayes.filters.VirtualSensorSquareRootUnscentedKalmanFilter">VirtualSensorSquareRootUnscentedKalmanFilter</a></li>
 <li><a class="reference internal" href="#diffbayes.filters.VirtualSensorUnscentedKalmanFilter">VirtualSensorUnscentedKalmanFilter</a></li>
@@ -195,19 +183,6 @@
   <div class="section" id="module-diffbayes.filters">
 <span id="diffbayes-filters"></span><h1><a class="reference internal" href="#module-diffbayes.filters" title="diffbayes.filters"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.filters</span></code></a><a class="headerlink" href="#module-diffbayes.filters" title="Permalink to this headline">¶</a></h1>
 <p>Filter implementations; can either be used directly or subclassed.</p>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="_extended_kalman_filter/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.filters._extended_kalman_filter</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="_particle_filter/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.filters._particle_filter</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="_square_root_unscented_kalman_filter/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.filters._square_root_unscented_kalman_filter</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="_unscented_kalman_filter/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.filters._unscented_kalman_filter</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="_virtual_sensor_filters/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.filters._virtual_sensor_filters</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="_virtual_sensor_kalman_filter_mixin/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.filters._virtual_sensor_kalman_filter_mixin</span></code></a></li>
-</ul>
-</div>
-</div>
 <div class="section" id="package-contents">
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="classes">
@@ -245,51 +220,24 @@
 <dt id="diffbayes.filters.ExtendedKalmanFilter">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.filters.</code><code class="sig-name descname">ExtendedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">unused_kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.filters.ExtendedKalmanFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/index.html#diffbayes.base.KalmanFilterBase" title="diffbayes.base.KalmanFilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.KalmanFilterBase</span></code></a></p>
-<div class="graphviz"><img src="../../../_images/inheritance-bcb50c926528f3ad207629061bd9dd8ffcc4f121.png" alt="Inheritance diagram of diffbayes.filters.ExtendedKalmanFilter" usemap="#inheritancebe55721854" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-52ae934f448e1cd46ebb2cfb2f9ccee55a64edf9.png" alt="Inheritance diagram of diffbayes.filters.ExtendedKalmanFilter" usemap="#inheritancebe55721854" class="inheritance graphviz" /></div>
 <map id="inheritancebe55721854" name="inheritancebe55721854">
-<area shape="rect" id="node3" href="../base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,29,383,55"/>
-<area shape="rect" id="node4" href="../base/_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,55,197,80"/>
-<area shape="rect" id="node2" href="_extended_kalman_filter/index.html#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter" target="_top" title="Generic differentiable EKF." alt="" coords="431,29,597,55"/>
+<area shape="rect" id="node3" href="../base/index.html#diffbayes.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,29,383,55"/>
+<area shape="rect" id="node4" href="../base/index.html#diffbayes.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,55,197,80"/>
+<area shape="rect" id="node2" href="#diffbayes.filters.ExtendedKalmanFilter" target="_top" title="Generic differentiable EKF." alt="" coords="431,29,597,55"/>
 </map><p>Generic differentiable EKF.</p>
 <p>For building estimators with more complex observation spaces (eg images), see
 <code class="docutils literal notranslate"><span class="pre">VirtualSensorExtendedKalmanFilter</span></code>.</p>
-<dl class="py method">
-<dt id="diffbayes.filters.ExtendedKalmanFilter._predict_step">
-<code class="sig-name descname">_predict_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.filters.ExtendedKalmanFilter._predict_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Kalman filter predict step.</p>
-<p>Computes $mu<em>{t | t - 1}$, $Sigma</em>{t | t - 1}$ from $mu<em>{t - 1 | t - 1}$,
-$Sigma</em>{t - 1 | t - 1}$.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><p><strong>controls</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Control inputs.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diffbayes.filters.ExtendedKalmanFilter._update_step">
-<code class="sig-name descname">_update_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.filters.ExtendedKalmanFilter._update_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Kalman filter measurement update step.</p>
-<p>Nominally, computes $mu<em>{t | t}$, $Sigma</em>{t | t}$ from $mu<em>{t | t - 1}$,
-$Sigma</em>{t | t - 1}$.</p>
-<p>Updates <code class="docutils literal notranslate"><span class="pre">self.belief_mean</span></code> and <code class="docutils literal notranslate"><span class="pre">self.belief_covariance</span></code>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><p><strong>observations</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Observation inputs.</p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
 <dt id="diffbayes.filters.ParticleFilter">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.filters.</code><code class="sig-name descname">ParticleFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">ParticleFilterMeasurementModel</span></em>, <em class="sig-param"><span class="n">num_particles</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">100</span></em>, <em class="sig-param"><span class="n">resample</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">soft_resample_alpha</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">estimation_method</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'weighted_average'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.filters.ParticleFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/index.html#diffbayes.base.Filter" title="diffbayes.base.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.Filter</span></code></a></p>
-<div class="graphviz"><img src="../../../_images/inheritance-f2ae559ba3c90f3c0c4f58e49d3dd638b1e1e529.png" alt="Inheritance diagram of diffbayes.filters.ParticleFilter" usemap="#inheritance29a79a3e07" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-851200824b827a144f991037f9e22dfe4733e44d.png" alt="Inheritance diagram of diffbayes.filters.ParticleFilter" usemap="#inheritance29a79a3e07" class="inheritance graphviz" /></div>
 <map id="inheritance29a79a3e07" name="inheritance29a79a3e07">
-<area shape="rect" id="node2" href="../base/_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,31,197,56"/>
-<area shape="rect" id="node4" href="_particle_filter/index.html#diffbayes.filters._particle_filter.ParticleFilter" target="_top" title="Generic differentiable particle filter." alt="" coords="245,31,348,56"/>
+<area shape="rect" id="node2" href="../base/index.html#diffbayes.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,31,197,56"/>
+<area shape="rect" id="node4" href="#diffbayes.filters.ParticleFilter" target="_top" title="Generic differentiable particle filter." alt="" coords="245,31,348,56"/>
 </map><p>Generic differentiable particle filter.</p>
 <dl class="py attribute">
 <dt id="diffbayes.filters.ParticleFilter.dynamics_model">
@@ -342,8 +290,8 @@ and off in train mode.</p>
 <dt id="diffbayes.filters.ParticleFilter.soft_resample_alpha">
 <code class="sig-name descname">soft_resample_alpha</code><a class="headerlink" href="#diffbayes.filters.ParticleFilter.soft_resample_alpha" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tunable constant for differentiable resampling, as described
-by Jonschkowski et al. in “Differentiable Particle Filters: End-to-End
-Learning with Algorithmic Priors”: <a class="reference external" href="https://arxiv.org/abs/1805.11122">https://arxiv.org/abs/1805.11122</a>.
+by Karkus et al. in “Particle Filter Networks with Application to Visual
+Localization”: <a class="reference external" href="https://arxiv.org/abs/1805.08975">https://arxiv.org/abs/1805.08975</a>
 Defaults to 1.0 (disabled).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -433,11 +381,11 @@ be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span
 <dt id="diffbayes.filters.SquareRootUnscentedKalmanFilter">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.filters.</code><code class="sig-name descname">SquareRootUnscentedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="n">sigma_point_strategy</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>utils.SigmaPointStrategy<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.filters.SquareRootUnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/index.html#diffbayes.base.KalmanFilterBase" title="diffbayes.base.KalmanFilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.KalmanFilterBase</span></code></a></p>
-<div class="graphviz"><img src="../../../_images/inheritance-b669f84da4e0587d198c7b24f7958b6d3141905e.png" alt="Inheritance diagram of diffbayes.filters.SquareRootUnscentedKalmanFilter" usemap="#inheritance55f011c757" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-ef1afc1728155297545c88b98fe3435e66afb86f.png" alt="Inheritance diagram of diffbayes.filters.SquareRootUnscentedKalmanFilter" usemap="#inheritance55f011c757" class="inheritance graphviz" /></div>
 <map id="inheritance55f011c757" name="inheritance55f011c757">
-<area shape="rect" id="node2" href="../base/_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,5,197,31"/>
-<area shape="rect" id="node4" href="../base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,31,383,56"/>
-<area shape="rect" id="node5" href="_square_root_unscented_kalman_filter/index.html#diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter" target="_top" title="Square&#45;root formulation of UKF." alt="" coords="431,31,680,56"/>
+<area shape="rect" id="node2" href="../base/index.html#diffbayes.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node4" href="../base/index.html#diffbayes.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,31,383,56"/>
+<area shape="rect" id="node5" href="#diffbayes.filters.SquareRootUnscentedKalmanFilter" target="_top" title="Square&#45;root formulation of UKF." alt="" coords="431,31,680,56"/>
 </map><p>Square-root formulation of UKF.</p>
 <p>From Algorithm 3.1 of Merwe et al [1].</p>
 <p>[1] The square-root unscented Kalman filter for state and parameter-estimation.
@@ -448,29 +396,17 @@ be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span
 <dd><p>Posterior covariance. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim)</span></code>.</p>
 </dd></dl>
 
-<dl class="py method">
-<dt id="diffbayes.filters.SquareRootUnscentedKalmanFilter._predict_step">
-<code class="sig-name descname">_predict_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.filters.SquareRootUnscentedKalmanFilter._predict_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Predict step.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diffbayes.filters.SquareRootUnscentedKalmanFilter._update_step">
-<code class="sig-name descname">_update_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.filters.SquareRootUnscentedKalmanFilter._update_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Update step.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
 <dt id="diffbayes.filters.UnscentedKalmanFilter">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.filters.</code><code class="sig-name descname">UnscentedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="n">sigma_point_strategy</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>utils.SigmaPointStrategy<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.filters.UnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/index.html#diffbayes.base.KalmanFilterBase" title="diffbayes.base.KalmanFilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.KalmanFilterBase</span></code></a></p>
-<div class="graphviz"><img src="../../../_images/inheritance-53bf6940326a001b5b5c83f0a77a48a107221be6.png" alt="Inheritance diagram of diffbayes.filters.UnscentedKalmanFilter" usemap="#inheritance931f991ec8" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-14cd1e0c7f59a3670cd9e5d6042c6e51fb1f4013.png" alt="Inheritance diagram of diffbayes.filters.UnscentedKalmanFilter" usemap="#inheritance931f991ec8" class="inheritance graphviz" /></div>
 <map id="inheritance931f991ec8" name="inheritance931f991ec8">
-<area shape="rect" id="node2" href="../base/_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,5,197,31"/>
-<area shape="rect" id="node4" href="../base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,31,383,56"/>
-<area shape="rect" id="node5" href="_unscented_kalman_filter/index.html#diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter" target="_top" title="Standard UKF." alt="" coords="431,31,605,56"/>
+<area shape="rect" id="node2" href="../base/index.html#diffbayes.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node4" href="../base/index.html#diffbayes.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,31,383,56"/>
+<area shape="rect" id="node5" href="#diffbayes.filters.UnscentedKalmanFilter" target="_top" title="Standard UKF." alt="" coords="431,31,605,56"/>
 </map><p>Standard UKF.</p>
 <p>From Algorithm 2.1 of Merwe et al. [1]. For working with heteroscedastic noise
 models, we use the weighting approach described in [2].</p>
@@ -478,40 +414,18 @@ models, we use the weighting approach described in [2].</p>
 <a class="reference external" href="https://ieeexplore.ieee.org/document/940586/">https://ieeexplore.ieee.org/document/940586/</a>
 [2] How to Train Your Differentiable Filter
 <a class="reference external" href="https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf">https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf</a></p>
-<dl class="py method">
-<dt id="diffbayes.filters.UnscentedKalmanFilter._predict_step">
-<code class="sig-name descname">_predict_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.filters.UnscentedKalmanFilter._predict_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Predict step.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diffbayes.filters.UnscentedKalmanFilter._update_step">
-<code class="sig-name descname">_update_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.filters.UnscentedKalmanFilter._update_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Update step.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diffbayes.filters.UnscentedKalmanFilter._weighted_covariance">
-<code class="sig-name descname">_weighted_covariance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">sigma_trils</span><span class="p">:</span> <span class="n">types.ScaleTrilTorch</span></em><span class="sig-paren">)</span> &#x2192; types.CovarianceTorch<a class="headerlink" href="#diffbayes.filters.UnscentedKalmanFilter._weighted_covariance" title="Permalink to this definition">¶</a></dt>
-<dd><p>For heteroscedastic covariances, we apply the weighted average approach
-described by Kloss et al:
-<a class="reference external" href="https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf">https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf</a></p>
-<p>(note that the mean weights are used because they sum to 1)</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
 <dt id="diffbayes.filters.VirtualSensorExtendedKalmanFilter">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.filters.</code><code class="sig-name descname">VirtualSensorExtendedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">virtual_sensor_model</span><span class="p">:</span> <span class="n">VirtualSensorModel</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.filters.VirtualSensorExtendedKalmanFilter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin" title="diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin</span></code></a>, <a class="reference internal" href="_extended_kalman_filter/index.html#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter" title="diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter</span></code></a></p>
-<div class="graphviz"><img src="../../../_images/inheritance-cff7a883c196e680abd01cbeaad05e96cbcf6a71.png" alt="Inheritance diagram of diffbayes.filters.VirtualSensorExtendedKalmanFilter" usemap="#inheritancef3ec2b561f" class="inheritance graphviz" /></div>
+<dd><p>Bases: <a class="reference internal" href="#module-diffbayes.filters" title="diffbayes.filters"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.filters</span></code></a>, <a class="reference internal" href="#diffbayes.filters.ExtendedKalmanFilter" title="diffbayes.filters.ExtendedKalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.filters.ExtendedKalmanFilter</span></code></a></p>
+<div class="graphviz"><img src="../../../_images/inheritance-b685cf28b355e2c5733940b4cc804541e7fac76e.png" alt="Inheritance diagram of diffbayes.filters.VirtualSensorExtendedKalmanFilter" usemap="#inheritancef3ec2b561f" class="inheritance graphviz" /></div>
 <map id="inheritancef3ec2b561f" name="inheritancef3ec2b561f">
-<area shape="rect" id="node3" href="../base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="194,24,302,44"/>
-<area shape="rect" id="node4" href="../base/_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="99,44,156,64"/>
-<area shape="rect" id="node2" href="_extended_kalman_filter/index.html#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter" target="_top" title="Generic differentiable EKF." alt="" coords="367,4,499,24"/>
-<area shape="rect" id="node6" href="_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter" target="_top" title="EKF variant with a virtual sensor model for mapping raw observations to predicted" alt="" coords="564,24,764,44"/>
-<area shape="rect" id="node7" href="_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin" target="_top" title="_VirtualSensorKalmanFilterMixin" alt="" coords="340,43,526,63"/>
+<area shape="rect" id="node3" href="../base/index.html#diffbayes.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="208,25,325,46"/>
+<area shape="rect" id="node4" href="../base/index.html#diffbayes.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="106,46,168,68"/>
+<area shape="rect" id="node2" href="#diffbayes.filters.ExtendedKalmanFilter" target="_top" title="Generic differentiable EKF." alt="" coords="366,25,507,46"/>
+<area shape="rect" id="node6" href="#diffbayes.filters.VirtualSensorExtendedKalmanFilter" target="_top" title="EKF variant with a virtual sensor model for mapping raw observations to predicted" alt="" coords="548,25,763,46"/>
 </map><p>EKF variant with a virtual sensor model for mapping raw observations to predicted
 states.</p>
 <p>Assumes measurement model is identity.</p>
@@ -520,14 +434,13 @@ states.</p>
 <dl class="py class">
 <dt id="diffbayes.filters.VirtualSensorSquareRootUnscentedKalmanFilter">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.filters.</code><code class="sig-name descname">VirtualSensorSquareRootUnscentedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">virtual_sensor_model</span><span class="p">:</span> <span class="n">VirtualSensorModel</span></em>, <em class="sig-param"><span class="n">sigma_point_strategy</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>utils.SigmaPointStrategy<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.filters.VirtualSensorSquareRootUnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin" title="diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin</span></code></a>, <a class="reference internal" href="_square_root_unscented_kalman_filter/index.html#diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter" title="diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter</span></code></a></p>
-<div class="graphviz"><img src="../../../_images/inheritance-6d043a5dbf3fbc13a683930458c4fdfc124ece46.png" alt="Inheritance diagram of diffbayes.filters.VirtualSensorSquareRootUnscentedKalmanFilter" usemap="#inheritanceab1a0bd5c7" class="inheritance graphviz" /></div>
+<dd><p>Bases: <a class="reference internal" href="#module-diffbayes.filters" title="diffbayes.filters"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.filters</span></code></a>, <a class="reference internal" href="#diffbayes.filters.SquareRootUnscentedKalmanFilter" title="diffbayes.filters.SquareRootUnscentedKalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.filters.SquareRootUnscentedKalmanFilter</span></code></a></p>
+<div class="graphviz"><img src="../../../_images/inheritance-c79998539f3138a6285a21318b9a2d6390acd404.png" alt="Inheritance diagram of diffbayes.filters.VirtualSensorSquareRootUnscentedKalmanFilter" usemap="#inheritanceab1a0bd5c7" class="inheritance graphviz" /></div>
 <map id="inheritanceab1a0bd5c7" name="inheritanceab1a0bd5c7">
-<area shape="rect" id="node2" href="../base/_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="90,4,142,22"/>
-<area shape="rect" id="node4" href="../base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="176,22,275,40"/>
-<area shape="rect" id="node5" href="_square_root_unscented_kalman_filter/index.html#diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter" target="_top" title="Square&#45;root formulation of UKF." alt="" coords="309,4,488,22"/>
-<area shape="rect" id="node7" href="_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin" target="_top" title="_VirtualSensorKalmanFilterMixin" alt="" coords="315,39,483,57"/>
-<area shape="rect" id="node6" href="_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters.VirtualSensorSquareRootUnscentedKalmanFilter" target="_top" title="Square root UKF variant with a virtual sensor model for mapping raw observations" alt="" coords="523,22,764,40"/>
+<area shape="rect" id="node2" href="../base/index.html#diffbayes.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="90,4,142,22"/>
+<area shape="rect" id="node4" href="../base/index.html#diffbayes.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="176,22,275,40"/>
+<area shape="rect" id="node5" href="#diffbayes.filters.SquareRootUnscentedKalmanFilter" target="_top" title="Square&#45;root formulation of UKF." alt="" coords="309,22,488,40"/>
+<area shape="rect" id="node6" href="#diffbayes.filters.VirtualSensorSquareRootUnscentedKalmanFilter" target="_top" title="Square root UKF variant with a virtual sensor model for mapping raw observations" alt="" coords="523,22,764,40"/>
 </map><p>Square root UKF variant with a virtual sensor model for mapping raw observations
 to predicted states.</p>
 <p>Assumes measurement model is identity.</p>
@@ -536,14 +449,13 @@ to predicted states.</p>
 <dl class="py class">
 <dt id="diffbayes.filters.VirtualSensorUnscentedKalmanFilter">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.filters.</code><code class="sig-name descname">VirtualSensorUnscentedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">virtual_sensor_model</span><span class="p">:</span> <span class="n">VirtualSensorModel</span></em>, <em class="sig-param"><span class="n">sigma_point_strategy</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>utils.SigmaPointStrategy<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.filters.VirtualSensorUnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin" title="diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin</span></code></a>, <a class="reference internal" href="_unscented_kalman_filter/index.html#diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter" title="diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter</span></code></a></p>
-<div class="graphviz"><img src="../../../_images/inheritance-8839775279dc54ff8ca72640cebe59ab34e5529d.png" alt="Inheritance diagram of diffbayes.filters.VirtualSensorUnscentedKalmanFilter" usemap="#inheritance430c9aaee0" class="inheritance graphviz" /></div>
+<dd><p>Bases: <a class="reference internal" href="#module-diffbayes.filters" title="diffbayes.filters"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.filters</span></code></a>, <a class="reference internal" href="#diffbayes.filters.UnscentedKalmanFilter" title="diffbayes.filters.UnscentedKalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.filters.UnscentedKalmanFilter</span></code></a></p>
+<div class="graphviz"><img src="../../../_images/inheritance-98668c72d59820d0bd75cceae700d4e001ba1221.png" alt="Inheritance diagram of diffbayes.filters.VirtualSensorUnscentedKalmanFilter" usemap="#inheritance430c9aaee0" class="inheritance graphviz" /></div>
 <map id="inheritance430c9aaee0" name="inheritance430c9aaee0">
-<area shape="rect" id="node2" href="../base/_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="98,4,155,24"/>
-<area shape="rect" id="node4" href="../base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="192,24,300,44"/>
-<area shape="rect" id="node5" href="_unscented_kalman_filter/index.html#diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter" target="_top" title="Standard UKF." alt="" coords="361,4,498,24"/>
-<area shape="rect" id="node7" href="_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin" target="_top" title="_VirtualSensorKalmanFilterMixin" alt="" coords="338,43,521,63"/>
-<area shape="rect" id="node6" href="_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters.VirtualSensorUnscentedKalmanFilter" target="_top" title="UKF variant with a virtual sensor model for mapping raw observations to predicted" alt="" coords="559,24,764,44"/>
+<area shape="rect" id="node2" href="../base/index.html#diffbayes.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="105,4,165,26"/>
+<area shape="rect" id="node4" href="../base/index.html#diffbayes.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="205,26,319,47"/>
+<area shape="rect" id="node5" href="#diffbayes.filters.UnscentedKalmanFilter" target="_top" title="Standard UKF." alt="" coords="360,26,505,47"/>
+<area shape="rect" id="node6" href="#diffbayes.filters.VirtualSensorUnscentedKalmanFilter" target="_top" title="UKF variant with a virtual sensor model for mapping raw observations to predicted" alt="" coords="545,26,764,47"/>
 </map><p>UKF variant with a virtual sensor model for mapping raw observations to predicted
 states.</p>
 <p>Assumes measurement model is identity.</p>

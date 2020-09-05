@@ -14,8 +14,8 @@ It's broken down into five submodules:
     <tr>
       <td><code>diffbayes.<strong>base</strong></code></td>
       <td>
-        Abstract classes that define standard interfaces for implementing
-        filter, dynamics, and measurement models as standard PyTorch modules.
+        Base classes that define standard interfaces for implementing filter,
+        dynamics, and measurement models as standard PyTorch modules.
       </td>
     </tr>
     <tr>

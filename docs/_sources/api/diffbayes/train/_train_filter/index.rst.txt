@@ -1,3 +1,5 @@
+:orphan:
+
 :mod:`diffbayes.train._train_filter`
 ====================================
 
@@ -18,13 +20,7 @@ Functions
 
 .. autoapisummary::
 
-   diffbayes.train._train_filter._swap_batch_sequence_axes
    diffbayes.train._train_filter.train_filter
-
-
-.. function:: _swap_batch_sequence_axes(tensor: torch.Tensor) -> torch.Tensor
-
-   Converts data formatted as (N, T, ...) to (T, N, ...)
 
 
 .. function:: train_filter(buddy: fannypack.utils.Buddy, filter_model: diffbayes.base.Filter, dataloader: DataLoader, initial_covariance: torch.Tensor, *, loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss, log_interval: int = 10, measurement_initialize=False, optimizer_name='train_filter_recurrent') -> None

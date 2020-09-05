@@ -178,13 +178,76 @@ autoapi_root = "api"
 autoapi_options = [
     "members",
     "undoc-members",
-    "private-members",
     "imported-members",
     "show-inheritance",
     "show-inheritance-diagram",
     "special-members",
     "show-module-summary",
 ]
+
+# Generate inheritance aliases
+def _gen_inheritance_alias():
+    inheritance_alias = {}
+
+    def recurse(module, prefixes):
+        if hasattr(module, "__name__") and module.__name__.startswith("diffbayes"):
+            MAX_DEPTH = 5
+            if len(prefixes) > MAX_DEPTH:
+                # Prevent infinite loops from cyclic imports
+                return
+        else:
+            return
+
+        for member_name in dir(module):
+            if member_name == "diffbayes":
+                continue
+
+            member = getattr(module, member_name)
+            if callable(member):
+                full_name = ".".join(["diffbayes"] + prefixes + [member_name])
+
+                shortened_name = "diffbayes"
+                current = diffbayes
+                success = True
+                for p in prefixes + [member_name]:
+                    if p.startswith("_"):
+                        continue
+                    if not hasattr(current, p):
+                        success = False
+                        break
+                    current = getattr(current, p)
+                    shortened_name += "." + p
+
+                if success and shortened_name != full_name:
+                    if full_name in inheritance_alias:
+                        assert full_name == inheritance_alias[shortened_name], full_name
+                    else:
+                        inheritance_alias[full_name] = shortened_name
+            elif not member_name.startswith("__"):
+                recurse(member, prefixes + [member_name])
+
+
+    import diffbayes
+    recurse(diffbayes, prefixes=[])
+    return inheritance_alias
+
+# Set inheritance_alias setting for inheritance diagrams
+inheritance_alias = _gen_inheritance_alias()
+
+# Apply our inheritance alias to autoapi base classes
+def _override_class_documenter():
+    import autoapi
+    orig_init = autoapi.mappers.python.PythonClass.__init__
+    def __init__(self, obj, **kwargs):
+        bases = obj["bases"]
+        for i, base in enumerate(bases):
+            if base in inheritance_alias:
+                bases[i] = inheritance_alias[base]
+                print(bases[i])
+        orig_init(self, obj, **kwargs)
+    autoapi.mappers.python.PythonClass.__init__ = __init__
+
+_override_class_documenter()
 
 # -- Options for todo extension ----------------------------------------------
 

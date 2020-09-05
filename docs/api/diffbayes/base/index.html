@@ -85,7 +85,6 @@
               <!-- Local TOC -->
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base</span></code></a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#package-contents">Package Contents</a><ul>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#diffbayes.base.DynamicsModel">DynamicsModel</a><ul>
@@ -109,8 +108,6 @@
 <li><a class="reference internal" href="#diffbayes.base.KalmanFilterBase.initialize_beliefs">initialize_beliefs</a></li>
 <li><a class="reference internal" href="#diffbayes.base.KalmanFilterBase.belief_mean">belief_mean</a></li>
 <li><a class="reference internal" href="#diffbayes.base.KalmanFilterBase.belief_covariance">belief_covariance</a></li>
-<li><a class="reference internal" href="#diffbayes.base.KalmanFilterBase._predict_step">_predict_step</a></li>
-<li><a class="reference internal" href="#diffbayes.base.KalmanFilterBase._update_step">_update_step</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#diffbayes.base.KalmanFilterMeasurementModel">KalmanFilterMeasurementModel</a><ul>
@@ -208,19 +205,6 @@
   <div class="section" id="module-diffbayes.base">
 <span id="diffbayes-base"></span><h1><a class="reference internal" href="#module-diffbayes.base" title="diffbayes.base"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base</span></code></a><a class="headerlink" href="#module-diffbayes.base" title="Permalink to this headline">¶</a></h1>
 <p>Abstract classes for filtering.</p>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="_dynamics_model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._dynamics_model</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="_filter/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._filter</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="_kalman_filter_base/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._kalman_filter_base</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="_kalman_filter_measurement_model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._kalman_filter_measurement_model</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="_particle_filter_measurement_model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._particle_filter_measurement_model</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="_virtual_sensor_model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._virtual_sensor_model</span></code></a></li>
-</ul>
-</div>
-</div>
 <div class="section" id="package-contents">
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="classes">
@@ -258,9 +242,9 @@
 <dt id="diffbayes.base.DynamicsModel">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.base.</code><code class="sig-name descname">DynamicsModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.DynamicsModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<div class="graphviz"><img src="../../../_images/inheritance-0f7249a11fd8eead9daaa52d756e301c093ec995.png" alt="Inheritance diagram of diffbayes.base.DynamicsModel" usemap="#inheritanced2555822ce" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-a7b5d76705e960a3ec072b4b6d6b4c7d5c96a847.png" alt="Inheritance diagram of diffbayes.base.DynamicsModel" usemap="#inheritanced2555822ce" class="inheritance graphviz" /></div>
 <map id="inheritanced2555822ce" name="inheritanced2555822ce">
-<area shape="rect" id="node2" href="_dynamics_model/index.html#diffbayes.base._dynamics_model.DynamicsModel" target="_top" title="Base class for a generic differentiable dynamics model, with additive white" alt="" coords="125,31,252,56"/>
+<area shape="rect" id="node2" href="#diffbayes.base.DynamicsModel" target="_top" title="Base class for a generic differentiable dynamics model, with additive white" alt="" coords="125,31,252,56"/>
 </map><p>Base class for a generic differentiable dynamics model, with additive white
 Gaussian noise.</p>
 <p>Subclasses should override either <code class="docutils literal notranslate"><span class="pre">forward</span></code> or <code class="docutils literal notranslate"><span class="pre">forward_loop</span></code> for computing dynamics
@@ -371,9 +355,9 @@ dict of tensors or tensor of size <code class="docutils literal notranslate"><sp
 <dt id="diffbayes.base.Filter">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.base.</code><code class="sig-name descname">Filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.Filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<div class="graphviz"><img src="../../../_images/inheritance-f6e35bcf3845ea6439e193f8ca5b3ab6bf1900f2.png" alt="Inheritance diagram of diffbayes.base.Filter" usemap="#inheritance9ad331580f" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-6864333ab518a86055deff525ff8f3e5a65e0e6d.png" alt="Inheritance diagram of diffbayes.base.Filter" usemap="#inheritance9ad331580f" class="inheritance graphviz" /></div>
 <map id="inheritance9ad331580f" name="inheritance9ad331580f">
-<area shape="rect" id="node2" href="_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,31,197,56"/>
+<area shape="rect" id="node2" href="#diffbayes.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,31,197,56"/>
 </map><p>Base class for a generic differentiable state estimator.</p>
 <p>As a minimum, subclasses should override:</p>
 <ul class="simple">
@@ -457,11 +441,11 @@ dict of tensors or tensor of size <code class="docutils literal notranslate"><sp
 <dl class="py class">
 <dt id="diffbayes.base.KalmanFilterBase">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.base.</code><code class="sig-name descname">KalmanFilterBase</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#diffbayes.base.DynamicsModel" title="diffbayes.base.DynamicsModel">DynamicsModel</a></span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#diffbayes.base.KalmanFilterMeasurementModel" title="diffbayes.base.KalmanFilterMeasurementModel">KalmanFilterMeasurementModel</a></span></em>, <em class="sig-param"><span class="o">**</span><span class="n">unused_kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.KalmanFilterBase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="_filter/index.html#diffbayes.base._filter.Filter" title="diffbayes.base._filter.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base._filter.Filter</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<div class="graphviz"><img src="../../../_images/inheritance-e3b01a169b06eb1e9b2663b7878601730116a729.png" alt="Inheritance diagram of diffbayes.base.KalmanFilterBase" usemap="#inheritance5254141c4b" class="inheritance graphviz" /></div>
+<dd><p>Bases: <a class="reference internal" href="#diffbayes.base.Filter" title="diffbayes.base.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.Filter</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<div class="graphviz"><img src="../../../_images/inheritance-efdbd4cd1e65faaf914627564dcef3cad8a01e48.png" alt="Inheritance diagram of diffbayes.base.KalmanFilterBase" usemap="#inheritance5254141c4b" class="inheritance graphviz" /></div>
 <map id="inheritance5254141c4b" name="inheritance5254141c4b">
-<area shape="rect" id="node2" href="_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,5,197,31"/>
-<area shape="rect" id="node4" href="_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,31,383,56"/>
+<area shape="rect" id="node2" href="#diffbayes.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node4" href="#diffbayes.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,31,383,56"/>
 </map><p>Base class for a generic Kalman-style filter. Parameterizes beliefs with a mean
 and covariance.</p>
 <p>Subclasses should override _predict_step() and _update_step().</p>
@@ -534,42 +518,15 @@ be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span
 <dd><p>Posterior covariance. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim)</span></code>.</p>
 </dd></dl>
 
-<dl class="py method">
-<dt id="diffbayes.base.KalmanFilterBase._predict_step">
-<em class="property">abstract </em><code class="sig-name descname">_predict_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.base.KalmanFilterBase._predict_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Kalman filter predict step.</p>
-<p>Computes $mu<em>{t | t - 1}$, $Sigma</em>{t | t - 1}$ from $mu<em>{t - 1 | t - 1}$,
-$Sigma</em>{t - 1 | t - 1}$.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><p><strong>controls</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Control inputs.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diffbayes.base.KalmanFilterBase._update_step">
-<em class="property">abstract </em><code class="sig-name descname">_update_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.base.KalmanFilterBase._update_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Kalman filter measurement update step.</p>
-<p>Nominally, computes $mu<em>{t | t}$, $Sigma</em>{t | t}$ from $mu<em>{t | t - 1}$,
-$Sigma</em>{t | t - 1}$.</p>
-<p>Updates <code class="docutils literal notranslate"><span class="pre">self.belief_mean</span></code> and <code class="docutils literal notranslate"><span class="pre">self.belief_covariance</span></code>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><p><strong>observations</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Observation inputs.</p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
 <dt id="diffbayes.base.KalmanFilterMeasurementModel">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.base.</code><code class="sig-name descname">KalmanFilterMeasurementModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span></em>, <em class="sig-param"><span class="n">observation_dim</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.KalmanFilterMeasurementModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
-<div class="graphviz"><img src="../../../_images/inheritance-2b05a3981246fbeb8543b4c350ab39137dafb3f8.png" alt="Inheritance diagram of diffbayes.base.KalmanFilterMeasurementModel" usemap="#inheritance850dae7170" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-4fbeccfc63e60cb1807d98b7408e56487a980d71.png" alt="Inheritance diagram of diffbayes.base.KalmanFilterMeasurementModel" usemap="#inheritance850dae7170" class="inheritance graphviz" /></div>
 <map id="inheritance850dae7170" name="inheritance850dae7170">
-<area shape="rect" id="node2" href="_kalman_filter_measurement_model/index.html#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel" target="_top" title="KalmanFilterMeasurementModel" alt="" coords="125,31,360,56"/>
+<area shape="rect" id="node2" href="#diffbayes.base.KalmanFilterMeasurementModel" target="_top" title="KalmanFilterMeasurementModel" alt="" coords="125,31,360,56"/>
 </map><p>Helper class that provides a standard way to create an ABC using
 inheritance.</p>
 <dl class="py attribute">
@@ -630,9 +587,9 @@ and cholesky decomposition of covariance.  Shape should be <code class="docutils
 <dt id="diffbayes.base.ParticleFilterMeasurementModel">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.base.</code><code class="sig-name descname">ParticleFilterMeasurementModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.ParticleFilterMeasurementModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
-<div class="graphviz"><img src="../../../_images/inheritance-39be8c4ee031679db163f49a6d7da16d77c80bc8.png" alt="Inheritance diagram of diffbayes.base.ParticleFilterMeasurementModel" usemap="#inheritancec1a3e5f79f" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-80ceb75a1f175b5a6441c0b9a1795f33ec9fe99a.png" alt="Inheritance diagram of diffbayes.base.ParticleFilterMeasurementModel" usemap="#inheritancec1a3e5f79f" class="inheritance graphviz" /></div>
 <map id="inheritancec1a3e5f79f" name="inheritancec1a3e5f79f">
-<area shape="rect" id="node3" href="_particle_filter_measurement_model/index.html#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel" target="_top" title="Observation model base class for a generic differentiable particle" alt="" coords="125,31,359,56"/>
+<area shape="rect" id="node3" href="#diffbayes.base.ParticleFilterMeasurementModel" target="_top" title="Observation model base class for a generic differentiable particle" alt="" coords="125,31,359,56"/>
 </map><p>Observation model base class for a generic differentiable particle
 filter; maps (state, observation) pairs to the log-likelihood of the
 observation given the state ( <span class="math notranslate nohighlight">\(\log p(z | x)\)</span> ).</p>
@@ -674,11 +631,11 @@ corresponding observation. Shape should be <code class="docutils literal notrans
 <dl class="py class">
 <dt id="diffbayes.base.ParticleFilterMeasurementModelWrapper">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.base.</code><code class="sig-name descname">ParticleFilterMeasurementModelWrapper</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">kalman_filter_measurement_model</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#diffbayes.base.KalmanFilterMeasurementModel" title="diffbayes.base.KalmanFilterMeasurementModel">KalmanFilterMeasurementModel</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.ParticleFilterMeasurementModelWrapper" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="_particle_filter_measurement_model/index.html#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel" title="diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel</span></code></a></p>
-<div class="graphviz"><img src="../../../_images/inheritance-bc8eee536ac1ceb532f1f48ed591a77a06c1c1c9.png" alt="Inheritance diagram of diffbayes.base.ParticleFilterMeasurementModelWrapper" usemap="#inheritancedf1e512ce1" class="inheritance graphviz" /></div>
+<dd><p>Bases: <a class="reference internal" href="#diffbayes.base.ParticleFilterMeasurementModel" title="diffbayes.base.ParticleFilterMeasurementModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.ParticleFilterMeasurementModel</span></code></a></p>
+<div class="graphviz"><img src="../../../_images/inheritance-69812e0ac7094dc7f874636fe710113a2f757191.png" alt="Inheritance diagram of diffbayes.base.ParticleFilterMeasurementModelWrapper" usemap="#inheritancedf1e512ce1" class="inheritance graphviz" /></div>
 <map id="inheritancedf1e512ce1" name="inheritancedf1e512ce1">
-<area shape="rect" id="node3" href="_particle_filter_measurement_model/index.html#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel" target="_top" title="Observation model base class for a generic differentiable particle" alt="" coords="125,31,359,56"/>
-<area shape="rect" id="node4" href="_particle_filter_measurement_model/index.html#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper" target="_top" title="Helper class for creating a particle filter measurement model (states," alt="" coords="407,31,695,56"/>
+<area shape="rect" id="node3" href="#diffbayes.base.ParticleFilterMeasurementModel" target="_top" title="Observation model base class for a generic differentiable particle" alt="" coords="125,31,359,56"/>
+<area shape="rect" id="node4" href="#diffbayes.base.ParticleFilterMeasurementModelWrapper" target="_top" title="Helper class for creating a particle filter measurement model (states," alt="" coords="407,31,695,56"/>
 </map><p>Helper class for creating a particle filter measurement model (states,
 observations -&gt; log-likelihoods) from a Kalman filter one (states -&gt; observations).</p>
 <dl class="field-list simple">
@@ -715,9 +672,9 @@ corresponding observation. Shape should be <code class="docutils literal notrans
 <dt id="diffbayes.base.VirtualSensorModel">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.base.</code><code class="sig-name descname">VirtualSensorModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.VirtualSensorModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
-<div class="graphviz"><img src="../../../_images/inheritance-18f312577b28fa9d68f23829df3da9bc088b2fa9.png" alt="Inheritance diagram of diffbayes.base.VirtualSensorModel" usemap="#inheritance7a87ba2adc" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-90e37cf24b0076cd5f50f921846c5dd2605b0002.png" alt="Inheritance diagram of diffbayes.base.VirtualSensorModel" usemap="#inheritance7a87ba2adc" class="inheritance graphviz" /></div>
 <map id="inheritance7a87ba2adc" name="inheritance7a87ba2adc">
-<area shape="rect" id="node3" href="_virtual_sensor_model/index.html#diffbayes.base._virtual_sensor_model.VirtualSensorModel" target="_top" title="Virtual sensor base class for our differentiable Kalman filters." alt="" coords="125,31,275,56"/>
+<area shape="rect" id="node3" href="#diffbayes.base.VirtualSensorModel" target="_top" title="Virtual sensor base class for our differentiable Kalman filters." alt="" coords="125,31,275,56"/>
 </map><p>Virtual sensor base class for our differentiable Kalman filters.</p>
 <p>Maps each observation input to a predicted state and uncertainty, in the style of
 BackpropKF. This is often necessary for complex observation spaces like images or

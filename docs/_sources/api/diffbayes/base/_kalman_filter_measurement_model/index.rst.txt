@@ -1,3 +1,5 @@
+:orphan:
+
 :mod:`diffbayes.base._kalman_filter_measurement_model`
 ======================================================
 
@@ -27,7 +29,6 @@ Classes
 
    .. autoapi-inheritance-diagram:: diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel
       :parts: 1
-      :private-bases:
 
    Helper class that provides a standard way to create an ABC using
    inheritance.

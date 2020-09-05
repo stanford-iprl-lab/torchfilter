@@ -87,12 +87,7 @@
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.filters._unscented_kalman_filter</span></code></a><ul>
 <li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
-<li><a class="reference internal" href="#diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter">UnscentedKalmanFilter</a><ul>
-<li><a class="reference internal" href="#diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter._predict_step">_predict_step</a></li>
-<li><a class="reference internal" href="#diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter._update_step">_update_step</a></li>
-<li><a class="reference internal" href="#diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter._weighted_covariance">_weighted_covariance</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter">UnscentedKalmanFilter</a></li>
 </ul>
 </li>
 </ul>
@@ -186,11 +181,11 @@
 <dt id="diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.filters._unscented_kalman_filter.</code><code class="sig-name descname">UnscentedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="n">sigma_point_strategy</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>utils.SigmaPointStrategy<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../base/index.html#diffbayes.base.KalmanFilterBase" title="diffbayes.base.KalmanFilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.KalmanFilterBase</span></code></a></p>
-<div class="graphviz"><img src="../../../../_images/inheritance-bdeb246333ade53dba992628d46781cb0ead938e.png" alt="Inheritance diagram of diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter" usemap="#inheritance8033375b8e" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../../_images/inheritance-92131d3af481e2453de42f92cd00d1ccff69ad01.png" alt="Inheritance diagram of diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter" usemap="#inheritance8033375b8e" class="inheritance graphviz" /></div>
 <map id="inheritance8033375b8e" name="inheritance8033375b8e">
-<area shape="rect" id="node2" href="../../base/_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,5,197,31"/>
-<area shape="rect" id="node4" href="../../base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,31,383,56"/>
-<area shape="rect" id="node5" href="#diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter" target="_top" title="Standard UKF." alt="" coords="431,31,605,56"/>
+<area shape="rect" id="node2" href="../../base/index.html#diffbayes.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node4" href="../../base/index.html#diffbayes.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,31,383,56"/>
+<area shape="rect" id="node5" href="../index.html#diffbayes.filters.UnscentedKalmanFilter" target="_top" title="Standard UKF." alt="" coords="431,31,605,56"/>
 </map><p>Standard UKF.</p>
 <p>From Algorithm 2.1 of Merwe et al. [1]. For working with heteroscedastic noise
 models, we use the weighting approach described in [2].</p>
@@ -198,27 +193,6 @@ models, we use the weighting approach described in [2].</p>
 <a class="reference external" href="https://ieeexplore.ieee.org/document/940586/">https://ieeexplore.ieee.org/document/940586/</a>
 [2] How to Train Your Differentiable Filter
 <a class="reference external" href="https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf">https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf</a></p>
-<dl class="py method">
-<dt id="diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter._predict_step">
-<code class="sig-name descname">_predict_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter._predict_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Predict step.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter._update_step">
-<code class="sig-name descname">_update_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter._update_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Update step.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter._weighted_covariance">
-<code class="sig-name descname">_weighted_covariance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">sigma_trils</span><span class="p">:</span> <span class="n">types.ScaleTrilTorch</span></em><span class="sig-paren">)</span> &#x2192; types.CovarianceTorch<a class="headerlink" href="#diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter._weighted_covariance" title="Permalink to this definition">¶</a></dt>
-<dd><p>For heteroscedastic covariances, we apply the weighted average approach
-described by Kloss et al:
-<a class="reference external" href="https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf">https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf</a></p>
-<p>(note that the mean weights are used because they sum to 1)</p>
-</dd></dl>
-
 </dd></dl>
 
 </div>

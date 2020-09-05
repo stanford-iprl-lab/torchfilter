@@ -1,3 +1,5 @@
+:orphan:
+
 :mod:`diffbayes.utils._sigma_points`
 ====================================
 
@@ -29,7 +31,6 @@ Classes
 
    .. autoapi-inheritance-diagram:: diffbayes.utils._sigma_points.SigmaPointStrategy
       :parts: 1
-      :private-bases:
 
    Strategy to use for computing sigma weights + selecting sigma points.
 
@@ -59,11 +60,10 @@ Classes
 
 .. py:class:: MerweSigmaPointStrategy
 
-   Bases: :class:`diffbayes.utils._sigma_points.SigmaPointStrategy`
+   Bases: :class:`diffbayes.utils.SigmaPointStrategy`
 
    .. autoapi-inheritance-diagram:: diffbayes.utils._sigma_points.MerweSigmaPointStrategy
       :parts: 1
-      :private-bases:
 
    Sigma point selection in the style of [2].
 
@@ -117,11 +117,10 @@ Classes
 
 .. py:class:: JulierSigmaPointStrategy
 
-   Bases: :class:`diffbayes.utils._sigma_points.SigmaPointStrategy`
+   Bases: :class:`diffbayes.utils.SigmaPointStrategy`
 
    .. autoapi-inheritance-diagram:: diffbayes.utils._sigma_points.JulierSigmaPointStrategy
       :parts: 1
-      :private-bases:
 
    Sigma point selection in this style of [1].
 

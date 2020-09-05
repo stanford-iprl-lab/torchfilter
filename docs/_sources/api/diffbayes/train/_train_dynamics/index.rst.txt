@@ -1,3 +1,5 @@
+:orphan:
+
 :mod:`diffbayes.train._train_dynamics`
 ======================================
 
@@ -18,14 +20,8 @@ Functions
 
 .. autoapisummary::
 
-   diffbayes.train._train_dynamics._swap_batch_sequence_axes
    diffbayes.train._train_dynamics.train_dynamics_single_step
    diffbayes.train._train_dynamics.train_dynamics_recurrent
-
-
-.. function:: _swap_batch_sequence_axes(tensor: torch.Tensor) -> torch.Tensor
-
-   Converts data formatted as (N, T, ...) to (T, N, ...)
 
 
 .. function:: train_dynamics_single_step(buddy: fannypack.utils.Buddy, dynamics_model: diffbayes.base.DynamicsModel, dataloader: DataLoader, *, loss_function: str = 'nll', log_interval: int = 10) -> None

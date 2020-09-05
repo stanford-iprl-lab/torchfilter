@@ -94,8 +94,6 @@
 <li><a class="reference internal" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase.initialize_beliefs">initialize_beliefs</a></li>
 <li><a class="reference internal" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase.belief_mean">belief_mean</a></li>
 <li><a class="reference internal" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase.belief_covariance">belief_covariance</a></li>
-<li><a class="reference internal" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase._predict_step">_predict_step</a></li>
-<li><a class="reference internal" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase._update_step">_update_step</a></li>
 </ul>
 </li>
 </ul>
@@ -190,11 +188,11 @@
 <dl class="py class">
 <dt id="diffbayes.base._kalman_filter_base.KalmanFilterBase">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._kalman_filter_base.</code><code class="sig-name descname">KalmanFilterBase</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">unused_kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../_filter/index.html#diffbayes.base._filter.Filter" title="diffbayes.base._filter.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base._filter.Filter</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<div class="graphviz"><img src="../../../../_images/inheritance-1be1d51ca3561ac9dbf8edfad4d8444fda2a7599.png" alt="Inheritance diagram of diffbayes.base._kalman_filter_base.KalmanFilterBase" usemap="#inheritance5daba854cb" class="inheritance graphviz" /></div>
+<dd><p>Bases: <a class="reference internal" href="../index.html#diffbayes.base.Filter" title="diffbayes.base.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.Filter</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<div class="graphviz"><img src="../../../../_images/inheritance-de4c5334f886b10265d35f7fa8a0e0e42c232b7c.png" alt="Inheritance diagram of diffbayes.base._kalman_filter_base.KalmanFilterBase" usemap="#inheritance5daba854cb" class="inheritance graphviz" /></div>
 <map id="inheritance5daba854cb" name="inheritance5daba854cb">
-<area shape="rect" id="node2" href="../_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,5,197,31"/>
-<area shape="rect" id="node4" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,31,383,56"/>
+<area shape="rect" id="node2" href="../index.html#diffbayes.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node4" href="../index.html#diffbayes.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,31,383,56"/>
 </map><p>Base class for a generic Kalman-style filter. Parameterizes beliefs with a mean
 and covariance.</p>
 <p>Subclasses should override _predict_step() and _update_step().</p>
@@ -265,33 +263,6 @@ be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span
 <dt id="diffbayes.base._kalman_filter_base.KalmanFilterBase.belief_covariance">
 <em class="property">property </em><code class="sig-name descname">belief_covariance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; types.CovarianceTorch<a class="headerlink" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase.belief_covariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Posterior covariance. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim)</span></code>.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diffbayes.base._kalman_filter_base.KalmanFilterBase._predict_step">
-<em class="property">abstract </em><code class="sig-name descname">_predict_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase._predict_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Kalman filter predict step.</p>
-<p>Computes $mu<em>{t | t - 1}$, $Sigma</em>{t | t - 1}$ from $mu<em>{t - 1 | t - 1}$,
-$Sigma</em>{t - 1 | t - 1}$.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><p><strong>controls</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Control inputs.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diffbayes.base._kalman_filter_base.KalmanFilterBase._update_step">
-<em class="property">abstract </em><code class="sig-name descname">_update_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase._update_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Kalman filter measurement update step.</p>
-<p>Nominally, computes $mu<em>{t | t}$, $Sigma</em>{t | t}$ from $mu<em>{t | t - 1}$,
-$Sigma</em>{t | t - 1}$.</p>
-<p>Updates <code class="docutils literal notranslate"><span class="pre">self.belief_mean</span></code> and <code class="docutils literal notranslate"><span class="pre">self.belief_covariance</span></code>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
-<dd class="field-odd"><p><strong>observations</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Observation inputs.</p>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>

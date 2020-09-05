@@ -1,5 +1,0 @@
-<map id="inheritance7a87ba2adc" name="inheritance7a87ba2adc">
-<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="5,5,77,31"/>
-<area shape="rect" id="node3" href="_virtual_sensor_model/index.html#diffbayes.base._virtual_sensor_model.VirtualSensorModel" target="_top" title="Virtual sensor base class for our differentiable Kalman filters." alt="" coords="125,31,275,56"/>
-<area shape="rect" id="node2" title="Base class for all neural network modules." alt="" coords="5,55,77,80"/>
-</map>

@@ -9,18 +9,6 @@
 
 
 
-Submodules
-----------
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
-
-   _particle_filter_measurement_dataset/index.rst
-   _single_step_dataset/index.rst
-   _split_trajectories/index.rst
-   _subsequence_dataset/index.rst
-
-
 Package Contents
 ----------------
 
@@ -49,7 +37,6 @@ Functions
 
    .. autoapi-inheritance-diagram:: diffbayes.data.ParticleFilterMeasurementDataset
       :parts: 1
-      :private-bases:
 
    A dataset interface for pre-training particle filter measurement models.
 
@@ -92,7 +79,6 @@ Functions
 
    .. autoapi-inheritance-diagram:: diffbayes.data.SingleStepDataset
       :parts: 1
-      :private-bases:
 
    A dataset interface that returns single-step training examples:
    ``(previous_state, state, observation, control)``
@@ -155,7 +141,6 @@ Functions
 
    .. autoapi-inheritance-diagram:: diffbayes.data.SubsequenceDataset
       :parts: 1
-      :private-bases:
 
    A data preprocessor for producing training subsequences from
    a list of trajectories.

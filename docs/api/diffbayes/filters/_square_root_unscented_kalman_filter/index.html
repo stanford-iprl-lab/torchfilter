@@ -89,8 +89,6 @@
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter">SquareRootUnscentedKalmanFilter</a><ul>
 <li><a class="reference internal" href="#diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter.belief_covariance">belief_covariance</a></li>
-<li><a class="reference internal" href="#diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter._predict_step">_predict_step</a></li>
-<li><a class="reference internal" href="#diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter._update_step">_update_step</a></li>
 </ul>
 </li>
 </ul>
@@ -186,11 +184,11 @@
 <dt id="diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.filters._square_root_unscented_kalman_filter.</code><code class="sig-name descname">SquareRootUnscentedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="n">sigma_point_strategy</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>utils.SigmaPointStrategy<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../base/index.html#diffbayes.base.KalmanFilterBase" title="diffbayes.base.KalmanFilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.KalmanFilterBase</span></code></a></p>
-<div class="graphviz"><img src="../../../../_images/inheritance-db9bd148f120fa5f7c32f4b5635439f0ed7b9489.png" alt="Inheritance diagram of diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter" usemap="#inheritance8193457b91" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../../_images/inheritance-e88dd549616881fc22c5b9184731c1ff146f53f6.png" alt="Inheritance diagram of diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter" usemap="#inheritance8193457b91" class="inheritance graphviz" /></div>
 <map id="inheritance8193457b91" name="inheritance8193457b91">
-<area shape="rect" id="node2" href="../../base/_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,5,197,31"/>
-<area shape="rect" id="node4" href="../../base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,31,383,56"/>
-<area shape="rect" id="node5" href="#diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter" target="_top" title="Square&#45;root formulation of UKF." alt="" coords="431,31,680,56"/>
+<area shape="rect" id="node2" href="../../base/index.html#diffbayes.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node4" href="../../base/index.html#diffbayes.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,31,383,56"/>
+<area shape="rect" id="node5" href="../index.html#diffbayes.filters.SquareRootUnscentedKalmanFilter" target="_top" title="Square&#45;root formulation of UKF." alt="" coords="431,31,680,56"/>
 </map><p>Square-root formulation of UKF.</p>
 <p>From Algorithm 3.1 of Merwe et al [1].</p>
 <p>[1] The square-root unscented Kalman filter for state and parameter-estimation.
@@ -199,18 +197,6 @@
 <dt id="diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter.belief_covariance">
 <em class="property">property </em><code class="sig-name descname">belief_covariance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; types.CovarianceTorch<a class="headerlink" href="#diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter.belief_covariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Posterior covariance. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim)</span></code>.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter._predict_step">
-<code class="sig-name descname">_predict_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter._predict_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Predict step.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter._update_step">
-<code class="sig-name descname">_update_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter._update_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Update step.</p>
 </dd></dl>
 
 </dd></dl>

@@ -13,19 +13,6 @@
 
 
 
-Submodules
-----------
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
-
-   _train_dynamics/index.rst
-   _train_filter/index.rst
-   _train_kalman_filter_measurement/index.rst
-   _train_particle_filter_measurement/index.rst
-   _train_virtual_sensor/index.rst
-
-
 Package Contents
 ----------------
 

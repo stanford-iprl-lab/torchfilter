@@ -193,10 +193,10 @@
 <dt id="diffbayes.filters._particle_filter.ParticleFilter">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.filters._particle_filter.</code><code class="sig-name descname">ParticleFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">ParticleFilterMeasurementModel</span></em>, <em class="sig-param"><span class="n">num_particles</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">100</span></em>, <em class="sig-param"><span class="n">resample</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">soft_resample_alpha</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">estimation_method</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'weighted_average'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.filters._particle_filter.ParticleFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../base/index.html#diffbayes.base.Filter" title="diffbayes.base.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.Filter</span></code></a></p>
-<div class="graphviz"><img src="../../../../_images/inheritance-13f4c689ceb4eb4bd93413beb1b56e108af2ee55.png" alt="Inheritance diagram of diffbayes.filters._particle_filter.ParticleFilter" usemap="#inheritance3fe8651cb7" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../../_images/inheritance-801768d4aa2ff0c7c7d7d81d3037b161acae3b64.png" alt="Inheritance diagram of diffbayes.filters._particle_filter.ParticleFilter" usemap="#inheritance3fe8651cb7" class="inheritance graphviz" /></div>
 <map id="inheritance3fe8651cb7" name="inheritance3fe8651cb7">
-<area shape="rect" id="node2" href="../../base/_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,31,197,56"/>
-<area shape="rect" id="node4" href="#diffbayes.filters._particle_filter.ParticleFilter" target="_top" title="Generic differentiable particle filter." alt="" coords="245,31,348,56"/>
+<area shape="rect" id="node2" href="../../base/index.html#diffbayes.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,31,197,56"/>
+<area shape="rect" id="node4" href="../index.html#diffbayes.filters.ParticleFilter" target="_top" title="Generic differentiable particle filter." alt="" coords="245,31,348,56"/>
 </map><p>Generic differentiable particle filter.</p>
 <dl class="py attribute">
 <dt id="diffbayes.filters._particle_filter.ParticleFilter.dynamics_model">
@@ -249,8 +249,8 @@ and off in train mode.</p>
 <dt id="diffbayes.filters._particle_filter.ParticleFilter.soft_resample_alpha">
 <code class="sig-name descname">soft_resample_alpha</code><a class="headerlink" href="#diffbayes.filters._particle_filter.ParticleFilter.soft_resample_alpha" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tunable constant for differentiable resampling, as described
-by Jonschkowski et al. in “Differentiable Particle Filters: End-to-End
-Learning with Algorithmic Priors”: <a class="reference external" href="https://arxiv.org/abs/1805.11122">https://arxiv.org/abs/1805.11122</a>.
+by Karkus et al. in “Particle Filter Networks with Application to Visual
+Localization”: <a class="reference external" href="https://arxiv.org/abs/1805.08975">https://arxiv.org/abs/1805.08975</a>
 Defaults to 1.0 (disabled).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>

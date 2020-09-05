@@ -1,3 +1,5 @@
+:orphan:
+
 :mod:`diffbayes.data._single_step_dataset`
 ==========================================
 
@@ -27,7 +29,6 @@ Classes
 
    .. autoapi-inheritance-diagram:: diffbayes.data._single_step_dataset.SingleStepDataset
       :parts: 1
-      :private-bases:
 
    A dataset interface that returns single-step training examples:
    ``(previous_state, state, observation, control)``

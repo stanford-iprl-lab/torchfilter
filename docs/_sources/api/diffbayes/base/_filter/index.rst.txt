@@ -1,3 +1,5 @@
+:orphan:
+
 :mod:`diffbayes.base._filter`
 =============================
 
@@ -27,7 +29,6 @@ Classes
 
    .. autoapi-inheritance-diagram:: diffbayes.base._filter.Filter
       :parts: 1
-      :private-bases:
 
    Base class for a generic differentiable state estimator.
 

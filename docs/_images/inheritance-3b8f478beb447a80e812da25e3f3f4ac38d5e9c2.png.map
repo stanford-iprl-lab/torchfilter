@@ -1,0 +1,8 @@
+<map id="inheritance266f926a82" name="inheritance266f926a82">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="4,46,65,67"/>
+<area shape="rect" id="node2" href="../../base/index.html#diffbayes.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="105,4,165,26"/>
+<area shape="rect" id="node4" href="../../base/index.html#diffbayes.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="205,26,319,47"/>
+<area shape="rect" id="node3" title="Base class for all neural network modules." alt="" coords="4,4,65,26"/>
+<area shape="rect" id="node5" href="../index.html#diffbayes.filters.UnscentedKalmanFilter" target="_top" title="Standard UKF." alt="" coords="360,26,505,47"/>
+<area shape="rect" id="node6" href="../index.html#diffbayes.filters.VirtualSensorUnscentedKalmanFilter" target="_top" title="UKF variant with a virtual sensor model for mapping raw observations to predicted" alt="" coords="545,26,764,47"/>
+</map>

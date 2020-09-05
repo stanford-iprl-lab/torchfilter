@@ -1,3 +1,5 @@
+:orphan:
+
 :mod:`diffbayes.base._particle_filter_measurement_model`
 ========================================================
 
@@ -28,7 +30,6 @@ Classes
 
    .. autoapi-inheritance-diagram:: diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel
       :parts: 1
-      :private-bases:
 
    Observation model base class for a generic differentiable particle
    filter; maps (state, observation) pairs to the log-likelihood of the
@@ -63,11 +64,10 @@ Classes
 
 .. py:class:: ParticleFilterMeasurementModelWrapper(kalman_filter_measurement_model: KalmanFilterMeasurementModel)
 
-   Bases: :class:`diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel`
+   Bases: :class:`diffbayes.base.ParticleFilterMeasurementModel`
 
    .. autoapi-inheritance-diagram:: diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper
       :parts: 1
-      :private-bases:
 
    Helper class for creating a particle filter measurement model (states,
    observations -> log-likelihoods) from a Kalman filter one (states -> observations).

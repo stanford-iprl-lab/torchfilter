@@ -1,9 +1,0 @@
-<map id="inheritancef3ec2b561f" name="inheritancef3ec2b561f">
-<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="4,5,61,25"/>
-<area shape="rect" id="node3" href="../base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="194,24,302,44"/>
-<area shape="rect" id="node4" href="../base/_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="99,44,156,64"/>
-<area shape="rect" id="node2" href="_extended_kalman_filter/index.html#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter" target="_top" title="Generic differentiable EKF." alt="" coords="367,4,499,24"/>
-<area shape="rect" id="node6" href="_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter" target="_top" title="EKF variant with a virtual sensor model for mapping raw observations to predicted" alt="" coords="564,24,764,44"/>
-<area shape="rect" id="node7" href="_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin" target="_top" title="_VirtualSensorKalmanFilterMixin" alt="" coords="340,43,526,63"/>
-<area shape="rect" id="node5" title="Base class for all neural network modules." alt="" coords="4,44,61,64"/>
-</map>

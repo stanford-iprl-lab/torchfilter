@@ -192,9 +192,9 @@
 <dt id="diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._particle_filter_measurement_model.</code><code class="sig-name descname">ParticleFilterMeasurementModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
-<div class="graphviz"><img src="../../../../_images/inheritance-07a77c2c95f792f1fb41bb6f551e4d8b17590659.png" alt="Inheritance diagram of diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel" usemap="#inheritance7e3adf800f" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../../_images/inheritance-9eff980b5ed11612160482494bcd3d46223f34bb.png" alt="Inheritance diagram of diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel" usemap="#inheritance7e3adf800f" class="inheritance graphviz" /></div>
 <map id="inheritance7e3adf800f" name="inheritance7e3adf800f">
-<area shape="rect" id="node3" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel" target="_top" title="Observation model base class for a generic differentiable particle" alt="" coords="125,31,359,56"/>
+<area shape="rect" id="node3" href="../index.html#diffbayes.base.ParticleFilterMeasurementModel" target="_top" title="Observation model base class for a generic differentiable particle" alt="" coords="125,31,359,56"/>
 </map><p>Observation model base class for a generic differentiable particle
 filter; maps (state, observation) pairs to the log-likelihood of the
 observation given the state ( <span class="math notranslate nohighlight">\(\log p(z | x)\)</span> ).</p>
@@ -236,11 +236,11 @@ corresponding observation. Shape should be <code class="docutils literal notrans
 <dl class="py class">
 <dt id="diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._particle_filter_measurement_model.</code><code class="sig-name descname">ParticleFilterMeasurementModelWrapper</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">kalman_filter_measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel" title="diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel</span></code></a></p>
-<div class="graphviz"><img src="../../../../_images/inheritance-a4a532f69c690bbc90dff6fec63dc105fe31b34b.png" alt="Inheritance diagram of diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper" usemap="#inheritanceb9aa454f50" class="inheritance graphviz" /></div>
+<dd><p>Bases: <a class="reference internal" href="../index.html#diffbayes.base.ParticleFilterMeasurementModel" title="diffbayes.base.ParticleFilterMeasurementModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.ParticleFilterMeasurementModel</span></code></a></p>
+<div class="graphviz"><img src="../../../../_images/inheritance-4f53df3744f7f0dc67cf1244b9b10f17ba6c4196.png" alt="Inheritance diagram of diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper" usemap="#inheritanceb9aa454f50" class="inheritance graphviz" /></div>
 <map id="inheritanceb9aa454f50" name="inheritanceb9aa454f50">
-<area shape="rect" id="node3" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel" target="_top" title="Observation model base class for a generic differentiable particle" alt="" coords="125,31,359,56"/>
-<area shape="rect" id="node4" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper" target="_top" title="Helper class for creating a particle filter measurement model (states," alt="" coords="407,31,695,56"/>
+<area shape="rect" id="node3" href="../index.html#diffbayes.base.ParticleFilterMeasurementModel" target="_top" title="Observation model base class for a generic differentiable particle" alt="" coords="125,31,359,56"/>
+<area shape="rect" id="node4" href="../index.html#diffbayes.base.ParticleFilterMeasurementModelWrapper" target="_top" title="Helper class for creating a particle filter measurement model (states," alt="" coords="407,31,695,56"/>
 </map><p>Helper class for creating a particle filter measurement model (states,
 observations -&gt; log-likelihoods) from a Kalman filter one (states -&gt; observations).</p>
 <dl class="field-list simple">

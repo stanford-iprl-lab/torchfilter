@@ -1,6 +1,0 @@
-<map id="inheritance48b0a942fc" name="inheritance48b0a942fc">
-<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="5,5,77,31"/>
-<area shape="rect" id="node2" href="../../base/_kalman_filter_measurement_model/index.html#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel" target="_top" title="KalmanFilterMeasurementModel" alt="" coords="125,31,360,56"/>
-<area shape="rect" id="node4" href="#diffbayes.filters._virtual_sensor_filters._IdentityMeasurementModel" target="_top" title="Identity measurement model. For use with our virtual sensor Kalman filters, which" alt="" coords="408,31,617,56"/>
-<area shape="rect" id="node3" title="Base class for all neural network modules." alt="" coords="5,55,77,80"/>
-</map>

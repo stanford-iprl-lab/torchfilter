@@ -85,7 +85,6 @@
               <!-- Local TOC -->
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data</span></code></a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#package-contents">Package Contents</a><ul>
 <li><a class="reference internal" href="#classes">Classes</a></li>
 <li><a class="reference internal" href="#functions">Functions</a><ul>
@@ -179,17 +178,6 @@
   <div class="section" id="module-diffbayes.data">
 <span id="diffbayes-data"></span><h1><a class="reference internal" href="#module-diffbayes.data" title="diffbayes.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data</span></code></a><a class="headerlink" href="#module-diffbayes.data" title="Permalink to this headline">¶</a></h1>
 <p>Dataset utilities for learning &amp; evaluating state estimators in PyTorch.</p>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="_particle_filter_measurement_dataset/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._particle_filter_measurement_dataset</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="_single_step_dataset/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._single_step_dataset</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="_split_trajectories/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._split_trajectories</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="_subsequence_dataset/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._subsequence_dataset</span></code></a></li>
-</ul>
-</div>
-</div>
 <div class="section" id="package-contents">
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="classes">
@@ -229,9 +217,9 @@
 <dt id="diffbayes.data.ParticleFilterMeasurementDataset">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.data.</code><code class="sig-name descname">ParticleFilterMeasurementDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">np.ndarray</span></em>, <em class="sig-param"><span class="n">samples_per_pair</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.data.ParticleFilterMeasurementDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
-<div class="graphviz"><img src="../../../_images/inheritance-ba68cb15b0f3db8fd77a20f444d2e7766dcdc938.png" alt="Inheritance diagram of diffbayes.data.ParticleFilterMeasurementDataset" usemap="#inheritancec32d9e7395" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-a73b4b36b0030c50eb0328d9bdae5dcaf298a921.png" alt="Inheritance diagram of diffbayes.data.ParticleFilterMeasurementDataset" usemap="#inheritancec32d9e7395" class="inheritance graphviz" /></div>
 <map id="inheritancec32d9e7395" name="inheritancec32d9e7395">
-<area shape="rect" id="node2" href="_particle_filter_measurement_dataset/index.html#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset" target="_top" title="A dataset interface for pre&#45;training particle filter measurement models." alt="" coords="127,5,371,31"/>
+<area shape="rect" id="node2" href="#diffbayes.data.ParticleFilterMeasurementDataset" target="_top" title="A dataset interface for pre&#45;training particle filter measurement models." alt="" coords="127,5,371,31"/>
 </map><p>A dataset interface for pre-training particle filter measurement models.</p>
 <p>Centers Gaussian distributions around our ground-truth states, and provides examples
 for learning the log-likelihood.</p>
@@ -281,9 +269,9 @@ the <code class="docutils literal notranslate"><span class="pre">p(observation</
 <dt id="diffbayes.data.SingleStepDataset">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.data.</code><code class="sig-name descname">SingleStepDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.data.SingleStepDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
-<div class="graphviz"><img src="../../../_images/inheritance-765f6b84fc0e0e67bf6e8bb56c8726c66be3bafa.png" alt="Inheritance diagram of diffbayes.data.SingleStepDataset" usemap="#inheritanceb597925dfb" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-b0355e3377f0e3ef4b9297045950d04e2866cd97.png" alt="Inheritance diagram of diffbayes.data.SingleStepDataset" usemap="#inheritanceb597925dfb" class="inheritance graphviz" /></div>
 <map id="inheritanceb597925dfb" name="inheritanceb597925dfb">
-<area shape="rect" id="node2" href="_single_step_dataset/index.html#diffbayes.data._single_step_dataset.SingleStepDataset" target="_top" title="A dataset interface that returns single&#45;step training examples:" alt="" coords="127,5,269,31"/>
+<area shape="rect" id="node2" href="#diffbayes.data.SingleStepDataset" target="_top" title="A dataset interface that returns single&#45;step training examples:" alt="" coords="127,5,269,31"/>
 </map><p>A dataset interface that returns single-step training examples:
 <code class="docutils literal notranslate"><span class="pre">(previous_state,</span> <span class="pre">state,</span> <span class="pre">observation,</span> <span class="pre">control)</span></code></p>
 <p>By default, extracts these examples from a list of trajectories.</p>
@@ -353,9 +341,9 @@ timesteps…</p>
 <dt id="diffbayes.data.SubsequenceDataset">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.data.</code><code class="sig-name descname">SubsequenceDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">subsequence_length</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.data.SubsequenceDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
-<div class="graphviz"><img src="../../../_images/inheritance-bc9231977f64f3e287e666e48218ad6184adaac1.png" alt="Inheritance diagram of diffbayes.data.SubsequenceDataset" usemap="#inheritance206f9a08cc" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-0b3b8cc336461906c4a6009144e34e3e3cb0601e.png" alt="Inheritance diagram of diffbayes.data.SubsequenceDataset" usemap="#inheritance206f9a08cc" class="inheritance graphviz" /></div>
 <map id="inheritance206f9a08cc" name="inheritance206f9a08cc">
-<area shape="rect" id="node2" href="_subsequence_dataset/index.html#diffbayes.data._subsequence_dataset.SubsequenceDataset" target="_top" title="A data preprocessor for producing training subsequences from" alt="" coords="127,5,285,31"/>
+<area shape="rect" id="node2" href="#diffbayes.data.SubsequenceDataset" target="_top" title="A data preprocessor for producing training subsequences from" alt="" coords="127,5,285,31"/>
 </map><p>A data preprocessor for producing training subsequences from
 a list of trajectories.</p>
 <p>Thin wrapper around <code class="docutils literal notranslate"><span class="pre">diffbayes.data.split_trajectories()</span></code>.</p>

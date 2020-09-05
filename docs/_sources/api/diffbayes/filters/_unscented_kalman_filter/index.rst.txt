@@ -1,3 +1,5 @@
+:orphan:
+
 :mod:`diffbayes.filters._unscented_kalman_filter`
 =================================================
 
@@ -27,7 +29,6 @@ Classes
 
    .. autoapi-inheritance-diagram:: diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter
       :parts: 1
-      :private-bases:
 
    Standard UKF.
 
@@ -38,24 +39,5 @@ Classes
    https://ieeexplore.ieee.org/document/940586/
    [2] How to Train Your Differentiable Filter
    https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf
-
-   .. method:: _predict_step(self, *, controls: types.ControlsTorch) -> None
-
-      Predict step.
-
-
-   .. method:: _update_step(self, *, observations: types.ObservationsTorch) -> None
-
-      Update step.
-
-
-   .. method:: _weighted_covariance(self, sigma_trils: types.ScaleTrilTorch) -> types.CovarianceTorch
-
-      For heteroscedastic covariances, we apply the weighted average approach
-      described by Kloss et al:
-      https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf
-
-      (note that the mean weights are used because they sum to 1)
-
 
 

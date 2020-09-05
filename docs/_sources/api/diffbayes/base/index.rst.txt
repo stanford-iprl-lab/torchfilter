@@ -9,20 +9,6 @@
 
 
 
-Submodules
-----------
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
-
-   _dynamics_model/index.rst
-   _filter/index.rst
-   _kalman_filter_base/index.rst
-   _kalman_filter_measurement_model/index.rst
-   _particle_filter_measurement_model/index.rst
-   _virtual_sensor_model/index.rst
-
-
 Package Contents
 ----------------
 
@@ -47,7 +33,6 @@ Classes
 
    .. autoapi-inheritance-diagram:: diffbayes.base.DynamicsModel
       :parts: 1
-      :private-bases:
 
    Base class for a generic differentiable dynamics model, with additive white
    Gaussian noise.
@@ -150,7 +135,6 @@ Classes
 
    .. autoapi-inheritance-diagram:: diffbayes.base.Filter
       :parts: 1
-      :private-bases:
 
    Base class for a generic differentiable state estimator.
 
@@ -221,11 +205,10 @@ Classes
 
 .. py:class:: KalmanFilterBase(*, dynamics_model: DynamicsModel, measurement_model: KalmanFilterMeasurementModel, **unused_kwargs)
 
-   Bases: :class:`diffbayes.base._filter.Filter`, :class:`abc.ABC`
+   Bases: :class:`diffbayes.base.Filter`, :class:`abc.ABC`
 
    .. autoapi-inheritance-diagram:: diffbayes.base.KalmanFilterBase
       :parts: 1
-      :private-bases:
 
    Base class for a generic Kalman-style filter. Parameterizes beliefs with a mean
    and covariance.
@@ -286,32 +269,6 @@ Classes
       Posterior covariance. Shape should be ``(N, state_dim, state_dim)``.
 
 
-   .. method:: _predict_step(self, *, controls: types.ControlsTorch) -> None
-      :abstractmethod:
-
-      Kalman filter predict step.
-
-      Computes $\mu\ *{t | t - 1}$, $\Sigma*\ {t | t - 1}$ from $\mu\ *{t - 1 | t - 1}$,
-      $\Sigma*\ {t - 1 | t - 1}$.
-
-      :keyword controls: Control inputs.
-      :kwtype controls: dict or torch.Tensor
-
-
-   .. method:: _update_step(self, *, observations: types.ObservationsTorch) -> None
-      :abstractmethod:
-
-      Kalman filter measurement update step.
-
-      Nominally, computes $\mu\ *{t | t}$, $\Sigma*\ {t | t}$ from $\mu\ *{t | t - 1}$,
-      $\Sigma*\ {t | t - 1}$.
-
-      Updates ``self.belief_mean`` and ``self.belief_covariance``.
-
-      :keyword observations: Observation inputs.
-      :kwtype observations: dict or torch.Tensor
-
-
 
 .. py:class:: KalmanFilterMeasurementModel(*, state_dim, observation_dim)
 
@@ -319,7 +276,6 @@ Classes
 
    .. autoapi-inheritance-diagram:: diffbayes.base.KalmanFilterMeasurementModel
       :parts: 1
-      :private-bases:
 
    Helper class that provides a standard way to create an ABC using
    inheritance.
@@ -370,7 +326,6 @@ Classes
 
    .. autoapi-inheritance-diagram:: diffbayes.base.ParticleFilterMeasurementModel
       :parts: 1
-      :private-bases:
 
    Observation model base class for a generic differentiable particle
    filter; maps (state, observation) pairs to the log-likelihood of the
@@ -405,11 +360,10 @@ Classes
 
 .. py:class:: ParticleFilterMeasurementModelWrapper(kalman_filter_measurement_model: KalmanFilterMeasurementModel)
 
-   Bases: :class:`diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel`
+   Bases: :class:`diffbayes.base.ParticleFilterMeasurementModel`
 
    .. autoapi-inheritance-diagram:: diffbayes.base.ParticleFilterMeasurementModelWrapper
       :parts: 1
-      :private-bases:
 
    Helper class for creating a particle filter measurement model (states,
    observations -> log-likelihoods) from a Kalman filter one (states -> observations).
@@ -442,7 +396,6 @@ Classes
 
    .. autoapi-inheritance-diagram:: diffbayes.base.VirtualSensorModel
       :parts: 1
-      :private-bases:
 
    Virtual sensor base class for our differentiable Kalman filters.
 

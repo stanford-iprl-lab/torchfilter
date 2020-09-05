@@ -85,7 +85,6 @@
               <!-- Local TOC -->
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.utils</span></code></a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#package-contents">Package Contents</a><ul>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#diffbayes.utils.JulierSigmaPointStrategy">JulierSigmaPointStrategy</a><ul>
@@ -189,15 +188,6 @@
             
   <div class="section" id="module-diffbayes.utils">
 <span id="diffbayes-utils"></span><h1><a class="reference internal" href="#module-diffbayes.utils" title="diffbayes.utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.utils</span></code></a><a class="headerlink" href="#module-diffbayes.utils" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="_sigma_points/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.utils._sigma_points</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="_unscented_transform/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.utils._unscented_transform</span></code></a></li>
-</ul>
-</div>
-</div>
 <div class="section" id="package-contents">
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="classes">
@@ -225,11 +215,11 @@
 <dl class="py class">
 <dt id="diffbayes.utils.JulierSigmaPointStrategy">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.utils.</code><code class="sig-name descname">JulierSigmaPointStrategy</code><a class="headerlink" href="#diffbayes.utils.JulierSigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="_sigma_points/index.html#diffbayes.utils._sigma_points.SigmaPointStrategy" title="diffbayes.utils._sigma_points.SigmaPointStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.utils._sigma_points.SigmaPointStrategy</span></code></a></p>
-<div class="graphviz"><img src="../../../_images/inheritance-1d457c4960984bfad25025bcec95109421affacc.png" alt="Inheritance diagram of diffbayes.utils.JulierSigmaPointStrategy" usemap="#inheritance09da3ba8f5" class="inheritance graphviz" /></div>
+<dd><p>Bases: <a class="reference internal" href="#diffbayes.utils.SigmaPointStrategy" title="diffbayes.utils.SigmaPointStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.utils.SigmaPointStrategy</span></code></a></p>
+<div class="graphviz"><img src="../../../_images/inheritance-c7bbafd8ad9d8a6c57c70e0f2d10f51cf9e25af0.png" alt="Inheritance diagram of diffbayes.utils.JulierSigmaPointStrategy" usemap="#inheritance09da3ba8f5" class="inheritance graphviz" /></div>
 <map id="inheritance09da3ba8f5" name="inheritance09da3ba8f5">
-<area shape="rect" id="node3" href="_sigma_points/index.html#diffbayes.utils._sigma_points.SigmaPointStrategy" target="_top" title="Strategy to use for computing sigma weights + selecting sigma points." alt="" coords="125,5,276,31"/>
-<area shape="rect" id="node2" href="_sigma_points/index.html#diffbayes.utils._sigma_points.JulierSigmaPointStrategy" target="_top" title="Sigma point selection in this style of [1]." alt="" coords="324,5,508,31"/>
+<area shape="rect" id="node3" href="#diffbayes.utils.SigmaPointStrategy" target="_top" title="Strategy to use for computing sigma weights + selecting sigma points." alt="" coords="125,5,276,31"/>
+<area shape="rect" id="node2" href="#diffbayes.utils.JulierSigmaPointStrategy" target="_top" title="Sigma point selection in this style of [1]." alt="" coords="324,5,508,31"/>
 </map><p>Sigma point selection in this style of [1].</p>
 <p>[1] <a class="reference external" href="https://www.cs.unc.edu/~welch/kalman/media/pdf/Julier1997_SPIE_KF.pdf">https://www.cs.unc.edu/~welch/kalman/media/pdf/Julier1997_SPIE_KF.pdf</a></p>
 <dl class="field-list simple">
@@ -277,11 +267,11 @@ float32 tensors on the CPU.</p>
 <dl class="py class">
 <dt id="diffbayes.utils.MerweSigmaPointStrategy">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.utils.</code><code class="sig-name descname">MerweSigmaPointStrategy</code><a class="headerlink" href="#diffbayes.utils.MerweSigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="_sigma_points/index.html#diffbayes.utils._sigma_points.SigmaPointStrategy" title="diffbayes.utils._sigma_points.SigmaPointStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.utils._sigma_points.SigmaPointStrategy</span></code></a></p>
-<div class="graphviz"><img src="../../../_images/inheritance-aac8adf7d049d44916444b277e9cf74458a33374.png" alt="Inheritance diagram of diffbayes.utils.MerweSigmaPointStrategy" usemap="#inheritance34faa6e6a7" class="inheritance graphviz" /></div>
+<dd><p>Bases: <a class="reference internal" href="#diffbayes.utils.SigmaPointStrategy" title="diffbayes.utils.SigmaPointStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.utils.SigmaPointStrategy</span></code></a></p>
+<div class="graphviz"><img src="../../../_images/inheritance-c81154710e9270f4a6cfb4a933e3cb361341531d.png" alt="Inheritance diagram of diffbayes.utils.MerweSigmaPointStrategy" usemap="#inheritance34faa6e6a7" class="inheritance graphviz" /></div>
 <map id="inheritance34faa6e6a7" name="inheritance34faa6e6a7">
-<area shape="rect" id="node3" href="_sigma_points/index.html#diffbayes.utils._sigma_points.SigmaPointStrategy" target="_top" title="Strategy to use for computing sigma weights + selecting sigma points." alt="" coords="125,5,276,31"/>
-<area shape="rect" id="node2" href="_sigma_points/index.html#diffbayes.utils._sigma_points.MerweSigmaPointStrategy" target="_top" title="Sigma point selection in the style of [2]." alt="" coords="324,5,519,31"/>
+<area shape="rect" id="node3" href="#diffbayes.utils.SigmaPointStrategy" target="_top" title="Strategy to use for computing sigma weights + selecting sigma points." alt="" coords="125,5,276,31"/>
+<area shape="rect" id="node2" href="#diffbayes.utils.MerweSigmaPointStrategy" target="_top" title="Sigma point selection in the style of [2]." alt="" coords="324,5,519,31"/>
 </map><p>Sigma point selection in the style of [2].</p>
 <p>[2] <a class="reference external" href="http://www.gatsby.ucl.ac.uk/~byron/nlds/merwe2003a.pdf">http://www.gatsby.ucl.ac.uk/~byron/nlds/merwe2003a.pdf</a></p>
 <dl class="field-list simple">
@@ -345,9 +335,9 @@ float32 tensors on the CPU.</p>
 <dt id="diffbayes.utils.SigmaPointStrategy">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.utils.</code><code class="sig-name descname">SigmaPointStrategy</code><a class="headerlink" href="#diffbayes.utils.SigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<div class="graphviz"><img src="../../../_images/inheritance-9c4864c54282e6e6085f99ff2da4ada9b2ace34d.png" alt="Inheritance diagram of diffbayes.utils.SigmaPointStrategy" usemap="#inheritance1dff06f124" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-9bdb0a2e68cb418564be50b618b80ff95aa64cc5.png" alt="Inheritance diagram of diffbayes.utils.SigmaPointStrategy" usemap="#inheritance1dff06f124" class="inheritance graphviz" /></div>
 <map id="inheritance1dff06f124" name="inheritance1dff06f124">
-<area shape="rect" id="node2" href="_sigma_points/index.html#diffbayes.utils._sigma_points.SigmaPointStrategy" target="_top" title="Strategy to use for computing sigma weights + selecting sigma points." alt="" coords="125,5,276,31"/>
+<area shape="rect" id="node2" href="#diffbayes.utils.SigmaPointStrategy" target="_top" title="Strategy to use for computing sigma weights + selecting sigma points." alt="" coords="125,5,276,31"/>
 </map><p>Strategy to use for computing sigma weights + selecting sigma points.</p>
 <dl class="py method">
 <dt id="diffbayes.utils.SigmaPointStrategy.compute_lambda">
