@@ -1,15 +1,27 @@
-:orphan:
-
 :mod:`diffbayes.data._split_trajectories`
 =========================================
 
 .. py:module:: diffbayes.data._split_trajectories
 
+.. autoapi-nested-parse::
+
+   Private module; avoid importing from directly.
+
+
 
 Module Contents
 ---------------
 
-.. function:: split_trajectories(trajectories: List[types.TrajectoryTupleNumpy], subsequence_length: int) -> List[types.TrajectoryTupleNumpy]
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   diffbayes.data._split_trajectories.split_trajectories
+
+
+.. function:: split_trajectories(trajectories: List[types.TrajectoryNumpy], subsequence_length: int) -> List[types.TrajectoryNumpy]
 
    Helper for splitting a list of trajectories into a list of overlapping
    subsequences.
@@ -28,15 +40,11 @@ Module Contents
 
           [5:15], [15:25], [25:30], ...
 
-   :param trajectories: list of trajectories, where each is a tuple of
-                        ``(states, observations, controls)``. Each tuple member should be
-                        either a numpy array or dict of numpy arrays with shape ``(T, ...)``.
-   :type trajectories: list
+   :param trajectories: List of trajectories.
+   :type trajectories: List[diffbayes.base.TrajectoryNumpy]
    :param subsequence_length: # of timesteps per subsequence.
    :type subsequence_length: int
 
-   :returns: *list* -- A list of subsequences, as ``(states, observations, controls)``
-             tuples. Each tuple member should be either a numpy array or dict of
-             numpy arrays with shape ``(subsequence_length, ...)``.
+   :returns: *List[diffbayes.base.TrajectoryNumpy]* -- List of subsequences.
 
 

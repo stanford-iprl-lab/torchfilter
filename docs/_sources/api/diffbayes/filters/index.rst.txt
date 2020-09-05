@@ -1,0 +1,307 @@
+:mod:`diffbayes.filters`
+========================
+
+.. py:module:: diffbayes.filters
+
+.. autoapi-nested-parse::
+
+   Filter implementations; can either be used directly or subclassed.
+
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   _extended_kalman_filter/index.rst
+   _particle_filter/index.rst
+   _square_root_unscented_kalman_filter/index.rst
+   _unscented_kalman_filter/index.rst
+   _virtual_sensor_filters/index.rst
+   _virtual_sensor_kalman_filter_mixin/index.rst
+
+
+Package Contents
+----------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   diffbayes.filters.ExtendedKalmanFilter
+   diffbayes.filters.ParticleFilter
+   diffbayes.filters.SquareRootUnscentedKalmanFilter
+   diffbayes.filters.UnscentedKalmanFilter
+   diffbayes.filters.VirtualSensorExtendedKalmanFilter
+   diffbayes.filters.VirtualSensorSquareRootUnscentedKalmanFilter
+   diffbayes.filters.VirtualSensorUnscentedKalmanFilter
+
+
+
+.. py:class:: ExtendedKalmanFilter(*, dynamics_model: DynamicsModel, measurement_model: KalmanFilterMeasurementModel, **unused_kwargs)
+
+   Bases: :class:`diffbayes.base.KalmanFilterBase`
+
+   .. autoapi-inheritance-diagram:: diffbayes.filters.ExtendedKalmanFilter
+      :parts: 1
+      :private-bases:
+
+   Generic differentiable EKF.
+
+   For building estimators with more complex observation spaces (eg images), see
+   ``VirtualSensorExtendedKalmanFilter``.
+
+   .. method:: _predict_step(self, *, controls: types.ControlsTorch) -> None
+
+      Kalman filter predict step.
+
+      Computes $\mu\ *{t | t - 1}$, $\Sigma*\ {t | t - 1}$ from $\mu\ *{t - 1 | t - 1}$,
+      $\Sigma*\ {t - 1 | t - 1}$.
+
+      :keyword controls: Control inputs.
+      :kwtype controls: dict or torch.Tensor
+
+
+   .. method:: _update_step(self, *, observations: types.ObservationsTorch) -> None
+
+      Kalman filter measurement update step.
+
+      Nominally, computes $\mu\ *{t | t}$, $\Sigma*\ {t | t}$ from $\mu\ *{t | t - 1}$,
+      $\Sigma*\ {t | t - 1}$.
+
+      Updates ``self.belief_mean`` and ``self.belief_covariance``.
+
+      :keyword observations: Observation inputs.
+      :kwtype observations: dict or torch.Tensor
+
+
+
+.. py:class:: ParticleFilter(*, dynamics_model: DynamicsModel, measurement_model: ParticleFilterMeasurementModel, num_particles: int = 100, resample: bool = None, soft_resample_alpha: float = 1.0, estimation_method: str = 'weighted_average')
+
+   Bases: :class:`diffbayes.base.Filter`
+
+   .. autoapi-inheritance-diagram:: diffbayes.filters.ParticleFilter
+      :parts: 1
+      :private-bases:
+
+   Generic differentiable particle filter.
+
+   .. attribute:: dynamics_model
+      
+
+      Forward model.
+
+      :type: diffbayes.base.DynamicsModel
+
+
+   .. attribute:: measurement_model
+      
+
+      Observation model.
+
+      :type: diffbayes.base.ParticleFilterMeasurementModel
+
+
+   .. attribute:: num_particles
+      
+
+      Number of particles to represent our belief distribution.
+      Defaults to 100.
+
+      :type: int
+
+
+   .. attribute:: resample
+      
+
+      If True, we resample particles & normalize weights at each
+      timestep. If unset (None), we automatically turn resampling on in eval mode
+      and off in train mode.
+
+      :type: bool
+
+
+   .. attribute:: soft_resample_alpha
+      
+
+      Tunable constant for differentiable resampling, as described
+      by Jonschkowski et al. in "Differentiable Particle Filters: End-to-End
+      Learning with Algorithmic Priors": https://arxiv.org/abs/1805.11122.
+      Defaults to 1.0 (disabled).
+
+      :type: float
+
+
+   .. attribute:: estimation_method
+      
+
+      Method of producing state estimates. Options include:
+
+
+      * 'weighted_average': average of particles weighted by their weights.
+      * 'argmax': state of highest weighted particle.
+
+      :type: str
+
+
+   .. attribute:: particle_states
+      :annotation: :torch.Tensor
+
+      Discrete particles representing our current belief
+      distribution. Shape should be ``(N, M, state_dim)``.
+
+      :type: torch.Tensor
+
+
+   .. attribute:: particle_log_weights
+      :annotation: :torch.Tensor
+
+      Weights corresponding to each particle, stored as
+      log-likelihoods. Shape should be ``(N, M)``.
+
+      :type: torch.Tensor
+
+
+   .. method:: initialize_beliefs(self, *, mean: types.StatesTorch, covariance: types.CovarianceTorch)
+
+      Populates initial particles, which will be normally distributed.
+
+      :param mean: Mean of belief. Shape should be
+                   ``(N, state_dim)``.
+      :type mean: torch.Tensor
+      :param covariance: Covariance of belief. Shape should be
+                         ``(N, state_dim, state_dim)``.
+      :type covariance: torch.Tensor
+
+
+   .. method:: forward(self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch) -> types.StatesTorch
+
+      Particle filter forward pass, single timestep.
+
+      :param observations: observation inputs. should be
+                           either a dict of tensors or tensor of shape ``(N, ...)``.
+      :type observations: dict or torch.Tensor
+      :param controls: control inputs. should be either a
+                       dict of tensors or tensor of shape ``(N, ...)``.
+      :type controls: dict or torch.Tensor
+
+      :returns: *torch.Tensor* -- Predicted state for each batch element. Shape should
+                be ``(N, state_dim).``
+
+
+
+.. py:class:: SquareRootUnscentedKalmanFilter(*, dynamics_model: DynamicsModel, measurement_model: KalmanFilterMeasurementModel, sigma_point_strategy: Optional[utils.SigmaPointStrategy] = None)
+
+   Bases: :class:`diffbayes.base.KalmanFilterBase`
+
+   .. autoapi-inheritance-diagram:: diffbayes.filters.SquareRootUnscentedKalmanFilter
+      :parts: 1
+      :private-bases:
+
+   Square-root formulation of UKF.
+
+   From Algorithm 3.1 of Merwe et al [1].
+
+   [1] The square-root unscented Kalman filter for state and parameter-estimation.
+   https://ieeexplore.ieee.org/document/940586/
+
+   .. method:: belief_covariance(self) -> types.CovarianceTorch
+      :property:
+
+      Posterior covariance. Shape should be ``(N, state_dim, state_dim)``.
+
+
+   .. method:: _predict_step(self, *, controls: types.ControlsTorch) -> None
+
+      Predict step.
+
+
+   .. method:: _update_step(self, *, observations: types.ObservationsTorch) -> None
+
+      Update step.
+
+
+
+.. py:class:: UnscentedKalmanFilter(*, dynamics_model: DynamicsModel, measurement_model: KalmanFilterMeasurementModel, sigma_point_strategy: Optional[utils.SigmaPointStrategy] = None)
+
+   Bases: :class:`diffbayes.base.KalmanFilterBase`
+
+   .. autoapi-inheritance-diagram:: diffbayes.filters.UnscentedKalmanFilter
+      :parts: 1
+      :private-bases:
+
+   Standard UKF.
+
+   From Algorithm 2.1 of Merwe et al. [1]. For working with heteroscedastic noise
+   models, we use the weighting approach described in [2].
+
+   [1] The square-root unscented Kalman filter for state and parameter-estimation.
+   https://ieeexplore.ieee.org/document/940586/
+   [2] How to Train Your Differentiable Filter
+   https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf
+
+   .. method:: _predict_step(self, *, controls: types.ControlsTorch) -> None
+
+      Predict step.
+
+
+   .. method:: _update_step(self, *, observations: types.ObservationsTorch) -> None
+
+      Update step.
+
+
+   .. method:: _weighted_covariance(self, sigma_trils: types.ScaleTrilTorch) -> types.CovarianceTorch
+
+      For heteroscedastic covariances, we apply the weighted average approach
+      described by Kloss et al:
+      https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf
+
+      (note that the mean weights are used because they sum to 1)
+
+
+
+.. py:class:: VirtualSensorExtendedKalmanFilter(*, dynamics_model: DynamicsModel, virtual_sensor_model: VirtualSensorModel)
+
+   Bases: :class:`diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin`, :class:`diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter`
+
+   .. autoapi-inheritance-diagram:: diffbayes.filters.VirtualSensorExtendedKalmanFilter
+      :parts: 1
+      :private-bases:
+
+   EKF variant with a virtual sensor model for mapping raw observations to predicted
+   states.
+
+   Assumes measurement model is identity.
+
+
+.. py:class:: VirtualSensorSquareRootUnscentedKalmanFilter(*, dynamics_model: DynamicsModel, virtual_sensor_model: VirtualSensorModel, sigma_point_strategy: Optional[utils.SigmaPointStrategy] = None)
+
+   Bases: :class:`diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin`, :class:`diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter`
+
+   .. autoapi-inheritance-diagram:: diffbayes.filters.VirtualSensorSquareRootUnscentedKalmanFilter
+      :parts: 1
+      :private-bases:
+
+   Square root UKF variant with a virtual sensor model for mapping raw observations
+   to predicted states.
+
+   Assumes measurement model is identity.
+
+
+.. py:class:: VirtualSensorUnscentedKalmanFilter(*, dynamics_model: DynamicsModel, virtual_sensor_model: VirtualSensorModel, sigma_point_strategy: Optional[utils.SigmaPointStrategy] = None)
+
+   Bases: :class:`diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin`, :class:`diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter`
+
+   .. autoapi-inheritance-diagram:: diffbayes.filters.VirtualSensorUnscentedKalmanFilter
+      :parts: 1
+      :private-bases:
+
+   UKF variant with a virtual sensor model for mapping raw observations to predicted
+   states.
+
+   Assumes measurement model is identity.
+
+

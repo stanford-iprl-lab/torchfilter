@@ -1,3 +1,6 @@
+"""Private module; avoid importing from directly.
+"""
+
 import abc
 
 import fannypack as fp
@@ -55,9 +58,9 @@ class KalmanFilterBase(Filter, abc.ABC):
 
         Args:
             observations (dict or torch.Tensor): Observation inputs. Should be either a
-            dict of tensors or tensor of shape `(N, ...)`.
+                dict of tensors or tensor of shape `(N, ...)`.
             controls (dict or torch.Tensor): Control inputs. Should be either a dict of
-            tensors or tensor of shape `(N, ...)`.
+                tensors or tensor of shape `(N, ...)`.
 
         Returns:
             torch.Tensor: Predicted state for each batch element. Shape should
@@ -87,8 +90,7 @@ class KalmanFilterBase(Filter, abc.ABC):
         """Set filter belief to a given mean and covariance.
 
         Args:
-            mean (torch.Tensor): Mean of belief. Shape should be
-                `(N, state_dim)`.
+            mean (torch.Tensor): Mean of belief. Shape should be `(N, state_dim)`.
             covariance (torch.Tensor): Covariance of belief. Shape should be
                 `(N, state_dim, state_dim)`.
         """

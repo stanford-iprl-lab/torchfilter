@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,19 @@
   
 
   
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
@@ -25,16 +31,11 @@
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
         <script src="../../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
 </head>
@@ -50,7 +51,7 @@
           
 
           
-            <a href="../../../../index.html" class="icon icon-home"> diffbayes
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> diffbayes
           
 
           
@@ -73,6 +74,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -84,20 +86,14 @@
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._dynamics_model</span></code></a><ul>
 <li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel">DynamicsModel</a><ul>
 <li><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel.state_dim">state_dim</a></li>
-</ul>
-<ul>
-<li><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel.Q">Q</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel.forward">forward</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel.forward_loop">forward_loop</a></li>
+<li><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel.jacobian">jacobian</a></li>
 </ul>
-<ul>
-<li><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel.add_noise">add_noise</a></li>
+</li>
 </ul>
 </li>
 </ul>
@@ -109,6 +105,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -147,7 +144,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._dynamics_model</span></code></li>
     
@@ -170,15 +167,33 @@
             
   <div class="section" id="module-diffbayes.base._dynamics_model">
 <span id="diffbayes-base-dynamics-model"></span><h1><a class="reference internal" href="#module-diffbayes.base._dynamics_model" title="diffbayes.base._dynamics_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._dynamics_model</span></code></a><a class="headerlink" href="#module-diffbayes.base._dynamics_model" title="Permalink to this headline">¶</a></h1>
+<p>Private module; avoid importing from directly.</p>
 <div class="section" id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel" title="diffbayes.base._dynamics_model.DynamicsModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DynamicsModel</span></code></a></p></td>
+<td><p>Base class for a generic differentiable dynamics model, with additive white</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="py class">
 <dt id="diffbayes.base._dynamics_model.DynamicsModel">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._dynamics_model.</code><code class="sig-name descname">DynamicsModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">Q</span><span class="p">:</span> <span class="n">torch.Tensor</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._dynamics_model.</code><code class="sig-name descname">DynamicsModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<p>Base class for a generic differentiable dynamics model.</p>
-<p>As a minimum, subclasses should override either <code class="docutils literal notranslate"><span class="pre">forward</span></code> or <code class="docutils literal notranslate"><span class="pre">forward_loop</span></code>
-for computing dynamics estimates.</p>
+<div class="graphviz"><img src="../../../../_images/inheritance-f56fa81d960b1f13b1e1998eefeefa0b9fa24a96.png" alt="Inheritance diagram of diffbayes.base._dynamics_model.DynamicsModel" usemap="#inheritance835584e097" class="inheritance graphviz" /></div>
+<map id="inheritance835584e097" name="inheritance835584e097">
+<area shape="rect" id="node2" href="#diffbayes.base._dynamics_model.DynamicsModel" target="_top" title="Base class for a generic differentiable dynamics model, with additive white" alt="" coords="125,31,252,56"/>
+</map><p>Base class for a generic differentiable dynamics model, with additive white
+Gaussian noise.</p>
+<p>Subclasses should override either <code class="docutils literal notranslate"><span class="pre">forward</span></code> or <code class="docutils literal notranslate"><span class="pre">forward_loop</span></code> for computing dynamics
+estimates.</p>
 <dl class="py attribute">
 <dt id="diffbayes.base._dynamics_model.DynamicsModel.state_dim">
 <code class="sig-name descname">state_dim</code><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.state_dim" title="Permalink to this definition">¶</a></dt>
@@ -190,46 +205,55 @@ for computing dynamics estimates.</p>
 </dl>
 </dd></dl>
 
-<dl class="py attribute">
-<dt id="diffbayes.base._dynamics_model.DynamicsModel.Q">
-<code class="sig-name descname">Q</code><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.Q" title="Permalink to this definition">¶</a></dt>
-<dd><p>Output covariance.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>torch.Tensor</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt id="diffbayes.base._dynamics_model.DynamicsModel.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em>, <em class="sig-param"><span class="n">noisy</span><span class="p">:</span> <span class="n">bool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamics model forward pass, single timestep.</p>
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesTorch<span class="p">, </span>types.ScaleTrilTorch<span class="p">]</span><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamics model forward pass, single timestep.
+Computes both predicted states and uncertainties. Note that uncertainties
+correspond to the (Cholesky decompositions of the) “Q” matrices in a standard
+linear dynamical system w/ additive white Gaussian noise. In other words, they
+should be lower triangular and not accumulate – the uncertainty at at time <code class="docutils literal notranslate"><span class="pre">t</span></code>
+should be computed as if the estimate at time <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">-</span> <span class="pre">1</span></code> is a ground-truth input.</p>
+<p>Computes both predicted states and uncertainties. Note that uncertainties
+correspond to the (Cholesky decompositions of the) “Q” matrices in a standard
+linear dynamical system w/ additive white Gaussian noise. In other words, they
+should be lower triangular and not accumulate – the uncertainty at at time <code class="docutils literal notranslate"><span class="pre">t</span></code>
+should be computed as if the estimate at time <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">-</span> <span class="pre">1</span></code> is a ground-truth input.</p>
 <p>By default, this is implemented by bootstrapping the <code class="docutils literal notranslate"><span class="pre">forward_loop()</span></code>
 method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>initial_states</strong> (<em>torch.Tensor</em>) – Initial states of our system.</p></li>
+<li><p><strong>initial_states</strong> (<em>torch.Tensor</em>) – Initial states of our system. Shape should be
+<code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>.</p></li>
 <li><p><strong>controls</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Control inputs. Should be either a
 dict of tensors or tensor of size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p></li>
-<li><p><strong>noisy</strong> (<em>bool</em>) – Set to True to add noise to output.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>torch.Tensor</em> – Predicted state for each batch element. Shape should
-be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim).</span></code></p>
+<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> –</p>
 </dd>
 </dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Predicted states &amp; uncertainties.
+    - States should have shape `(N, state_dim).`
+    - Uncertainties should be lower triangular, and should have shape
+    `(N, state_dim, state_dim).`
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt id="diffbayes.base._dynamics_model.DynamicsModel.forward_loop">
-<code class="sig-name descname">forward_loop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em>, <em class="sig-param"><span class="n">noisy</span><span class="p">:</span> <span class="n">bool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.forward_loop" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward_loop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesTorch<span class="p">, </span>torch.Tensor<span class="p">]</span><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.forward_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamics model forward pass, over sequence length <code class="docutils literal notranslate"><span class="pre">T</span></code> and batch size
 <code class="docutils literal notranslate"><span class="pre">N</span></code>.  By default, this is implemented by iteratively calling
-<code class="docutils literal notranslate"><span class="pre">forward()</span></code>.
-To inject code between timesteps (for example, to inspect hidden state),
+<code class="docutils literal notranslate"><span class="pre">forward()</span></code>.</p>
+<p>Computes both predicted states and uncertainties. Note that uncertainties
+correspond to the (Cholesky decompositions of the) “Q” matrices in a standard
+linear dynamical system w/ additive white Gaussian noise. In other words, they
+should be lower triangular and not accumulate – the uncertainty at at time <code class="docutils literal notranslate"><span class="pre">t</span></code>
+should be computed as if the estimate at time <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">-</span> <span class="pre">1</span></code> is a ground-truth input.</p>
+<p>To inject code between timesteps (for example, to inspect hidden state),
 use <code class="docutils literal notranslate"><span class="pre">register_forward_hook()</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -238,24 +262,41 @@ use <code class="docutils literal notranslate"><span class="pre">register_forwar
 dynamics model. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>.</p></li>
 <li><p><strong>controls</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Control inputs. Should be either a
 dict of tensors or tensor of size <code class="docutils literal notranslate"><span class="pre">(T,</span> <span class="pre">N,</span> <span class="pre">...)</span></code>.</p></li>
-<li><p><strong>noisy</strong> (<em>bool</em>) – Set to True to add noise to output.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>torch.Tensor</em> – Predicted states at each timestep. Shape should be
-<code class="docutils literal notranslate"><span class="pre">(T,</span> <span class="pre">N,</span> <span class="pre">state_dim).</span></code></p>
+<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> –</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Predicted states &amp; uncertainties.
+    - States should have shape `(T, N, state_dim).`
+    - Uncertainties should be lower triangular, and should have shape
+    `(T, N, state_dim, state_dim).`
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="diffbayes.base._dynamics_model.DynamicsModel.jacobian">
+<code class="sig-name descname">jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.jacobian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Jacobian of the dynamics model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>states</strong> (<em>torch.Tensor</em>) – Current state, size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>.</p></li>
+<li><p><strong>controls</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Control inputs. Should be either a
+dict of tensors or tensor of size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>torch.Tensor</em> – Jacobian, size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim)</span></code></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="diffbayes.base._dynamics_model.DynamicsModel.add_noise">
-<code class="sig-name descname">add_noise</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">states</span><span class="p">:</span> <span class="n">torch.Tensor</span></em>, <em class="sig-param"><span class="n">enabled</span><span class="p">:</span> <span class="n">bool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.add_noise" title="Permalink to this definition">¶</a></dt>
-<dd><p>Protected helper for adding Gaussian noise to a set of states.</p>
 </dd></dl>
 
-</dd></dl>
-
+</div>
 </div>
 </div>
 
@@ -270,11 +311,19 @@ dict of tensors or tensor of size <code class="docutils literal notranslate"><sp
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -285,7 +334,6 @@ dict of tensors or tensor of size <code class="docutils literal notranslate"><sp
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

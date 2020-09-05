@@ -1,3 +1,6 @@
+"""Private module; avoid importing from directly.
+"""
+
 from typing import Optional, cast
 
 import fannypack
@@ -5,9 +8,7 @@ import torch
 from overrides import overrides
 
 from .. import types, utils
-from ..base._dynamics_model import DynamicsModel
-from ..base._kalman_filter_base import KalmanFilterBase
-from ..base._kalman_filter_measurement_model import KalmanFilterMeasurementModel
+from ..base import DynamicsModel, KalmanFilterBase, KalmanFilterMeasurementModel
 
 
 class SquareRootUnscentedKalmanFilter(KalmanFilterBase):

@@ -1,10 +1,13 @@
+"""Private module; avoid importing from directly.
+"""
+
 from typing import cast
 
 import torch
 from overrides import overrides
 
 from .. import types
-from ..base._kalman_filter_base import KalmanFilterBase
+from ..base import KalmanFilterBase
 
 
 class ExtendedKalmanFilter(KalmanFilterBase):

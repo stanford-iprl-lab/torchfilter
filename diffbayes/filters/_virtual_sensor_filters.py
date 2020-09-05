@@ -1,13 +1,18 @@
+"""Private module; avoid importing from directly.
+"""
+
 from typing import Optional, Tuple
 
 import torch
 from overrides import overrides
 
 from .. import types, utils
-from ..base._dynamics_model import DynamicsModel
-from ..base._kalman_filter_base import KalmanFilterBase
-from ..base._kalman_filter_measurement_model import KalmanFilterMeasurementModel
-from ..base._virtual_sensor_model import VirtualSensorModel
+from ..base import (
+    DynamicsModel,
+    KalmanFilterBase,
+    KalmanFilterMeasurementModel,
+    VirtualSensorModel,
+)
 from ._extended_kalman_filter import ExtendedKalmanFilter
 from ._square_root_unscented_kalman_filter import SquareRootUnscentedKalmanFilter
 from ._unscented_kalman_filter import UnscentedKalmanFilter
@@ -166,7 +171,6 @@ class VirtualSensorUnscentedKalmanFilter(
 
     # Redefine constructor to add explicit sigma_point_strategy kwarg
     # This is for better static checking, makes language servers a little more useful
-    @overrides
     def __init__(
         self,
         *,
@@ -192,7 +196,6 @@ class VirtualSensorSquareRootUnscentedKalmanFilter(
 
     # Redefine constructor to add explicit sigma_point_strategy kwarg
     # This is for better static checking, makes language servers a little more useful
-    @overrides
     def __init__(
         self,
         *,

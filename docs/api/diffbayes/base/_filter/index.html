@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,19 @@
   
 
   
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
@@ -25,16 +31,11 @@
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
         <script src="../../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
 </head>
@@ -50,7 +51,7 @@
           
 
           
-            <a href="../../../../index.html" class="icon icon-home"> diffbayes
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> diffbayes
           
 
           
@@ -73,6 +74,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -84,17 +86,14 @@
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._filter</span></code></a><ul>
 <li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#diffbayes.base._filter.Filter">Filter</a><ul>
 <li><a class="reference internal" href="#diffbayes.base._filter.Filter.state_dim">state_dim</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.base._filter.Filter.initialize_beliefs">initialize_beliefs</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.base._filter.Filter.forward">forward</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.base._filter.Filter.forward_loop">forward_loop</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -106,6 +105,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -144,7 +144,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._filter</span></code></li>
     
@@ -167,13 +167,30 @@
             
   <div class="section" id="module-diffbayes.base._filter">
 <span id="diffbayes-base-filter"></span><h1><a class="reference internal" href="#module-diffbayes.base._filter" title="diffbayes.base._filter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._filter</span></code></a><a class="headerlink" href="#module-diffbayes.base._filter" title="Permalink to this headline">¶</a></h1>
+<p>Private module; avoid importing from directly.</p>
 <div class="section" id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#diffbayes.base._filter.Filter" title="diffbayes.base._filter.Filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Filter</span></code></a></p></td>
+<td><p>Base class for a generic differentiable state estimator.</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="py class">
 <dt id="diffbayes.base._filter.Filter">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._filter.</code><code class="sig-name descname">Filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._filter.Filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<p>Base class for a generic differentiable state estimator.</p>
+<div class="graphviz"><img src="../../../../_images/inheritance-7017413383bf750b718a73df801afcadafa75398.png" alt="Inheritance diagram of diffbayes.base._filter.Filter" usemap="#inheritance70a645ad16" class="inheritance graphviz" /></div>
+<map id="inheritance70a645ad16" name="inheritance70a645ad16">
+<area shape="rect" id="node2" href="#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,31,197,56"/>
+</map><p>Base class for a generic differentiable state estimator.</p>
 <p>As a minimum, subclasses should override:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">initialize_beliefs</span></code> for populating the initial belief of our estimator</p></li>
@@ -192,7 +209,7 @@
 
 <dl class="py method">
 <dt id="diffbayes.base._filter.Filter.initialize_beliefs">
-<em class="property">abstract </em><code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mean</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">torch.Tensor</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._filter.Filter.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mean</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">types.CovarianceTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.base._filter.Filter.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize our filter with a Gaussian prior.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -208,7 +225,7 @@
 
 <dl class="py method">
 <dt id="diffbayes.base._filter.Filter.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._filter.Filter.forward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="headerlink" href="#diffbayes.base._filter.Filter.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filtering forward pass, over a single timestep.</p>
 <p>By default, this is implemented by bootstrapping the <code class="docutils literal notranslate"><span class="pre">forward_loop()</span></code>
 method.</p>
@@ -230,7 +247,7 @@ be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span
 
 <dl class="py method">
 <dt id="diffbayes.base._filter.Filter.forward_loop">
-<code class="sig-name descname">forward_loop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._filter.Filter.forward_loop" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward_loop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="headerlink" href="#diffbayes.base._filter.Filter.forward_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filtering forward pass, over sequence length <code class="docutils literal notranslate"><span class="pre">T</span></code> and batch size <code class="docutils literal notranslate"><span class="pre">N</span></code>.
 By default, this is implemented by iteratively calling <code class="docutils literal notranslate"><span class="pre">forward()</span></code>.</p>
 <p>To inject code between timesteps (for example, to inspect hidden state),
@@ -255,6 +272,7 @@ dict of tensors or tensor of size <code class="docutils literal notranslate"><sp
 
 </div>
 </div>
+</div>
 
 
            </div>
@@ -267,11 +285,19 @@ dict of tensors or tensor of size <code class="docutils literal notranslate"><sp
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -282,7 +308,6 @@ dict of tensors or tensor of size <code class="docutils literal notranslate"><sp
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

@@ -1,0 +1,42 @@
+:mod:`diffbayes.train._train_virtual_sensor`
+============================================
+
+.. py:module:: diffbayes.train._train_virtual_sensor
+
+.. autoapi-nested-parse::
+
+   Private module; avoid importing from directly.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   diffbayes.train._train_virtual_sensor.train_virtual_sensor
+
+
+.. function:: train_virtual_sensor(buddy: fannypack.utils.Buddy, virtual_sensor_model: diffbayes.base.VirtualSensorModel, dataloader: DataLoader, *, loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss, log_interval: int = 10, optimizer_name='train_measurement') -> None
+
+   Optimizes a virtual sensor model's prediction accuracy. Minimizes output mean
+   error only; does not define a loss on uncertainty.
+
+   :param buddy: Training helper.
+   :type buddy: fannypack.utils.Buddy
+   :param measurement_model: Model to train.
+   :type measurement_model: diffbayes.base.VirtualSensorModel
+   :param dataloader: Loader for a SingleStepDataset.
+   :type dataloader: DataLoader
+
+   :keyword loss_function: Loss function, from ``torch.nn.functional``.
+                           Defaults to MSE.
+   :kwtype loss_function: callable, optional
+   :keyword log_interval: Minibatches between each Tensorboard log.
+   :kwtype log_interval: int, optional
+
+

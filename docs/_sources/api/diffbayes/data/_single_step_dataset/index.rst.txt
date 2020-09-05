@@ -1,41 +1,55 @@
-:orphan:
-
 :mod:`diffbayes.data._single_step_dataset`
 ==========================================
 
 .. py:module:: diffbayes.data._single_step_dataset
 
+.. autoapi-nested-parse::
+
+   Private module; avoid importing from directly.
+
+
 
 Module Contents
 ---------------
 
-.. py:class:: SingleStepDataset(trajectories: List[types.TrajectoryTupleNumpy])
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   diffbayes.data._single_step_dataset.SingleStepDataset
+
+
+
+.. py:class:: SingleStepDataset(trajectories: List[types.TrajectoryNumpy])
 
    Bases: :class:`torch.utils.data.Dataset`
 
-   A data preprocessor for producing single-step training examples from
-   a list of trajectories.
+   .. autoapi-inheritance-diagram:: diffbayes.data._single_step_dataset.SingleStepDataset
+      :parts: 1
+      :private-bases:
 
-   :param trajectories: list of trajectories, where each is a tuple of
-                        ``(states, observations, controls)``. Each tuple member should be
-                        either a numpy array or dict of numpy arrays with shape ``(T, ...)``.
-   :type trajectories: list
+   A dataset interface that returns single-step training examples:
+   ``(previous_state, state, observation, control)``
 
-   .. method:: __getitem__(self, index: int)
+   By default, extracts these examples from a list of trajectories.
 
+   :param trajectories: List of trajectories.
+   :type trajectories: List[diffbayes.types.TrajectoryNumpy]
+
+   .. method:: __getitem__(self, index: int) -> Tuple[types.StatesNumpy, types.StatesNumpy, types.ObservationsNumpy, types.ControlsNumpy]
 
       Get a single-step prediction sample from our dataset.
 
       :param index: Subsequence number in our dataset.
       :type index: int
 
-      :returns: *tuple* -- ``(initial_state, next_state, observation, control)`` tuple that
+      :returns: *tuple* -- ``(previous_state, state, observation, control)`` tuple that
                 contains data for a single subsequence. Each tuple member should be either a
                 numpy array or dict of numpy arrays with shape ``(subsequence_length, ...)``.
 
 
-   .. method:: __len__(self)
-
+   .. method:: __len__(self) -> int
 
       Total number of subsequences in the dataset.
 

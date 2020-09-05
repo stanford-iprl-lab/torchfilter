@@ -1,0 +1,61 @@
+:mod:`diffbayes.filters._unscented_kalman_filter`
+=================================================
+
+.. py:module:: diffbayes.filters._unscented_kalman_filter
+
+.. autoapi-nested-parse::
+
+   Private module; avoid importing from directly.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter
+
+
+
+.. py:class:: UnscentedKalmanFilter(*, dynamics_model: DynamicsModel, measurement_model: KalmanFilterMeasurementModel, sigma_point_strategy: Optional[utils.SigmaPointStrategy] = None)
+
+   Bases: :class:`diffbayes.base.KalmanFilterBase`
+
+   .. autoapi-inheritance-diagram:: diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter
+      :parts: 1
+      :private-bases:
+
+   Standard UKF.
+
+   From Algorithm 2.1 of Merwe et al. [1]. For working with heteroscedastic noise
+   models, we use the weighting approach described in [2].
+
+   [1] The square-root unscented Kalman filter for state and parameter-estimation.
+   https://ieeexplore.ieee.org/document/940586/
+   [2] How to Train Your Differentiable Filter
+   https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf
+
+   .. method:: _predict_step(self, *, controls: types.ControlsTorch) -> None
+
+      Predict step.
+
+
+   .. method:: _update_step(self, *, observations: types.ObservationsTorch) -> None
+
+      Update step.
+
+
+   .. method:: _weighted_covariance(self, sigma_trils: types.ScaleTrilTorch) -> types.CovarianceTorch
+
+      For heteroscedastic covariances, we apply the weighted average approach
+      described by Kloss et al:
+      https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf
+
+      (note that the mean weights are used because they sum to 1)
+
+
+

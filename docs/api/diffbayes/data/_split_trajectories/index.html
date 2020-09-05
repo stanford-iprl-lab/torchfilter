@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,19 @@
   
 
   
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
@@ -25,16 +31,11 @@
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
         <script src="../../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
 </head>
@@ -50,7 +51,7 @@
           
 
           
-            <a href="../../../../index.html" class="icon icon-home"> diffbayes
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> diffbayes
           
 
           
@@ -73,6 +74,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -84,7 +86,10 @@
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._split_trajectories</span></code></a><ul>
 <li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a><ul>
 <li><a class="reference internal" href="#diffbayes.data._split_trajectories.split_trajectories">split_trajectories</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -94,6 +99,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -132,7 +138,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._split_trajectories</span></code></li>
     
@@ -155,11 +161,25 @@
             
   <div class="section" id="module-diffbayes.data._split_trajectories">
 <span id="diffbayes-data-split-trajectories"></span><h1><a class="reference internal" href="#module-diffbayes.data._split_trajectories" title="diffbayes.data._split_trajectories"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._split_trajectories</span></code></a><a class="headerlink" href="#module-diffbayes.data._split_trajectories" title="Permalink to this headline">¶</a></h1>
+<p>Private module; avoid importing from directly.</p>
 <div class="section" id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#diffbayes.data._split_trajectories.split_trajectories" title="diffbayes.data._split_trajectories.split_trajectories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_trajectories</span></code></a>(trajectories: List[types.TrajectoryNumpy], subsequence_length: int) → List[types.TrajectoryNumpy]</p></td>
+<td><p>Helper for splitting a list of trajectories into a list of overlapping</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="py function">
 <dt id="diffbayes.data._split_trajectories.split_trajectories">
-<code class="sig-prename descclassname">diffbayes.data._split_trajectories.</code><code class="sig-name descname">split_trajectories</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryTupleNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">subsequence_length</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>types.TrajectoryTupleNumpy<span class="p">]</span><a class="headerlink" href="#diffbayes.data._split_trajectories.split_trajectories" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diffbayes.data._split_trajectories.</code><code class="sig-name descname">split_trajectories</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">subsequence_length</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span><a class="headerlink" href="#diffbayes.data._split_trajectories.split_trajectories" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper for splitting a list of trajectories into a list of overlapping
 subsequences.</p>
 <p>For each trajectory, assuming a subsequence length of 10, this function
@@ -175,20 +195,17 @@ timesteps…</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>trajectories</strong> (<em>list</em>) – list of trajectories, where each is a tuple of
-<code class="docutils literal notranslate"><span class="pre">(states,</span> <span class="pre">observations,</span> <span class="pre">controls)</span></code>. Each tuple member should be
-either a numpy array or dict of numpy arrays with shape <code class="docutils literal notranslate"><span class="pre">(T,</span> <span class="pre">...)</span></code>.</p></li>
+<li><p><strong>trajectories</strong> (<em>List</em><em>[</em><em>diffbayes.base.TrajectoryNumpy</em><em>]</em>) – List of trajectories.</p></li>
 <li><p><strong>subsequence_length</strong> (<em>int</em>) – # of timesteps per subsequence.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>list</em> – A list of subsequences, as <code class="docutils literal notranslate"><span class="pre">(states,</span> <span class="pre">observations,</span> <span class="pre">controls)</span></code>
-tuples. Each tuple member should be either a numpy array or dict of
-numpy arrays with shape <code class="docutils literal notranslate"><span class="pre">(subsequence_length,</span> <span class="pre">...)</span></code>.</p>
+<dd class="field-even"><p><em>List[diffbayes.base.TrajectoryNumpy]</em> – List of subsequences.</p>
 </dd>
 </dl>
 </dd></dl>
 
+</div>
 </div>
 </div>
 
@@ -203,11 +220,19 @@ numpy arrays with shape <code class="docutils literal notranslate"><span class="
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -218,7 +243,6 @@ numpy arrays with shape <code class="docutils literal notranslate"><span class="
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

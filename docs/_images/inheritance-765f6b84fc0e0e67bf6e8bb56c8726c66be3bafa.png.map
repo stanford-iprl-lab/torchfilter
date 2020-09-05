@@ -1,0 +1,4 @@
+<map id="inheritanceb597925dfb" name="inheritanceb597925dfb">
+<area shape="rect" id="node1" title="An abstract class representing a :class:`Dataset`." alt="" coords="5,5,79,31"/>
+<area shape="rect" id="node2" href="_single_step_dataset/index.html#diffbayes.data._single_step_dataset.SingleStepDataset" target="_top" title="A dataset interface that returns single&#45;step training examples:" alt="" coords="127,5,269,31"/>
+</map>

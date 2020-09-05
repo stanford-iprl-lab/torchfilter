@@ -1,0 +1,106 @@
+:mod:`diffbayes.utils._unscented_transform`
+===========================================
+
+.. py:module:: diffbayes.utils._unscented_transform
+
+.. autoapi-nested-parse::
+
+   Private module; avoid importing from directly.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   diffbayes.utils._unscented_transform.UnscentedTransform
+
+
+
+.. py:class:: UnscentedTransform(*, dim: int, sigma_point_strategy: SigmaPointStrategy = JulierSigmaPointStrategy())
+
+   Helper class for performing (batched, differentiable) unscented transforms.
+
+   :keyword dim: Input dimension.
+   :kwtype dim: int
+   :keyword sigma_point_strategy: Strategy to
+                                  use for sigma point selection. Defaults to Julier.
+   :kwtype sigma_point_strategy: diffbayes.utils.SigmaPointStrategy, optional
+
+   .. attribute:: weights_c
+      :annotation: :torch.Tensor
+
+      Unscented transform covariance weights. Note that this will be
+      initially instantiated on the CPU, and moved in ``compute_distribution()``.
+
+      :type: torch.Tensor
+
+
+   .. attribute:: weights_m
+      :annotation: :torch.Tensor
+
+      Unscented transform mean weights. Note that this will be
+      initially instantiated on the CPU, and moved in ``compute_distribution()``.
+
+      :type: torch.Tensor
+
+
+   .. method:: select_sigma_points(self, input_mean: torch.Tensor, input_covariance: types.CovarianceTorch) -> torch.Tensor
+
+      Select sigma points.
+
+      :param input_mean: Distribution mean. Shape should be ``(N, dim)``.
+      :type input_mean: torch.Tensor
+      :param input_covariance: Distribution covariance. Shape should be
+                               ``(N, dim, dim)``.
+      :type input_covariance: torch.Tensor
+
+      :returns: *torch.Tensor* -- Selected sigma points, with shape ``(N, 2 * dim + 1, dim)``.
+
+
+   .. method:: select_sigma_points_square_root(self, input_mean: torch.Tensor, input_scale_tril: types.ScaleTrilTorch) -> torch.Tensor
+
+      Select sigma points using square root of covariance.
+
+      :param input_mean: Distribution mean. Shape should be ``(N, dim)``.
+      :type input_mean: torch.Tensor
+      :param input_scale_tril: Cholesky decomposition of distribution
+                               covariance. Shape should be ``(N, dim, dim)``.
+      :type input_scale_tril: torch.Tensor
+
+      :returns: *torch.Tensor* -- Selected sigma points, with shape ``(N, 2 * dim + 1, dim)``.
+
+
+   .. method:: compute_distribution(self, sigma_points: torch.Tensor) -> Tuple[torch.Tensor, types.CovarianceTorch]
+
+      Estimate a distribution from selected sigma points.
+
+      :param sigma_points: Sigma points, with shape
+                           ``(N, 2 * dim + 1, dim)``.
+      :type sigma_points: torch.Tensor
+
+      :returns: *Tuple[torch.Tensor, torch.Tensor]* -- Mean and covariance, with shapes
+                ``(N, dim)`` and ``(N, dim, dim)`` respectively.
+
+
+   .. method:: compute_distribution_square_root(self, sigma_points: torch.Tensor, additive_noise_scale_tril: Optional[types.ScaleTrilTorch] = None) -> Tuple[torch.Tensor, types.ScaleTrilTorch]
+
+      Estimate a distribution from selected sigma points; square root formulation.
+
+      :param sigma_points: Sigma points, with shape
+                           ``(N, 2 * dim + 1, dim)``.
+      :type sigma_points: torch.Tensor
+      :param additive_noise_scale_tril: Parameterizes an
+                                        additive Gaussian noise term. Should be lower-trinagular, with shape
+                                        ``(N, dim, dim)``.
+      :type additive_noise_scale_tril: torch.Tensor, optional
+
+      :returns: *Tuple[torch.Tensor, torch.Tensor]* -- Mean and square root of covariance, with
+                shapes ``(N, dim)`` and ``(N, dim, dim)`` respectively.
+
+
+

@@ -1,0 +1,69 @@
+:mod:`diffbayes.base._virtual_sensor_model`
+===========================================
+
+.. py:module:: diffbayes.base._virtual_sensor_model
+
+.. autoapi-nested-parse::
+
+   Private module; avoid importing from directly.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   diffbayes.base._virtual_sensor_model.VirtualSensorModel
+
+
+
+.. py:class:: VirtualSensorModel(state_dim: int)
+
+   Bases: :class:`abc.ABC`, :class:`torch.nn.Module`
+
+   .. autoapi-inheritance-diagram:: diffbayes.base._virtual_sensor_model.VirtualSensorModel
+      :parts: 1
+      :private-bases:
+
+   Virtual sensor base class for our differentiable Kalman filters.
+
+   Maps each observation input to a predicted state and uncertainty, in the style of
+   BackpropKF. This is often necessary for complex observation spaces like images or
+   point clouds, where it's not possible to learn a standard state->observation
+   measurement model.
+
+   .. attribute:: state_dim
+      
+
+      Dimensionality of our state.
+
+      :type: int
+
+
+   .. method:: forward(self, *, observations: types.ObservationsTorch) -> Tuple[types.StatesTorch, types.ScaleTrilTorch]
+      :abstractmethod:
+
+      Predicts states and uncertainties from observation inputs.
+
+      Uncertainties should be lower-triangular Cholesky decompositions of covariance
+      matrices.
+
+      :param observations: Measurement inputs. Should be
+                           either a dict of tensors or tensor of size ``(N, ...)``.
+      :type observations: dict or torch.Tensor
+
+      :returns: *Tuple[torch.Tensor, torch.Tensor]* --
+
+      .. code-block::
+
+               Predicted states & uncertainties.
+                   - States should have shape `(N, state_dim).`
+                   - Uncertainties should be lower triangular, and should have shape
+                   `(N, state_dim, state_dim).`
+
+
+

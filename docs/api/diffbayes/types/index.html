@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,19 @@
   
 
   
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -25,16 +31,11 @@
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
@@ -50,7 +51,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home"> diffbayes
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> diffbayes
           
 
           
@@ -73,6 +74,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -83,41 +85,42 @@
               <!-- Local TOC -->
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.types</span></code></a><ul>
-<li><a class="reference internal" href="#package-contents">Package Contents</a><ul>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#diffbayes.types.NumpyDict">NumpyDict</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.types.TorchDict">TorchDict</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.types.NumpyArrayOrDict">NumpyArrayOrDict</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.types.TorchTensorOrDict">TorchTensorOrDict</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.types.StatesNumpy">StatesNumpy</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.types.StatesTorch">StatesTorch</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.types.ObservationsNumpy">ObservationsNumpy</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.types.ObservationsTorch">ObservationsTorch</a></li>
-</ul>
-<ul>
+<li><a class="reference internal" href="#diffbayes.types.ObservationsNoDictNumpy">ObservationsNoDictNumpy</a></li>
+<li><a class="reference internal" href="#diffbayes.types.ObservationsNoDictTorch">ObservationsNoDictTorch</a></li>
 <li><a class="reference internal" href="#diffbayes.types.ControlsNumpy">ControlsNumpy</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.types.ControlsTorch">ControlsTorch</a></li>
+<li><a class="reference internal" href="#diffbayes.types.CovarianceTorch">CovarianceTorch</a></li>
+<li><a class="reference internal" href="#diffbayes.types.ScaleTrilTorch">ScaleTrilTorch</a></li>
+<li><a class="reference internal" href="#diffbayes.types.Trajectory">Trajectory</a><ul>
+<li><a class="reference internal" href="#diffbayes.types.Trajectory.states">states</a></li>
+<li><a class="reference internal" href="#diffbayes.types.Trajectory.observations">observations</a></li>
+<li><a class="reference internal" href="#diffbayes.types.Trajectory.controls">controls</a></li>
 </ul>
-<ul>
-<li><a class="reference internal" href="#diffbayes.types.TrajectoryTupleNumpy">TrajectoryTupleNumpy</a></li>
+</li>
+<li><a class="reference internal" href="#diffbayes.types.TrajectoryNumpy">TrajectoryNumpy</a><ul>
+<li><a class="reference internal" href="#diffbayes.types.TrajectoryNumpy.states">states</a></li>
+<li><a class="reference internal" href="#diffbayes.types.TrajectoryNumpy.observations">observations</a></li>
+<li><a class="reference internal" href="#diffbayes.types.TrajectoryNumpy.controls">controls</a></li>
 </ul>
-<ul>
-<li><a class="reference internal" href="#diffbayes.types.TrajectoryTupleTorch">TrajectoryTupleTorch</a></li>
+</li>
+<li><a class="reference internal" href="#diffbayes.types.TrajectoryTorch">TrajectoryTorch</a><ul>
+<li><a class="reference internal" href="#diffbayes.types.TrajectoryTorch.states">states</a></li>
+<li><a class="reference internal" href="#diffbayes.types.TrajectoryTorch.observations">observations</a></li>
+<li><a class="reference internal" href="#diffbayes.types.TrajectoryTorch.controls">controls</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -127,6 +130,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -165,7 +169,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.types</span></code></li>
     
@@ -188,10 +192,28 @@
             
   <div class="section" id="module-diffbayes.types">
 <span id="diffbayes-types"></span><h1><a class="reference internal" href="#module-diffbayes.types" title="diffbayes.types"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.types</span></code></a><a class="headerlink" href="#module-diffbayes.types" title="Permalink to this headline">¶</a></h1>
-<p><p>Type hint aliases for diffbayes.</p>
-</p>
-<div class="section" id="package-contents">
-<h2>Package Contents<a class="headerlink" href="#package-contents" title="Permalink to this headline">¶</a></h2>
+<p>Semantic typehints for filtering.</p>
+<div class="section" id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#diffbayes.types.Trajectory" title="diffbayes.types.Trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Trajectory</span></code></a></p></td>
+<td><p>Named tuple containing states, observations, and controls.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#diffbayes.types.TrajectoryNumpy" title="diffbayes.types.TrajectoryNumpy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TrajectoryNumpy</span></code></a></p></td>
+<td><p>Named tuple containing states, observations, and controls represented in NumPy.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#diffbayes.types.TrajectoryTorch" title="diffbayes.types.TrajectoryTorch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TrajectoryTorch</span></code></a></p></td>
+<td><p>Named tuple containing states, observations, and controls represented in Torch.</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="py data">
 <dt id="diffbayes.types.NumpyDict">
 <code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">NumpyDict</code><a class="headerlink" href="#diffbayes.types.NumpyDict" title="Permalink to this definition">¶</a></dt>
@@ -241,6 +263,18 @@
 </dd></dl>
 
 <dl class="py data">
+<dt id="diffbayes.types.ObservationsNoDictNumpy">
+<code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">ObservationsNoDictNumpy</code><a class="headerlink" href="#diffbayes.types.ObservationsNoDictNumpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as <code class="docutils literal notranslate"><span class="pre">ObservationsNumpy</span></code>, but no dictionaries.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="diffbayes.types.ObservationsNoDictTorch">
+<code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">ObservationsNoDictTorch</code><a class="headerlink" href="#diffbayes.types.ObservationsNoDictTorch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as <code class="docutils literal notranslate"><span class="pre">ObservationsTorch</span></code>, but no dictionaries.</p>
+</dd></dl>
+
+<dl class="py data">
 <dt id="diffbayes.types.ControlsNumpy">
 <code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">ControlsNumpy</code><a class="headerlink" href="#diffbayes.types.ControlsNumpy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Controls can be either <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> objects or <code class="docutils literal notranslate"><span class="pre">str-&gt;np.ndarray</span></code> dictionaries.</p>
@@ -253,17 +287,93 @@
 </dd></dl>
 
 <dl class="py data">
-<dt id="diffbayes.types.TrajectoryTupleNumpy">
-<code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">TrajectoryTupleNumpy</code><a class="headerlink" href="#diffbayes.types.TrajectoryTupleNumpy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Trajectories in Numpy, defined as <code class="docutils literal notranslate"><span class="pre">(States,</span> <span class="pre">Observation,</span> <span class="pre">Controls)</span></code> tuples.</p>
+<dt id="diffbayes.types.CovarianceTorch">
+<code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">CovarianceTorch</code><a class="headerlink" href="#diffbayes.types.CovarianceTorch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Covariance matrix as <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code>. Must be positive semi-definite.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="diffbayes.types.TrajectoryTupleTorch">
-<code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">TrajectoryTupleTorch</code><a class="headerlink" href="#diffbayes.types.TrajectoryTupleTorch" title="Permalink to this definition">¶</a></dt>
-<dd><p>Trajectory in PyTorch, defined as <code class="docutils literal notranslate"><span class="pre">(States,</span> <span class="pre">Observation,</span> <span class="pre">Controls)</span></code> tuples.</p>
+<dt id="diffbayes.types.ScaleTrilTorch">
+<code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">ScaleTrilTorch</code><a class="headerlink" href="#diffbayes.types.ScaleTrilTorch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lower-triangular cholesky decomposition of covariance matrix as <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code>.</p>
 </dd></dl>
 
+<dl class="py class">
+<dt id="diffbayes.types.Trajectory">
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">Trajectory</code><a class="headerlink" href="#diffbayes.types.Trajectory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.NamedTuple</span></code></p>
+<div class="graphviz"><img src="../../../_images/inheritance-7e36007b0eb58adee3271c934674ddd55c0016eb.png" alt="Inheritance diagram of diffbayes.types.Trajectory" usemap="#inheritance9f8b538df3" class="inheritance graphviz" /></div>
+<map id="inheritance9f8b538df3" name="inheritance9f8b538df3">
+<area shape="rect" id="node2" href="#diffbayes.types.Trajectory" target="_top" title="Named tuple containing states, observations, and controls." alt="" coords="156,5,243,31"/>
+</map><p>Named tuple containing states, observations, and controls.</p>
+<dl class="py attribute">
+<dt id="diffbayes.types.Trajectory.states">
+<code class="sig-name descname">states</code><em class="property"> :Union[StatesNumpy, StatesTorch]</em><a class="headerlink" href="#diffbayes.types.Trajectory.states" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="diffbayes.types.Trajectory.observations">
+<code class="sig-name descname">observations</code><em class="property"> :Union[ObservationsNumpy, ObservationsTorch]</em><a class="headerlink" href="#diffbayes.types.Trajectory.observations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="diffbayes.types.Trajectory.controls">
+<code class="sig-name descname">controls</code><em class="property"> :Union[ControlsNumpy, ControlsTorch]</em><a class="headerlink" href="#diffbayes.types.Trajectory.controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="diffbayes.types.TrajectoryNumpy">
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">TrajectoryNumpy</code><a class="headerlink" href="#diffbayes.types.TrajectoryNumpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#diffbayes.types.Trajectory" title="diffbayes.types.Trajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.types.Trajectory</span></code></a></p>
+<div class="graphviz"><img src="../../../_images/inheritance-803b5b2a4ce68fdbe39cac24fa759c4170c6ac22.png" alt="Inheritance diagram of diffbayes.types.TrajectoryNumpy" usemap="#inheritancedef8fd7636" class="inheritance graphviz" /></div>
+<map id="inheritancedef8fd7636" name="inheritancedef8fd7636">
+<area shape="rect" id="node2" href="#diffbayes.types.TrajectoryNumpy" target="_top" title="Named tuple containing states, observations, and controls represented in NumPy." alt="" coords="140,5,273,31"/>
+</map><p>Named tuple containing states, observations, and controls represented in NumPy.</p>
+<dl class="py attribute">
+<dt id="diffbayes.types.TrajectoryNumpy.states">
+<code class="sig-name descname">states</code><em class="property"> :StatesNumpy</em><a class="headerlink" href="#diffbayes.types.TrajectoryNumpy.states" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="diffbayes.types.TrajectoryNumpy.observations">
+<code class="sig-name descname">observations</code><em class="property"> :ObservationsNumpy</em><a class="headerlink" href="#diffbayes.types.TrajectoryNumpy.observations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="diffbayes.types.TrajectoryNumpy.controls">
+<code class="sig-name descname">controls</code><em class="property"> :ControlsNumpy</em><a class="headerlink" href="#diffbayes.types.TrajectoryNumpy.controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="diffbayes.types.TrajectoryTorch">
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.types.</code><code class="sig-name descname">TrajectoryTorch</code><a class="headerlink" href="#diffbayes.types.TrajectoryTorch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#diffbayes.types.Trajectory" title="diffbayes.types.Trajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.types.Trajectory</span></code></a></p>
+<div class="graphviz"><img src="../../../_images/inheritance-40351e3cbf80139a55b836f8e782c0abb94e262d.png" alt="Inheritance diagram of diffbayes.types.TrajectoryTorch" usemap="#inheritance6254de9d6e" class="inheritance graphviz" /></div>
+<map id="inheritance6254de9d6e" name="inheritance6254de9d6e">
+<area shape="rect" id="node2" href="#diffbayes.types.TrajectoryTorch" target="_top" title="Named tuple containing states, observations, and controls represented in Torch." alt="" coords="140,5,260,31"/>
+</map><p>Named tuple containing states, observations, and controls represented in Torch.</p>
+<dl class="py attribute">
+<dt id="diffbayes.types.TrajectoryTorch.states">
+<code class="sig-name descname">states</code><em class="property"> :StatesTorch</em><a class="headerlink" href="#diffbayes.types.TrajectoryTorch.states" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="diffbayes.types.TrajectoryTorch.observations">
+<code class="sig-name descname">observations</code><em class="property"> :ObservationsTorch</em><a class="headerlink" href="#diffbayes.types.TrajectoryTorch.observations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="diffbayes.types.TrajectoryTorch.controls">
+<code class="sig-name descname">controls</code><em class="property"> :ControlsTorch</em><a class="headerlink" href="#diffbayes.types.TrajectoryTorch.controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 </div>
 
@@ -278,11 +388,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -293,7 +411,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

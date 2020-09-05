@@ -1,3 +1,6 @@
+"""Private module; avoid importing from directly.
+"""
+
 import abc
 
 import fannypack

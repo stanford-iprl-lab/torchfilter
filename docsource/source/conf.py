@@ -178,11 +178,12 @@ autoapi_root = "api"
 autoapi_options = [
     "members",
     "undoc-members",
-    # "private-members",
+    "private-members",
     "imported-members",
     "show-inheritance",
+    "show-inheritance-diagram",
     "special-members",
-    "inheritance-diagram",
+    "show-module-summary",
 ]
 
 # -- Options for todo extension ----------------------------------------------

@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,19 @@
   
 
   
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -25,16 +31,11 @@
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
@@ -50,7 +51,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home"> diffbayes
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> diffbayes
           
 
           
@@ -73,6 +74,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -83,78 +85,55 @@
               <!-- Local TOC -->
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base</span></code></a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#package-contents">Package Contents</a><ul>
+<li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#diffbayes.base.DynamicsModel">DynamicsModel</a><ul>
 <li><a class="reference internal" href="#diffbayes.base.DynamicsModel.state_dim">state_dim</a></li>
-</ul>
-<ul>
-<li><a class="reference internal" href="#diffbayes.base.DynamicsModel.Q">Q</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.base.DynamicsModel.forward">forward</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.base.DynamicsModel.forward_loop">forward_loop</a></li>
-</ul>
-<ul>
-<li><a class="reference internal" href="#diffbayes.base.DynamicsModel.add_noise">add_noise</a></li>
+<li><a class="reference internal" href="#diffbayes.base.DynamicsModel.jacobian">jacobian</a></li>
 </ul>
 </li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.base.Filter">Filter</a><ul>
 <li><a class="reference internal" href="#diffbayes.base.Filter.state_dim">state_dim</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.base.Filter.initialize_beliefs">initialize_beliefs</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.base.Filter.forward">forward</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.base.Filter.forward_loop">forward_loop</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#diffbayes.base.KalmanFilterBase">KalmanFilterBase</a><ul>
+<li><a class="reference internal" href="#diffbayes.base.KalmanFilterBase.dynamics_model">dynamics_model</a></li>
+<li><a class="reference internal" href="#diffbayes.base.KalmanFilterBase.measurement_model">measurement_model</a></li>
+<li><a class="reference internal" href="#diffbayes.base.KalmanFilterBase.forward">forward</a></li>
+<li><a class="reference internal" href="#diffbayes.base.KalmanFilterBase.initialize_beliefs">initialize_beliefs</a></li>
+<li><a class="reference internal" href="#diffbayes.base.KalmanFilterBase.belief_mean">belief_mean</a></li>
+<li><a class="reference internal" href="#diffbayes.base.KalmanFilterBase.belief_covariance">belief_covariance</a></li>
+<li><a class="reference internal" href="#diffbayes.base.KalmanFilterBase._predict_step">_predict_step</a></li>
+<li><a class="reference internal" href="#diffbayes.base.KalmanFilterBase._update_step">_update_step</a></li>
 </ul>
-<ul>
+</li>
+<li><a class="reference internal" href="#diffbayes.base.KalmanFilterMeasurementModel">KalmanFilterMeasurementModel</a><ul>
+<li><a class="reference internal" href="#diffbayes.base.KalmanFilterMeasurementModel.state_dim">state_dim</a></li>
+<li><a class="reference internal" href="#diffbayes.base.KalmanFilterMeasurementModel.observation_dim">observation_dim</a></li>
+<li><a class="reference internal" href="#diffbayes.base.KalmanFilterMeasurementModel.forward">forward</a></li>
+<li><a class="reference internal" href="#diffbayes.base.KalmanFilterMeasurementModel.jacobian">jacobian</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#diffbayes.base.ParticleFilterMeasurementModel">ParticleFilterMeasurementModel</a><ul>
 <li><a class="reference internal" href="#diffbayes.base.ParticleFilterMeasurementModel.state_dim">state_dim</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.base.ParticleFilterMeasurementModel.forward">forward</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#diffbayes.base.ParticleFilterMeasurementModelWrapper">ParticleFilterMeasurementModelWrapper</a><ul>
+<li><a class="reference internal" href="#diffbayes.base.ParticleFilterMeasurementModelWrapper.forward">forward</a></li>
 </ul>
-<ul>
-<li><a class="reference internal" href="#diffbayes.base.ParticleFilter">ParticleFilter</a><ul>
-<li><a class="reference internal" href="#diffbayes.base.ParticleFilter.dynamics_model">dynamics_model</a></li>
+</li>
+<li><a class="reference internal" href="#diffbayes.base.VirtualSensorModel">VirtualSensorModel</a><ul>
+<li><a class="reference internal" href="#diffbayes.base.VirtualSensorModel.state_dim">state_dim</a></li>
+<li><a class="reference internal" href="#diffbayes.base.VirtualSensorModel.forward">forward</a></li>
 </ul>
-<ul>
-<li><a class="reference internal" href="#diffbayes.base.ParticleFilter.measurement_model">measurement_model</a></li>
-</ul>
-<ul>
-<li><a class="reference internal" href="#diffbayes.base.ParticleFilter.num_particles">num_particles</a></li>
-</ul>
-<ul>
-<li><a class="reference internal" href="#diffbayes.base.ParticleFilter.resample">resample</a></li>
-</ul>
-<ul>
-<li><a class="reference internal" href="#diffbayes.base.ParticleFilter.soft_resample_alpha">soft_resample_alpha</a></li>
-</ul>
-<ul>
-<li><a class="reference internal" href="#diffbayes.base.ParticleFilter.estimation_method">estimation_method</a></li>
-</ul>
-<ul>
-<li><a class="reference internal" href="#diffbayes.base.ParticleFilter.particle_states">particle_states</a></li>
-</ul>
-<ul>
-<li><a class="reference internal" href="#diffbayes.base.ParticleFilter.particle_log_weights">particle_log_weights</a></li>
-</ul>
-<ul>
-<li><a class="reference internal" href="#diffbayes.base.ParticleFilter.initialize_beliefs">initialize_beliefs</a></li>
-</ul>
-<ul>
-<li><a class="reference internal" href="#diffbayes.base.ParticleFilter.forward">forward</a></li>
+</li>
 </ul>
 </li>
 </ul>
@@ -166,6 +145,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -204,7 +184,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base</span></code></li>
     
@@ -227,17 +207,64 @@
             
   <div class="section" id="module-diffbayes.base">
 <span id="diffbayes-base"></span><h1><a class="reference internal" href="#module-diffbayes.base" title="diffbayes.base"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base</span></code></a><a class="headerlink" href="#module-diffbayes.base" title="Permalink to this headline">¶</a></h1>
-<p><p>Abstract Bayesian filter implementations in PyTorch.</p>
-</p>
+<p>Abstract classes for filtering.</p>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_dynamics_model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._dynamics_model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="_filter/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._filter</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="_kalman_filter_base/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._kalman_filter_base</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="_kalman_filter_measurement_model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._kalman_filter_measurement_model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="_particle_filter_measurement_model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._particle_filter_measurement_model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="_virtual_sensor_model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._virtual_sensor_model</span></code></a></li>
+</ul>
+</div>
+</div>
 <div class="section" id="package-contents">
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#diffbayes.base.DynamicsModel" title="diffbayes.base.DynamicsModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DynamicsModel</span></code></a></p></td>
+<td><p>Base class for a generic differentiable dynamics model, with additive white</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#diffbayes.base.Filter" title="diffbayes.base.Filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Filter</span></code></a></p></td>
+<td><p>Base class for a generic differentiable state estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#diffbayes.base.KalmanFilterBase" title="diffbayes.base.KalmanFilterBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KalmanFilterBase</span></code></a></p></td>
+<td><p>Base class for a generic Kalman-style filter. Parameterizes beliefs with a mean</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#diffbayes.base.KalmanFilterMeasurementModel" title="diffbayes.base.KalmanFilterMeasurementModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KalmanFilterMeasurementModel</span></code></a></p></td>
+<td><p>Helper class that provides a standard way to create an ABC using</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#diffbayes.base.ParticleFilterMeasurementModel" title="diffbayes.base.ParticleFilterMeasurementModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ParticleFilterMeasurementModel</span></code></a></p></td>
+<td><p>Observation model base class for a generic differentiable particle</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#diffbayes.base.ParticleFilterMeasurementModelWrapper" title="diffbayes.base.ParticleFilterMeasurementModelWrapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ParticleFilterMeasurementModelWrapper</span></code></a></p></td>
+<td><p>Helper class for creating a particle filter measurement model (states,</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#diffbayes.base.VirtualSensorModel" title="diffbayes.base.VirtualSensorModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VirtualSensorModel</span></code></a></p></td>
+<td><p>Virtual sensor base class for our differentiable Kalman filters.</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="py class">
 <dt id="diffbayes.base.DynamicsModel">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base.</code><code class="sig-name descname">DynamicsModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">Q</span><span class="p">:</span> <span class="n">torch.Tensor</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.DynamicsModel" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base.</code><code class="sig-name descname">DynamicsModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.DynamicsModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<p>Base class for a generic differentiable dynamics model.</p>
-<p>As a minimum, subclasses should override either <code class="docutils literal notranslate"><span class="pre">forward</span></code> or <code class="docutils literal notranslate"><span class="pre">forward_loop</span></code>
-for computing dynamics estimates.</p>
+<div class="graphviz"><img src="../../../_images/inheritance-0f7249a11fd8eead9daaa52d756e301c093ec995.png" alt="Inheritance diagram of diffbayes.base.DynamicsModel" usemap="#inheritanced2555822ce" class="inheritance graphviz" /></div>
+<map id="inheritanced2555822ce" name="inheritanced2555822ce">
+<area shape="rect" id="node2" href="_dynamics_model/index.html#diffbayes.base._dynamics_model.DynamicsModel" target="_top" title="Base class for a generic differentiable dynamics model, with additive white" alt="" coords="125,31,252,56"/>
+</map><p>Base class for a generic differentiable dynamics model, with additive white
+Gaussian noise.</p>
+<p>Subclasses should override either <code class="docutils literal notranslate"><span class="pre">forward</span></code> or <code class="docutils literal notranslate"><span class="pre">forward_loop</span></code> for computing dynamics
+estimates.</p>
 <dl class="py attribute">
 <dt id="diffbayes.base.DynamicsModel.state_dim">
 <code class="sig-name descname">state_dim</code><a class="headerlink" href="#diffbayes.base.DynamicsModel.state_dim" title="Permalink to this definition">¶</a></dt>
@@ -249,46 +276,55 @@ for computing dynamics estimates.</p>
 </dl>
 </dd></dl>
 
-<dl class="py attribute">
-<dt id="diffbayes.base.DynamicsModel.Q">
-<code class="sig-name descname">Q</code><a class="headerlink" href="#diffbayes.base.DynamicsModel.Q" title="Permalink to this definition">¶</a></dt>
-<dd><p>Output covariance.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>torch.Tensor</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt id="diffbayes.base.DynamicsModel.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em>, <em class="sig-param"><span class="n">noisy</span><span class="p">:</span> <span class="n">bool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.DynamicsModel.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamics model forward pass, single timestep.</p>
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesTorch<span class="p">, </span>types.ScaleTrilTorch<span class="p">]</span><a class="headerlink" href="#diffbayes.base.DynamicsModel.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamics model forward pass, single timestep.
+Computes both predicted states and uncertainties. Note that uncertainties
+correspond to the (Cholesky decompositions of the) “Q” matrices in a standard
+linear dynamical system w/ additive white Gaussian noise. In other words, they
+should be lower triangular and not accumulate – the uncertainty at at time <code class="docutils literal notranslate"><span class="pre">t</span></code>
+should be computed as if the estimate at time <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">-</span> <span class="pre">1</span></code> is a ground-truth input.</p>
+<p>Computes both predicted states and uncertainties. Note that uncertainties
+correspond to the (Cholesky decompositions of the) “Q” matrices in a standard
+linear dynamical system w/ additive white Gaussian noise. In other words, they
+should be lower triangular and not accumulate – the uncertainty at at time <code class="docutils literal notranslate"><span class="pre">t</span></code>
+should be computed as if the estimate at time <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">-</span> <span class="pre">1</span></code> is a ground-truth input.</p>
 <p>By default, this is implemented by bootstrapping the <code class="docutils literal notranslate"><span class="pre">forward_loop()</span></code>
 method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>initial_states</strong> (<em>torch.Tensor</em>) – Initial states of our system.</p></li>
+<li><p><strong>initial_states</strong> (<em>torch.Tensor</em>) – Initial states of our system. Shape should be
+<code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>.</p></li>
 <li><p><strong>controls</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Control inputs. Should be either a
 dict of tensors or tensor of size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p></li>
-<li><p><strong>noisy</strong> (<em>bool</em>) – Set to True to add noise to output.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>torch.Tensor</em> – Predicted state for each batch element. Shape should
-be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim).</span></code></p>
+<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> –</p>
 </dd>
 </dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Predicted states &amp; uncertainties.
+    - States should have shape `(N, state_dim).`
+    - Uncertainties should be lower triangular, and should have shape
+    `(N, state_dim, state_dim).`
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt id="diffbayes.base.DynamicsModel.forward_loop">
-<code class="sig-name descname">forward_loop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em>, <em class="sig-param"><span class="n">noisy</span><span class="p">:</span> <span class="n">bool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.DynamicsModel.forward_loop" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward_loop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesTorch<span class="p">, </span>torch.Tensor<span class="p">]</span><a class="headerlink" href="#diffbayes.base.DynamicsModel.forward_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamics model forward pass, over sequence length <code class="docutils literal notranslate"><span class="pre">T</span></code> and batch size
 <code class="docutils literal notranslate"><span class="pre">N</span></code>.  By default, this is implemented by iteratively calling
-<code class="docutils literal notranslate"><span class="pre">forward()</span></code>.
-To inject code between timesteps (for example, to inspect hidden state),
+<code class="docutils literal notranslate"><span class="pre">forward()</span></code>.</p>
+<p>Computes both predicted states and uncertainties. Note that uncertainties
+correspond to the (Cholesky decompositions of the) “Q” matrices in a standard
+linear dynamical system w/ additive white Gaussian noise. In other words, they
+should be lower triangular and not accumulate – the uncertainty at at time <code class="docutils literal notranslate"><span class="pre">t</span></code>
+should be computed as if the estimate at time <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">-</span> <span class="pre">1</span></code> is a ground-truth input.</p>
+<p>To inject code between timesteps (for example, to inspect hidden state),
 use <code class="docutils literal notranslate"><span class="pre">register_forward_hook()</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -297,20 +333,36 @@ use <code class="docutils literal notranslate"><span class="pre">register_forwar
 dynamics model. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>.</p></li>
 <li><p><strong>controls</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Control inputs. Should be either a
 dict of tensors or tensor of size <code class="docutils literal notranslate"><span class="pre">(T,</span> <span class="pre">N,</span> <span class="pre">...)</span></code>.</p></li>
-<li><p><strong>noisy</strong> (<em>bool</em>) – Set to True to add noise to output.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>torch.Tensor</em> – Predicted states at each timestep. Shape should be
-<code class="docutils literal notranslate"><span class="pre">(T,</span> <span class="pre">N,</span> <span class="pre">state_dim).</span></code></p>
+<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> –</p>
 </dd>
 </dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Predicted states &amp; uncertainties.
+    - States should have shape `(T, N, state_dim).`
+    - Uncertainties should be lower triangular, and should have shape
+    `(T, N, state_dim, state_dim).`
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
-<dt id="diffbayes.base.DynamicsModel.add_noise">
-<code class="sig-name descname">add_noise</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">states</span><span class="p">:</span> <span class="n">torch.Tensor</span></em>, <em class="sig-param"><span class="n">enabled</span><span class="p">:</span> <span class="n">bool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.DynamicsModel.add_noise" title="Permalink to this definition">¶</a></dt>
-<dd><p>Protected helper for adding Gaussian noise to a set of states.</p>
+<dt id="diffbayes.base.DynamicsModel.jacobian">
+<code class="sig-name descname">jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="headerlink" href="#diffbayes.base.DynamicsModel.jacobian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Jacobian of the dynamics model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>states</strong> (<em>torch.Tensor</em>) – Current state, size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>.</p></li>
+<li><p><strong>controls</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Control inputs. Should be either a
+dict of tensors or tensor of size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>torch.Tensor</em> – Jacobian, size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim)</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -319,7 +371,10 @@ dict of tensors or tensor of size <code class="docutils literal notranslate"><sp
 <dt id="diffbayes.base.Filter">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.base.</code><code class="sig-name descname">Filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.Filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<p>Base class for a generic differentiable state estimator.</p>
+<div class="graphviz"><img src="../../../_images/inheritance-f6e35bcf3845ea6439e193f8ca5b3ab6bf1900f2.png" alt="Inheritance diagram of diffbayes.base.Filter" usemap="#inheritance9ad331580f" class="inheritance graphviz" /></div>
+<map id="inheritance9ad331580f" name="inheritance9ad331580f">
+<area shape="rect" id="node2" href="_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,31,197,56"/>
+</map><p>Base class for a generic differentiable state estimator.</p>
 <p>As a minimum, subclasses should override:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">initialize_beliefs</span></code> for populating the initial belief of our estimator</p></li>
@@ -338,7 +393,7 @@ dict of tensors or tensor of size <code class="docutils literal notranslate"><sp
 
 <dl class="py method">
 <dt id="diffbayes.base.Filter.initialize_beliefs">
-<em class="property">abstract </em><code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mean</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">torch.Tensor</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.Filter.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mean</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">types.CovarianceTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.base.Filter.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize our filter with a Gaussian prior.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -354,7 +409,7 @@ dict of tensors or tensor of size <code class="docutils literal notranslate"><sp
 
 <dl class="py method">
 <dt id="diffbayes.base.Filter.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.Filter.forward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="headerlink" href="#diffbayes.base.Filter.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filtering forward pass, over a single timestep.</p>
 <p>By default, this is implemented by bootstrapping the <code class="docutils literal notranslate"><span class="pre">forward_loop()</span></code>
 method.</p>
@@ -376,7 +431,7 @@ be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span
 
 <dl class="py method">
 <dt id="diffbayes.base.Filter.forward_loop">
-<code class="sig-name descname">forward_loop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.Filter.forward_loop" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward_loop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="headerlink" href="#diffbayes.base.Filter.forward_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filtering forward pass, over sequence length <code class="docutils literal notranslate"><span class="pre">T</span></code> and batch size <code class="docutils literal notranslate"><span class="pre">N</span></code>.
 By default, this is implemented by iteratively calling <code class="docutils literal notranslate"><span class="pre">forward()</span></code>.</p>
 <p>To inject code between timesteps (for example, to inspect hidden state),
@@ -400,10 +455,185 @@ dict of tensors or tensor of size <code class="docutils literal notranslate"><sp
 </dd></dl>
 
 <dl class="py class">
+<dt id="diffbayes.base.KalmanFilterBase">
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base.</code><code class="sig-name descname">KalmanFilterBase</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#diffbayes.base.DynamicsModel" title="diffbayes.base.DynamicsModel">DynamicsModel</a></span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#diffbayes.base.KalmanFilterMeasurementModel" title="diffbayes.base.KalmanFilterMeasurementModel">KalmanFilterMeasurementModel</a></span></em>, <em class="sig-param"><span class="o">**</span><span class="n">unused_kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.KalmanFilterBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="_filter/index.html#diffbayes.base._filter.Filter" title="diffbayes.base._filter.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base._filter.Filter</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<div class="graphviz"><img src="../../../_images/inheritance-e3b01a169b06eb1e9b2663b7878601730116a729.png" alt="Inheritance diagram of diffbayes.base.KalmanFilterBase" usemap="#inheritance5254141c4b" class="inheritance graphviz" /></div>
+<map id="inheritance5254141c4b" name="inheritance5254141c4b">
+<area shape="rect" id="node2" href="_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node4" href="_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,31,383,56"/>
+</map><p>Base class for a generic Kalman-style filter. Parameterizes beliefs with a mean
+and covariance.</p>
+<p>Subclasses should override _predict_step() and _update_step().</p>
+<dl class="py attribute">
+<dt id="diffbayes.base.KalmanFilterBase.dynamics_model">
+<code class="sig-name descname">dynamics_model</code><a class="headerlink" href="#diffbayes.base.KalmanFilterBase.dynamics_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#diffbayes.base.DynamicsModel" title="diffbayes.base.DynamicsModel">diffbayes.base.DynamicsModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="diffbayes.base.KalmanFilterBase.measurement_model">
+<code class="sig-name descname">measurement_model</code><a class="headerlink" href="#diffbayes.base.KalmanFilterBase.measurement_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Measurement model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#diffbayes.base.KalmanFilterMeasurementModel" title="diffbayes.base.KalmanFilterMeasurementModel">diffbayes.base.KalmanFilterMeasurementModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="diffbayes.base.KalmanFilterBase.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="headerlink" href="#diffbayes.base.KalmanFilterBase.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kalman filter forward pass, single timestep.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>observations</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Observation inputs. Should be either a
+dict of tensors or tensor of shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p></li>
+<li><p><strong>controls</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Control inputs. Should be either a dict of
+tensors or tensor of shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>torch.Tensor</em> – Predicted state for each batch element. Shape should
+be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim).</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="diffbayes.base.KalmanFilterBase.initialize_beliefs">
+<code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mean</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">types.CovarianceTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.base.KalmanFilterBase.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set filter belief to a given mean and covariance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mean</strong> (<em>torch.Tensor</em>) – Mean of belief. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>.</p></li>
+<li><p><strong>covariance</strong> (<em>torch.Tensor</em>) – Covariance of belief. Shape should be
+<code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim)</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="diffbayes.base.KalmanFilterBase.belief_mean">
+<em class="property">property </em><code class="sig-name descname">belief_mean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="headerlink" href="#diffbayes.base.KalmanFilterBase.belief_mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Posterior mean. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="diffbayes.base.KalmanFilterBase.belief_covariance">
+<em class="property">property </em><code class="sig-name descname">belief_covariance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; types.CovarianceTorch<a class="headerlink" href="#diffbayes.base.KalmanFilterBase.belief_covariance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Posterior covariance. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim)</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="diffbayes.base.KalmanFilterBase._predict_step">
+<em class="property">abstract </em><code class="sig-name descname">_predict_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.base.KalmanFilterBase._predict_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kalman filter predict step.</p>
+<p>Computes $mu<em>{t | t - 1}$, $Sigma</em>{t | t - 1}$ from $mu<em>{t - 1 | t - 1}$,
+$Sigma</em>{t - 1 | t - 1}$.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><p><strong>controls</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Control inputs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="diffbayes.base.KalmanFilterBase._update_step">
+<em class="property">abstract </em><code class="sig-name descname">_update_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.base.KalmanFilterBase._update_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kalman filter measurement update step.</p>
+<p>Nominally, computes $mu<em>{t | t}$, $Sigma</em>{t | t}$ from $mu<em>{t | t - 1}$,
+$Sigma</em>{t | t - 1}$.</p>
+<p>Updates <code class="docutils literal notranslate"><span class="pre">self.belief_mean</span></code> and <code class="docutils literal notranslate"><span class="pre">self.belief_covariance</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><p><strong>observations</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Observation inputs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="diffbayes.base.KalmanFilterMeasurementModel">
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base.</code><code class="sig-name descname">KalmanFilterMeasurementModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span></em>, <em class="sig-param"><span class="n">observation_dim</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.KalmanFilterMeasurementModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
+<div class="graphviz"><img src="../../../_images/inheritance-2b05a3981246fbeb8543b4c350ab39137dafb3f8.png" alt="Inheritance diagram of diffbayes.base.KalmanFilterMeasurementModel" usemap="#inheritance850dae7170" class="inheritance graphviz" /></div>
+<map id="inheritance850dae7170" name="inheritance850dae7170">
+<area shape="rect" id="node2" href="_kalman_filter_measurement_model/index.html#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel" target="_top" title="KalmanFilterMeasurementModel" alt="" coords="125,31,360,56"/>
+</map><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+<dl class="py attribute">
+<dt id="diffbayes.base.KalmanFilterMeasurementModel.state_dim">
+<code class="sig-name descname">state_dim</code><a class="headerlink" href="#diffbayes.base.KalmanFilterMeasurementModel.state_dim" title="Permalink to this definition">¶</a></dt>
+<dd><p>State dimensionality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="diffbayes.base.KalmanFilterMeasurementModel.observation_dim">
+<code class="sig-name descname">observation_dim</code><a class="headerlink" href="#diffbayes.base.KalmanFilterMeasurementModel.observation_dim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Observation dimensionality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="diffbayes.base.KalmanFilterMeasurementModel.forward">
+<em class="property">abstract </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.ObservationsNoDictTorch<span class="p">, </span>types.ScaleTrilTorch<span class="p">]</span><a class="headerlink" href="#diffbayes.base.KalmanFilterMeasurementModel.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Observation model forward pass, over batch size <code class="docutils literal notranslate"><span class="pre">N</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>states</strong> (<em>torch.Tensor</em>) – States to pass to our observation model.
+Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> – tuple containing expected observations
+and cholesky decomposition of covariance.  Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">M)</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="diffbayes.base.KalmanFilterMeasurementModel.jacobian">
+<code class="sig-name descname">jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="headerlink" href="#diffbayes.base.KalmanFilterMeasurementModel.jacobian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Jacobian of the measurement model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>states</strong> (<em>torch.Tensor</em>) – Current state, size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>torch.Tensor</em> – Jacobian, size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">observation_dim,</span> <span class="pre">state_dim)</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="diffbayes.base.ParticleFilterMeasurementModel">
 <em class="property">class </em><code class="sig-prename descclassname">diffbayes.base.</code><code class="sig-name descname">ParticleFilterMeasurementModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.ParticleFilterMeasurementModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
-<p>Observation model base class for a generic differentiable particle
+<div class="graphviz"><img src="../../../_images/inheritance-39be8c4ee031679db163f49a6d7da16d77c80bc8.png" alt="Inheritance diagram of diffbayes.base.ParticleFilterMeasurementModel" usemap="#inheritancec1a3e5f79f" class="inheritance graphviz" /></div>
+<map id="inheritancec1a3e5f79f" name="inheritancec1a3e5f79f">
+<area shape="rect" id="node3" href="_particle_filter_measurement_model/index.html#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel" target="_top" title="Observation model base class for a generic differentiable particle" alt="" coords="125,31,359,56"/>
+</map><p>Observation model base class for a generic differentiable particle
 filter; maps (state, observation) pairs to the log-likelihood of the
 observation given the state ( <span class="math notranslate nohighlight">\(\log p(z | x)\)</span> ).</p>
 <dl class="py attribute">
@@ -419,10 +649,10 @@ observation given the state ( <span class="math notranslate nohighlight">\(\log 
 
 <dl class="py method">
 <dt id="diffbayes.base.ParticleFilterMeasurementModel.forward">
-<em class="property">abstract </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.ParticleFilterMeasurementModel.forward" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="headerlink" href="#diffbayes.base.ParticleFilterMeasurementModel.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Observation model forward pass, over batch size <code class="docutils literal notranslate"><span class="pre">N</span></code>.
 For each member of a batch, we expect <code class="docutils literal notranslate"><span class="pre">M</span></code> separate states (particles)
-and just one unique observation.</p>
+and one unique observation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -442,37 +672,61 @@ corresponding observation. Shape should be <code class="docutils literal notrans
 </dd></dl>
 
 <dl class="py class">
-<dt id="diffbayes.base.ParticleFilter">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base.</code><code class="sig-name descname">ParticleFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">ParticleFilterMeasurementModel</span></em>, <em class="sig-param"><span class="n">num_particles</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">100</span></em>, <em class="sig-param"><span class="n">resample</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">soft_resample_alpha</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">estimation_method</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'weighted_average'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.ParticleFilter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#diffbayes.base.Filter" title="diffbayes.base.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.Filter</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<p>Base class for a generic differentiable particle filter.</p>
-<dl class="py attribute">
-<dt id="diffbayes.base.ParticleFilter.dynamics_model">
-<code class="sig-name descname">dynamics_model</code><a class="headerlink" href="#diffbayes.base.ParticleFilter.dynamics_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Forward model.</p>
+<dt id="diffbayes.base.ParticleFilterMeasurementModelWrapper">
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base.</code><code class="sig-name descname">ParticleFilterMeasurementModelWrapper</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">kalman_filter_measurement_model</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#diffbayes.base.KalmanFilterMeasurementModel" title="diffbayes.base.KalmanFilterMeasurementModel">KalmanFilterMeasurementModel</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.ParticleFilterMeasurementModelWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="_particle_filter_measurement_model/index.html#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel" title="diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel</span></code></a></p>
+<div class="graphviz"><img src="../../../_images/inheritance-bc8eee536ac1ceb532f1f48ed591a77a06c1c1c9.png" alt="Inheritance diagram of diffbayes.base.ParticleFilterMeasurementModelWrapper" usemap="#inheritancedf1e512ce1" class="inheritance graphviz" /></div>
+<map id="inheritancedf1e512ce1" name="inheritancedf1e512ce1">
+<area shape="rect" id="node3" href="_particle_filter_measurement_model/index.html#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel" target="_top" title="Observation model base class for a generic differentiable particle" alt="" coords="125,31,359,56"/>
+<area shape="rect" id="node4" href="_particle_filter_measurement_model/index.html#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper" target="_top" title="Helper class for creating a particle filter measurement model (states," alt="" coords="407,31,695,56"/>
+</map><p>Helper class for creating a particle filter measurement model (states,
+observations -&gt; log-likelihoods) from a Kalman filter one (states -&gt; observations).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#diffbayes.base.DynamicsModel" title="diffbayes.base.DynamicsModel">diffbayes.base.DynamicsModel</a></p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>kalman_filter_measurement_model</strong> (<a class="reference internal" href="#diffbayes.base.KalmanFilterMeasurementModel" title="diffbayes.base.KalmanFilterMeasurementModel"><em>diffbayes.base.KalmanFilterMeasurementModel</em></a>) – Kalman filter
+measurement model instance to wrap.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="diffbayes.base.ParticleFilterMeasurementModelWrapper.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="headerlink" href="#diffbayes.base.ParticleFilterMeasurementModelWrapper.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Observation model forward pass, over batch size <code class="docutils literal notranslate"><span class="pre">N</span></code>.
+For each member of a batch, we expect <code class="docutils literal notranslate"><span class="pre">M</span></code> separate states (particles)
+and one unique observation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>states</strong> (<em>torch.Tensor</em>) – States to pass to our observation model.
+Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">M,</span> <span class="pre">state_dim)</span></code>.</p></li>
+<li><p><strong>observations</strong> (<em>torch.Tensor</em>) – Measurement inputs. Should be either a dict of
+tensors or tensor of size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>torch.Tensor</em> – Log-likelihoods of each state, conditioned on a
+corresponding observation. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">M)</span></code>.</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="py attribute">
-<dt id="diffbayes.base.ParticleFilter.measurement_model">
-<code class="sig-name descname">measurement_model</code><a class="headerlink" href="#diffbayes.base.ParticleFilter.measurement_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Observation model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#diffbayes.base.ParticleFilterMeasurementModel" title="diffbayes.base.ParticleFilterMeasurementModel">diffbayes.base.ParticleFilterMeasurementModel</a></p>
-</dd>
-</dl>
 </dd></dl>
 
+<dl class="py class">
+<dt id="diffbayes.base.VirtualSensorModel">
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base.</code><code class="sig-name descname">VirtualSensorModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.VirtualSensorModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
+<div class="graphviz"><img src="../../../_images/inheritance-18f312577b28fa9d68f23829df3da9bc088b2fa9.png" alt="Inheritance diagram of diffbayes.base.VirtualSensorModel" usemap="#inheritance7a87ba2adc" class="inheritance graphviz" /></div>
+<map id="inheritance7a87ba2adc" name="inheritance7a87ba2adc">
+<area shape="rect" id="node3" href="_virtual_sensor_model/index.html#diffbayes.base._virtual_sensor_model.VirtualSensorModel" target="_top" title="Virtual sensor base class for our differentiable Kalman filters." alt="" coords="125,31,275,56"/>
+</map><p>Virtual sensor base class for our differentiable Kalman filters.</p>
+<p>Maps each observation input to a predicted state and uncertainty, in the style of
+BackpropKF. This is often necessary for complex observation spaces like images or
+point clouds, where it’s not possible to learn a standard state-&gt;observation
+measurement model.</p>
 <dl class="py attribute">
-<dt id="diffbayes.base.ParticleFilter.num_particles">
-<code class="sig-name descname">num_particles</code><a class="headerlink" href="#diffbayes.base.ParticleFilter.num_particles" title="Permalink to this definition">¶</a></dt>
-<dd><p>Number of particles to represent our belief distribution.
-Defaults to 100.</p>
+<dt id="diffbayes.base.VirtualSensorModel.state_dim">
+<code class="sig-name descname">state_dim</code><a class="headerlink" href="#diffbayes.base.VirtualSensorModel.state_dim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dimensionality of our state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
@@ -480,110 +734,32 @@ Defaults to 100.</p>
 </dl>
 </dd></dl>
 
-<dl class="py attribute">
-<dt id="diffbayes.base.ParticleFilter.resample">
-<code class="sig-name descname">resample</code><a class="headerlink" href="#diffbayes.base.ParticleFilter.resample" title="Permalink to this definition">¶</a></dt>
-<dd><p>If True, we resample particles &amp; normalize weights at each
-timestep. If unset (None), we automatically turn resampling on in eval mode
-and off in train mode.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="diffbayes.base.ParticleFilter.soft_resample_alpha">
-<code class="sig-name descname">soft_resample_alpha</code><a class="headerlink" href="#diffbayes.base.ParticleFilter.soft_resample_alpha" title="Permalink to this definition">¶</a></dt>
-<dd><p>Tunable constant for differentiable resampling, as described
-by Jonschkowski et al. in “Differentiable Particle Filters: End-to-End
-Learning with Algorithmic Priors”: <a class="reference external" href="https://arxiv.org/abs/1805.11122">https://arxiv.org/abs/1805.11122</a>.
-Defaults to 1.0 (disabled).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="diffbayes.base.ParticleFilter.estimation_method">
-<code class="sig-name descname">estimation_method</code><a class="headerlink" href="#diffbayes.base.ParticleFilter.estimation_method" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method of producing state estimates. Options include:</p>
-<ul class="simple">
-<li><p>‘weighted_average’: average of particles weighted by their weights.</p></li>
-<li><p>‘argmax’: state of highest weighted particle.</p></li>
-</ul>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="diffbayes.base.ParticleFilter.particle_states">
-<code class="sig-name descname">particle_states</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#diffbayes.base.ParticleFilter.particle_states" title="Permalink to this definition">¶</a></dt>
-<dd><p>Discrete particles representing our current belief
-distribution. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">M,</span> <span class="pre">state_dim)</span></code>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>torch.Tensor</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="diffbayes.base.ParticleFilter.particle_log_weights">
-<code class="sig-name descname">particle_log_weights</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#diffbayes.base.ParticleFilter.particle_log_weights" title="Permalink to this definition">¶</a></dt>
-<dd><p>Weights corresponding to each particle, stored as
-log-likelihoods. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">M)</span></code>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>torch.Tensor</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
-<dt id="diffbayes.base.ParticleFilter.initialize_beliefs">
-<code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mean</span><span class="p">:</span> <span class="n">torch.Tensor</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">torch.Tensor</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.ParticleFilter.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Populates initial particles, which will be normally distributed.</p>
+<dt id="diffbayes.base.VirtualSensorModel.forward">
+<em class="property">abstract </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesTorch<span class="p">, </span>types.ScaleTrilTorch<span class="p">]</span><a class="headerlink" href="#diffbayes.base.VirtualSensorModel.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predicts states and uncertainties from observation inputs.</p>
+<p>Uncertainties should be lower-triangular Cholesky decompositions of covariance
+matrices.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mean</strong> (<em>torch.Tensor</em>) – Mean of belief. Shape should be
-<code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>.</p></li>
-<li><p><strong>covariance</strong> (<em>torch.Tensor</em>) – Covariance of belief. Shape should be
-<code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim)</span></code>.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diffbayes.base.ParticleFilter.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base.ParticleFilter.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Particle filter forward pass, single timestep.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>observations</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – observation inputs. should be
-either a dict of tensors or tensor of shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p></li>
-<li><p><strong>controls</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – control inputs. should be either a
-dict of tensors or tensor of shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>observations</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Measurement inputs. Should be
+either a dict of tensors or tensor of size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>torch.Tensor</em> – Predicted state for each batch element. Shape should
-be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim).</span></code></p>
+<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> –</p>
 </dd>
 </dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Predicted states &amp; uncertainties.
+    - States should have shape `(N, state_dim).`
+    - Uncertainties should be lower triangular, and should have shape
+    `(N, state_dim, state_dim).`
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>
 
+</div>
 </div>
 </div>
 
@@ -598,11 +774,19 @@ be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -613,7 +797,6 @@ be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

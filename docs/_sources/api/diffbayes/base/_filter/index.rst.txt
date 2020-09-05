@@ -1,17 +1,33 @@
-:orphan:
-
 :mod:`diffbayes.base._filter`
 =============================
 
 .. py:module:: diffbayes.base._filter
 
+.. autoapi-nested-parse::
+
+   Private module; avoid importing from directly.
+
+
 
 Module Contents
 ---------------
 
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   diffbayes.base._filter.Filter
+
+
+
 .. py:class:: Filter(*, state_dim: int)
 
    Bases: :class:`torch.nn.Module`, :class:`abc.ABC`
+
+   .. autoapi-inheritance-diagram:: diffbayes.base._filter.Filter
+      :parts: 1
+      :private-bases:
 
    Base class for a generic differentiable state estimator.
 
@@ -29,9 +45,8 @@ Module Contents
       :type: int
 
 
-   .. method:: initialize_beliefs(self, *, mean: types.StatesTorch, covariance: torch.Tensor)
+   .. method:: initialize_beliefs(self, *, mean: types.StatesTorch, covariance: types.CovarianceTorch) -> None
       :abstractmethod:
-
 
       Initialize our filter with a Gaussian prior.
 
@@ -43,8 +58,7 @@ Module Contents
       :type covariance: torch.Tensor
 
 
-   .. method:: forward(self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch)
-
+   .. method:: forward(self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch) -> types.StatesTorch
 
       Filtering forward pass, over a single timestep.
 
@@ -62,8 +76,7 @@ Module Contents
                 be ``(N, state_dim).``
 
 
-   .. method:: forward_loop(self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch)
-
+   .. method:: forward_loop(self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch) -> types.StatesTorch
 
       Filtering forward pass, over sequence length ``T`` and batch size ``N``.
       By default, this is implemented by iteratively calling ``forward()``.

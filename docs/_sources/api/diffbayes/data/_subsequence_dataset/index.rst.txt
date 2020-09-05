@@ -1,17 +1,33 @@
-:orphan:
-
 :mod:`diffbayes.data._subsequence_dataset`
 ==========================================
 
 .. py:module:: diffbayes.data._subsequence_dataset
 
+.. autoapi-nested-parse::
+
+   Private module; avoid importing from directly.
+
+
 
 Module Contents
 ---------------
 
-.. py:class:: SubsequenceDataset(trajectories: List[types.TrajectoryTupleNumpy], subsequence_length: int)
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   diffbayes.data._subsequence_dataset.SubsequenceDataset
+
+
+
+.. py:class:: SubsequenceDataset(trajectories: List[types.TrajectoryNumpy], subsequence_length: int)
 
    Bases: :class:`torch.utils.data.Dataset`
+
+   .. autoapi-inheritance-diagram:: diffbayes.data._subsequence_dataset.SubsequenceDataset
+      :parts: 1
+      :private-bases:
 
    A data preprocessor for producing training subsequences from
    a list of trajectories.
@@ -25,8 +41,7 @@ Module Contents
    :param subsequence_length: # of timesteps per subsequence.
    :type subsequence_length: int
 
-   .. method:: __getitem__(self, index: int)
-
+   .. method:: __getitem__(self, index: int) -> types.TrajectoryNumpy
 
       Get a subsequence from our dataset.
 
@@ -39,8 +54,7 @@ Module Contents
                 ``(subsequence_length, ...)``.
 
 
-   .. method:: __len__(self)
-
+   .. method:: __len__(self) -> int
 
       Total number of subsequences in the dataset.
 

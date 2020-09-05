@@ -1,3 +1,6 @@
+"""Private module; avoid importing from directly.
+"""
+
 from typing import List
 
 import fannypack as fp

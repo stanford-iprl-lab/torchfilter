@@ -1,3 +1,6 @@
+"""Private module; avoid importing from directly.
+"""
+
 import abc
 from dataclasses import dataclass
 from typing import Optional, Tuple
@@ -31,7 +34,7 @@ class SigmaPointStrategy(abc.ABC):
 
         Returns:
             Tuple[torch.Tensor, torch.Tensor]: Covariance and mean weights. We expect 1D
-                float32 tensors on the CPU.
+            float32 tensors on the CPU.
         """
         pass
 
@@ -76,7 +79,7 @@ class MerweSigmaPointStrategy(SigmaPointStrategy):
 
         Returns:
             Tuple[torch.Tensor, torch.Tensor]: Covariance and mean weights. We expect 1D
-                float32 tensors on the CPU.
+            float32 tensors on the CPU.
         """
 
         lambd = self.compute_lambda(dim=dim)
@@ -130,7 +133,7 @@ class JulierSigmaPointStrategy(SigmaPointStrategy):
 
         Returns:
             Tuple[torch.Tensor, torch.Tensor]: Covariance and mean weights. We expect 1D
-                float32 tensors on the CPU.
+            float32 tensors on the CPU.
         """
 
         lambd = self.compute_lambda(dim=dim)

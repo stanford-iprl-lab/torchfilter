@@ -1,0 +1,61 @@
+:mod:`diffbayes.filters._extended_kalman_filter`
+================================================
+
+.. py:module:: diffbayes.filters._extended_kalman_filter
+
+.. autoapi-nested-parse::
+
+   Private module; avoid importing from directly.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter
+
+
+
+.. py:class:: ExtendedKalmanFilter(*, dynamics_model: DynamicsModel, measurement_model: KalmanFilterMeasurementModel, **unused_kwargs)
+
+   Bases: :class:`diffbayes.base.KalmanFilterBase`
+
+   .. autoapi-inheritance-diagram:: diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter
+      :parts: 1
+      :private-bases:
+
+   Generic differentiable EKF.
+
+   For building estimators with more complex observation spaces (eg images), see
+   ``VirtualSensorExtendedKalmanFilter``.
+
+   .. method:: _predict_step(self, *, controls: types.ControlsTorch) -> None
+
+      Kalman filter predict step.
+
+      Computes $\mu\ *{t | t - 1}$, $\Sigma*\ {t | t - 1}$ from $\mu\ *{t - 1 | t - 1}$,
+      $\Sigma*\ {t - 1 | t - 1}$.
+
+      :keyword controls: Control inputs.
+      :kwtype controls: dict or torch.Tensor
+
+
+   .. method:: _update_step(self, *, observations: types.ObservationsTorch) -> None
+
+      Kalman filter measurement update step.
+
+      Nominally, computes $\mu\ *{t | t}$, $\Sigma*\ {t | t}$ from $\mu\ *{t | t - 1}$,
+      $\Sigma*\ {t | t - 1}$.
+
+      Updates ``self.belief_mean`` and ``self.belief_covariance``.
+
+      :keyword observations: Observation inputs.
+      :kwtype observations: dict or torch.Tensor
+
+
+

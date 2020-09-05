@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,19 @@
   
 
   
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
@@ -25,16 +31,11 @@
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
         <script src="../../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
 </head>
@@ -50,7 +51,7 @@
           
 
           
-            <a href="../../../../index.html" class="icon icon-home"> diffbayes
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> diffbayes
           
 
           
@@ -73,6 +74,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -84,11 +86,12 @@
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._particle_filter_measurement_dataset</span></code></a><ul>
 <li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset">ParticleFilterMeasurementDataset</a><ul>
 <li><a class="reference internal" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__getitem__">__getitem__</a></li>
-</ul>
-<ul>
 <li><a class="reference internal" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__len__">__len__</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -100,6 +103,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -138,7 +142,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._particle_filter_measurement_dataset</span></code></li>
     
@@ -161,27 +165,75 @@
             
   <div class="section" id="module-diffbayes.data._particle_filter_measurement_dataset">
 <span id="diffbayes-data-particle-filter-measurement-dataset"></span><h1><a class="reference internal" href="#module-diffbayes.data._particle_filter_measurement_dataset" title="diffbayes.data._particle_filter_measurement_dataset"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._particle_filter_measurement_dataset</span></code></a><a class="headerlink" href="#module-diffbayes.data._particle_filter_measurement_dataset" title="Permalink to this headline">¶</a></h1>
+<p>Private module; avoid importing from directly.</p>
 <div class="section" id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset" title="diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ParticleFilterMeasurementDataset</span></code></a></p></td>
+<td><p>A dataset interface for pre-training particle filter measurement models.</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="py class">
 <dt id="diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.data._particle_filter_measurement_dataset.</code><code class="sig-name descname">ParticleFilterMeasurementDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryTupleNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">np.ndarray</span></em>, <em class="sig-param"><span class="n">samples_per_pair</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.data._particle_filter_measurement_dataset.</code><code class="sig-name descname">ParticleFilterMeasurementDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">np.ndarray</span></em>, <em class="sig-param"><span class="n">samples_per_pair</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
-<p>A data preprocessor for pre-training particle filter measurement models.</p>
+<div class="graphviz"><img src="../../../../_images/inheritance-7cde7f95a3c0bf0ac8e9c93a0c2a626b4b832ab0.png" alt="Inheritance diagram of diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset" usemap="#inheritance134d5e8a39" class="inheritance graphviz" /></div>
+<map id="inheritance134d5e8a39" name="inheritance134d5e8a39">
+<area shape="rect" id="node2" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset" target="_top" title="A dataset interface for pre&#45;training particle filter measurement models." alt="" coords="127,5,371,31"/>
+</map><p>A dataset interface for pre-training particle filter measurement models.</p>
+<p>Centers Gaussian distributions around our ground-truth states, and provides examples
+for learning the log-likelihood.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trajectories</strong> (<em>List</em><em>[</em><a class="reference internal" href="../../types/index.html#diffbayes.types.TrajectoryNumpy" title="diffbayes.types.TrajectoryNumpy"><em>diffbayes.types.TrajectoryNumpy</em></a><em>]</em>) – List of trajectories.</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>covariance</strong> (<em>np.ndarray</em>) – Covariance of Gaussian PDFs.</p></li>
+<li><p><strong>samples_per_pair</strong> (<em>int</em>) – Number of training examples to provide for each
+state/observation pair. Half of these will typically be generated close
+to the example, and the other half far away.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt id="diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__getitem__">
-<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
-<dd><p>TODO</p>
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesNumpy<span class="p">, </span>types.ObservationsNumpy<span class="p">, </span>np.ndarray<span class="p">]</span><a class="headerlink" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a state/observation/log-likelihood sample from our dataset. Nominally, we
+want our measurement model to predict the returned log-likelihood as the PDF of
+the <code class="docutils literal notranslate"><span class="pre">p(observation</span> <span class="pre">|</span> <span class="pre">state)</span></code> distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – Subsequence number in our dataset.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>tuple</em> – <code class="docutils literal notranslate"><span class="pre">(state,</span> <span class="pre">observation,</span> <span class="pre">log-likelihood)</span></code> tuple.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__len__">
-<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__len__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Total number of samples in the dataset</p>
+<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__len__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total number of samples in the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><em>int</em> – Length of dataset.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
+</div>
 </div>
 </div>
 
@@ -196,11 +248,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -211,7 +271,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

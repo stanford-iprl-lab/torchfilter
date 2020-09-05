@@ -1,3 +1,6 @@
+"""Private module; avoid importing from directly.
+"""
+
 import fannypack
 import torch
 import torch.nn.functional as F

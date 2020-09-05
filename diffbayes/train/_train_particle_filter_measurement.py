@@ -1,3 +1,6 @@
+"""Private module; avoid importing from directly.
+"""
+
 from typing import Callable
 
 import fannypack

@@ -1,0 +1,9 @@
+<map id="inheritancecbd135b76f" name="inheritancecbd135b76f">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="4,39,56,57"/>
+<area shape="rect" id="node2" href="../../base/_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="90,4,142,22"/>
+<area shape="rect" id="node4" href="../../base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="176,22,275,40"/>
+<area shape="rect" id="node3" title="Base class for all neural network modules." alt="" coords="4,4,56,22"/>
+<area shape="rect" id="node5" href="../_square_root_unscented_kalman_filter/index.html#diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter" target="_top" title="Square&#45;root formulation of UKF." alt="" coords="309,4,488,22"/>
+<area shape="rect" id="node7" href="#diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin" target="_top" title="_VirtualSensorKalmanFilterMixin" alt="" coords="315,39,483,57"/>
+<area shape="rect" id="node6" href="#diffbayes.filters._virtual_sensor_filters.VirtualSensorSquareRootUnscentedKalmanFilter" target="_top" title="Square root UKF variant with a virtual sensor model for mapping raw observations" alt="" coords="523,22,764,40"/>
+</map>

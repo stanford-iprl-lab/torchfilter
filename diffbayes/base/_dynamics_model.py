@@ -1,3 +1,6 @@
+"""Private module; avoid importing from directly.
+"""
+
 import abc
 from typing import List, Tuple
 
@@ -42,6 +45,7 @@ class DynamicsModel(nn.Module, abc.ABC):
 
         By default, this is implemented by bootstrapping the `forward_loop()`
         method.
+
         Args:
             initial_states (torch.Tensor): Initial states of our system. Shape should be
                 `(N, state_dim)`.
@@ -84,6 +88,7 @@ class DynamicsModel(nn.Module, abc.ABC):
 
         To inject code between timesteps (for example, to inspect hidden state),
         use `register_forward_hook()`.
+
         Args:
             initial_states (torch.Tensor): Initial states to pass to our
                 dynamics model. Shape should be `(N, state_dim)`.

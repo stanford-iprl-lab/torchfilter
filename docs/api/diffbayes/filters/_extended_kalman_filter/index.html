@@ -1,0 +1,276 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>diffbayes.filters._extended_kalman_filter &mdash; diffbayes  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> diffbayes
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.filters._extended_kalman_filter</span></code></a><ul>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#classes">Classes</a><ul>
+<li><a class="reference internal" href="#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter">ExtendedKalmanFilter</a><ul>
+<li><a class="reference internal" href="#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter._predict_step">_predict_step</a></li>
+<li><a class="reference internal" href="#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter._update_step">_update_step</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">diffbayes</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.filters._extended_kalman_filter</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/api/diffbayes/filters/_extended_kalman_filter/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-diffbayes.filters._extended_kalman_filter">
+<span id="diffbayes-filters-extended-kalman-filter"></span><h1><a class="reference internal" href="#module-diffbayes.filters._extended_kalman_filter" title="diffbayes.filters._extended_kalman_filter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.filters._extended_kalman_filter</span></code></a><a class="headerlink" href="#module-diffbayes.filters._extended_kalman_filter" title="Permalink to this headline">¶</a></h1>
+<p>Private module; avoid importing from directly.</p>
+<div class="section" id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter" title="diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExtendedKalmanFilter</span></code></a></p></td>
+<td><p>Generic differentiable EKF.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt id="diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter">
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.filters._extended_kalman_filter.</code><code class="sig-name descname">ExtendedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">unused_kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../../base/index.html#diffbayes.base.KalmanFilterBase" title="diffbayes.base.KalmanFilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.KalmanFilterBase</span></code></a></p>
+<div class="graphviz"><img src="../../../../_images/inheritance-6d530b1bb3bf484976bbe261d4588f9113743250.png" alt="Inheritance diagram of diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter" usemap="#inheritance681cc3ce4a" class="inheritance graphviz" /></div>
+<map id="inheritance681cc3ce4a" name="inheritance681cc3ce4a">
+<area shape="rect" id="node3" href="../../base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,29,383,55"/>
+<area shape="rect" id="node4" href="../../base/_filter/index.html#diffbayes.base._filter.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,55,197,80"/>
+<area shape="rect" id="node2" href="#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter" target="_top" title="Generic differentiable EKF." alt="" coords="431,29,597,55"/>
+</map><p>Generic differentiable EKF.</p>
+<p>For building estimators with more complex observation spaces (eg images), see
+<code class="docutils literal notranslate"><span class="pre">VirtualSensorExtendedKalmanFilter</span></code>.</p>
+<dl class="py method">
+<dt id="diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter._predict_step">
+<code class="sig-name descname">_predict_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter._predict_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kalman filter predict step.</p>
+<p>Computes $mu<em>{t | t - 1}$, $Sigma</em>{t | t - 1}$ from $mu<em>{t - 1 | t - 1}$,
+$Sigma</em>{t - 1 | t - 1}$.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><p><strong>controls</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Control inputs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter._update_step">
+<code class="sig-name descname">_update_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter._update_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kalman filter measurement update step.</p>
+<p>Nominally, computes $mu<em>{t | t}$, $Sigma</em>{t | t}$ from $mu<em>{t | t - 1}$,
+$Sigma</em>{t | t - 1}$.</p>
+<p>Updates <code class="docutils literal notranslate"><span class="pre">self.belief_mean</span></code> and <code class="docutils literal notranslate"><span class="pre">self.belief_covariance</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><p><strong>observations</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – Observation inputs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

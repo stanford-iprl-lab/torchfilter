@@ -1,9 +1,7 @@
 
 
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -13,12 +11,19 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -26,16 +31,11 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" /> 
 </head>
@@ -51,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> diffbayes
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> diffbayes
           
 
           
@@ -74,6 +74,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -86,6 +87,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -124,7 +126,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Index</li>
     
@@ -149,19 +151,25 @@
 <div class="genindex-jumpbox">
  <a href="#_"><strong>_</strong></a>
  | <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#I"><strong>I</strong></a>
+ | <a href="#J"><strong>J</strong></a>
+ | <a href="#K"><strong>K</strong></a>
+ | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#N"><strong>N</strong></a>
  | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
- | <a href="#Q"><strong>Q</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
  
 </div>
 <h2 id="_">_</h2>
@@ -181,8 +189,6 @@
         <li><a href="api/diffbayes/data/index.html#diffbayes.data.SubsequenceDataset.__getitem__">(diffbayes.data.SubsequenceDataset method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/diffbayes/data/_particle_filter_measurement_dataset/index.html#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__len__">__len__() (diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset method)</a>
 
       <ul>
@@ -197,16 +203,112 @@
         <li><a href="api/diffbayes/data/index.html#diffbayes.data.SubsequenceDataset.__len__">(diffbayes.data.SubsequenceDataset method)</a>
 </li>
       </ul></li>
+      <li><a href="api/diffbayes/filters/_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters._IdentityMeasurementModel">_IdentityMeasurementModel (class in diffbayes.filters._virtual_sensor_filters)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_kalman_filter_mixin/index.html#diffbayes.filters._virtual_sensor_kalman_filter_mixin._IdentityMeasurementModel">(class in diffbayes.filters._virtual_sensor_kalman_filter_mixin)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase._predict_step">_predict_step() (diffbayes.base._kalman_filter_base.KalmanFilterBase method)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/base/index.html#diffbayes.base.KalmanFilterBase._predict_step">(diffbayes.base.KalmanFilterBase method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/_extended_kalman_filter/index.html#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter._predict_step">(diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/_square_root_unscented_kalman_filter/index.html#diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter._predict_step">(diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/_unscented_kalman_filter/index.html#diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter._predict_step">(diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.ExtendedKalmanFilter._predict_step">(diffbayes.filters.ExtendedKalmanFilter method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.SquareRootUnscentedKalmanFilter._predict_step">(diffbayes.filters.SquareRootUnscentedKalmanFilter method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.UnscentedKalmanFilter._predict_step">(diffbayes.filters.UnscentedKalmanFilter method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/train/_train_dynamics/index.html#diffbayes.train._train_dynamics._swap_batch_sequence_axes">_swap_batch_sequence_axes() (in module diffbayes.train._train_dynamics)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/train/_train_filter/index.html#diffbayes.train._train_filter._swap_batch_sequence_axes">(in module diffbayes.train._train_filter)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase._update_step">_update_step() (diffbayes.base._kalman_filter_base.KalmanFilterBase method)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/base/index.html#diffbayes.base.KalmanFilterBase._update_step">(diffbayes.base.KalmanFilterBase method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/_extended_kalman_filter/index.html#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter._update_step">(diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/_square_root_unscented_kalman_filter/index.html#diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter._update_step">(diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/_unscented_kalman_filter/index.html#diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter._update_step">(diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin._update_step">(diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_kalman_filter_mixin/index.html#diffbayes.filters._virtual_sensor_kalman_filter_mixin._VirtualSensorKalmanFilterMixin._update_step">(diffbayes.filters._virtual_sensor_kalman_filter_mixin._VirtualSensorKalmanFilterMixin method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.ExtendedKalmanFilter._update_step">(diffbayes.filters.ExtendedKalmanFilter method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.SquareRootUnscentedKalmanFilter._update_step">(diffbayes.filters.SquareRootUnscentedKalmanFilter method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.UnscentedKalmanFilter._update_step">(diffbayes.filters.UnscentedKalmanFilter method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/filters/_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin">_VirtualSensorKalmanFilterMixin (class in diffbayes.filters._virtual_sensor_filters)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_kalman_filter_mixin/index.html#diffbayes.filters._virtual_sensor_kalman_filter_mixin._VirtualSensorKalmanFilterMixin">(class in diffbayes.filters._virtual_sensor_kalman_filter_mixin)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/filters/_unscented_kalman_filter/index.html#diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter._weighted_covariance">_weighted_covariance() (diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter method)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.UnscentedKalmanFilter._weighted_covariance">(diffbayes.filters.UnscentedKalmanFilter method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/diffbayes/base/_dynamics_model/index.html#diffbayes.base._dynamics_model.DynamicsModel.add_noise">add_noise() (diffbayes.base._dynamics_model.DynamicsModel method)</a>
+      <li><a href="api/diffbayes/utils/_sigma_points/index.html#diffbayes.utils._sigma_points.MerweSigmaPointStrategy.alpha">alpha (diffbayes.utils._sigma_points.MerweSigmaPointStrategy attribute)</a>
 
       <ul>
-        <li><a href="api/diffbayes/base/index.html#diffbayes.base.DynamicsModel.add_noise">(diffbayes.base.DynamicsModel method)</a>
+        <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.MerweSigmaPointStrategy.alpha">(diffbayes.utils.MerweSigmaPointStrategy attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase.belief_covariance">belief_covariance() (diffbayes.base._kalman_filter_base.KalmanFilterBase property)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/base/index.html#diffbayes.base.KalmanFilterBase.belief_covariance">(diffbayes.base.KalmanFilterBase property)</a>
+</li>
+        <li><a href="api/diffbayes/filters/_square_root_unscented_kalman_filter/index.html#diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter.belief_covariance">(diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter property)</a>
+</li>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.SquareRootUnscentedKalmanFilter.belief_covariance">(diffbayes.filters.SquareRootUnscentedKalmanFilter property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase.belief_mean">belief_mean() (diffbayes.base._kalman_filter_base.KalmanFilterBase property)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/base/index.html#diffbayes.base.KalmanFilterBase.belief_mean">(diffbayes.base.KalmanFilterBase property)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/utils/_sigma_points/index.html#diffbayes.utils._sigma_points.MerweSigmaPointStrategy.beta">beta (diffbayes.utils._sigma_points.MerweSigmaPointStrategy attribute)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.MerweSigmaPointStrategy.beta">(diffbayes.utils.MerweSigmaPointStrategy attribute)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -215,20 +317,62 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/diffbayes/types/index.html#diffbayes.types.ControlsNumpy">ControlsNumpy (in module diffbayes.types)</a>
+      <li><a href="api/diffbayes/utils/_unscented_transform/index.html#diffbayes.utils._unscented_transform.UnscentedTransform.compute_distribution">compute_distribution() (diffbayes.utils._unscented_transform.UnscentedTransform method)</a>
 
       <ul>
-        <li><a href="api/diffbayes/types/_types/index.html#diffbayes.types._types.ControlsNumpy">(in module diffbayes.types._types)</a>
+        <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.UnscentedTransform.compute_distribution">(diffbayes.utils.UnscentedTransform method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/utils/_unscented_transform/index.html#diffbayes.utils._unscented_transform.UnscentedTransform.compute_distribution_square_root">compute_distribution_square_root() (diffbayes.utils._unscented_transform.UnscentedTransform method)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.UnscentedTransform.compute_distribution_square_root">(diffbayes.utils.UnscentedTransform method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/utils/_sigma_points/index.html#diffbayes.utils._sigma_points.JulierSigmaPointStrategy.compute_lambda">compute_lambda() (diffbayes.utils._sigma_points.JulierSigmaPointStrategy method)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/utils/_sigma_points/index.html#diffbayes.utils._sigma_points.MerweSigmaPointStrategy.compute_lambda">(diffbayes.utils._sigma_points.MerweSigmaPointStrategy method)</a>
+</li>
+        <li><a href="api/diffbayes/utils/_sigma_points/index.html#diffbayes.utils._sigma_points.SigmaPointStrategy.compute_lambda">(diffbayes.utils._sigma_points.SigmaPointStrategy method)</a>
+</li>
+        <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.JulierSigmaPointStrategy.compute_lambda">(diffbayes.utils.JulierSigmaPointStrategy method)</a>
+</li>
+        <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.MerweSigmaPointStrategy.compute_lambda">(diffbayes.utils.MerweSigmaPointStrategy method)</a>
+</li>
+        <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.SigmaPointStrategy.compute_lambda">(diffbayes.utils.SigmaPointStrategy method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/utils/_sigma_points/index.html#diffbayes.utils._sigma_points.JulierSigmaPointStrategy.compute_sigma_weights">compute_sigma_weights() (diffbayes.utils._sigma_points.JulierSigmaPointStrategy method)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/utils/_sigma_points/index.html#diffbayes.utils._sigma_points.MerweSigmaPointStrategy.compute_sigma_weights">(diffbayes.utils._sigma_points.MerweSigmaPointStrategy method)</a>
+</li>
+        <li><a href="api/diffbayes/utils/_sigma_points/index.html#diffbayes.utils._sigma_points.SigmaPointStrategy.compute_sigma_weights">(diffbayes.utils._sigma_points.SigmaPointStrategy method)</a>
+</li>
+        <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.JulierSigmaPointStrategy.compute_sigma_weights">(diffbayes.utils.JulierSigmaPointStrategy method)</a>
+</li>
+        <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.MerweSigmaPointStrategy.compute_sigma_weights">(diffbayes.utils.MerweSigmaPointStrategy method)</a>
+</li>
+        <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.SigmaPointStrategy.compute_sigma_weights">(diffbayes.utils.SigmaPointStrategy method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/diffbayes/types/index.html#diffbayes.types.ControlsTorch">ControlsTorch (in module diffbayes.types)</a>
+      <li><a href="api/diffbayes/types/index.html#diffbayes.types.Trajectory.controls">controls (diffbayes.types.Trajectory attribute)</a>
 
       <ul>
-        <li><a href="api/diffbayes/types/_types/index.html#diffbayes.types._types.ControlsTorch">(in module diffbayes.types._types)</a>
+        <li><a href="api/diffbayes/types/index.html#diffbayes.types.TrajectoryNumpy.controls">(diffbayes.types.TrajectoryNumpy attribute)</a>
+</li>
+        <li><a href="api/diffbayes/types/index.html#diffbayes.types.TrajectoryTorch.controls">(diffbayes.types.TrajectoryTorch attribute)</a>
 </li>
       </ul></li>
+      <li><a href="api/diffbayes/types/index.html#diffbayes.types.ControlsNumpy">ControlsNumpy (in module diffbayes.types)</a>
+</li>
+      <li><a href="api/diffbayes/types/index.html#diffbayes.types.ControlsTorch">ControlsTorch (in module diffbayes.types)</a>
+</li>
+      <li><a href="api/diffbayes/types/index.html#diffbayes.types.CovarianceTorch">CovarianceTorch (in module diffbayes.types)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -264,17 +408,31 @@
 </li>
       </ul></li>
       <li>
-    diffbayes.base._measurement_models
+    diffbayes.base._kalman_filter_base
 
       <ul>
-        <li><a href="api/diffbayes/base/_measurement_models/index.html#module-diffbayes.base._measurement_models">module</a>
+        <li><a href="api/diffbayes/base/_kalman_filter_base/index.html#module-diffbayes.base._kalman_filter_base">module</a>
 </li>
       </ul></li>
       <li>
-    diffbayes.base._particle_filter
+    diffbayes.base._kalman_filter_measurement_model
 
       <ul>
-        <li><a href="api/diffbayes/base/_particle_filter/index.html#module-diffbayes.base._particle_filter">module</a>
+        <li><a href="api/diffbayes/base/_kalman_filter_measurement_model/index.html#module-diffbayes.base._kalman_filter_measurement_model">module</a>
+</li>
+      </ul></li>
+      <li>
+    diffbayes.base._particle_filter_measurement_model
+
+      <ul>
+        <li><a href="api/diffbayes/base/_particle_filter_measurement_model/index.html#module-diffbayes.base._particle_filter_measurement_model">module</a>
+</li>
+      </ul></li>
+      <li>
+    diffbayes.base._virtual_sensor_model
+
+      <ul>
+        <li><a href="api/diffbayes/base/_virtual_sensor_model/index.html#module-diffbayes.base._virtual_sensor_model">module</a>
 </li>
       </ul></li>
       <li>
@@ -305,13 +463,62 @@
         <li><a href="api/diffbayes/data/_split_trajectories/index.html#module-diffbayes.data._split_trajectories">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     diffbayes.data._subsequence_dataset
 
       <ul>
         <li><a href="api/diffbayes/data/_subsequence_dataset/index.html#module-diffbayes.data._subsequence_dataset">module</a>
+</li>
+      </ul></li>
+      <li>
+    diffbayes.filters
+
+      <ul>
+        <li><a href="api/diffbayes/filters/index.html#module-diffbayes.filters">module</a>
+</li>
+      </ul></li>
+      <li>
+    diffbayes.filters._extended_kalman_filter
+
+      <ul>
+        <li><a href="api/diffbayes/filters/_extended_kalman_filter/index.html#module-diffbayes.filters._extended_kalman_filter">module</a>
+</li>
+      </ul></li>
+      <li>
+    diffbayes.filters._particle_filter
+
+      <ul>
+        <li><a href="api/diffbayes/filters/_particle_filter/index.html#module-diffbayes.filters._particle_filter">module</a>
+</li>
+      </ul></li>
+      <li>
+    diffbayes.filters._square_root_unscented_kalman_filter
+
+      <ul>
+        <li><a href="api/diffbayes/filters/_square_root_unscented_kalman_filter/index.html#module-diffbayes.filters._square_root_unscented_kalman_filter">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    diffbayes.filters._unscented_kalman_filter
+
+      <ul>
+        <li><a href="api/diffbayes/filters/_unscented_kalman_filter/index.html#module-diffbayes.filters._unscented_kalman_filter">module</a>
+</li>
+      </ul></li>
+      <li>
+    diffbayes.filters._virtual_sensor_filters
+
+      <ul>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_filters/index.html#module-diffbayes.filters._virtual_sensor_filters">module</a>
+</li>
+      </ul></li>
+      <li>
+    diffbayes.filters._virtual_sensor_kalman_filter_mixin
+
+      <ul>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_kalman_filter_mixin/index.html#module-diffbayes.filters._virtual_sensor_kalman_filter_mixin">module</a>
 </li>
       </ul></li>
       <li>
@@ -336,10 +543,24 @@
 </li>
       </ul></li>
       <li>
-    diffbayes.train._train_particle_filter_measurement_model
+    diffbayes.train._train_kalman_filter_measurement
 
       <ul>
-        <li><a href="api/diffbayes/train/_train_particle_filter_measurement_model/index.html#module-diffbayes.train._train_particle_filter_measurement_model">module</a>
+        <li><a href="api/diffbayes/train/_train_kalman_filter_measurement/index.html#module-diffbayes.train._train_kalman_filter_measurement">module</a>
+</li>
+      </ul></li>
+      <li>
+    diffbayes.train._train_particle_filter_measurement
+
+      <ul>
+        <li><a href="api/diffbayes/train/_train_particle_filter_measurement/index.html#module-diffbayes.train._train_particle_filter_measurement">module</a>
+</li>
+      </ul></li>
+      <li>
+    diffbayes.train._train_virtual_sensor
+
+      <ul>
+        <li><a href="api/diffbayes/train/_train_virtual_sensor/index.html#module-diffbayes.train._train_virtual_sensor">module</a>
 </li>
       </ul></li>
       <li>
@@ -350,16 +571,34 @@
 </li>
       </ul></li>
       <li>
-    diffbayes.types._types
+    diffbayes.utils
 
       <ul>
-        <li><a href="api/diffbayes/types/_types/index.html#module-diffbayes.types._types">module</a>
+        <li><a href="api/diffbayes/utils/index.html#module-diffbayes.utils">module</a>
 </li>
       </ul></li>
-      <li><a href="api/diffbayes/base/_particle_filter/index.html#diffbayes.base._particle_filter.ParticleFilter.dynamics_model">dynamics_model (diffbayes.base._particle_filter.ParticleFilter attribute)</a>
+      <li>
+    diffbayes.utils._sigma_points
 
       <ul>
-        <li><a href="api/diffbayes/base/index.html#diffbayes.base.ParticleFilter.dynamics_model">(diffbayes.base.ParticleFilter attribute)</a>
+        <li><a href="api/diffbayes/utils/_sigma_points/index.html#module-diffbayes.utils._sigma_points">module</a>
+</li>
+      </ul></li>
+      <li>
+    diffbayes.utils._unscented_transform
+
+      <ul>
+        <li><a href="api/diffbayes/utils/_unscented_transform/index.html#module-diffbayes.utils._unscented_transform">module</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase.dynamics_model">dynamics_model (diffbayes.base._kalman_filter_base.KalmanFilterBase attribute)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/base/index.html#diffbayes.base.KalmanFilterBase.dynamics_model">(diffbayes.base.KalmanFilterBase attribute)</a>
+</li>
+        <li><a href="api/diffbayes/filters/_particle_filter/index.html#diffbayes.filters._particle_filter.ParticleFilter.dynamics_model">(diffbayes.filters._particle_filter.ParticleFilter attribute)</a>
+</li>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.ParticleFilter.dynamics_model">(diffbayes.filters.ParticleFilter attribute)</a>
 </li>
       </ul></li>
       <li><a href="api/diffbayes/base/index.html#diffbayes.base.DynamicsModel">DynamicsModel (class in diffbayes.base)</a>
@@ -374,10 +613,18 @@
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/diffbayes/base/_particle_filter/index.html#diffbayes.base._particle_filter.ParticleFilter.estimation_method">estimation_method (diffbayes.base._particle_filter.ParticleFilter attribute)</a>
+      <li><a href="api/diffbayes/filters/_particle_filter/index.html#diffbayes.filters._particle_filter.ParticleFilter.estimation_method">estimation_method (diffbayes.filters._particle_filter.ParticleFilter attribute)</a>
 
       <ul>
-        <li><a href="api/diffbayes/base/index.html#diffbayes.base.ParticleFilter.estimation_method">(diffbayes.base.ParticleFilter attribute)</a>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.ParticleFilter.estimation_method">(diffbayes.filters.ParticleFilter attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.ExtendedKalmanFilter">ExtendedKalmanFilter (class in diffbayes.filters)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/filters/_extended_kalman_filter/index.html#diffbayes.filters._extended_kalman_filter.ExtendedKalmanFilter">(class in diffbayes.filters._extended_kalman_filter)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -397,17 +644,37 @@
       <ul>
         <li><a href="api/diffbayes/base/_filter/index.html#diffbayes.base._filter.Filter.forward">(diffbayes.base._filter.Filter method)</a>
 </li>
-        <li><a href="api/diffbayes/base/_measurement_models/index.html#diffbayes.base._measurement_models.ParticleFilterMeasurementModel.forward">(diffbayes.base._measurement_models.ParticleFilterMeasurementModel method)</a>
+        <li><a href="api/diffbayes/base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase.forward">(diffbayes.base._kalman_filter_base.KalmanFilterBase method)</a>
 </li>
-        <li><a href="api/diffbayes/base/_particle_filter/index.html#diffbayes.base._particle_filter.ParticleFilter.forward">(diffbayes.base._particle_filter.ParticleFilter method)</a>
+        <li><a href="api/diffbayes/base/_kalman_filter_measurement_model/index.html#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel.forward">(diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel method)</a>
+</li>
+        <li><a href="api/diffbayes/base/_particle_filter_measurement_model/index.html#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel.forward">(diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel method)</a>
+</li>
+        <li><a href="api/diffbayes/base/_particle_filter_measurement_model/index.html#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper.forward">(diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper method)</a>
+</li>
+        <li><a href="api/diffbayes/base/_virtual_sensor_model/index.html#diffbayes.base._virtual_sensor_model.VirtualSensorModel.forward">(diffbayes.base._virtual_sensor_model.VirtualSensorModel method)</a>
 </li>
         <li><a href="api/diffbayes/base/index.html#diffbayes.base.DynamicsModel.forward">(diffbayes.base.DynamicsModel method)</a>
 </li>
         <li><a href="api/diffbayes/base/index.html#diffbayes.base.Filter.forward">(diffbayes.base.Filter method)</a>
 </li>
-        <li><a href="api/diffbayes/base/index.html#diffbayes.base.ParticleFilter.forward">(diffbayes.base.ParticleFilter method)</a>
+        <li><a href="api/diffbayes/base/index.html#diffbayes.base.KalmanFilterBase.forward">(diffbayes.base.KalmanFilterBase method)</a>
+</li>
+        <li><a href="api/diffbayes/base/index.html#diffbayes.base.KalmanFilterMeasurementModel.forward">(diffbayes.base.KalmanFilterMeasurementModel method)</a>
 </li>
         <li><a href="api/diffbayes/base/index.html#diffbayes.base.ParticleFilterMeasurementModel.forward">(diffbayes.base.ParticleFilterMeasurementModel method)</a>
+</li>
+        <li><a href="api/diffbayes/base/index.html#diffbayes.base.ParticleFilterMeasurementModelWrapper.forward">(diffbayes.base.ParticleFilterMeasurementModelWrapper method)</a>
+</li>
+        <li><a href="api/diffbayes/base/index.html#diffbayes.base.VirtualSensorModel.forward">(diffbayes.base.VirtualSensorModel method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/_particle_filter/index.html#diffbayes.filters._particle_filter.ParticleFilter.forward">(diffbayes.filters._particle_filter.ParticleFilter method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters._IdentityMeasurementModel.forward">(diffbayes.filters._virtual_sensor_filters._IdentityMeasurementModel method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_kalman_filter_mixin/index.html#diffbayes.filters._virtual_sensor_kalman_filter_mixin._IdentityMeasurementModel.forward">(diffbayes.filters._virtual_sensor_kalman_filter_mixin._IdentityMeasurementModel method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.ParticleFilter.forward">(diffbayes.filters.ParticleFilter method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -431,11 +698,81 @@
       <li><a href="api/diffbayes/base/_filter/index.html#diffbayes.base._filter.Filter.initialize_beliefs">initialize_beliefs() (diffbayes.base._filter.Filter method)</a>
 
       <ul>
-        <li><a href="api/diffbayes/base/_particle_filter/index.html#diffbayes.base._particle_filter.ParticleFilter.initialize_beliefs">(diffbayes.base._particle_filter.ParticleFilter method)</a>
+        <li><a href="api/diffbayes/base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase.initialize_beliefs">(diffbayes.base._kalman_filter_base.KalmanFilterBase method)</a>
 </li>
         <li><a href="api/diffbayes/base/index.html#diffbayes.base.Filter.initialize_beliefs">(diffbayes.base.Filter method)</a>
 </li>
-        <li><a href="api/diffbayes/base/index.html#diffbayes.base.ParticleFilter.initialize_beliefs">(diffbayes.base.ParticleFilter method)</a>
+        <li><a href="api/diffbayes/base/index.html#diffbayes.base.KalmanFilterBase.initialize_beliefs">(diffbayes.base.KalmanFilterBase method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/_particle_filter/index.html#diffbayes.filters._particle_filter.ParticleFilter.initialize_beliefs">(diffbayes.filters._particle_filter.ParticleFilter method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.ParticleFilter.initialize_beliefs">(diffbayes.filters.ParticleFilter method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="J">J</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/base/_dynamics_model/index.html#diffbayes.base._dynamics_model.DynamicsModel.jacobian">jacobian() (diffbayes.base._dynamics_model.DynamicsModel method)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/base/_kalman_filter_measurement_model/index.html#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel.jacobian">(diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel method)</a>
+</li>
+        <li><a href="api/diffbayes/base/index.html#diffbayes.base.DynamicsModel.jacobian">(diffbayes.base.DynamicsModel method)</a>
+</li>
+        <li><a href="api/diffbayes/base/index.html#diffbayes.base.KalmanFilterMeasurementModel.jacobian">(diffbayes.base.KalmanFilterMeasurementModel method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters._IdentityMeasurementModel.jacobian">(diffbayes.filters._virtual_sensor_filters._IdentityMeasurementModel method)</a>
+</li>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_kalman_filter_mixin/index.html#diffbayes.filters._virtual_sensor_kalman_filter_mixin._IdentityMeasurementModel.jacobian">(diffbayes.filters._virtual_sensor_kalman_filter_mixin._IdentityMeasurementModel method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.JulierSigmaPointStrategy">JulierSigmaPointStrategy (class in diffbayes.utils)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/utils/_sigma_points/index.html#diffbayes.utils._sigma_points.JulierSigmaPointStrategy">(class in diffbayes.utils._sigma_points)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="K">K</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/base/index.html#diffbayes.base.KalmanFilterBase">KalmanFilterBase (class in diffbayes.base)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase">(class in diffbayes.base._kalman_filter_base)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/base/index.html#diffbayes.base.KalmanFilterMeasurementModel">KalmanFilterMeasurementModel (class in diffbayes.base)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/base/_kalman_filter_measurement_model/index.html#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel">(class in diffbayes.base._kalman_filter_measurement_model)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/utils/_sigma_points/index.html#diffbayes.utils._sigma_points.MerweSigmaPointStrategy.kappa">kappa (diffbayes.utils._sigma_points.MerweSigmaPointStrategy attribute)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.MerweSigmaPointStrategy.kappa">(diffbayes.utils.MerweSigmaPointStrategy attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/utils/_sigma_points/index.html#diffbayes.utils._sigma_points.JulierSigmaPointStrategy.lambd">lambd (diffbayes.utils._sigma_points.JulierSigmaPointStrategy attribute)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.JulierSigmaPointStrategy.lambd">(diffbayes.utils.JulierSigmaPointStrategy attribute)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -444,10 +781,20 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/diffbayes/base/_particle_filter/index.html#diffbayes.base._particle_filter.ParticleFilter.measurement_model">measurement_model (diffbayes.base._particle_filter.ParticleFilter attribute)</a>
+      <li><a href="api/diffbayes/base/_kalman_filter_base/index.html#diffbayes.base._kalman_filter_base.KalmanFilterBase.measurement_model">measurement_model (diffbayes.base._kalman_filter_base.KalmanFilterBase attribute)</a>
 
       <ul>
-        <li><a href="api/diffbayes/base/index.html#diffbayes.base.ParticleFilter.measurement_model">(diffbayes.base.ParticleFilter attribute)</a>
+        <li><a href="api/diffbayes/base/index.html#diffbayes.base.KalmanFilterBase.measurement_model">(diffbayes.base.KalmanFilterBase attribute)</a>
+</li>
+        <li><a href="api/diffbayes/filters/_particle_filter/index.html#diffbayes.filters._particle_filter.ParticleFilter.measurement_model">(diffbayes.filters._particle_filter.ParticleFilter attribute)</a>
+</li>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.ParticleFilter.measurement_model">(diffbayes.filters.ParticleFilter attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.MerweSigmaPointStrategy">MerweSigmaPointStrategy (class in diffbayes.utils)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/utils/_sigma_points/index.html#diffbayes.utils._sigma_points.MerweSigmaPointStrategy">(class in diffbayes.utils._sigma_points)</a>
 </li>
       </ul></li>
       <li>
@@ -462,9 +809,13 @@
 </li>
         <li><a href="api/diffbayes/base/_filter/index.html#module-diffbayes.base._filter">diffbayes.base._filter</a>
 </li>
-        <li><a href="api/diffbayes/base/_measurement_models/index.html#module-diffbayes.base._measurement_models">diffbayes.base._measurement_models</a>
+        <li><a href="api/diffbayes/base/_kalman_filter_base/index.html#module-diffbayes.base._kalman_filter_base">diffbayes.base._kalman_filter_base</a>
 </li>
-        <li><a href="api/diffbayes/base/_particle_filter/index.html#module-diffbayes.base._particle_filter">diffbayes.base._particle_filter</a>
+        <li><a href="api/diffbayes/base/_kalman_filter_measurement_model/index.html#module-diffbayes.base._kalman_filter_measurement_model">diffbayes.base._kalman_filter_measurement_model</a>
+</li>
+        <li><a href="api/diffbayes/base/_particle_filter_measurement_model/index.html#module-diffbayes.base._particle_filter_measurement_model">diffbayes.base._particle_filter_measurement_model</a>
+</li>
+        <li><a href="api/diffbayes/base/_virtual_sensor_model/index.html#module-diffbayes.base._virtual_sensor_model">diffbayes.base._virtual_sensor_model</a>
 </li>
         <li><a href="api/diffbayes/data/index.html#module-diffbayes.data">diffbayes.data</a>
 </li>
@@ -476,17 +827,39 @@
 </li>
         <li><a href="api/diffbayes/data/_subsequence_dataset/index.html#module-diffbayes.data._subsequence_dataset">diffbayes.data._subsequence_dataset</a>
 </li>
+        <li><a href="api/diffbayes/filters/index.html#module-diffbayes.filters">diffbayes.filters</a>
+</li>
+        <li><a href="api/diffbayes/filters/_extended_kalman_filter/index.html#module-diffbayes.filters._extended_kalman_filter">diffbayes.filters._extended_kalman_filter</a>
+</li>
+        <li><a href="api/diffbayes/filters/_particle_filter/index.html#module-diffbayes.filters._particle_filter">diffbayes.filters._particle_filter</a>
+</li>
+        <li><a href="api/diffbayes/filters/_square_root_unscented_kalman_filter/index.html#module-diffbayes.filters._square_root_unscented_kalman_filter">diffbayes.filters._square_root_unscented_kalman_filter</a>
+</li>
+        <li><a href="api/diffbayes/filters/_unscented_kalman_filter/index.html#module-diffbayes.filters._unscented_kalman_filter">diffbayes.filters._unscented_kalman_filter</a>
+</li>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_filters/index.html#module-diffbayes.filters._virtual_sensor_filters">diffbayes.filters._virtual_sensor_filters</a>
+</li>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_kalman_filter_mixin/index.html#module-diffbayes.filters._virtual_sensor_kalman_filter_mixin">diffbayes.filters._virtual_sensor_kalman_filter_mixin</a>
+</li>
         <li><a href="api/diffbayes/train/index.html#module-diffbayes.train">diffbayes.train</a>
 </li>
         <li><a href="api/diffbayes/train/_train_dynamics/index.html#module-diffbayes.train._train_dynamics">diffbayes.train._train_dynamics</a>
 </li>
         <li><a href="api/diffbayes/train/_train_filter/index.html#module-diffbayes.train._train_filter">diffbayes.train._train_filter</a>
 </li>
-        <li><a href="api/diffbayes/train/_train_particle_filter_measurement_model/index.html#module-diffbayes.train._train_particle_filter_measurement_model">diffbayes.train._train_particle_filter_measurement_model</a>
+        <li><a href="api/diffbayes/train/_train_kalman_filter_measurement/index.html#module-diffbayes.train._train_kalman_filter_measurement">diffbayes.train._train_kalman_filter_measurement</a>
+</li>
+        <li><a href="api/diffbayes/train/_train_particle_filter_measurement/index.html#module-diffbayes.train._train_particle_filter_measurement">diffbayes.train._train_particle_filter_measurement</a>
+</li>
+        <li><a href="api/diffbayes/train/_train_virtual_sensor/index.html#module-diffbayes.train._train_virtual_sensor">diffbayes.train._train_virtual_sensor</a>
 </li>
         <li><a href="api/diffbayes/types/index.html#module-diffbayes.types">diffbayes.types</a>
 </li>
-        <li><a href="api/diffbayes/types/_types/index.html#module-diffbayes.types._types">diffbayes.types._types</a>
+        <li><a href="api/diffbayes/utils/index.html#module-diffbayes.utils">diffbayes.utils</a>
+</li>
+        <li><a href="api/diffbayes/utils/_sigma_points/index.html#module-diffbayes.utils._sigma_points">diffbayes.utils._sigma_points</a>
+</li>
+        <li><a href="api/diffbayes/utils/_unscented_transform/index.html#module-diffbayes.utils._unscented_transform">diffbayes.utils._unscented_transform</a>
 </li>
       </ul></li>
   </ul></td>
@@ -495,68 +868,70 @@
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/diffbayes/base/_particle_filter/index.html#diffbayes.base._particle_filter.ParticleFilter.num_particles">num_particles (diffbayes.base._particle_filter.ParticleFilter attribute)</a>
+      <li><a href="api/diffbayes/filters/_particle_filter/index.html#diffbayes.filters._particle_filter.ParticleFilter.num_particles">num_particles (diffbayes.filters._particle_filter.ParticleFilter attribute)</a>
 
       <ul>
-        <li><a href="api/diffbayes/base/index.html#diffbayes.base.ParticleFilter.num_particles">(diffbayes.base.ParticleFilter attribute)</a>
-</li>
-      </ul></li>
-      <li><a href="api/diffbayes/types/index.html#diffbayes.types.NumpyArrayOrDict">NumpyArrayOrDict (in module diffbayes.types)</a>
-
-      <ul>
-        <li><a href="api/diffbayes/types/_types/index.html#diffbayes.types._types.NumpyArrayOrDict">(in module diffbayes.types._types)</a>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.ParticleFilter.num_particles">(diffbayes.filters.ParticleFilter attribute)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/diffbayes/types/index.html#diffbayes.types.NumpyDict">NumpyDict (in module diffbayes.types)</a>
-
-      <ul>
-        <li><a href="api/diffbayes/types/_types/index.html#diffbayes.types._types.NumpyDict">(in module diffbayes.types._types)</a>
+      <li><a href="api/diffbayes/types/index.html#diffbayes.types.NumpyArrayOrDict">NumpyArrayOrDict (in module diffbayes.types)</a>
 </li>
-      </ul></li>
+      <li><a href="api/diffbayes/types/index.html#diffbayes.types.NumpyDict">NumpyDict (in module diffbayes.types)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/diffbayes/types/index.html#diffbayes.types.ObservationsNumpy">ObservationsNumpy (in module diffbayes.types)</a>
+      <li><a href="api/diffbayes/base/_kalman_filter_measurement_model/index.html#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel.observation_dim">observation_dim (diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel attribute)</a>
 
       <ul>
-        <li><a href="api/diffbayes/types/_types/index.html#diffbayes.types._types.ObservationsNumpy">(in module diffbayes.types._types)</a>
+        <li><a href="api/diffbayes/base/index.html#diffbayes.base.KalmanFilterMeasurementModel.observation_dim">(diffbayes.base.KalmanFilterMeasurementModel attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/types/index.html#diffbayes.types.Trajectory.observations">observations (diffbayes.types.Trajectory attribute)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/types/index.html#diffbayes.types.TrajectoryNumpy.observations">(diffbayes.types.TrajectoryNumpy attribute)</a>
+</li>
+        <li><a href="api/diffbayes/types/index.html#diffbayes.types.TrajectoryTorch.observations">(diffbayes.types.TrajectoryTorch attribute)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/diffbayes/types/index.html#diffbayes.types.ObservationsTorch">ObservationsTorch (in module diffbayes.types)</a>
-
-      <ul>
-        <li><a href="api/diffbayes/types/_types/index.html#diffbayes.types._types.ObservationsTorch">(in module diffbayes.types._types)</a>
+      <li><a href="api/diffbayes/types/index.html#diffbayes.types.ObservationsNoDictNumpy">ObservationsNoDictNumpy (in module diffbayes.types)</a>
 </li>
-      </ul></li>
+      <li><a href="api/diffbayes/types/index.html#diffbayes.types.ObservationsNoDictTorch">ObservationsNoDictTorch (in module diffbayes.types)</a>
+</li>
+      <li><a href="api/diffbayes/types/index.html#diffbayes.types.ObservationsNumpy">ObservationsNumpy (in module diffbayes.types)</a>
+</li>
+      <li><a href="api/diffbayes/types/index.html#diffbayes.types.ObservationsTorch">ObservationsTorch (in module diffbayes.types)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/diffbayes/base/_particle_filter/index.html#diffbayes.base._particle_filter.ParticleFilter.particle_log_weights">particle_log_weights (diffbayes.base._particle_filter.ParticleFilter attribute)</a>
+      <li><a href="api/diffbayes/filters/_particle_filter/index.html#diffbayes.filters._particle_filter.ParticleFilter.particle_log_weights">particle_log_weights (diffbayes.filters._particle_filter.ParticleFilter attribute)</a>
 
       <ul>
-        <li><a href="api/diffbayes/base/index.html#diffbayes.base.ParticleFilter.particle_log_weights">(diffbayes.base.ParticleFilter attribute)</a>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.ParticleFilter.particle_log_weights">(diffbayes.filters.ParticleFilter attribute)</a>
 </li>
       </ul></li>
-      <li><a href="api/diffbayes/base/_particle_filter/index.html#diffbayes.base._particle_filter.ParticleFilter.particle_states">particle_states (diffbayes.base._particle_filter.ParticleFilter attribute)</a>
+      <li><a href="api/diffbayes/filters/_particle_filter/index.html#diffbayes.filters._particle_filter.ParticleFilter.particle_states">particle_states (diffbayes.filters._particle_filter.ParticleFilter attribute)</a>
 
       <ul>
-        <li><a href="api/diffbayes/base/index.html#diffbayes.base.ParticleFilter.particle_states">(diffbayes.base.ParticleFilter attribute)</a>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.ParticleFilter.particle_states">(diffbayes.filters.ParticleFilter attribute)</a>
 </li>
       </ul></li>
-      <li><a href="api/diffbayes/base/index.html#diffbayes.base.ParticleFilter">ParticleFilter (class in diffbayes.base)</a>
+      <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.ParticleFilter">ParticleFilter (class in diffbayes.filters)</a>
 
       <ul>
-        <li><a href="api/diffbayes/base/_particle_filter/index.html#diffbayes.base._particle_filter.ParticleFilter">(class in diffbayes.base._particle_filter)</a>
+        <li><a href="api/diffbayes/filters/_particle_filter/index.html#diffbayes.filters._particle_filter.ParticleFilter">(class in diffbayes.filters._particle_filter)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -570,19 +945,13 @@
       <li><a href="api/diffbayes/base/index.html#diffbayes.base.ParticleFilterMeasurementModel">ParticleFilterMeasurementModel (class in diffbayes.base)</a>
 
       <ul>
-        <li><a href="api/diffbayes/base/_measurement_models/index.html#diffbayes.base._measurement_models.ParticleFilterMeasurementModel">(class in diffbayes.base._measurement_models)</a>
+        <li><a href="api/diffbayes/base/_particle_filter_measurement_model/index.html#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel">(class in diffbayes.base._particle_filter_measurement_model)</a>
 </li>
       </ul></li>
-  </ul></td>
-</tr></table>
-
-<h2 id="Q">Q</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/diffbayes/base/_dynamics_model/index.html#diffbayes.base._dynamics_model.DynamicsModel.Q">Q (diffbayes.base._dynamics_model.DynamicsModel attribute)</a>
+      <li><a href="api/diffbayes/base/index.html#diffbayes.base.ParticleFilterMeasurementModelWrapper">ParticleFilterMeasurementModelWrapper (class in diffbayes.base)</a>
 
       <ul>
-        <li><a href="api/diffbayes/base/index.html#diffbayes.base.DynamicsModel.Q">(diffbayes.base.DynamicsModel attribute)</a>
+        <li><a href="api/diffbayes/base/_particle_filter_measurement_model/index.html#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper">(class in diffbayes.base._particle_filter_measurement_model)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -591,10 +960,10 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/diffbayes/base/_particle_filter/index.html#diffbayes.base._particle_filter.ParticleFilter.resample">resample (diffbayes.base._particle_filter.ParticleFilter attribute)</a>
+      <li><a href="api/diffbayes/filters/_particle_filter/index.html#diffbayes.filters._particle_filter.ParticleFilter.resample">resample (diffbayes.filters._particle_filter.ParticleFilter attribute)</a>
 
       <ul>
-        <li><a href="api/diffbayes/base/index.html#diffbayes.base.ParticleFilter.resample">(diffbayes.base.ParticleFilter attribute)</a>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.ParticleFilter.resample">(diffbayes.filters.ParticleFilter attribute)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -603,16 +972,42 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/filters/_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters._IdentityMeasurementModel.scale_tril">scale_tril (diffbayes.filters._virtual_sensor_filters._IdentityMeasurementModel attribute)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_kalman_filter_mixin/index.html#diffbayes.filters._virtual_sensor_kalman_filter_mixin._IdentityMeasurementModel.scale_tril">(diffbayes.filters._virtual_sensor_kalman_filter_mixin._IdentityMeasurementModel attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/types/index.html#diffbayes.types.ScaleTrilTorch">ScaleTrilTorch (in module diffbayes.types)</a>
+</li>
+      <li><a href="api/diffbayes/utils/_unscented_transform/index.html#diffbayes.utils._unscented_transform.UnscentedTransform.select_sigma_points">select_sigma_points() (diffbayes.utils._unscented_transform.UnscentedTransform method)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.UnscentedTransform.select_sigma_points">(diffbayes.utils.UnscentedTransform method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/utils/_unscented_transform/index.html#diffbayes.utils._unscented_transform.UnscentedTransform.select_sigma_points_square_root">select_sigma_points_square_root() (diffbayes.utils._unscented_transform.UnscentedTransform method)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.UnscentedTransform.select_sigma_points_square_root">(diffbayes.utils.UnscentedTransform method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.SigmaPointStrategy">SigmaPointStrategy (class in diffbayes.utils)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/utils/_sigma_points/index.html#diffbayes.utils._sigma_points.SigmaPointStrategy">(class in diffbayes.utils._sigma_points)</a>
+</li>
+      </ul></li>
       <li><a href="api/diffbayes/data/index.html#diffbayes.data.SingleStepDataset">SingleStepDataset (class in diffbayes.data)</a>
 
       <ul>
         <li><a href="api/diffbayes/data/_single_step_dataset/index.html#diffbayes.data._single_step_dataset.SingleStepDataset">(class in diffbayes.data._single_step_dataset)</a>
 </li>
       </ul></li>
-      <li><a href="api/diffbayes/base/_particle_filter/index.html#diffbayes.base._particle_filter.ParticleFilter.soft_resample_alpha">soft_resample_alpha (diffbayes.base._particle_filter.ParticleFilter attribute)</a>
+      <li><a href="api/diffbayes/filters/_particle_filter/index.html#diffbayes.filters._particle_filter.ParticleFilter.soft_resample_alpha">soft_resample_alpha (diffbayes.filters._particle_filter.ParticleFilter attribute)</a>
 
       <ul>
-        <li><a href="api/diffbayes/base/index.html#diffbayes.base.ParticleFilter.soft_resample_alpha">(diffbayes.base.ParticleFilter attribute)</a>
+        <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.ParticleFilter.soft_resample_alpha">(diffbayes.filters.ParticleFilter attribute)</a>
 </li>
       </ul></li>
       <li><a href="api/diffbayes/data/index.html#diffbayes.data.split_trajectories">split_trajectories() (in module diffbayes.data)</a>
@@ -621,34 +1016,48 @@
         <li><a href="api/diffbayes/data/_split_trajectories/index.html#diffbayes.data._split_trajectories.split_trajectories">(in module diffbayes.data._split_trajectories)</a>
 </li>
       </ul></li>
+      <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.SquareRootUnscentedKalmanFilter">SquareRootUnscentedKalmanFilter (class in diffbayes.filters)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/filters/_square_root_unscented_kalman_filter/index.html#diffbayes.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter">(class in diffbayes.filters._square_root_unscented_kalman_filter)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/diffbayes/base/_dynamics_model/index.html#diffbayes.base._dynamics_model.DynamicsModel.state_dim">state_dim (diffbayes.base._dynamics_model.DynamicsModel attribute)</a>
 
       <ul>
         <li><a href="api/diffbayes/base/_filter/index.html#diffbayes.base._filter.Filter.state_dim">(diffbayes.base._filter.Filter attribute)</a>
 </li>
-        <li><a href="api/diffbayes/base/_measurement_models/index.html#diffbayes.base._measurement_models.ParticleFilterMeasurementModel.state_dim">(diffbayes.base._measurement_models.ParticleFilterMeasurementModel attribute)</a>
+        <li><a href="api/diffbayes/base/_kalman_filter_measurement_model/index.html#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel.state_dim">(diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel attribute)</a>
+</li>
+        <li><a href="api/diffbayes/base/_particle_filter_measurement_model/index.html#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel.state_dim">(diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel attribute)</a>
+</li>
+        <li><a href="api/diffbayes/base/_virtual_sensor_model/index.html#diffbayes.base._virtual_sensor_model.VirtualSensorModel.state_dim">(diffbayes.base._virtual_sensor_model.VirtualSensorModel attribute)</a>
 </li>
         <li><a href="api/diffbayes/base/index.html#diffbayes.base.DynamicsModel.state_dim">(diffbayes.base.DynamicsModel attribute)</a>
 </li>
         <li><a href="api/diffbayes/base/index.html#diffbayes.base.Filter.state_dim">(diffbayes.base.Filter attribute)</a>
 </li>
+        <li><a href="api/diffbayes/base/index.html#diffbayes.base.KalmanFilterMeasurementModel.state_dim">(diffbayes.base.KalmanFilterMeasurementModel attribute)</a>
+</li>
         <li><a href="api/diffbayes/base/index.html#diffbayes.base.ParticleFilterMeasurementModel.state_dim">(diffbayes.base.ParticleFilterMeasurementModel attribute)</a>
 </li>
+        <li><a href="api/diffbayes/base/index.html#diffbayes.base.VirtualSensorModel.state_dim">(diffbayes.base.VirtualSensorModel attribute)</a>
+</li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/types/index.html#diffbayes.types.Trajectory.states">states (diffbayes.types.Trajectory attribute)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/types/index.html#diffbayes.types.TrajectoryNumpy.states">(diffbayes.types.TrajectoryNumpy attribute)</a>
+</li>
+        <li><a href="api/diffbayes/types/index.html#diffbayes.types.TrajectoryTorch.states">(diffbayes.types.TrajectoryTorch attribute)</a>
+</li>
+      </ul></li>
       <li><a href="api/diffbayes/types/index.html#diffbayes.types.StatesNumpy">StatesNumpy (in module diffbayes.types)</a>
-
-      <ul>
-        <li><a href="api/diffbayes/types/_types/index.html#diffbayes.types._types.StatesNumpy">(in module diffbayes.types._types)</a>
 </li>
-      </ul></li>
       <li><a href="api/diffbayes/types/index.html#diffbayes.types.StatesTorch">StatesTorch (in module diffbayes.types)</a>
-
-      <ul>
-        <li><a href="api/diffbayes/types/_types/index.html#diffbayes.types._types.StatesTorch">(in module diffbayes.types._types)</a>
 </li>
-      </ul></li>
       <li><a href="api/diffbayes/data/index.html#diffbayes.data.SubsequenceDataset">SubsequenceDataset (class in diffbayes.data)</a>
 
       <ul>
@@ -662,17 +1071,9 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/diffbayes/types/index.html#diffbayes.types.TorchDict">TorchDict (in module diffbayes.types)</a>
-
-      <ul>
-        <li><a href="api/diffbayes/types/_types/index.html#diffbayes.types._types.TorchDict">(in module diffbayes.types._types)</a>
 </li>
-      </ul></li>
       <li><a href="api/diffbayes/types/index.html#diffbayes.types.TorchTensorOrDict">TorchTensorOrDict (in module diffbayes.types)</a>
-
-      <ul>
-        <li><a href="api/diffbayes/types/_types/index.html#diffbayes.types._types.TorchTensorOrDict">(in module diffbayes.types._types)</a>
 </li>
-      </ul></li>
       <li><a href="api/diffbayes/train/index.html#diffbayes.train.train_dynamics_recurrent">train_dynamics_recurrent() (in module diffbayes.train)</a>
 
       <ul>
@@ -685,30 +1086,120 @@
         <li><a href="api/diffbayes/train/_train_dynamics/index.html#diffbayes.train._train_dynamics.train_dynamics_single_step">(in module diffbayes.train._train_dynamics)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/diffbayes/train/index.html#diffbayes.train.train_filter">train_filter() (in module diffbayes.train)</a>
 
       <ul>
         <li><a href="api/diffbayes/train/_train_filter/index.html#diffbayes.train._train_filter.train_filter">(in module diffbayes.train._train_filter)</a>
 </li>
       </ul></li>
-      <li><a href="api/diffbayes/train/index.html#diffbayes.train.train_particle_filter_measurement_model">train_particle_filter_measurement_model() (in module diffbayes.train)</a>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/train/index.html#diffbayes.train.train_kalman_filter_measurement">train_kalman_filter_measurement() (in module diffbayes.train)</a>
 
       <ul>
-        <li><a href="api/diffbayes/train/_train_particle_filter_measurement_model/index.html#diffbayes.train._train_particle_filter_measurement_model.train_particle_filter_measurement_model">(in module diffbayes.train._train_particle_filter_measurement_model)</a>
+        <li><a href="api/diffbayes/train/_train_kalman_filter_measurement/index.html#diffbayes.train._train_kalman_filter_measurement.train_kalman_filter_measurement">(in module diffbayes.train._train_kalman_filter_measurement)</a>
 </li>
       </ul></li>
-      <li><a href="api/diffbayes/types/index.html#diffbayes.types.TrajectoryTupleNumpy">TrajectoryTupleNumpy (in module diffbayes.types)</a>
+      <li><a href="api/diffbayes/train/index.html#diffbayes.train.train_particle_filter_measurement">train_particle_filter_measurement() (in module diffbayes.train)</a>
 
       <ul>
-        <li><a href="api/diffbayes/types/_types/index.html#diffbayes.types._types.TrajectoryTupleNumpy">(in module diffbayes.types._types)</a>
+        <li><a href="api/diffbayes/train/_train_particle_filter_measurement/index.html#diffbayes.train._train_particle_filter_measurement.train_particle_filter_measurement">(in module diffbayes.train._train_particle_filter_measurement)</a>
 </li>
       </ul></li>
-      <li><a href="api/diffbayes/types/index.html#diffbayes.types.TrajectoryTupleTorch">TrajectoryTupleTorch (in module diffbayes.types)</a>
+      <li><a href="api/diffbayes/train/index.html#diffbayes.train.train_virtual_sensor">train_virtual_sensor() (in module diffbayes.train)</a>
 
       <ul>
-        <li><a href="api/diffbayes/types/_types/index.html#diffbayes.types._types.TrajectoryTupleTorch">(in module diffbayes.types._types)</a>
+        <li><a href="api/diffbayes/train/_train_virtual_sensor/index.html#diffbayes.train._train_virtual_sensor.train_virtual_sensor">(in module diffbayes.train._train_virtual_sensor)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/types/index.html#diffbayes.types.Trajectory">Trajectory (class in diffbayes.types)</a>
+</li>
+      <li><a href="api/diffbayes/types/index.html#diffbayes.types.TrajectoryNumpy">TrajectoryNumpy (class in diffbayes.types)</a>
+</li>
+      <li><a href="api/diffbayes/types/index.html#diffbayes.types.TrajectoryTorch">TrajectoryTorch (class in diffbayes.types)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.UnscentedKalmanFilter">UnscentedKalmanFilter (class in diffbayes.filters)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/filters/_unscented_kalman_filter/index.html#diffbayes.filters._unscented_kalman_filter.UnscentedKalmanFilter">(class in diffbayes.filters._unscented_kalman_filter)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.UnscentedTransform">UnscentedTransform (class in diffbayes.utils)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/utils/_unscented_transform/index.html#diffbayes.utils._unscented_transform.UnscentedTransform">(class in diffbayes.utils._unscented_transform)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/filters/_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin.virtual_sensor_initialize_beliefs">virtual_sensor_initialize_beliefs() (diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin method)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_kalman_filter_mixin/index.html#diffbayes.filters._virtual_sensor_kalman_filter_mixin._VirtualSensorKalmanFilterMixin.virtual_sensor_initialize_beliefs">(diffbayes.filters._virtual_sensor_kalman_filter_mixin._VirtualSensorKalmanFilterMixin method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/filters/_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin.virtual_sensor_model">virtual_sensor_model (diffbayes.filters._virtual_sensor_filters._VirtualSensorKalmanFilterMixin attribute)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_kalman_filter_mixin/index.html#diffbayes.filters._virtual_sensor_kalman_filter_mixin._VirtualSensorKalmanFilterMixin.virtual_sensor_model">(diffbayes.filters._virtual_sensor_kalman_filter_mixin._VirtualSensorKalmanFilterMixin attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.VirtualSensorExtendedKalmanFilter">VirtualSensorExtendedKalmanFilter (class in diffbayes.filters)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter">(class in diffbayes.filters._virtual_sensor_filters)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/base/index.html#diffbayes.base.VirtualSensorModel">VirtualSensorModel (class in diffbayes.base)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/base/_virtual_sensor_model/index.html#diffbayes.base._virtual_sensor_model.VirtualSensorModel">(class in diffbayes.base._virtual_sensor_model)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.VirtualSensorSquareRootUnscentedKalmanFilter">VirtualSensorSquareRootUnscentedKalmanFilter (class in diffbayes.filters)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters.VirtualSensorSquareRootUnscentedKalmanFilter">(class in diffbayes.filters._virtual_sensor_filters)</a>
+</li>
+      </ul></li>
+      <li><a href="api/diffbayes/filters/index.html#diffbayes.filters.VirtualSensorUnscentedKalmanFilter">VirtualSensorUnscentedKalmanFilter (class in diffbayes.filters)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/filters/_virtual_sensor_filters/index.html#diffbayes.filters._virtual_sensor_filters.VirtualSensorUnscentedKalmanFilter">(class in diffbayes.filters._virtual_sensor_filters)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/utils/_unscented_transform/index.html#diffbayes.utils._unscented_transform.UnscentedTransform.weights_c">weights_c (diffbayes.utils._unscented_transform.UnscentedTransform attribute)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.UnscentedTransform.weights_c">(diffbayes.utils.UnscentedTransform attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/diffbayes/utils/_unscented_transform/index.html#diffbayes.utils._unscented_transform.UnscentedTransform.weights_m">weights_m (diffbayes.utils._unscented_transform.UnscentedTransform attribute)</a>
+
+      <ul>
+        <li><a href="api/diffbayes/utils/index.html#diffbayes.utils.UnscentedTransform.weights_m">(diffbayes.utils.UnscentedTransform attribute)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -726,11 +1217,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -741,7 +1240,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

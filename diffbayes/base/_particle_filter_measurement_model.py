@@ -1,3 +1,6 @@
+"""Private module; avoid importing from directly.
+"""
+
 import abc
 from typing import cast
 
@@ -35,6 +38,7 @@ class ParticleFilterMeasurementModel(abc.ABC, nn.Module):
                 Shape should be `(N, M, state_dim)`.
             observations (dict or torch.Tensor): Measurement inputs. Should be
                 either a dict of tensors or tensor of size `(N, ...)`.
+
         Returns:
             torch.Tensor: Log-likelihoods of each state, conditioned on a
             corresponding observation. Shape should be `(N, M)`.
@@ -47,7 +51,7 @@ class ParticleFilterMeasurementModelWrapper(ParticleFilterMeasurementModel):
     observations -> log-likelihoods) from a Kalman filter one (states -> observations).
 
     Args:
-        kalman_filter_measurement_model (KalmanFilterMeasurementModel): Kalman filter
+        kalman_filter_measurement_model (diffbayes.base.KalmanFilterMeasurementModel): Kalman filter
             measurement model instance to wrap.
     """
 
@@ -68,6 +72,7 @@ class ParticleFilterMeasurementModelWrapper(ParticleFilterMeasurementModel):
                 Shape should be `(N, M, state_dim)`.
             observations (torch.Tensor): Measurement inputs. Should be either a dict of
                 tensors or tensor of size `(N, ...)`.
+
         Returns:
             torch.Tensor: Log-likelihoods of each state, conditioned on a
             corresponding observation. Shape should be `(N, M)`.
