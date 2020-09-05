@@ -50,8 +50,8 @@ class ParticleFilter(Filter):
 
         self.soft_resample_alpha = soft_resample_alpha
         """float: Tunable constant for differentiable resampling, as described
-        by Jonschkowski et al. in "Differentiable Particle Filters: End-to-End
-        Learning with Algorithmic Priors": https://arxiv.org/abs/1805.11122.
+        by Karkus et al. in "Particle Filter Networks with Application to Visual
+        Localization": https://arxiv.org/abs/1805.08975
         Defaults to 1.0 (disabled)."""
 
         assert estimation_method in ("weighted_average", "argmax")
@@ -213,7 +213,7 @@ class ParticleFilter(Filter):
             states=self.particle_states, observations=observations,
         )
 
-        # Normalize particle weights
+        # Normalize particle weights to sum to 1.0
         self.particle_log_weights = self.particle_log_weights - torch.logsumexp(
             self.particle_log_weights, dim=1, keepdim=True
         )
@@ -235,9 +235,25 @@ class ParticleFilter(Filter):
 
         # Resampling
         if resample:
+            sample_logits: torch.Tensor
+            uniform_log_weights = self.particle_log_weights.new_full(
+                (N, self.num_particles), float(-np.log(M, dtype=np.float32))
+            )
             if self.soft_resample_alpha < 1.0:
-                # TODO: port this implementation over!
-                assert False, "Not yet ported"
+                # Soft resampling
+                assert self.particle_log_weights.shape == (N, M)
+                alpha = self.soft_resample_alpha
+                sample_logits = torch.logsumexp(
+                    torch.stack(
+                        [
+                            self.particle_log_weights + np.log(alpha),
+                            uniform_log_weights + np.log(1.0 - alpha),
+                        ],
+                        dim=0,
+                    ),
+                    dim=0,
+                )
+                self.particle_log_weights = self.particle_log_weights - sample_logits
             else:
                 # Standard particle filter re-sampling -- this stops gradients
                 # This is the most naive flavor of resampling, and not the low
@@ -245,22 +261,23 @@ class ParticleFilter(Filter):
                 #
                 # Note the distinction between M, the current # of particles,
                 # and self.num_particles, the desired # of particles
-                assert self.particle_log_weights.shape == (N, M)
-                distribution = torch.distributions.Categorical(
-                    logits=self.particle_log_weights
-                )
-                state_indices = distribution.sample((self.num_particles,)).T
-                assert state_indices.shape == (N, self.num_particles)
+                sample_logits = self.particle_log_weights
+                self.particle_log_weights = uniform_log_weights
 
-                new_states = torch.zeros_like(self.particle_states)
-                for i in range(N):
-                    # TODO: 90% sure this loop can be factored out
-                    new_states[i] = self.particle_states[i][state_indices[i]]
+            assert sample_logits.shape == (N, M)
+            distribution = torch.distributions.Categorical(logits=sample_logits)
+            state_indices = distribution.sample((self.num_particles,)).T
+            assert state_indices.shape == (N, self.num_particles)
 
-                # Uniform weights
-                self.particle_log_weights = self.particle_log_weights.new_full(
-                    (N, self.num_particles), float(-np.log(M, dtype=np.float32))
-                )
+            self.particle_states = torch.gather(
+                self.particle_states,
+                dim=1,
+                index=state_indices[:, :, None].repeat(1, 1, state_dim),
+            )
+            # # ^This gather magic is equivalent to:
+            # particle_states_alt = torch.zeros_like(self.particle_states)
+            # for i in range(N):
+            #     particle_states_alt[i] = self.particle_states[i][state_indices[i]]
 
         # Post-condition :)
         assert state_estimates.shape == (N, state_dim)

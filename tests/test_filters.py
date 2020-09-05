@@ -39,6 +39,20 @@ def test_particle_filter_resample(generated_data):
     )
 
 
+def test_particle_filter_soft_resample(generated_data):
+    """Smoke test for particle filter with soft-resampling.
+    """
+    _run_filter(
+        diffbayes.filters.ParticleFilter(
+            dynamics_model=LinearDynamicsModel(),
+            measurement_model=LinearParticleFilterMeasurementModel(),
+            resample=True,
+            soft_resample_alpha=0.5,
+        ),
+        generated_data,
+    )
+
+
 def test_ekf(generated_data):
     """Smoke test for EKF.
     """
