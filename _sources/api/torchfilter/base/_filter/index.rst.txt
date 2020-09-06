@@ -1,0 +1,99 @@
+:orphan:
+
+:mod:`torchfilter.base._filter`
+===============================
+
+.. py:module:: torchfilter.base._filter
+
+.. autoapi-nested-parse::
+
+   Private module; avoid importing from directly.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   torchfilter.base._filter.Filter
+
+
+
+.. py:class:: Filter(*, state_dim: int)
+
+   Bases: :class:`torch.nn.Module`, :class:`abc.ABC`
+
+   .. autoapi-inheritance-diagram:: torchfilter.base._filter.Filter
+      :parts: 1
+
+   Base class for a generic differentiable state estimator.
+
+   As a minimum, subclasses should override:
+
+
+   * ``initialize_beliefs`` for populating the initial belief of our estimator
+   * ``forward`` or ``forward_loop`` for computing state predictions
+
+   .. attribute:: state_dim
+      
+
+      Dimensionality of our state.
+
+      :type: int
+
+
+   .. method:: initialize_beliefs(self, *, mean: types.StatesTorch, covariance: types.CovarianceTorch) -> None
+      :abstractmethod:
+
+      Initialize our filter with a Gaussian prior.
+
+      :param mean: Mean of belief. Shape should be
+                   ``(N, state_dim)``.
+      :type mean: torch.Tensor
+      :param covariance: Covariance of belief. Shape should be
+                         ``(N, state_dim, state_dim)``.
+      :type covariance: torch.Tensor
+
+
+   .. method:: forward(self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch) -> types.StatesTorch
+
+      Filtering forward pass, over a single timestep.
+
+      By default, this is implemented by bootstrapping the ``forward_loop()``
+      method.
+
+      :param observations: Observation inputs. Should be
+                           either a dict of tensors or tensor of size ``(N, ...)``.
+      :type observations: dict or torch.Tensor
+      :param controls: Control inputs. Should be either a
+                       dict of tensors or tensor of size ``(N, ...)``.
+      :type controls: dict or torch.Tensor
+
+      :returns: *torch.Tensor* -- Predicted state for each batch element. Shape should
+                be ``(N, state_dim).``
+
+
+   .. method:: forward_loop(self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch) -> types.StatesTorch
+
+      Filtering forward pass, over sequence length ``T`` and batch size ``N``.
+      By default, this is implemented by iteratively calling ``forward()``.
+
+      To inject code between timesteps (for example, to inspect hidden state),
+      use ``register_forward_hook()``.
+
+      :param observations: observation inputs. should be
+                           either a dict of tensors or tensor of size ``(T, N, ...)``.
+      :type observations: dict or torch.Tensor
+      :param controls: control inputs. should be either a
+                       dict of tensors or tensor of size ``(T, N, ...)``.
+      :type controls: dict or torch.Tensor
+
+      :returns: *torch.Tensor* -- Predicted states at each timestep. Shape should be
+                ``(T, N, state_dim).``
+
+
+

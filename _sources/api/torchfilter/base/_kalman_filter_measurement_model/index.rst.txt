@@ -1,0 +1,75 @@
+:orphan:
+
+:mod:`torchfilter.base._kalman_filter_measurement_model`
+========================================================
+
+.. py:module:: torchfilter.base._kalman_filter_measurement_model
+
+.. autoapi-nested-parse::
+
+   Private module; avoid importing from directly.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   torchfilter.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel
+
+
+
+.. py:class:: KalmanFilterMeasurementModel(*, state_dim, observation_dim)
+
+   Bases: :class:`abc.ABC`, :class:`torch.nn.Module`
+
+   .. autoapi-inheritance-diagram:: torchfilter.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel
+      :parts: 1
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+   .. attribute:: state_dim
+      
+
+      State dimensionality.
+
+      :type: int
+
+
+   .. attribute:: observation_dim
+      
+
+      Observation dimensionality.
+
+      :type: int
+
+
+   .. method:: forward(self, *, states: types.StatesTorch) -> Tuple[types.ObservationsNoDictTorch, types.ScaleTrilTorch]
+      :abstractmethod:
+
+      Observation model forward pass, over batch size ``N``.
+
+      :param states: States to pass to our observation model.
+                     Shape should be ``(N, state_dim)``.
+      :type states: torch.Tensor
+
+      :returns: *Tuple[torch.Tensor, torch.Tensor]* -- tuple containing expected observations
+                and cholesky decomposition of covariance.  Shape should be ``(N, M)``.
+
+
+   .. method:: jacobian(self, *, states: types.StatesTorch) -> torch.Tensor
+
+      Returns Jacobian of the measurement model.
+
+      :param states: Current state, size ``(N, state_dim)``.
+      :type states: torch.Tensor
+
+      :returns: *torch.Tensor* -- Jacobian, size ``(N, observation_dim, state_dim)``
+
+
+

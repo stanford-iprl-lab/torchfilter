@@ -1,0 +1,516 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchfilter.utils &mdash; torchfilter  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex/" />
+    <link rel="search" title="Search" href="../../../search/" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../" class="icon icon-home" alt="Documentation Home"> torchfilter
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../">torchfilter</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.utils</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/api/torchfilter/utils/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-torchfilter.utils">
+<span id="torchfilter-utils"></span><h1><a class="reference internal" href="#module-torchfilter.utils" title="torchfilter.utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.utils</span></code></a><a class="headerlink" href="#module-torchfilter.utils" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#torchfilter.utils.JulierSigmaPointStrategy" title="torchfilter.utils.JulierSigmaPointStrategy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">JulierSigmaPointStrategy</span></code></a></p></td>
+<td><p>Sigma point selection in this style of [1].</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#torchfilter.utils.MerweSigmaPointStrategy" title="torchfilter.utils.MerweSigmaPointStrategy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MerweSigmaPointStrategy</span></code></a></p></td>
+<td><p>Sigma point selection in the style of [2].</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#torchfilter.utils.SigmaPointStrategy" title="torchfilter.utils.SigmaPointStrategy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SigmaPointStrategy</span></code></a></p></td>
+<td><p>Strategy to use for computing sigma weights + selecting sigma points.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#torchfilter.utils.UnscentedTransform" title="torchfilter.utils.UnscentedTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnscentedTransform</span></code></a></p></td>
+<td><p>Helper class for performing (batched, differentiable) unscented transforms.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt id="torchfilter.utils.JulierSigmaPointStrategy">
+<em class="property">class </em><code class="sig-prename descclassname">torchfilter.utils.</code><code class="sig-name descname">JulierSigmaPointStrategy</code><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#JulierSigmaPointStrategy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.JulierSigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#torchfilter.utils.SigmaPointStrategy" title="torchfilter.utils.SigmaPointStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.utils.SigmaPointStrategy</span></code></a></p>
+digraph inheritancecae6dbbfe6 {
+bgcolor=transparent;
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;ABC&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
+  &quot;JulierSigmaPointStrategy&quot; [URL=&quot;#torchfilter.utils.JulierSigmaPointStrategy&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Sigma point selection in this style of [1].&quot;];
+  &quot;SigmaPointStrategy&quot; -&gt; &quot;JulierSigmaPointStrategy&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;SigmaPointStrategy&quot; [URL=&quot;#torchfilter.utils.SigmaPointStrategy&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Strategy to use for computing sigma weights + selecting sigma points.&quot;];
+  &quot;ABC&quot; -&gt; &quot;SigmaPointStrategy&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+}
+<p>Sigma point selection in this style of [1].</p>
+<p>[1] <a class="reference external" href="https://www.cs.unc.edu/~welch/kalman/media/pdf/Julier1997_SPIE_KF.pdf">https://www.cs.unc.edu/~welch/kalman/media/pdf/Julier1997_SPIE_KF.pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><p><strong>lambd</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Spread parameter; sometimes denoted as kappa. If
+<code class="docutils literal notranslate"><span class="pre">None</span></code>, we use <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">-</span> <span class="pre">dim</span></code>.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="torchfilter.utils.JulierSigmaPointStrategy.lambd">
+<code class="sig-name descname">lambd</code><em class="property"> :Optional[float]</em><a class="headerlink" href="#torchfilter.utils.JulierSigmaPointStrategy.lambd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="torchfilter.utils.JulierSigmaPointStrategy.compute_lambda">
+<code class="sig-name descname">compute_lambda</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#JulierSigmaPointStrategy.compute_lambda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.JulierSigmaPointStrategy.compute_lambda" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute sigma point scaling parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dim</strong> (<em>int</em>) – Dimensionality of input vectors.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>float</em> – Lambda scaling parameter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="torchfilter.utils.JulierSigmaPointStrategy.compute_sigma_weights">
+<code class="sig-name descname">compute_sigma_weights</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>torch.Tensor<span class="p">]</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#JulierSigmaPointStrategy.compute_sigma_weights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.JulierSigmaPointStrategy.compute_sigma_weights" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper for computing sigma weights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dim</strong> (<em>int</em>) – Dimensionality of input vectors.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> – Covariance and mean weights. We expect 1D
+float32 tensors on the CPU.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="torchfilter.utils.MerweSigmaPointStrategy">
+<em class="property">class </em><code class="sig-prename descclassname">torchfilter.utils.</code><code class="sig-name descname">MerweSigmaPointStrategy</code><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#MerweSigmaPointStrategy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#torchfilter.utils.SigmaPointStrategy" title="torchfilter.utils.SigmaPointStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.utils.SigmaPointStrategy</span></code></a></p>
+digraph inheritance7d5c63e9f7 {
+bgcolor=transparent;
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;ABC&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
+  &quot;MerweSigmaPointStrategy&quot; [URL=&quot;#torchfilter.utils.MerweSigmaPointStrategy&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Sigma point selection in the style of [2].&quot;];
+  &quot;SigmaPointStrategy&quot; -&gt; &quot;MerweSigmaPointStrategy&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;SigmaPointStrategy&quot; [URL=&quot;#torchfilter.utils.SigmaPointStrategy&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Strategy to use for computing sigma weights + selecting sigma points.&quot;];
+  &quot;ABC&quot; -&gt; &quot;SigmaPointStrategy&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+}
+<p>Sigma point selection in the style of [2].</p>
+<p>[2] <a class="reference external" href="http://www.gatsby.ucl.ac.uk/~byron/nlds/merwe2003a.pdf">http://www.gatsby.ucl.ac.uk/~byron/nlds/merwe2003a.pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alpha</strong> (<em>float</em>) – Spread parameter. Defaults to <code class="docutils literal notranslate"><span class="pre">1e-2</span></code>.</p></li>
+<li><p><strong>kappa</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Secondary scaling parameter, which is typically set to
+<code class="docutils literal notranslate"><span class="pre">0.0</span></code> or <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">-</span> <span class="pre">dim</span></code>. If None, we use <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">-</span> <span class="pre">dim</span></code>.</p></li>
+<li><p><strong>beta</strong> (<em>float</em>) – Extra sigma parameter. Defaults to <code class="docutils literal notranslate"><span class="pre">2</span></code> (optimal for Gaussians, as
+per [1]).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="torchfilter.utils.MerweSigmaPointStrategy.alpha">
+<code class="sig-name descname">alpha</code><em class="property"> :float = 0.01</em><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy.alpha" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="torchfilter.utils.MerweSigmaPointStrategy.beta">
+<code class="sig-name descname">beta</code><em class="property"> :float = 2.0</em><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy.beta" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="torchfilter.utils.MerweSigmaPointStrategy.kappa">
+<code class="sig-name descname">kappa</code><em class="property"> :Optional[float]</em><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy.kappa" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="torchfilter.utils.MerweSigmaPointStrategy.compute_lambda">
+<code class="sig-name descname">compute_lambda</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#MerweSigmaPointStrategy.compute_lambda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy.compute_lambda" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute sigma point scaling parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dim</strong> (<em>int</em>) – Dimensionality of input vectors.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>float</em> – Lambda scaling parameter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="torchfilter.utils.MerweSigmaPointStrategy.compute_sigma_weights">
+<code class="sig-name descname">compute_sigma_weights</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>torch.Tensor<span class="p">]</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#MerweSigmaPointStrategy.compute_sigma_weights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy.compute_sigma_weights" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper for computing sigma weights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dim</strong> (<em>int</em>) – Dimensionality of input vectors.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> – Covariance and mean weights. We expect 1D
+float32 tensors on the CPU.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="torchfilter.utils.SigmaPointStrategy">
+<em class="property">class </em><code class="sig-prename descclassname">torchfilter.utils.</code><code class="sig-name descname">SigmaPointStrategy</code><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#SigmaPointStrategy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.SigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+digraph inheritancedba8aeb3d1 {
+bgcolor=transparent;
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;ABC&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
+  &quot;SigmaPointStrategy&quot; [URL=&quot;#torchfilter.utils.SigmaPointStrategy&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Strategy to use for computing sigma weights + selecting sigma points.&quot;];
+  &quot;ABC&quot; -&gt; &quot;SigmaPointStrategy&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+}
+<p>Strategy to use for computing sigma weights + selecting sigma points.</p>
+<dl class="py method">
+<dt id="torchfilter.utils.SigmaPointStrategy.compute_lambda">
+<em class="property">abstract </em><code class="sig-name descname">compute_lambda</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#SigmaPointStrategy.compute_lambda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.SigmaPointStrategy.compute_lambda" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute sigma point scaling parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dim</strong> (<em>int</em>) – Dimensionality of input vectors.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>float</em> – Lambda scaling parameter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="torchfilter.utils.SigmaPointStrategy.compute_sigma_weights">
+<em class="property">abstract </em><code class="sig-name descname">compute_sigma_weights</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>torch.Tensor<span class="p">]</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#SigmaPointStrategy.compute_sigma_weights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.SigmaPointStrategy.compute_sigma_weights" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper for computing sigma weights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dim</strong> (<em>int</em>) – Dimensionality of input vectors.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> – Covariance and mean weights. We expect 1D
+float32 tensors on the CPU.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="torchfilter.utils.UnscentedTransform">
+<em class="property">class </em><code class="sig-prename descclassname">torchfilter.utils.</code><code class="sig-name descname">UnscentedTransform</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">sigma_point_strategy</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#torchfilter.utils.SigmaPointStrategy" title="torchfilter.utils.SigmaPointStrategy">SigmaPointStrategy</a></span> <span class="o">=</span> <span class="default_value">JulierSigmaPointStrategy()</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.UnscentedTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper class for performing (batched, differentiable) unscented transforms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>int</em>) – Input dimension.</p></li>
+<li><p><strong>sigma_point_strategy</strong> (<a class="reference internal" href="#torchfilter.utils.SigmaPointStrategy" title="torchfilter.utils.SigmaPointStrategy"><em>torchfilter.utils.SigmaPointStrategy</em></a><em>, </em><em>optional</em>) – Strategy to
+use for sigma point selection. Defaults to Julier.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="torchfilter.utils.UnscentedTransform.weights_c">
+<code class="sig-name descname">weights_c</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.weights_c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unscented transform covariance weights. Note that this will be
+initially instantiated on the CPU, and moved in <code class="docutils literal notranslate"><span class="pre">compute_distribution()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="torchfilter.utils.UnscentedTransform.weights_m">
+<code class="sig-name descname">weights_m</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.weights_m" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unscented transform mean weights. Note that this will be
+initially instantiated on the CPU, and moved in <code class="docutils literal notranslate"><span class="pre">compute_distribution()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="torchfilter.utils.UnscentedTransform.select_sigma_points">
+<code class="sig-name descname">select_sigma_points</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">input_mean</span><span class="p">:</span> <span class="n">torch.Tensor</span></em>, <em class="sig-param"><span class="n">input_covariance</span><span class="p">:</span> <span class="n">types.CovarianceTorch</span></em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="reference internal" href="../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.select_sigma_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.select_sigma_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select sigma points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_mean</strong> (<em>torch.Tensor</em>) – Distribution mean. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">dim)</span></code>.</p></li>
+<li><p><strong>input_covariance</strong> (<em>torch.Tensor</em>) – Distribution covariance. Shape should be
+<code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">dim,</span> <span class="pre">dim)</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>torch.Tensor</em> – Selected sigma points, with shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">dim</span> <span class="pre">+</span> <span class="pre">1,</span> <span class="pre">dim)</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="torchfilter.utils.UnscentedTransform.select_sigma_points_square_root">
+<code class="sig-name descname">select_sigma_points_square_root</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">input_mean</span><span class="p">:</span> <span class="n">torch.Tensor</span></em>, <em class="sig-param"><span class="n">input_scale_tril</span><span class="p">:</span> <span class="n">types.ScaleTrilTorch</span></em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="reference internal" href="../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.select_sigma_points_square_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.select_sigma_points_square_root" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select sigma points using square root of covariance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_mean</strong> (<em>torch.Tensor</em>) – Distribution mean. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">dim)</span></code>.</p></li>
+<li><p><strong>input_scale_tril</strong> (<em>torch.Tensor</em>) – Cholesky decomposition of distribution
+covariance. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">dim,</span> <span class="pre">dim)</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>torch.Tensor</em> – Selected sigma points, with shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">dim</span> <span class="pre">+</span> <span class="pre">1,</span> <span class="pre">dim)</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="torchfilter.utils.UnscentedTransform.compute_distribution">
+<code class="sig-name descname">compute_distribution</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">sigma_points</span><span class="p">:</span> <span class="n">torch.Tensor</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>types.CovarianceTorch<span class="p">]</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.compute_distribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.compute_distribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate a distribution from selected sigma points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sigma_points</strong> (<em>torch.Tensor</em>) – Sigma points, with shape
+<code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">dim</span> <span class="pre">+</span> <span class="pre">1,</span> <span class="pre">dim)</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> – Mean and covariance, with shapes
+<code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">dim)</span></code> and <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">dim,</span> <span class="pre">dim)</span></code> respectively.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="torchfilter.utils.UnscentedTransform.compute_distribution_square_root">
+<code class="sig-name descname">compute_distribution_square_root</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">sigma_points</span><span class="p">:</span> <span class="n">torch.Tensor</span></em>, <em class="sig-param"><span class="n">additive_noise_scale_tril</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>types.ScaleTrilTorch<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>types.ScaleTrilTorch<span class="p">]</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.compute_distribution_square_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.compute_distribution_square_root" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate a distribution from selected sigma points; square root formulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sigma_points</strong> (<em>torch.Tensor</em>) – Sigma points, with shape
+<code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">dim</span> <span class="pre">+</span> <span class="pre">1,</span> <span class="pre">dim)</span></code>.</p></li>
+<li><p><strong>additive_noise_scale_tril</strong> (<em>torch.Tensor</em><em>, </em><em>optional</em>) – Parameterizes an
+additive Gaussian noise term. Should be lower-trinagular, with shape
+<code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">dim,</span> <span class="pre">dim)</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> – Mean and square root of covariance, with
+shapes <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">dim)</span></code> and <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">dim,</span> <span class="pre">dim)</span></code> respectively.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

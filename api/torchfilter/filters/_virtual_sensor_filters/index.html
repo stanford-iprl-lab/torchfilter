@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchfilter.filters._virtual_sensor_filters &mdash; torchfilter  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex/" />
+    <link rel="search" title="Search" href="../../../../search/" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../" class="icon icon-home" alt="Documentation Home"> torchfilter
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../">torchfilter</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.filters._virtual_sensor_filters</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/api/torchfilter/filters/_virtual_sensor_filters/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-torchfilter.filters._virtual_sensor_filters">
+<span id="torchfilter-filters-virtual-sensor-filters"></span><h1><a class="reference internal" href="#module-torchfilter.filters._virtual_sensor_filters" title="torchfilter.filters._virtual_sensor_filters"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.filters._virtual_sensor_filters</span></code></a><a class="headerlink" href="#module-torchfilter.filters._virtual_sensor_filters" title="Permalink to this headline">¶</a></h1>
+<p>Private module; avoid importing from directly.</p>
+<div class="section" id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter" title="torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VirtualSensorExtendedKalmanFilter</span></code></a></p></td>
+<td><p>EKF variant with a virtual sensor model for mapping raw observations to predicted</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#torchfilter.filters._virtual_sensor_filters.VirtualSensorUnscentedKalmanFilter" title="torchfilter.filters._virtual_sensor_filters.VirtualSensorUnscentedKalmanFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VirtualSensorUnscentedKalmanFilter</span></code></a></p></td>
+<td><p>UKF variant with a virtual sensor model for mapping raw observations to predicted</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#torchfilter.filters._virtual_sensor_filters.VirtualSensorSquareRootUnscentedKalmanFilter" title="torchfilter.filters._virtual_sensor_filters.VirtualSensorSquareRootUnscentedKalmanFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VirtualSensorSquareRootUnscentedKalmanFilter</span></code></a></p></td>
+<td><p>Square root UKF variant with a virtual sensor model for mapping raw observations</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt id="torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter">
+<em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters._virtual_sensor_filters.</code><code class="sig-name descname">VirtualSensorExtendedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">virtual_sensor_model</span><span class="p">:</span> <span class="n">VirtualSensorModel</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/filters/_virtual_sensor_filters/#VirtualSensorExtendedKalmanFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../#module-torchfilter.filters" title="torchfilter.filters"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.filters</span></code></a>, <a class="reference internal" href="../#torchfilter.filters.ExtendedKalmanFilter" title="torchfilter.filters.ExtendedKalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.filters.ExtendedKalmanFilter</span></code></a></p>
+digraph inheritanceca41492af3 {
+bgcolor=transparent;
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;ABC&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
+  &quot;ExtendedKalmanFilter&quot; [URL=&quot;../#torchfilter.filters.ExtendedKalmanFilter&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Generic differentiable EKF.&quot;];
+  &quot;KalmanFilterBase&quot; -&gt; &quot;ExtendedKalmanFilter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Filter&quot; [URL=&quot;../../base/#torchfilter.base.Filter&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Base class for a generic differentiable state estimator.&quot;];
+  &quot;Module&quot; -&gt; &quot;Filter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;ABC&quot; -&gt; &quot;Filter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;KalmanFilterBase&quot; [URL=&quot;../../base/#torchfilter.base.KalmanFilterBase&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Base class for a generic Kalman-style filter. Parameterizes beliefs with a mean&quot;];
+  &quot;Filter&quot; -&gt; &quot;KalmanFilterBase&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;ABC&quot; -&gt; &quot;KalmanFilterBase&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Module&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Base class for all neural network modules.&quot;];
+  &quot;VirtualSensorExtendedKalmanFilter&quot; [URL=&quot;../#torchfilter.filters.VirtualSensorExtendedKalmanFilter&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;EKF variant with a virtual sensor model for mapping raw observations to predicted&quot;];
+  &quot;ExtendedKalmanFilter&quot; -&gt; &quot;VirtualSensorExtendedKalmanFilter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+}
+<p>EKF variant with a virtual sensor model for mapping raw observations to predicted
+states.</p>
+<p>Assumes measurement model is identity.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="torchfilter.filters._virtual_sensor_filters.VirtualSensorUnscentedKalmanFilter">
+<em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters._virtual_sensor_filters.</code><code class="sig-name descname">VirtualSensorUnscentedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">virtual_sensor_model</span><span class="p">:</span> <span class="n">VirtualSensorModel</span></em>, <em class="sig-param"><span class="n">sigma_point_strategy</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>utils.SigmaPointStrategy<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/filters/_virtual_sensor_filters/#VirtualSensorUnscentedKalmanFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters._virtual_sensor_filters.VirtualSensorUnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../#module-torchfilter.filters" title="torchfilter.filters"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.filters</span></code></a>, <a class="reference internal" href="../#torchfilter.filters.UnscentedKalmanFilter" title="torchfilter.filters.UnscentedKalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.filters.UnscentedKalmanFilter</span></code></a></p>
+digraph inheritance0904bd8155 {
+bgcolor=transparent;
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;ABC&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
+  &quot;Filter&quot; [URL=&quot;../../base/#torchfilter.base.Filter&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Base class for a generic differentiable state estimator.&quot;];
+  &quot;Module&quot; -&gt; &quot;Filter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;ABC&quot; -&gt; &quot;Filter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;KalmanFilterBase&quot; [URL=&quot;../../base/#torchfilter.base.KalmanFilterBase&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Base class for a generic Kalman-style filter. Parameterizes beliefs with a mean&quot;];
+  &quot;Filter&quot; -&gt; &quot;KalmanFilterBase&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;ABC&quot; -&gt; &quot;KalmanFilterBase&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Module&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Base class for all neural network modules.&quot;];
+  &quot;UnscentedKalmanFilter&quot; [URL=&quot;../#torchfilter.filters.UnscentedKalmanFilter&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Standard UKF.&quot;];
+  &quot;KalmanFilterBase&quot; -&gt; &quot;UnscentedKalmanFilter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;VirtualSensorUnscentedKalmanFilter&quot; [URL=&quot;../#torchfilter.filters.VirtualSensorUnscentedKalmanFilter&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;UKF variant with a virtual sensor model for mapping raw observations to predicted&quot;];
+  &quot;UnscentedKalmanFilter&quot; -&gt; &quot;VirtualSensorUnscentedKalmanFilter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+}
+<p>UKF variant with a virtual sensor model for mapping raw observations to predicted
+states.</p>
+<p>Assumes measurement model is identity.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="torchfilter.filters._virtual_sensor_filters.VirtualSensorSquareRootUnscentedKalmanFilter">
+<em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters._virtual_sensor_filters.</code><code class="sig-name descname">VirtualSensorSquareRootUnscentedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">virtual_sensor_model</span><span class="p">:</span> <span class="n">VirtualSensorModel</span></em>, <em class="sig-param"><span class="n">sigma_point_strategy</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>utils.SigmaPointStrategy<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/filters/_virtual_sensor_filters/#VirtualSensorSquareRootUnscentedKalmanFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters._virtual_sensor_filters.VirtualSensorSquareRootUnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../#module-torchfilter.filters" title="torchfilter.filters"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.filters</span></code></a>, <a class="reference internal" href="../#torchfilter.filters.SquareRootUnscentedKalmanFilter" title="torchfilter.filters.SquareRootUnscentedKalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.filters.SquareRootUnscentedKalmanFilter</span></code></a></p>
+digraph inheritanceccf405039b {
+bgcolor=transparent;
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;ABC&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
+  &quot;Filter&quot; [URL=&quot;../../base/#torchfilter.base.Filter&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Base class for a generic differentiable state estimator.&quot;];
+  &quot;Module&quot; -&gt; &quot;Filter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;ABC&quot; -&gt; &quot;Filter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;KalmanFilterBase&quot; [URL=&quot;../../base/#torchfilter.base.KalmanFilterBase&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Base class for a generic Kalman-style filter. Parameterizes beliefs with a mean&quot;];
+  &quot;Filter&quot; -&gt; &quot;KalmanFilterBase&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;ABC&quot; -&gt; &quot;KalmanFilterBase&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Module&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Base class for all neural network modules.&quot;];
+  &quot;SquareRootUnscentedKalmanFilter&quot; [URL=&quot;../#torchfilter.filters.SquareRootUnscentedKalmanFilter&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Square-root formulation of UKF.&quot;];
+  &quot;KalmanFilterBase&quot; -&gt; &quot;SquareRootUnscentedKalmanFilter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;VirtualSensorSquareRootUnscentedKalmanFilter&quot; [URL=&quot;../#torchfilter.filters.VirtualSensorSquareRootUnscentedKalmanFilter&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Square root UKF variant with a virtual sensor model for mapping raw observations&quot;];
+  &quot;SquareRootUnscentedKalmanFilter&quot; -&gt; &quot;VirtualSensorSquareRootUnscentedKalmanFilter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+}
+<p>Square root UKF variant with a virtual sensor model for mapping raw observations
+to predicted states.</p>
+<p>Assumes measurement model is identity.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

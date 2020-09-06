@@ -1,0 +1,65 @@
+:orphan:
+
+:mod:`torchfilter.data._subsequence_dataset`
+============================================
+
+.. py:module:: torchfilter.data._subsequence_dataset
+
+.. autoapi-nested-parse::
+
+   Private module; avoid importing from directly.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   torchfilter.data._subsequence_dataset.SubsequenceDataset
+
+
+
+.. py:class:: SubsequenceDataset(trajectories: List[types.TrajectoryNumpy], subsequence_length: int)
+
+   Bases: :class:`torch.utils.data.Dataset`
+
+   .. autoapi-inheritance-diagram:: torchfilter.data._subsequence_dataset.SubsequenceDataset
+      :parts: 1
+
+   A data preprocessor for producing training subsequences from
+   a list of trajectories.
+
+   Thin wrapper around ``torchfilter.data.split_trajectories()``.
+
+   :param trajectories: list of trajectories, where each is a tuple of
+                        ``(states, observations, controls)``. Each tuple member should be
+                        either a numpy array or dict of numpy arrays with shape ``(T, ...)``.
+   :type trajectories: list
+   :param subsequence_length: # of timesteps per subsequence.
+   :type subsequence_length: int
+
+   .. method:: __getitem__(self, index: int) -> types.TrajectoryNumpy
+
+      Get a subsequence from our dataset.
+
+      :param index: Subsequence number in our dataset.
+      :type index: int
+
+      :returns: *tuple* -- ``(states, observations, controls)`` tuple that contains
+                data for a single subsequence. Each tuple member should be either a
+                numpy array or dict of numpy arrays with shape
+                ``(subsequence_length, ...)``.
+
+
+   .. method:: __len__(self) -> int
+
+      Total number of subsequences in the dataset.
+
+      :returns: *int* -- Length of dataset.
+
+
+

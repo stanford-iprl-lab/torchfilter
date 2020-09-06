@@ -1,0 +1,64 @@
+:orphan:
+
+:mod:`torchfilter.train._train_dynamics`
+========================================
+
+.. py:module:: torchfilter.train._train_dynamics
+
+.. autoapi-nested-parse::
+
+   Private module; avoid importing from directly.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   torchfilter.train._train_dynamics.train_dynamics_single_step
+   torchfilter.train._train_dynamics.train_dynamics_recurrent
+
+
+.. function:: train_dynamics_single_step(buddy: fannypack.utils.Buddy, dynamics_model: torchfilter.base.DynamicsModel, dataloader: DataLoader, *, loss_function: str = 'nll', log_interval: int = 10) -> None
+
+   Optimizes a dynamics model's single-step prediction accuracy. This is roughly
+   equivalent to training with ``train_dynamics_recurrent()`` with a subsequence length
+   of 2.
+
+   :param buddy: Training helper.
+   :type buddy: fannypack.utils.Buddy
+   :param dynamics_model: Model to train.
+   :type dynamics_model: torchfilter.base.DynamicsModel
+   :param dataloader: Loader for a SingleStepDataset.
+   :type dataloader: DataLoader
+
+   :keyword loss_function: Either "nll" for negative log-likelihood or "mse"
+                           for mean-squared error. Defaults to "nll".
+   :kwtype loss_function: str, optional
+   :keyword log_interval: Minibatches between each Tensorboard log.
+   :kwtype log_interval: int, optional
+
+
+.. function:: train_dynamics_recurrent(buddy: fannypack.utils.Buddy, dynamics_model: torchfilter.base.DynamicsModel, dataloader: DataLoader, *, loss_function: str = 'nll', log_interval: int = 10) -> None
+
+   Trains a dynamics model via backpropagation through time.
+
+   :param buddy: Training helper.
+   :type buddy: fannypack.utils.Buddy
+   :param dynamics_model: Model to train.
+   :type dynamics_model: torchfilter.base.DynamicsModel
+   :param dataloader: Loader for a SubsequenceDataset.
+   :type dataloader: DataLoader
+
+   :keyword loss_function: Either "nll" for negative log-likelihood or "mse"
+                           for mean-squared error. Defaults to "nll".
+   :kwtype loss_function: str, optional
+   :keyword log_interval: Minibatches between each Tensorboard log.
+   :kwtype log_interval: int, optional
+
+

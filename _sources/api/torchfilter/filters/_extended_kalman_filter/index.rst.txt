@@ -1,0 +1,38 @@
+:orphan:
+
+:mod:`torchfilter.filters._extended_kalman_filter`
+==================================================
+
+.. py:module:: torchfilter.filters._extended_kalman_filter
+
+.. autoapi-nested-parse::
+
+   Private module; avoid importing from directly.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   torchfilter.filters._extended_kalman_filter.ExtendedKalmanFilter
+
+
+
+.. py:class:: ExtendedKalmanFilter(*, dynamics_model: DynamicsModel, measurement_model: KalmanFilterMeasurementModel, **unused_kwargs)
+
+   Bases: :class:`torchfilter.base.KalmanFilterBase`
+
+   .. autoapi-inheritance-diagram:: torchfilter.filters._extended_kalman_filter.ExtendedKalmanFilter
+      :parts: 1
+
+   Generic differentiable EKF.
+
+   For building estimators with more complex observation spaces (eg images), see
+   ``VirtualSensorExtendedKalmanFilter``.
+
+

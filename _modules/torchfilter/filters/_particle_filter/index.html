@@ -1,0 +1,488 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchfilter.filters._particle_filter &mdash; torchfilter  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex/" />
+    <link rel="search" title="Search" href="../../../../search/" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../" class="icon icon-home" alt="Documentation Home"> torchfilter
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../">torchfilter</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../">Module code</a> &raquo;</li>
+        
+      <li>torchfilter.filters._particle_filter</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for torchfilter.filters._particle_filter</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Private module; avoid importing from directly.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">fannypack</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">overrides</span> <span class="kn">import</span> <span class="n">overrides</span>
+
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">types</span>
+<span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">DynamicsModel</span><span class="p">,</span> <span class="n">Filter</span><span class="p">,</span> <span class="n">ParticleFilterMeasurementModel</span>
+
+
+<div class="viewcode-block" id="ParticleFilter"><a class="viewcode-back" href="../../../../api/torchfilter/filters/#torchfilter.filters._particle_filter.ParticleFilter">[docs]</a><span class="k">class</span> <span class="nc">ParticleFilter</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generic differentiable particle filter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span><span class="p">,</span>
+        <span class="n">measurement_model</span><span class="p">:</span> <span class="n">ParticleFilterMeasurementModel</span><span class="p">,</span>
+        <span class="n">num_particles</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="n">resample</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">soft_resample_alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">estimation_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;weighted_average&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="c1"># Check submodule consistency</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dynamics_model</span><span class="p">,</span> <span class="n">DynamicsModel</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">measurement_model</span><span class="p">,</span> <span class="n">ParticleFilterMeasurementModel</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">dynamics_model</span><span class="o">.</span><span class="n">state_dim</span> <span class="o">==</span> <span class="n">measurement_model</span><span class="o">.</span><span class="n">state_dim</span>
+
+        <span class="c1"># Initialize state dimension</span>
+        <span class="n">state_dim</span> <span class="o">=</span> <span class="n">dynamics_model</span><span class="o">.</span><span class="n">state_dim</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">state_dim</span><span class="o">=</span><span class="n">state_dim</span><span class="p">)</span>
+
+        <span class="c1"># Assign submodules</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span> <span class="o">=</span> <span class="n">dynamics_model</span>
+        <span class="sd">&quot;&quot;&quot;torchfilter.base.DynamicsModel: Forward model.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measurement_model</span> <span class="o">=</span> <span class="n">measurement_model</span>
+        <span class="sd">&quot;&quot;&quot;torchfilter.base.ParticleFilterMeasurementModel: Observation model.&quot;&quot;&quot;</span>
+
+        <span class="c1"># Settings</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_particles</span> <span class="o">=</span> <span class="n">num_particles</span>
+        <span class="sd">&quot;&quot;&quot;int: Number of particles to represent our belief distribution.</span>
+<span class="sd">        Defaults to 100.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resample</span> <span class="o">=</span> <span class="n">resample</span>
+        <span class="sd">&quot;&quot;&quot;bool: If True, we resample particles &amp; normalize weights at each</span>
+<span class="sd">        timestep. If unset (None), we automatically turn resampling on in eval mode</span>
+<span class="sd">        and off in train mode.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">soft_resample_alpha</span> <span class="o">=</span> <span class="n">soft_resample_alpha</span>
+        <span class="sd">&quot;&quot;&quot;float: Tunable constant for differentiable resampling, as described</span>
+<span class="sd">        by Karkus et al. in &quot;Particle Filter Networks with Application to Visual</span>
+<span class="sd">        Localization&quot;: https://arxiv.org/abs/1805.08975</span>
+<span class="sd">        Defaults to 1.0 (disabled).&quot;&quot;&quot;</span>
+
+        <span class="k">assert</span> <span class="n">estimation_method</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;weighted_average&quot;</span><span class="p">,</span> <span class="s2">&quot;argmax&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">estimation_method</span> <span class="o">=</span> <span class="n">estimation_method</span>
+        <span class="sd">&quot;&quot;&quot;str: Method of producing state estimates. Options include:</span>
+<span class="sd">        - &#39;weighted_average&#39;: average of particles weighted by their weights.</span>
+<span class="sd">        - &#39;argmax&#39;: state of highest weighted particle.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># &quot;Hidden state&quot; tensors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span>
+        <span class="sd">&quot;&quot;&quot;torch.Tensor: Discrete particles representing our current belief</span>
+<span class="sd">        distribution. Shape should be `(N, M, state_dim)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span>
+        <span class="sd">&quot;&quot;&quot;torch.Tensor: Weights corresponding to each particle, stored as</span>
+<span class="sd">        log-likelihoods. Shape should be `(N, M)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initialized</span> <span class="o">=</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="ParticleFilter.initialize_beliefs"><a class="viewcode-back" href="../../../../api/torchfilter/filters/#torchfilter.filters._particle_filter.ParticleFilter.initialize_beliefs">[docs]</a>    <span class="nd">@overrides</span>
+    <span class="k">def</span> <span class="nf">initialize_beliefs</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">mean</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">StatesTorch</span><span class="p">,</span> <span class="n">covariance</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">CovarianceTorch</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Populates initial particles, which will be normally distributed.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mean (torch.Tensor): Mean of belief. Shape should be</span>
+<span class="sd">                `(N, state_dim)`.</span>
+<span class="sd">            covariance (torch.Tensor): Covariance of belief. Shape should be</span>
+<span class="sd">                `(N, state_dim, state_dim)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="n">mean</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="n">mean</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">covariance</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">)</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_particles</span>
+
+        <span class="c1"># Sample particles</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">MultivariateNormal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">covariance</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">sample</span><span class="p">((</span><span class="n">M</span><span class="p">,))</span>
+            <span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">)</span>
+
+        <span class="c1"># Normalize weights</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="o">.</span><span class="n">new_full</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+
+        <span class="c1"># Set initialized flag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initialized</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="ParticleFilter.forward"><a class="viewcode-back" href="../../../../api/torchfilter/filters/#torchfilter.filters._particle_filter.ParticleFilter.forward">[docs]</a>    <span class="nd">@overrides</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">observations</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ObservationsTorch</span><span class="p">,</span> <span class="n">controls</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ControlsTorch</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">StatesTorch</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Particle filter forward pass, single timestep.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            observations (dict or torch.Tensor): observation inputs. should be</span>
+<span class="sd">                either a dict of tensors or tensor of shape `(N, ...)`.</span>
+<span class="sd">            controls (dict or torch.Tensor): control inputs. should be either a</span>
+<span class="sd">                dict of tensors or tensor of shape `(N, ...)`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            torch.Tensor: Predicted state for each batch element. Shape should</span>
+<span class="sd">            be `(N, state_dim).`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Make sure our particle filter&#39;s been initialized</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initialized</span><span class="p">,</span> <span class="s2">&quot;Particle filter not initialized!&quot;</span>
+
+        <span class="c1"># Get our batch size (N), current particle count (M), &amp; state dimension</span>
+        <span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">state_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">assert</span> <span class="n">state_dim</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">controls</span><span class="p">))</span> <span class="o">==</span> <span class="n">N</span>
+
+        <span class="c1"># Decide whether or not we&#39;re resampling</span>
+        <span class="n">resample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resample</span>
+        <span class="k">if</span> <span class="n">resample</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># If not explicitly set, we disable resampling in train mode (to allow</span>
+            <span class="c1"># gradients to propagate through time) and enable in eval mode (to prevent</span>
+            <span class="c1"># particle deprivation)</span>
+            <span class="n">resample</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">training</span>
+
+        <span class="c1"># If we&#39;re not resampling and our current particle count doesn&#39;t match</span>
+        <span class="c1"># our desired particle count, we need to either expand or contract our</span>
+        <span class="c1"># particle set</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">resample</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_particles</span> <span class="o">!=</span> <span class="n">M</span><span class="p">:</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="o">.</span><span class="n">new_zeros</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_particles</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span>
+            <span class="p">)</span>
+
+            <span class="c1"># If output particles &gt; our input particles, for the beginning part we copy</span>
+            <span class="c1"># particles directly to reduce variance</span>
+            <span class="n">copy_count</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_particles</span> <span class="o">//</span> <span class="n">M</span><span class="p">)</span> <span class="o">*</span> <span class="n">M</span>
+            <span class="k">if</span> <span class="n">copy_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">indices</span><span class="p">[:,</span> <span class="p">:</span><span class="n">copy_count</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">copy_count</span> <span class="o">//</span> <span class="n">M</span><span class="p">)[</span>
+                    <span class="kc">None</span><span class="p">,</span> <span class="p">:</span>
+                <span class="p">]</span>
+
+            <span class="c1"># For remaining particles, we sample w/o replacement (also lowers variance)</span>
+            <span class="n">remaining_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_particles</span> <span class="o">-</span> <span class="n">copy_count</span>
+            <span class="k">assert</span> <span class="n">remaining_count</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">remaining_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">indices</span><span class="p">[:,</span> <span class="n">copy_count</span><span class="p">:]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randperm</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">indices</span><span class="o">.</span><span class="n">device</span><span class="p">)[</span>
+                    <span class="kc">None</span><span class="p">,</span> <span class="p">:</span><span class="n">remaining_count</span>
+                <span class="p">]</span>
+
+            <span class="c1"># Gather new particles, weights</span>
+            <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_particles</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+                <span class="mi">1</span><span class="p">,</span> <span class="n">indices</span><span class="p">[:,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span><span class="o">.</span><span class="n">expand</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">))</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_particles</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_particles</span><span class="p">)</span>
+
+            <span class="c1"># Normalize particle weights to sum to 1.0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">logsumexp</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Propagate particles through our dynamics model</span>
+        <span class="c1"># A bit of extra effort is required for the extra particle dimension</span>
+        <span class="c1"># &gt; For our states, we flatten along the N/M axes</span>
+        <span class="c1"># &gt; For our controls, we repeat each one `M` times, if M=3:</span>
+        <span class="c1">#       [u0 u1 u2] should become [u0 u0 u0 u1 u1 u1 u2 u2 u2]</span>
+        <span class="c1">#</span>
+        <span class="c1"># Currently each of the M particles within a &quot;sample&quot; get the same action, but</span>
+        <span class="c1"># we could also add noise in the action space (a la Jonschkowski et al. 2018)</span>
+        <span class="n">reshaped_states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">)</span>
+        <span class="n">reshaped_controls</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">tensor</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="n">M</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">predicted_states</span><span class="p">,</span> <span class="n">scale_trils</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span><span class="p">(</span>
+            <span class="n">initial_states</span><span class="o">=</span><span class="n">reshaped_states</span><span class="p">,</span> <span class="n">controls</span><span class="o">=</span><span class="n">reshaped_controls</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">MultivariateNormal</span><span class="p">(</span>
+                <span class="n">loc</span><span class="o">=</span><span class="n">predicted_states</span><span class="p">,</span> <span class="n">scale_tril</span><span class="o">=</span><span class="n">scale_trils</span>
+            <span class="p">)</span>
+            <span class="o">.</span><span class="n">rsample</span><span class="p">()</span>  <span class="c1"># Note that we use `rsample` to make sampling differentiable</span>
+            <span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">)</span>
+
+        <span class="c1"># Re-weight particles using observations</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurement_model</span><span class="p">(</span>
+            <span class="n">states</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="p">,</span> <span class="n">observations</span><span class="o">=</span><span class="n">observations</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Normalize particle weights to sum to 1.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">logsumexp</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Compute output</span>
+        <span class="n">state_estimates</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">StatesTorch</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimation_method</span> <span class="o">==</span> <span class="s2">&quot;weighted_average&quot;</span><span class="p">:</span>
+            <span class="n">state_estimates</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+                <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span>
+                <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="p">,</span>
+                <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimation_method</span> <span class="o">==</span> <span class="s2">&quot;argmax&quot;</span><span class="p">:</span>
+            <span class="n">best_indices</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">state_estimates</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">best_indices</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Unsupported estimation method!&quot;</span>
+
+        <span class="c1"># Resampling</span>
+        <span class="k">if</span> <span class="n">resample</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_resample</span><span class="p">()</span>
+
+        <span class="c1"># Post-condition :)</span>
+        <span class="k">assert</span> <span class="n">state_estimates</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_particles</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_particles</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">state_estimates</span></div>
+
+    <span class="k">def</span> <span class="nf">_resample</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Resample particles.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Note the distinction between `M`, the current number of particles, and</span>
+        <span class="c1"># `self.num_particles`, the desired number of particles</span>
+        <span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">state_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="n">sample_logits</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span>
+        <span class="n">uniform_log_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span><span class="o">.</span><span class="n">new_full</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_particles</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">soft_resample_alpha</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="c1"># Soft resampling</span>
+            <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+            <span class="n">sample_logits</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">logsumexp</span><span class="p">(</span>
+                <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">soft_resample_alpha</span><span class="p">),</span>
+                        <span class="n">uniform_log_weights</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">soft_resample_alpha</span><span class="p">),</span>
+                    <span class="p">],</span>
+                    <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span> <span class="o">-</span> <span class="n">sample_logits</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Standard particle filter re-sampling -- this stops gradients</span>
+            <span class="c1"># This is the most naive flavor of resampling, and not the low</span>
+            <span class="c1"># variance approach</span>
+            <span class="c1">#</span>
+            <span class="c1"># Note the distinction between M, the current # of particles,</span>
+            <span class="c1"># and self.num_particles, the desired # of particles</span>
+            <span class="n">sample_logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span> <span class="o">=</span> <span class="n">uniform_log_weights</span>
+
+        <span class="k">assert</span> <span class="n">sample_logits</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+        <span class="n">distribution</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">logits</span><span class="o">=</span><span class="n">sample_logits</span><span class="p">)</span>
+        <span class="n">state_indices</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">sample</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">num_particles</span><span class="p">,))</span><span class="o">.</span><span class="n">T</span>
+        <span class="k">assert</span> <span class="n">state_indices</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_particles</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="p">,</span>
+            <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">index</span><span class="o">=</span><span class="n">state_indices</span><span class="p">[:,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span><span class="o">.</span><span class="n">expand</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_particles</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">)),</span>
+        <span class="p">)</span></div>
+        <span class="c1"># # ^This gather magic is equivalent to:</span>
+        <span class="c1"># particle_states_alt = torch.zeros_like(self.particle_states)</span>
+        <span class="c1"># for i in range(N):</span>
+        <span class="c1">#     particle_states_alt[i] = self.particle_states[i][state_indices[i]]</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
