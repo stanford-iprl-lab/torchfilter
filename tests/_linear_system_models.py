@@ -3,8 +3,8 @@ from typing import Tuple, cast
 import torch
 import torch.nn as nn
 
-import diffbayes
-from diffbayes import types
+import torchfilter
+from torchfilter import types
 
 state_dim = 5
 control_dim = 3
@@ -21,7 +21,7 @@ Q_tril = torch.eye(state_dim) * 0.02
 R_tril = torch.eye(observation_dim) * 0.05
 
 
-class LinearDynamicsModel(diffbayes.base.DynamicsModel):
+class LinearDynamicsModel(torchfilter.base.DynamicsModel):
     """Forward model for our linear system. Maps (initial_states, controls) pairs to
     (predicted_state, uncertainty) pairs.
 
@@ -76,7 +76,7 @@ class LinearDynamicsModel(diffbayes.base.DynamicsModel):
         return predicted_states, Q_tril[None, :, :].expand((N, state_dim, state_dim))
 
 
-class LinearKalmanFilterMeasurementModel(diffbayes.base.KalmanFilterMeasurementModel):
+class LinearKalmanFilterMeasurementModel(torchfilter.base.KalmanFilterMeasurementModel):
     """Kalman filter measurement model for our linear system. Maps states to
     (observation, uncertainty) pairs.
 
@@ -121,7 +121,7 @@ class LinearKalmanFilterMeasurementModel(diffbayes.base.KalmanFilterMeasurementM
         return observations, scale_tril
 
 
-class LinearVirtualSensorModel(diffbayes.base.VirtualSensorModel):
+class LinearVirtualSensorModel(torchfilter.base.VirtualSensorModel):
     """Virtual sensor model for our linear system. Maps raw sensor readings to predicted
     states and uncertainties.
 
@@ -177,7 +177,7 @@ class LinearVirtualSensorModel(diffbayes.base.VirtualSensorModel):
 
 
 class LinearParticleFilterMeasurementModel(
-    diffbayes.base.ParticleFilterMeasurementModelWrapper
+    torchfilter.base.ParticleFilterMeasurementModelWrapper
 ):
     """Particle filter measurement model. Defined by wrapping our Kalman filter one.
 

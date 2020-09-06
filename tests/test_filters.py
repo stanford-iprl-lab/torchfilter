@@ -10,15 +10,15 @@ from _linear_system_models import (
     state_dim,
 )
 
-import diffbayes
-from diffbayes import types
+import torchfilter
+from torchfilter import types
 
 
 def test_particle_filter(generated_data):
     """Smoke test for particle filter.
     """
     _run_filter(
-        diffbayes.filters.ParticleFilter(
+        torchfilter.filters.ParticleFilter(
             dynamics_model=LinearDynamicsModel(),
             measurement_model=LinearParticleFilterMeasurementModel(),
         ),
@@ -30,7 +30,7 @@ def test_particle_filter_resample(generated_data):
     """Smoke test for particle filter with resampling.
     """
     _run_filter(
-        diffbayes.filters.ParticleFilter(
+        torchfilter.filters.ParticleFilter(
             dynamics_model=LinearDynamicsModel(),
             measurement_model=LinearParticleFilterMeasurementModel(),
             resample=True,
@@ -43,7 +43,7 @@ def test_particle_filter_soft_resample(generated_data):
     """Smoke test for particle filter with soft-resampling.
     """
     _run_filter(
-        diffbayes.filters.ParticleFilter(
+        torchfilter.filters.ParticleFilter(
             dynamics_model=LinearDynamicsModel(),
             measurement_model=LinearParticleFilterMeasurementModel(),
             resample=True,
@@ -56,7 +56,7 @@ def test_particle_filter_soft_resample(generated_data):
 def test_particle_filter_dynamic_particle_count(generated_data):
     """Smoke test for particle filter with a dynamically changing particle count + no resampling.
     """
-    filter_model = diffbayes.filters.ParticleFilter(
+    filter_model = torchfilter.filters.ParticleFilter(
         dynamics_model=LinearDynamicsModel(),
         measurement_model=LinearParticleFilterMeasurementModel(),
         resample=False,
@@ -79,7 +79,7 @@ def test_particle_filter_dynamic_particle_count(generated_data):
 def test_particle_filter_dynamic_particle_count_resample(generated_data):
     """Smoke test for particle filter with a dynamically changing particle count w/ resampling.
     """
-    filter_model = diffbayes.filters.ParticleFilter(
+    filter_model = torchfilter.filters.ParticleFilter(
         dynamics_model=LinearDynamicsModel(),
         measurement_model=LinearParticleFilterMeasurementModel(),
         resample=True,
@@ -103,7 +103,7 @@ def test_ekf(generated_data):
     """Smoke test for EKF.
     """
     _run_filter(
-        diffbayes.filters.ExtendedKalmanFilter(
+        torchfilter.filters.ExtendedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
             measurement_model=LinearKalmanFilterMeasurementModel(),
         ),
@@ -115,7 +115,7 @@ def test_virtual_sensor_ekf(generated_data):
     """Smoke test for EKF w/ virtual sensor.
     """
     _run_filter(
-        diffbayes.filters.VirtualSensorExtendedKalmanFilter(
+        torchfilter.filters.VirtualSensorExtendedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
             virtual_sensor_model=LinearVirtualSensorModel(),
         ),
@@ -127,7 +127,7 @@ def test_ukf(generated_data):
     """Smoke test for UKF w/ Julier-style sigma points.
     """
     _run_filter(
-        diffbayes.filters.UnscentedKalmanFilter(
+        torchfilter.filters.UnscentedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
             measurement_model=LinearKalmanFilterMeasurementModel(),
         ),
@@ -139,10 +139,10 @@ def test_ukf_merwe(generated_data):
     """Smoke test for UKF w/ Merwe-style sigma points.
     """
     _run_filter(
-        diffbayes.filters.UnscentedKalmanFilter(
+        torchfilter.filters.UnscentedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
             measurement_model=LinearKalmanFilterMeasurementModel(),
-            sigma_point_strategy=diffbayes.utils.MerweSigmaPointStrategy(alpha=1e-1),
+            sigma_point_strategy=torchfilter.utils.MerweSigmaPointStrategy(alpha=1e-1),
         ),
         generated_data,
     )
@@ -152,10 +152,10 @@ def test_virtual_sensor_ukf(generated_data):
     """Smoke test for virtual sensor UKF w/ Julier-style sigma points.
     """
     _run_filter(
-        diffbayes.filters.VirtualSensorUnscentedKalmanFilter(
+        torchfilter.filters.VirtualSensorUnscentedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
             virtual_sensor_model=LinearVirtualSensorModel(),
-            sigma_point_strategy=diffbayes.utils.JulierSigmaPointStrategy(),  # optional
+            sigma_point_strategy=torchfilter.utils.JulierSigmaPointStrategy(),  # optional
         ),
         generated_data,
     )
@@ -165,7 +165,7 @@ def test_srukf(generated_data):
     """Smoke test for SRUKF w/ Julier-style sigma points.
     """
     _run_filter(
-        diffbayes.filters.SquareRootUnscentedKalmanFilter(
+        torchfilter.filters.SquareRootUnscentedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
             measurement_model=LinearKalmanFilterMeasurementModel(),
         ),
@@ -177,10 +177,10 @@ def test_srukf_merwe(generated_data):
     """Smoke test for SRUKF w/ Merwe-style sigma points.
     """
     _run_filter(
-        diffbayes.filters.SquareRootUnscentedKalmanFilter(
+        torchfilter.filters.SquareRootUnscentedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
             measurement_model=LinearKalmanFilterMeasurementModel(),
-            sigma_point_strategy=diffbayes.utils.MerweSigmaPointStrategy(alpha=1e-1),
+            sigma_point_strategy=torchfilter.utils.MerweSigmaPointStrategy(alpha=1e-1),
         ),
         generated_data,
     )
@@ -190,10 +190,10 @@ def test_virtual_sensor_srukf(generated_data):
     """Smoke test for virtual sensor SRUKF w/ Julier-style sigma points.
     """
     _run_filter(
-        diffbayes.filters.VirtualSensorSquareRootUnscentedKalmanFilter(
+        torchfilter.filters.VirtualSensorSquareRootUnscentedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
             virtual_sensor_model=LinearVirtualSensorModel(),
-            sigma_point_strategy=diffbayes.utils.JulierSigmaPointStrategy(),  # optional
+            sigma_point_strategy=torchfilter.utils.JulierSigmaPointStrategy(),  # optional
         ),
         generated_data,
     )
@@ -204,11 +204,11 @@ def test_virtual_sensor_ekf_consistency(generated_data):
     a linear system.
     """
     # Create filters
-    ekf = diffbayes.filters.ExtendedKalmanFilter(
+    ekf = torchfilter.filters.ExtendedKalmanFilter(
         dynamics_model=LinearDynamicsModel(),
         measurement_model=LinearKalmanFilterMeasurementModel(),
     )
-    virtual_sensor_ekf = diffbayes.filters.VirtualSensorExtendedKalmanFilter(
+    virtual_sensor_ekf = torchfilter.filters.VirtualSensorExtendedKalmanFilter(
         dynamics_model=LinearDynamicsModel(),
         virtual_sensor_model=LinearVirtualSensorModel(),
     )
@@ -229,11 +229,11 @@ def test_virtual_sensor_ukf_consistency(generated_data):
     a linear system.
     """
     # Create filters
-    ekf = diffbayes.filters.ExtendedKalmanFilter(
+    ekf = torchfilter.filters.ExtendedKalmanFilter(
         dynamics_model=LinearDynamicsModel(),
         measurement_model=LinearKalmanFilterMeasurementModel(),
     )
-    virtual_sensor_ukf = diffbayes.filters.VirtualSensorUnscentedKalmanFilter(
+    virtual_sensor_ukf = torchfilter.filters.VirtualSensorUnscentedKalmanFilter(
         dynamics_model=LinearDynamicsModel(),
         virtual_sensor_model=LinearVirtualSensorModel(),
     )
@@ -257,11 +257,11 @@ def test_virtual_sensor_srukf_consistency(generated_data):
     a linear system.
     """
     # Create filters
-    ekf = diffbayes.filters.ExtendedKalmanFilter(
+    ekf = torchfilter.filters.ExtendedKalmanFilter(
         dynamics_model=LinearDynamicsModel(),
         measurement_model=LinearKalmanFilterMeasurementModel(),
     )
-    virtual_sensor_srukf = diffbayes.filters.VirtualSensorSquareRootUnscentedKalmanFilter(
+    virtual_sensor_srukf = torchfilter.filters.VirtualSensorSquareRootUnscentedKalmanFilter(
         dynamics_model=LinearDynamicsModel(),
         virtual_sensor_model=LinearVirtualSensorModel(),
     )
@@ -285,11 +285,11 @@ def test_ukf_ekf_consistency(generated_data):
     should be identical)
     """
     # Create filters
-    ekf = diffbayes.filters.ExtendedKalmanFilter(
+    ekf = torchfilter.filters.ExtendedKalmanFilter(
         dynamics_model=LinearDynamicsModel(),
         measurement_model=LinearKalmanFilterMeasurementModel(),
     )
-    ukf = diffbayes.filters.UnscentedKalmanFilter(
+    ukf = torchfilter.filters.UnscentedKalmanFilter(
         dynamics_model=LinearDynamicsModel(),
         measurement_model=LinearKalmanFilterMeasurementModel(),
     )
@@ -310,11 +310,11 @@ def test_ukf_srukf_consistency(generated_data):
     (they should be identical)
     """
     # Create filters
-    srukf = diffbayes.filters.SquareRootUnscentedKalmanFilter(
+    srukf = torchfilter.filters.SquareRootUnscentedKalmanFilter(
         dynamics_model=LinearDynamicsModel(),
         measurement_model=LinearKalmanFilterMeasurementModel(),
     )
-    ukf = diffbayes.filters.UnscentedKalmanFilter(
+    ukf = torchfilter.filters.UnscentedKalmanFilter(
         dynamics_model=LinearDynamicsModel(),
         measurement_model=LinearKalmanFilterMeasurementModel(),
     )
@@ -331,7 +331,7 @@ def test_ukf_srukf_consistency(generated_data):
 
 
 def _run_filter(
-    filter_model: diffbayes.base.Filter,
+    filter_model: torchfilter.base.Filter,
     data: Tuple[
         types.StatesTorch, types.ObservationsNoDictTorch, types.ControlsNoDictTorch
     ],
@@ -340,7 +340,7 @@ def _run_filter(
     """Helper for running a filter and returning estimated states.
 
     Args:
-        filter_model (diffbayes.base.Filter): Filter to run.
+        filter_model (torchfilter.base.Filter): Filter to run.
         data (Tuple[
             types.StatesTorch, types.ObservationsNoDictTorch, types.ControlsNoDictTorch
         ]): Data to run on. Shapes of all inputs should be `(T, N, *)`.

@@ -1,18 +1,18 @@
-# diffbayes
+# torchfilter
 
-![build](https://github.com/brentyi/diffbayes/workflows/build/badge.svg)
-![mypy](https://github.com/brentyi/diffbayes/workflows/mypy/badge.svg)
-![lint](https://github.com/brentyi/diffbayes/workflows/lint/badge.svg)
-[![codecov](https://codecov.io/gh/brentyi/diffbayes/branch/master/graph/badge.svg)](https://codecov.io/gh/brentyi/diffbayes)
+![build](https://github.com/brentyi/torchfilter/workflows/build/badge.svg)
+![mypy](https://github.com/brentyi/torchfilter/workflows/mypy/badge.svg)
+![lint](https://github.com/brentyi/torchfilter/workflows/lint/badge.svg)
+[![codecov](https://codecov.io/gh/brentyi/torchfilter/branch/master/graph/badge.svg)](https://codecov.io/gh/brentyi/torchfilter)
 
-**`diffbayes`** is a library for discrete-time Bayesian filtering in PyTorch.
+**`torchfilter`** is a library for discrete-time Bayesian filtering in PyTorch.
 
 It's broken down into six submodules:
 
 <table>
   <tbody valign="top">
     <tr>
-      <td><code>diffbayes.<strong>base</strong></code></td>
+      <td><code>torchfilter.<strong>base</strong></code></td>
       <td>
         Base classes that define standard interfaces for implementing filter,
         dynamics, measurement, and virtual sensor models as standard PyTorch
@@ -20,7 +20,7 @@ It's broken down into six submodules:
       </td>
     </tr>
     <tr>
-      <td><code>diffbayes.<strong>filters</strong></code></td>
+      <td><code>torchfilter.<strong>filters</strong></code></td>
       <td>
         Differentiable filters implemented as standard PyTorch modules, which
         can either be used directly or subclassed. Currently implemented:
@@ -36,46 +36,50 @@ It's broken down into six submodules:
       </td>
     </tr>
     <tr>
-      <td><code>diffbayes.<strong>train</strong></code></td>
+      <td><code>torchfilter.<strong>train</strong></code></td>
       <td>
         Training loop helpers. These are currently coupled tightly with a custom
         experiment management framework, but may be useful as a reference.
       </td>
     </tr>
     <tr>
-      <td><code>diffbayes.<strong>data</strong></code></td>
+      <td><code>torchfilter.<strong>data</strong></code></td>
       <td>
         Dataset interfaces used for our training loop helpers.
       </td>
     </tr>
     <tr>
-      <td><code>diffbayes.<strong>utils</strong></code></td>
+      <td><code>torchfilter.<strong>utils</strong></code></td>
       <td>
         General utilities; currently only contains helpers for performing
         unscented transforms.
       </td>
     </tr>
     <tr>
-      <td><code>diffbayes.<strong>types</strong></code></td>
+      <td><code>torchfilter.<strong>types</strong></code></td>
       <td>Data structures and semantic type aliases.</td>
     </tr>
   </tbody>
 </table>
 
 For more details, see the
-[API documentation](https://brentyi.github.io/diffbayes/api).
+[API documentation](https://brentyi.github.io/torchfilter).
 
 For a linear system example, see `tests/_linear_system_models.py`.
+
+---
 
 ### Installation
 
 From source:
 
 ```bash
-$ git clone https://github.com/brentyi/diffbayes.git
-$ cd diffbayes
+$ git clone https://github.com/brentyi/torchfilter.git
+$ cd torchfilter
 $ pip install -e .
 ```
+
+---
 
 ### Development
 

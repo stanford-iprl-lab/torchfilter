@@ -16,7 +16,7 @@ from _linear_system_models import (
     state_dim,
 )
 
-import diffbayes
+import torchfilter
 
 
 def test_train_dynamics_recurrent(subsequence_dataloader, buddy):
@@ -30,7 +30,7 @@ def test_train_dynamics_recurrent(subsequence_dataloader, buddy):
 
     # Train for 1 epoch
     buddy.attach_model(dynamics_model)
-    diffbayes.train.train_dynamics_recurrent(
+    torchfilter.train.train_dynamics_recurrent(
         buddy, dynamics_model, subsequence_dataloader
     )
 
@@ -49,7 +49,7 @@ def test_train_dynamics_single_step(single_step_dataloader, buddy):
 
     # Train for 1 epoch
     buddy.attach_model(dynamics_model)
-    diffbayes.train.train_dynamics_single_step(
+    torchfilter.train.train_dynamics_single_step(
         buddy, dynamics_model, single_step_dataloader
     )
 
@@ -68,7 +68,7 @@ def test_train_virtual_sensor(single_step_dataloader, buddy):
 
     # Train for 1 epoch
     buddy.attach_model(virtual_sensor_model)
-    diffbayes.train.train_virtual_sensor(
+    torchfilter.train.train_virtual_sensor(
         buddy, virtual_sensor_model, single_step_dataloader
     )
 
@@ -87,7 +87,7 @@ def test_train_kalman_filter_measurement(single_step_dataloader, buddy):
 
     # Train for 1 epoch
     buddy.attach_model(measurement_model)
-    diffbayes.train.train_kalman_filter_measurement(
+    torchfilter.train.train_kalman_filter_measurement(
         buddy, measurement_model, single_step_dataloader
     )
 
@@ -112,7 +112,7 @@ def test_train_particle_filter_measurement(
 
     # Train for 1 epoch
     buddy.attach_model(particle_filter_measurement_model)
-    diffbayes.train.train_particle_filter_measurement(
+    torchfilter.train.train_particle_filter_measurement(
         buddy, particle_filter_measurement_model, particle_filter_measurement_dataloader
     )
 

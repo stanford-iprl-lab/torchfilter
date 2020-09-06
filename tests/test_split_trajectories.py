@@ -2,7 +2,7 @@ from typing import List
 
 import numpy as np
 
-import diffbayes
+import torchfilter
 
 
 def test_split_trajectories():
@@ -14,10 +14,10 @@ def test_split_trajectories():
     subsequence_length = 10
 
     # Generate trajectories
-    trajectories: List[diffbayes.types.TrajectoryNumpy] = []
+    trajectories: List[torchfilter.types.TrajectoryNumpy] = []
     for i in range(num_trajectories):
         trajectories.append(
-            diffbayes.types.TrajectoryNumpy(
+            torchfilter.types.TrajectoryNumpy(
                 states=np.ones((trajectory_timesteps, 5)),
                 observations={
                     "key": np.zeros((trajectory_timesteps, 5)),
@@ -28,7 +28,7 @@ def test_split_trajectories():
         )
 
     # Split into subsequences
-    subsequences = diffbayes.data.split_trajectories(
+    subsequences = torchfilter.data.split_trajectories(
         trajectories, subsequence_length=subsequence_length
     )
 

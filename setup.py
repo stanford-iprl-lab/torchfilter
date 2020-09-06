@@ -1,14 +1,14 @@
 from setuptools import setup
 
 setup(
-    name="diffbayes",
+    name="torchfilter",
     version="0.0",
     description="differentiable bayesian filtering",
-    url="http://github.com/brentyi/diffbayes",
+    url="http://github.com/brentyi/torchfilter",
     author="brentyi",
     author_email="brentyi@berkeley.edu",
     license="BSD",
-    packages=["diffbayes"],
+    packages=["torchfilter"],
     install_requires=[
         "fannypack",
         "hypothesis",

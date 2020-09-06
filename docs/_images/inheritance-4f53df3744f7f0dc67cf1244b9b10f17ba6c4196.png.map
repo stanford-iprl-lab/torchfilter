@@ -1,6 +1,0 @@
-<map id="inheritanceb9aa454f50" name="inheritanceb9aa454f50">
-<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="5,5,77,31"/>
-<area shape="rect" id="node3" href="../index.html#diffbayes.base.ParticleFilterMeasurementModel" target="_top" title="Observation model base class for a generic differentiable particle" alt="" coords="125,31,359,56"/>
-<area shape="rect" id="node2" title="Base class for all neural network modules." alt="" coords="5,55,77,80"/>
-<area shape="rect" id="node4" href="../index.html#diffbayes.base.ParticleFilterMeasurementModelWrapper" target="_top" title="Helper class for creating a particle filter measurement model (states," alt="" coords="407,31,695,56"/>
-</map>

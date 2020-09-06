@@ -1,0 +1,386 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchfilter.types &mdash; torchfilter  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> torchfilter
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">torchfilter</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.types</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/api/torchfilter/types/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-torchfilter.types">
+<span id="torchfilter-types"></span><h1><a class="reference internal" href="#module-torchfilter.types" title="torchfilter.types"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.types</span></code></a><a class="headerlink" href="#module-torchfilter.types" title="Permalink to this headline">¶</a></h1>
+<p>Data structures and semantic type aliases for filtering.</p>
+<div class="section" id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#torchfilter.types.Trajectory" title="torchfilter.types.Trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Trajectory</span></code></a></p></td>
+<td><p>Named tuple containing states, observations, and controls.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#torchfilter.types.TrajectoryNumpy" title="torchfilter.types.TrajectoryNumpy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TrajectoryNumpy</span></code></a></p></td>
+<td><p>Named tuple containing states, observations, and controls represented in NumPy.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#torchfilter.types.TrajectoryTorch" title="torchfilter.types.TrajectoryTorch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TrajectoryTorch</span></code></a></p></td>
+<td><p>Named tuple containing states, observations, and controls represented in Torch.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py data">
+<dt id="torchfilter.types.NumpyDict">
+<code class="sig-prename descclassname">torchfilter.types.</code><code class="sig-name descname">NumpyDict</code><a class="headerlink" href="#torchfilter.types.NumpyDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary from <code class="docutils literal notranslate"><span class="pre">str</span></code> keys to <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> values.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="torchfilter.types.TorchDict">
+<code class="sig-prename descclassname">torchfilter.types.</code><code class="sig-name descname">TorchDict</code><a class="headerlink" href="#torchfilter.types.TorchDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary from <code class="docutils literal notranslate"><span class="pre">str</span></code> keys to <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code> values.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="torchfilter.types.NumpyArrayOrDict">
+<code class="sig-prename descclassname">torchfilter.types.</code><code class="sig-name descname">NumpyArrayOrDict</code><a class="headerlink" href="#torchfilter.types.NumpyArrayOrDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Union of np.ndarray and NumpyDict types.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="torchfilter.types.TorchTensorOrDict">
+<code class="sig-prename descclassname">torchfilter.types.</code><code class="sig-name descname">TorchTensorOrDict</code><a class="headerlink" href="#torchfilter.types.TorchTensorOrDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Union of torch.Tensor and TorchDict types.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="torchfilter.types.StatesNumpy">
+<code class="sig-prename descclassname">torchfilter.types.</code><code class="sig-name descname">StatesNumpy</code><a class="headerlink" href="#torchfilter.types.StatesNumpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>State array type hint. Needs to be a raw <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="torchfilter.types.StatesTorch">
+<code class="sig-prename descclassname">torchfilter.types.</code><code class="sig-name descname">StatesTorch</code><a class="headerlink" href="#torchfilter.types.StatesTorch" title="Permalink to this definition">¶</a></dt>
+<dd><p>State array type hint. Needs to be a raw <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="torchfilter.types.ObservationsNumpy">
+<code class="sig-prename descclassname">torchfilter.types.</code><code class="sig-name descname">ObservationsNumpy</code><a class="headerlink" href="#torchfilter.types.ObservationsNumpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Observations can be either <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> objects or <code class="docutils literal notranslate"><span class="pre">str-&gt;np.ndarray</span></code> dictionaries.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="torchfilter.types.ObservationsTorch">
+<code class="sig-prename descclassname">torchfilter.types.</code><code class="sig-name descname">ObservationsTorch</code><a class="headerlink" href="#torchfilter.types.ObservationsTorch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Observations can be either <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code> objects or <code class="docutils literal notranslate"><span class="pre">str-&gt;torch.Tensor</span></code> dictionaries.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="torchfilter.types.ObservationsNoDictNumpy">
+<code class="sig-prename descclassname">torchfilter.types.</code><code class="sig-name descname">ObservationsNoDictNumpy</code><a class="headerlink" href="#torchfilter.types.ObservationsNoDictNumpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as <code class="docutils literal notranslate"><span class="pre">ObservationsNumpy</span></code>, but no dictionaries.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="torchfilter.types.ObservationsNoDictTorch">
+<code class="sig-prename descclassname">torchfilter.types.</code><code class="sig-name descname">ObservationsNoDictTorch</code><a class="headerlink" href="#torchfilter.types.ObservationsNoDictTorch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as <code class="docutils literal notranslate"><span class="pre">ObservationsTorch</span></code>, but no dictionaries.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="torchfilter.types.ControlsNumpy">
+<code class="sig-prename descclassname">torchfilter.types.</code><code class="sig-name descname">ControlsNumpy</code><a class="headerlink" href="#torchfilter.types.ControlsNumpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Controls can be either <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> objects or <code class="docutils literal notranslate"><span class="pre">str-&gt;np.ndarray</span></code> dictionaries.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="torchfilter.types.ControlsTorch">
+<code class="sig-prename descclassname">torchfilter.types.</code><code class="sig-name descname">ControlsTorch</code><a class="headerlink" href="#torchfilter.types.ControlsTorch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Controls can be either <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code> objects or <code class="docutils literal notranslate"><span class="pre">str-&gt;torch.Tensor</span></code> dictionaries.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="torchfilter.types.CovarianceTorch">
+<code class="sig-prename descclassname">torchfilter.types.</code><code class="sig-name descname">CovarianceTorch</code><a class="headerlink" href="#torchfilter.types.CovarianceTorch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Covariance matrix as <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code>. Must be positive semi-definite.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="torchfilter.types.ScaleTrilTorch">
+<code class="sig-prename descclassname">torchfilter.types.</code><code class="sig-name descname">ScaleTrilTorch</code><a class="headerlink" href="#torchfilter.types.ScaleTrilTorch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lower-triangular cholesky decomposition of covariance matrix as <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="torchfilter.types.Trajectory">
+<em class="property">class </em><code class="sig-prename descclassname">torchfilter.types.</code><code class="sig-name descname">Trajectory</code><a class="reference internal" href="../../../_modules/torchfilter/types.html#Trajectory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.types.Trajectory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.NamedTuple</span></code></p>
+<div class="graphviz"><img src="../../../_images/inheritance-e6d32b3ebd737fd6d016aa477308eecc8f33249b.png" alt="Inheritance diagram of torchfilter.types.Trajectory" usemap="#inheritance540b56069e" class="inheritance graphviz" /></div>
+<map id="inheritance540b56069e" name="inheritance540b56069e">
+<area shape="rect" id="node2" href="#torchfilter.types.Trajectory" target="_top" title="Named tuple containing states, observations, and controls." alt="" coords="156,5,243,31"/>
+</map><p>Named tuple containing states, observations, and controls.</p>
+<dl class="py attribute">
+<dt id="torchfilter.types.Trajectory.states">
+<code class="sig-name descname">states</code><em class="property"> :Union[StatesNumpy, StatesTorch]</em><a class="headerlink" href="#torchfilter.types.Trajectory.states" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="torchfilter.types.Trajectory.observations">
+<code class="sig-name descname">observations</code><em class="property"> :Union[ObservationsNumpy, ObservationsTorch]</em><a class="headerlink" href="#torchfilter.types.Trajectory.observations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="torchfilter.types.Trajectory.controls">
+<code class="sig-name descname">controls</code><em class="property"> :Union[ControlsNumpy, ControlsTorch]</em><a class="headerlink" href="#torchfilter.types.Trajectory.controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="torchfilter.types.TrajectoryNumpy">
+<em class="property">class </em><code class="sig-prename descclassname">torchfilter.types.</code><code class="sig-name descname">TrajectoryNumpy</code><a class="reference internal" href="../../../_modules/torchfilter/types.html#TrajectoryNumpy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.types.TrajectoryNumpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#torchfilter.types.Trajectory" title="torchfilter.types.Trajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.types.Trajectory</span></code></a></p>
+<div class="graphviz"><img src="../../../_images/inheritance-446605b7eac37a4dc3578f90b3783ee096c5e836.png" alt="Inheritance diagram of torchfilter.types.TrajectoryNumpy" usemap="#inheritanced41cbcf737" class="inheritance graphviz" /></div>
+<map id="inheritanced41cbcf737" name="inheritanced41cbcf737">
+<area shape="rect" id="node2" href="#torchfilter.types.TrajectoryNumpy" target="_top" title="Named tuple containing states, observations, and controls represented in NumPy." alt="" coords="140,5,273,31"/>
+</map><p>Named tuple containing states, observations, and controls represented in NumPy.</p>
+<dl class="py attribute">
+<dt id="torchfilter.types.TrajectoryNumpy.states">
+<code class="sig-name descname">states</code><em class="property"> :StatesNumpy</em><a class="headerlink" href="#torchfilter.types.TrajectoryNumpy.states" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="torchfilter.types.TrajectoryNumpy.observations">
+<code class="sig-name descname">observations</code><em class="property"> :ObservationsNumpy</em><a class="headerlink" href="#torchfilter.types.TrajectoryNumpy.observations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="torchfilter.types.TrajectoryNumpy.controls">
+<code class="sig-name descname">controls</code><em class="property"> :ControlsNumpy</em><a class="headerlink" href="#torchfilter.types.TrajectoryNumpy.controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="torchfilter.types.TrajectoryTorch">
+<em class="property">class </em><code class="sig-prename descclassname">torchfilter.types.</code><code class="sig-name descname">TrajectoryTorch</code><a class="reference internal" href="../../../_modules/torchfilter/types.html#TrajectoryTorch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.types.TrajectoryTorch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#torchfilter.types.Trajectory" title="torchfilter.types.Trajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.types.Trajectory</span></code></a></p>
+<div class="graphviz"><img src="../../../_images/inheritance-808d19c43bdfbfd7a08c6a8d9d75b262541afe24.png" alt="Inheritance diagram of torchfilter.types.TrajectoryTorch" usemap="#inheritancee5ad7f451c" class="inheritance graphviz" /></div>
+<map id="inheritancee5ad7f451c" name="inheritancee5ad7f451c">
+<area shape="rect" id="node2" href="#torchfilter.types.TrajectoryTorch" target="_top" title="Named tuple containing states, observations, and controls represented in Torch." alt="" coords="140,5,260,31"/>
+</map><p>Named tuple containing states, observations, and controls represented in Torch.</p>
+<dl class="py attribute">
+<dt id="torchfilter.types.TrajectoryTorch.states">
+<code class="sig-name descname">states</code><em class="property"> :StatesTorch</em><a class="headerlink" href="#torchfilter.types.TrajectoryTorch.states" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="torchfilter.types.TrajectoryTorch.observations">
+<code class="sig-name descname">observations</code><em class="property"> :ObservationsTorch</em><a class="headerlink" href="#torchfilter.types.TrajectoryTorch.observations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="torchfilter.types.TrajectoryTorch.controls">
+<code class="sig-name descname">controls</code><em class="property"> :ControlsTorch</em><a class="headerlink" href="#torchfilter.types.TrajectoryTorch.controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

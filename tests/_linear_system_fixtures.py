@@ -14,8 +14,8 @@ from _linear_system_models import (
     state_dim,
 )
 
-import diffbayes
-from diffbayes import types
+import torchfilter
+from torchfilter import types
 
 
 @pytest.fixture
@@ -110,9 +110,9 @@ def subsequence_dataloader(
         generated_data_numpy_list (List[types.TrajectoryNumpy]): Input trajectories.
 
     Returns:
-        torch.utils.data.DataLoader: Loader for a `diffbayes.data.SubsequenceDataset`.
+        torch.utils.data.DataLoader: Loader for a `torchfilter.data.SubsequenceDataset`.
     """
-    dataset = diffbayes.data.SubsequenceDataset(
+    dataset = torchfilter.data.SubsequenceDataset(
         generated_data_numpy_list, subsequence_length=10
     )
     return torch.utils.data.DataLoader(dataset, batch_size=16)
@@ -129,9 +129,9 @@ def single_step_dataloader(
         generated_data_numpy_list (List[types.TrajectoryNumpy]): Input trajectories.
 
     Returns:
-        torch.utils.data.DataLoader: Loader for a `diffbayes.data.SingleStepDataset`.
+        torch.utils.data.DataLoader: Loader for a `torchfilter.data.SingleStepDataset`.
     """
-    dataset = diffbayes.data.SingleStepDataset(generated_data_numpy_list)
+    dataset = torchfilter.data.SingleStepDataset(generated_data_numpy_list)
     return torch.utils.data.DataLoader(dataset, batch_size=16)
 
 
@@ -147,9 +147,9 @@ def particle_filter_measurement_dataloader(
 
     Returns:
         torch.utils.data.DataLoader: Loader for a
-        `diffbayes.data.ParticleFilterMeasurementDataset`.
+        `torchfilter.data.ParticleFilterMeasurementDataset`.
     """
-    dataset = diffbayes.data.ParticleFilterMeasurementDataset(
+    dataset = torchfilter.data.ParticleFilterMeasurementDataset(
         generated_data_numpy_list,
         covariance=np.identity(state_dim) * 0.05,
         samples_per_pair=10,

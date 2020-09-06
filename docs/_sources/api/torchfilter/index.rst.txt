@@ -1,0 +1,28 @@
+:mod:`torchfilter`
+==================
+
+.. py:module:: torchfilter
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   base/index.rst
+   data/index.rst
+   filters/index.rst
+   train/index.rst
+   utils/index.rst
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   types/index.rst
+
+

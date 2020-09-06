@@ -19,8 +19,8 @@ from _linear_system_models import (
     state_dim,
 )
 
-import diffbayes
-from diffbayes import types
+import torchfilter
+from torchfilter import types
 
 
 def test_train_ekf_e2e(subsequence_dataloader, buddy):
@@ -30,7 +30,7 @@ def test_train_ekf_e2e(subsequence_dataloader, buddy):
     # Create individual models + filter
     dynamics_model = LinearDynamicsModel(trainable=True)
     measurement_model = LinearKalmanFilterMeasurementModel(trainable=True)
-    filter_model = diffbayes.filters.ExtendedKalmanFilter(
+    filter_model = torchfilter.filters.ExtendedKalmanFilter(
         dynamics_model=dynamics_model, measurement_model=measurement_model
     )
 
@@ -40,7 +40,7 @@ def test_train_ekf_e2e(subsequence_dataloader, buddy):
 
     # Train for 1 epoch
     buddy.attach_model(filter_model)
-    diffbayes.train.train_filter(
+    torchfilter.train.train_filter(
         buddy,
         filter_model,
         subsequence_dataloader,
@@ -59,7 +59,7 @@ def test_train_ukf_e2e(subsequence_dataloader, buddy):
     # Create individual models + filter
     dynamics_model = LinearDynamicsModel(trainable=True)
     measurement_model = LinearKalmanFilterMeasurementModel(trainable=True)
-    filter_model = diffbayes.filters.UnscentedKalmanFilter(
+    filter_model = torchfilter.filters.UnscentedKalmanFilter(
         dynamics_model=dynamics_model, measurement_model=measurement_model
     )
 
@@ -69,7 +69,7 @@ def test_train_ukf_e2e(subsequence_dataloader, buddy):
 
     # Train for 1 epoch
     buddy.attach_model(filter_model)
-    diffbayes.train.train_filter(
+    torchfilter.train.train_filter(
         buddy,
         filter_model,
         subsequence_dataloader,
@@ -88,7 +88,7 @@ def test_train_virtual_sensor_ekf_e2e(subsequence_dataloader, buddy):
     # Create individual models + filter
     dynamics_model = LinearDynamicsModel(trainable=True)
     virtual_sensor_model = LinearVirtualSensorModel(trainable=True)
-    filter_model = diffbayes.filters.VirtualSensorExtendedKalmanFilter(
+    filter_model = torchfilter.filters.VirtualSensorExtendedKalmanFilter(
         dynamics_model=dynamics_model, virtual_sensor_model=virtual_sensor_model
     )
 
@@ -98,7 +98,7 @@ def test_train_virtual_sensor_ekf_e2e(subsequence_dataloader, buddy):
 
     # Train for 1 epoch
     buddy.attach_model(filter_model)
-    diffbayes.train.train_filter(
+    torchfilter.train.train_filter(
         buddy,
         filter_model,
         subsequence_dataloader,
@@ -119,7 +119,7 @@ def test_train_pf_e2e(subsequence_dataloader, buddy):
     # Create individual models + filter
     dynamics_model = LinearDynamicsModel(trainable=True)
     measurement_model = LinearParticleFilterMeasurementModel(trainable=True)
-    filter_model = diffbayes.filters.ParticleFilter(
+    filter_model = torchfilter.filters.ParticleFilter(
         dynamics_model=dynamics_model, measurement_model=measurement_model
     )
 
@@ -131,7 +131,7 @@ def test_train_pf_e2e(subsequence_dataloader, buddy):
 
     # Train for 1 epoch
     buddy.attach_model(filter_model)
-    diffbayes.train.train_filter(
+    torchfilter.train.train_filter(
         buddy,
         filter_model,
         subsequence_dataloader,

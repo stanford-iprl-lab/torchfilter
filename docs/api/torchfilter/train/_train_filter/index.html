@@ -1,0 +1,247 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchfilter.train._train_filter &mdash; torchfilter  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> torchfilter
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">torchfilter</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.train._train_filter</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/api/torchfilter/train/_train_filter/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-torchfilter.train._train_filter">
+<span id="torchfilter-train-train-filter"></span><h1><a class="reference internal" href="#module-torchfilter.train._train_filter" title="torchfilter.train._train_filter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.train._train_filter</span></code></a><a class="headerlink" href="#module-torchfilter.train._train_filter" title="Permalink to this headline">¶</a></h1>
+<p>Private module; avoid importing from directly.</p>
+<div class="section" id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#torchfilter.train._train_filter.train_filter" title="torchfilter.train._train_filter.train_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train_filter</span></code></a>(buddy: fannypack.utils.Buddy, filter_model: torchfilter.base.Filter, dataloader: DataLoader, initial_covariance: torch.Tensor, *, loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss, log_interval: int = 10, measurement_initialize=False, optimizer_name='train_filter_recurrent') → None</p></td>
+<td><p>Trains a filter end-to-end via backpropagation through time for 1 epoch over a</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt id="torchfilter.train._train_filter.train_filter">
+<code class="sig-prename descclassname">torchfilter.train._train_filter.</code><code class="sig-name descname">train_filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buddy</span><span class="p">:</span> <span class="n">fannypack.utils.Buddy</span></em>, <em class="sig-param"><span class="n">filter_model</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../base/index.html#torchfilter.base.Filter" title="torchfilter.base.Filter">torchfilter.base.Filter</a></span></em>, <em class="sig-param"><span class="n">dataloader</span><span class="p">:</span> <span class="n">DataLoader</span></em>, <em class="sig-param"><span class="n">initial_covariance</span><span class="p">:</span> <span class="n">torch.Tensor</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">loss_function</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span>torch.Tensor<span class="p">, </span>torch.Tensor<span class="p">]</span><span class="p">, </span>torch.Tensor<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">F.mse_loss</span></em>, <em class="sig-param"><span class="n">log_interval</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">10</span></em>, <em class="sig-param"><span class="n">measurement_initialize</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">optimizer_name</span><span class="o">=</span><span class="default_value">'train_filter_recurrent'</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../../../../_modules/torchfilter/train/_train_filter.html#train_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.train._train_filter.train_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains a filter end-to-end via backpropagation through time for 1 epoch over a
+subsequence dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>buddy</strong> (<em>fannypack.utils.Buddy</em>) – Training helper.</p></li>
+<li><p><strong>filter_model</strong> (<a class="reference internal" href="../../base/index.html#torchfilter.base.DynamicsModel" title="torchfilter.base.DynamicsModel"><em>torchfilter.base.DynamicsModel</em></a>) – Model to train.</p></li>
+<li><p><strong>dataloader</strong> (<em>DataLoader</em>) – Loader for a SubsequenceDataset.</p></li>
+<li><p><strong>initial_covariance</strong> (<em>torch.Tensor</em>) – Covariance matrix of error in initial
+posterior, whose mean is sampled from a Gaussian centered at the
+ground-truth start state. Shape should be <code class="docutils literal notranslate"><span class="pre">(state_dim,</span> <span class="pre">state_dim)</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>loss_function</strong> (<em>callable</em><em>, </em><em>optional</em>) – Loss function, from <code class="docutils literal notranslate"><span class="pre">torch.nn.functional</span></code>.
+Defaults to MSE.</p></li>
+<li><p><strong>log_interval</strong> (<em>int</em><em>, </em><em>optional</em>) – Minibatches between each Tensorboard log.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

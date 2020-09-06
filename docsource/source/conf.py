@@ -15,7 +15,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = "diffbayes"
+project = "torchfilter"
 copyright = "2020"
 author = "brentyi"
 
@@ -111,7 +111,7 @@ html_static_path = ["_static"]
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "diffbayes_doc"
+htmlhelp_basename = "torchfilter_doc"
 
 
 # -- Options for Github output ------------------------------------------------
@@ -142,7 +142,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, "diffbayes.tex", "diffbayes documentation", "brentyi", "manual",),
+    (master_doc, "torchfilter.tex", "torchfilter documentation", "brentyi", "manual",),
 ]
 
 
@@ -150,7 +150,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "diffbayes", "diffbayes documentation", [author], 1)]
+man_pages = [(master_doc, "torchfilter", "torchfilter documentation", [author], 1)]
 
 
 # -- Options for Texinfo output ----------------------------------------------
@@ -161,11 +161,11 @@ man_pages = [(master_doc, "diffbayes", "diffbayes documentation", [author], 1)]
 texinfo_documents = [
     (
         master_doc,
-        "diffbayes",
-        "diffbayes documentation",
+        "torchfilter",
+        "torchfilter documentation",
         author,
-        "diffbayes",
-        "diffbayes documentation",
+        "torchfilter",
+        "torchfilter documentation",
         "Miscellaneous",
     ),
 ]
@@ -174,7 +174,7 @@ texinfo_documents = [
 # -- Extension configuration --------------------------------------------------
 
 # -- Options for autoapi extension --------------------------------------------
-autoapi_dirs = ["../../diffbayes"]
+autoapi_dirs = ["../../torchfilter"]
 autoapi_root = "api"
 autoapi_options = [
     "members",
@@ -191,7 +191,7 @@ def _gen_inheritance_alias():
     inheritance_alias = {}
 
     def recurse(module, prefixes):
-        if hasattr(module, "__name__") and module.__name__.startswith("diffbayes"):
+        if hasattr(module, "__name__") and module.__name__.startswith("torchfilter"):
             MAX_DEPTH = 5
             if len(prefixes) > MAX_DEPTH:
                 # Prevent infinite loops from cyclic imports
@@ -200,15 +200,15 @@ def _gen_inheritance_alias():
             return
 
         for member_name in dir(module):
-            if member_name == "diffbayes":
+            if member_name == "torchfilter":
                 continue
 
             member = getattr(module, member_name)
             if callable(member):
-                full_name = ".".join(["diffbayes"] + prefixes + [member_name])
+                full_name = ".".join(["torchfilter"] + prefixes + [member_name])
 
-                shortened_name = "diffbayes"
-                current = diffbayes
+                shortened_name = "torchfilter"
+                current = torchfilter
                 success = True
                 for p in prefixes + [member_name]:
                     if p.startswith("_"):
@@ -227,9 +227,9 @@ def _gen_inheritance_alias():
             elif not member_name.startswith("__"):
                 recurse(member, prefixes + [member_name])
 
-    import diffbayes
+    import torchfilter
 
-    recurse(diffbayes, prefixes=[])
+    recurse(torchfilter, prefixes=[])
     return inheritance_alias
 
 

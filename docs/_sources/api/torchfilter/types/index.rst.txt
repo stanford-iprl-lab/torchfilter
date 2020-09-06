@@ -1,0 +1,184 @@
+:mod:`torchfilter.types`
+========================
+
+.. py:module:: torchfilter.types
+
+.. autoapi-nested-parse::
+
+   Data structures and semantic type aliases for filtering.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   torchfilter.types.Trajectory
+   torchfilter.types.TrajectoryNumpy
+   torchfilter.types.TrajectoryTorch
+
+
+
+.. data:: NumpyDict
+   
+
+   Dictionary from ``str`` keys to ``np.ndarray`` values.
+
+
+.. data:: TorchDict
+   
+
+   Dictionary from ``str`` keys to ``torch.Tensor`` values.
+
+
+.. data:: NumpyArrayOrDict
+   
+
+   Union of np.ndarray and NumpyDict types.
+
+
+.. data:: TorchTensorOrDict
+   
+
+   Union of torch.Tensor and TorchDict types.
+
+
+.. data:: StatesNumpy
+   
+
+   State array type hint. Needs to be a raw ``np.ndarray``.
+
+
+.. data:: StatesTorch
+   
+
+   State array type hint. Needs to be a raw ``torch.Tensor``.
+
+
+.. data:: ObservationsNumpy
+   
+
+   Observations can be either ``np.ndarray`` objects or ``str->np.ndarray`` dictionaries.
+
+
+.. data:: ObservationsTorch
+   
+
+   Observations can be either ``torch.Tensor`` objects or ``str->torch.Tensor`` dictionaries.
+
+
+.. data:: ObservationsNoDictNumpy
+   
+
+   Same as ``ObservationsNumpy``\ , but no dictionaries.
+
+
+.. data:: ObservationsNoDictTorch
+   
+
+   Same as ``ObservationsTorch``\ , but no dictionaries.
+
+
+.. data:: ControlsNumpy
+   
+
+   Controls can be either ``np.ndarray`` objects or ``str->np.ndarray`` dictionaries.
+
+
+.. data:: ControlsTorch
+   
+
+   Controls can be either ``torch.Tensor`` objects or ``str->torch.Tensor`` dictionaries.
+
+
+.. data:: CovarianceTorch
+   
+
+   Covariance matrix as ``torch.Tensor``. Must be positive semi-definite.
+
+
+.. data:: ScaleTrilTorch
+   
+
+   Lower-triangular cholesky decomposition of covariance matrix as ``torch.Tensor``.
+
+
+.. py:class:: Trajectory
+
+   Bases: :class:`typing.NamedTuple`
+
+   .. autoapi-inheritance-diagram:: torchfilter.types.Trajectory
+      :parts: 1
+
+   Named tuple containing states, observations, and controls.
+
+   .. attribute:: states
+      :annotation: :Union[StatesNumpy, StatesTorch]
+
+      
+
+   .. attribute:: observations
+      :annotation: :Union[ObservationsNumpy, ObservationsTorch]
+
+      
+
+   .. attribute:: controls
+      :annotation: :Union[ControlsNumpy, ControlsTorch]
+
+      
+
+
+.. py:class:: TrajectoryNumpy
+
+   Bases: :class:`torchfilter.types.Trajectory`
+
+   .. autoapi-inheritance-diagram:: torchfilter.types.TrajectoryNumpy
+      :parts: 1
+
+   Named tuple containing states, observations, and controls represented in NumPy.
+
+   .. attribute:: states
+      :annotation: :StatesNumpy
+
+      
+
+   .. attribute:: observations
+      :annotation: :ObservationsNumpy
+
+      
+
+   .. attribute:: controls
+      :annotation: :ControlsNumpy
+
+      
+
+
+.. py:class:: TrajectoryTorch
+
+   Bases: :class:`torchfilter.types.Trajectory`
+
+   .. autoapi-inheritance-diagram:: torchfilter.types.TrajectoryTorch
+      :parts: 1
+
+   Named tuple containing states, observations, and controls represented in Torch.
+
+   .. attribute:: states
+      :annotation: :StatesTorch
+
+      
+
+   .. attribute:: observations
+      :annotation: :ObservationsTorch
+
+      
+
+   .. attribute:: controls
+      :annotation: :ControlsTorch
+
+      
+
+

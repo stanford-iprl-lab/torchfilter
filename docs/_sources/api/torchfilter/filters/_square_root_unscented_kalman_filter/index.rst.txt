@@ -1,0 +1,46 @@
+:orphan:
+
+:mod:`torchfilter.filters._square_root_unscented_kalman_filter`
+===============================================================
+
+.. py:module:: torchfilter.filters._square_root_unscented_kalman_filter
+
+.. autoapi-nested-parse::
+
+   Private module; avoid importing from directly.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   torchfilter.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter
+
+
+
+.. py:class:: SquareRootUnscentedKalmanFilter(*, dynamics_model: DynamicsModel, measurement_model: KalmanFilterMeasurementModel, sigma_point_strategy: Optional[utils.SigmaPointStrategy] = None)
+
+   Bases: :class:`torchfilter.base.KalmanFilterBase`
+
+   .. autoapi-inheritance-diagram:: torchfilter.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter
+      :parts: 1
+
+   Square-root formulation of UKF.
+
+   From Algorithm 3.1 of Merwe et al [1].
+
+   [1] The square-root unscented Kalman filter for state and parameter-estimation.
+   https://ieeexplore.ieee.org/document/940586/
+
+   .. method:: belief_covariance(self) -> types.CovarianceTorch
+      :property:
+
+      Posterior covariance. Shape should be ``(N, state_dim, state_dim)``.
+
+
+

@@ -22,7 +22,7 @@ jobs:
       - name: Generate coverage report
         run: |
           pip install pytest pytest-cov
-          pytest --cov=diffbayes --cov-report=xml
+          pytest --cov=torchfilter --cov-report=xml
       - name: Upload to Codecov
         uses: codecov/codecov-action@v1
         with:
