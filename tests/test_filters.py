@@ -53,13 +53,36 @@ def test_particle_filter_soft_resample(generated_data):
     )
 
 
-def test_particle_filter_dynamics_particle_count(generated_data):
+def test_particle_filter_dynamic_particle_count(generated_data):
     """Smoke test for particle filter with a dynamically changing particle count + no resampling.
     """
     filter_model = diffbayes.filters.ParticleFilter(
         dynamics_model=LinearDynamicsModel(),
         measurement_model=LinearParticleFilterMeasurementModel(),
         resample=False,
+        num_particles=30,
+    )
+    _run_filter(filter_model, generated_data)
+    assert filter_model.particle_states.shape[1] == 30
+
+    # Expand
+    filter_model.num_particles = 100
+    _run_filter(filter_model, generated_data, initialize_beliefs=False)
+    assert filter_model.particle_states.shape[1] == 100
+
+    # Contract
+    filter_model.num_particles = 30
+    _run_filter(filter_model, generated_data, initialize_beliefs=False)
+    assert filter_model.particle_states.shape[1] == 30
+
+
+def test_particle_filter_dynamic_particle_count_resample(generated_data):
+    """Smoke test for particle filter with a dynamically changing particle count w/ resampling.
+    """
+    filter_model = diffbayes.filters.ParticleFilter(
+        dynamics_model=LinearDynamicsModel(),
+        measurement_model=LinearParticleFilterMeasurementModel(),
+        resample=True,
         num_particles=30,
     )
     _run_filter(filter_model, generated_data)

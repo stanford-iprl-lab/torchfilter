@@ -212,6 +212,7 @@ class ParticleFilter(Filter):
         )
 
         # Compute output
+        state_estimates: types.StatesTorch
         if self.estimation_method == "weighted_average":
             state_estimates = torch.sum(
                 torch.exp(self.particle_log_weights[:, :, np.newaxis])
@@ -228,49 +229,7 @@ class ParticleFilter(Filter):
 
         # Resampling
         if resample:
-            sample_logits: torch.Tensor
-            uniform_log_weights = self.particle_log_weights.new_full(
-                (N, self.num_particles), float(-np.log(M, dtype=np.float32))
-            )
-            if self.soft_resample_alpha < 1.0:
-                # Soft resampling
-                assert self.particle_log_weights.shape == (N, M)
-                alpha = self.soft_resample_alpha
-                sample_logits = torch.logsumexp(
-                    torch.stack(
-                        [
-                            self.particle_log_weights + np.log(alpha),
-                            uniform_log_weights + np.log(1.0 - alpha),
-                        ],
-                        dim=0,
-                    ),
-                    dim=0,
-                )
-                self.particle_log_weights = self.particle_log_weights - sample_logits
-            else:
-                # Standard particle filter re-sampling -- this stops gradients
-                # This is the most naive flavor of resampling, and not the low
-                # variance approach
-                #
-                # Note the distinction between M, the current # of particles,
-                # and self.num_particles, the desired # of particles
-                sample_logits = self.particle_log_weights
-                self.particle_log_weights = uniform_log_weights
-
-            assert sample_logits.shape == (N, M)
-            distribution = torch.distributions.Categorical(logits=sample_logits)
-            state_indices = distribution.sample((self.num_particles,)).T
-            assert state_indices.shape == (N, self.num_particles)
-
-            self.particle_states = torch.gather(
-                self.particle_states,
-                dim=1,
-                index=state_indices[:, :, None].expand((N, M, state_dim)),
-            )
-            # # ^This gather magic is equivalent to:
-            # particle_states_alt = torch.zeros_like(self.particle_states)
-            # for i in range(N):
-            #     particle_states_alt[i] = self.particle_states[i][state_indices[i]]
+            self._resample()
 
         # Post-condition :)
         assert state_estimates.shape == (N, state_dim)
@@ -278,3 +237,53 @@ class ParticleFilter(Filter):
         assert self.particle_log_weights.shape == (N, self.num_particles)
 
         return state_estimates
+
+    def _resample(self) -> None:
+        """Resample particles.
+        """
+        # Note the distinction between `M`, the current number of particles, and
+        # `self.num_particles`, the desired number of particles
+        N, M, state_dim = self.particle_states.shape
+
+        sample_logits: torch.Tensor
+        uniform_log_weights = self.particle_log_weights.new_full(
+            (N, self.num_particles), float(-np.log(M, dtype=np.float32))
+        )
+        if self.soft_resample_alpha < 1.0:
+            # Soft resampling
+            assert self.particle_log_weights.shape == (N, M)
+            sample_logits = torch.logsumexp(
+                torch.stack(
+                    [
+                        self.particle_log_weights + np.log(self.soft_resample_alpha),
+                        uniform_log_weights + np.log(1.0 - self.soft_resample_alpha),
+                    ],
+                    dim=0,
+                ),
+                dim=0,
+            )
+            self.particle_log_weights = self.particle_log_weights - sample_logits
+        else:
+            # Standard particle filter re-sampling -- this stops gradients
+            # This is the most naive flavor of resampling, and not the low
+            # variance approach
+            #
+            # Note the distinction between M, the current # of particles,
+            # and self.num_particles, the desired # of particles
+            sample_logits = self.particle_log_weights
+            self.particle_log_weights = uniform_log_weights
+
+        assert sample_logits.shape == (N, M)
+        distribution = torch.distributions.Categorical(logits=sample_logits)
+        state_indices = distribution.sample((self.num_particles,)).T
+        assert state_indices.shape == (N, self.num_particles)
+
+        self.particle_states = torch.gather(
+            self.particle_states,
+            dim=1,
+            index=state_indices[:, :, None].expand((N, self.num_particles, state_dim)),
+        )
+        # # ^This gather magic is equivalent to:
+        # particle_states_alt = torch.zeros_like(self.particle_states)
+        # for i in range(N):
+        #     particle_states_alt[i] = self.particle_states[i][state_indices[i]]

@@ -28,7 +28,7 @@ class ParticleFilterMeasurementModel(abc.ABC, nn.Module):
     @overrides
     def forward(
         self, *, states: types.StatesTorch, observations: types.ObservationsTorch
-    ) -> types.StatesTorch:
+    ) -> torch.Tensor:
         """Observation model forward pass, over batch size `N`.
         For each member of a batch, we expect `M` separate states (particles)
         and one unique observation.
@@ -62,7 +62,7 @@ class ParticleFilterMeasurementModelWrapper(ParticleFilterMeasurementModel):
     @overrides
     def forward(
         self, *, states: types.StatesTorch, observations: types.ObservationsTorch
-    ) -> types.StatesTorch:
+    ) -> torch.Tensor:
         """Observation model forward pass, over batch size `N`.
         For each member of a batch, we expect `M` separate states (particles)
         and one unique observation.
@@ -97,17 +97,20 @@ class ParticleFilterMeasurementModelWrapper(ParticleFilterMeasurementModel):
         )
         assert pred_observations.shape == (N * M, observation_dim)
         assert observations_tril.shape == (N * M, observation_dim, observation_dim)
+        pred_observations = pred_observations.reshape((N, M, observation_dim))
+        observations_tril = observations_tril.reshape(
+            (N, M, observation_dim, observation_dim)
+        )
 
         # Expand observations to account for particle count
         # This is currently not very memory-efficient
-        observations = torch.repeat_interleave(observations, repeats=M, dim=0)
-        assert observations.shape == (N * M, observation_dim)
+        observations = observations[:, None, :].expand((N, M, observation_dim))
 
         # Compute log likelihoods
         log_likelihoods = torch.distributions.MultivariateNormal(
             loc=pred_observations, scale_tril=observations_tril
         ).log_prob(observations)
-        assert log_likelihoods.shape == (N * M,)
+        assert log_likelihoods.shape == (N, M)
 
         # Reshape and return
-        return log_likelihoods.reshape(N, M)
+        return log_likelihoods
