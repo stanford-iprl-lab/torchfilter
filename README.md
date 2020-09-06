@@ -6,8 +6,10 @@
 [![codecov](https://codecov.io/gh/brentyi/torchfilter/branch/master/graph/badge.svg)](https://codecov.io/gh/brentyi/torchfilter)
 
 **`torchfilter`** is a library for discrete-time Bayesian filtering in PyTorch.
+By writing filters as differentiable PyTorch modules, we can optimize for system
+models/parameters that directly minimize end-to-end state estimation error.
 
-It's broken down into six submodules:
+The package is broken down into six submodules:
 
 <table>
   <tbody valign="top">

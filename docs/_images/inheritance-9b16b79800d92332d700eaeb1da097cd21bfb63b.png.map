@@ -1,8 +1,0 @@
-<map id="inheritanceccf405039b" name="inheritanceccf405039b">
-<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="4,39,56,57"/>
-<area shape="rect" id="node2" href="../../base/index.html#torchfilter.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="90,4,142,22"/>
-<area shape="rect" id="node4" href="../../base/index.html#torchfilter.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="176,22,275,40"/>
-<area shape="rect" id="node3" title="Base class for all neural network modules." alt="" coords="4,4,56,22"/>
-<area shape="rect" id="node5" href="../index.html#torchfilter.filters.SquareRootUnscentedKalmanFilter" target="_top" title="Square&#45;root formulation of UKF." alt="" coords="309,22,488,40"/>
-<area shape="rect" id="node6" href="../index.html#torchfilter.filters.VirtualSensorSquareRootUnscentedKalmanFilter" target="_top" title="Square root UKF variant with a virtual sensor model for mapping raw observations" alt="" coords="523,22,764,40"/>
-</map>
