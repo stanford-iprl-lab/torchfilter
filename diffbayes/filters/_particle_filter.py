@@ -150,39 +150,32 @@ class ParticleFilter(Filter):
             # If output particles > our input particles, for the beginning part we copy
             # particles directly to reduce variance
             copy_count = (self.num_particles // M) * M
-            indices[:, :copy_count] = torch.arange(M).repeat(copy_count // M)[None, :]
+            if copy_count > 0:
+                indices[:, :copy_count] = torch.arange(M).repeat(copy_count // M)[
+                    None, :
+                ]
 
             # For remaining particles, we sample w/o replacement (also lowers variance)
             remaining_count = self.num_particles - copy_count
             assert remaining_count >= 0
             if remaining_count > 0:
-                uniform_logits = torch.ones_like(self.particle_log_weights[0])
-                indices[:, copy_count:] = torch.stack(
-                    [
-                        torch.multinomial(
-                            uniform_logits,
-                            num_samples=remaining_count,
-                            replacement=False,
-                        )
-                        for _ in range(N)
-                    ],
-                    dim=0,
-                )
+                indices[:, copy_count:] = torch.randperm(M, device=indices.device)[
+                    None, :remaining_count
+                ]
 
             # Gather new particles, weights
-            new_states = self.particle_states.gather(
-                1, indices[:, :, None].expand((N, self.num_particles, state_dim))
-            )
-            new_log_weights = self.particle_log_weights.gather(1, indices)
-            assert new_states.shape == (N, self.num_particles, state_dim)
-            assert new_log_weights.shape == (N, self.num_particles)
-
-            # Update particle states and (normalized) weights
-            self.particle_states = new_states
-            self.particle_log_weights = new_log_weights - torch.logsumexp(
-                new_log_weights, dim=1, keepdim=True
-            )
             M = self.num_particles
+            self.particle_states = self.particle_states.gather(
+                1, indices[:, :, None].expand((N, M, state_dim))
+            )
+            self.particle_log_weights = self.particle_log_weights.gather(1, indices)
+            assert self.particle_states.shape == (N, self.num_particles, state_dim)
+            assert self.particle_log_weights.shape == (N, self.num_particles)
+
+            # Normalize particle weights to sum to 1.0
+            self.particle_log_weights = self.particle_log_weights - torch.logsumexp(
+                self.particle_log_weights, dim=1, keepdim=True
+            )
 
         # Propagate particles through our dynamics model
         # A bit of extra effort is required for the extra particle dimension
@@ -272,7 +265,7 @@ class ParticleFilter(Filter):
             self.particle_states = torch.gather(
                 self.particle_states,
                 dim=1,
-                index=state_indices[:, :, None].repeat(1, 1, state_dim),
+                index=state_indices[:, :, None].expand((N, M, state_dim)),
             )
             # # ^This gather magic is equivalent to:
             # particle_states_alt = torch.zeros_like(self.particle_states)

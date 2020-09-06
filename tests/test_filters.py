@@ -53,6 +53,29 @@ def test_particle_filter_soft_resample(generated_data):
     )
 
 
+def test_particle_filter_dynamics_particle_count(generated_data):
+    """Smoke test for particle filter with a dynamically changing particle count + no resampling.
+    """
+    filter_model = diffbayes.filters.ParticleFilter(
+        dynamics_model=LinearDynamicsModel(),
+        measurement_model=LinearParticleFilterMeasurementModel(),
+        resample=False,
+        num_particles=30,
+    )
+    _run_filter(filter_model, generated_data)
+    assert filter_model.particle_states.shape[1] == 30
+
+    # Expand
+    filter_model.num_particles = 100
+    _run_filter(filter_model, generated_data, initialize_beliefs=False)
+    assert filter_model.particle_states.shape[1] == 100
+
+    # Contract
+    filter_model.num_particles = 30
+    _run_filter(filter_model, generated_data, initialize_beliefs=False)
+    assert filter_model.particle_states.shape[1] == 30
+
+
 def test_ekf(generated_data):
     """Smoke test for EKF.
     """
@@ -289,6 +312,7 @@ def _run_filter(
     data: Tuple[
         types.StatesTorch, types.ObservationsNoDictTorch, types.ControlsNoDictTorch
     ],
+    initialize_beliefs: bool = True,
 ) -> torch.Tensor:
     """Helper for running a filter and returning estimated states.
 
@@ -307,11 +331,12 @@ def _run_filter(
     T, N, state_dim = states.shape
 
     # Initialize the filter belief to match the first timestep
-    filter_model.initialize_beliefs(
-        mean=states[0],
-        covariance=torch.zeros(size=(N, state_dim, state_dim))
-        + torch.eye(state_dim)[None, :, :] * 0.1,
-    )
+    if initialize_beliefs:
+        filter_model.initialize_beliefs(
+            mean=states[0],
+            covariance=torch.zeros(size=(N, state_dim, state_dim))
+            + torch.eye(state_dim)[None, :, :] * 0.1,
+        )
 
     # Run the filter on the remaining `T - 1` timesteps
     estimated_states = filter_model.forward_loop(
