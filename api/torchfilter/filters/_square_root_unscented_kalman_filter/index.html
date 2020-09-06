@@ -171,22 +171,12 @@
 <dt id="torchfilter.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter">
 <em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters._square_root_unscented_kalman_filter.</code><code class="sig-name descname">SquareRootUnscentedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="n">sigma_point_strategy</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>utils.SigmaPointStrategy<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/filters/_square_root_unscented_kalman_filter/#SquareRootUnscentedKalmanFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../base/#torchfilter.base.KalmanFilterBase" title="torchfilter.base.KalmanFilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.base.KalmanFilterBase</span></code></a></p>
-digraph inheritance043a2712a5 {
-bgcolor=transparent;
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;ABC&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
-  &quot;Filter&quot; [URL=&quot;../../base/#torchfilter.base.Filter&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Base class for a generic differentiable state estimator.&quot;];
-  &quot;Module&quot; -&gt; &quot;Filter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;ABC&quot; -&gt; &quot;Filter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;KalmanFilterBase&quot; [URL=&quot;../../base/#torchfilter.base.KalmanFilterBase&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Base class for a generic Kalman-style filter. Parameterizes beliefs with a mean&quot;];
-  &quot;Filter&quot; -&gt; &quot;KalmanFilterBase&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;ABC&quot; -&gt; &quot;KalmanFilterBase&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;Module&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Base class for all neural network modules.&quot;];
-  &quot;SquareRootUnscentedKalmanFilter&quot; [URL=&quot;../#torchfilter.filters.SquareRootUnscentedKalmanFilter&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Square-root formulation of UKF.&quot;];
-  &quot;KalmanFilterBase&quot; -&gt; &quot;SquareRootUnscentedKalmanFilter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-}
-<p>Square-root formulation of UKF.</p>
+<div class="graphviz"><img src="../../../../_images/inheritance-a3e8da4912e4a8d607201d143271e87c222ca655.png" alt="Inheritance diagram of torchfilter.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter" usemap="#inheritance043a2712a5" class="inheritance graphviz" /></div>
+<map id="inheritance043a2712a5" name="inheritance043a2712a5">
+<area shape="rect" id="node2" href="../../base/#torchfilter.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node4" href="../../base/#torchfilter.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,31,381,56"/>
+<area shape="rect" id="node5" href="../#torchfilter.filters.SquareRootUnscentedKalmanFilter" target="_top" title="Square&#45;root formulation of UKF." alt="" coords="429,31,676,56"/>
+</map><p>Square-root formulation of UKF.</p>
 <p>From Algorithm 3.1 of Merwe et al [1].</p>
 <p>[1] The square-root unscented Kalman filter for state and parameter-estimation.
 <a class="reference external" href="https://ieeexplore.ieee.org/document/940586/">https://ieeexplore.ieee.org/document/940586/</a></p>

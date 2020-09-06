@@ -171,22 +171,12 @@
 <dt id="torchfilter.filters._extended_kalman_filter.ExtendedKalmanFilter">
 <em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters._extended_kalman_filter.</code><code class="sig-name descname">ExtendedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">unused_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/filters/_extended_kalman_filter/#ExtendedKalmanFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters._extended_kalman_filter.ExtendedKalmanFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../base/#torchfilter.base.KalmanFilterBase" title="torchfilter.base.KalmanFilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.base.KalmanFilterBase</span></code></a></p>
-digraph inheritance4679c6ebed {
-bgcolor=transparent;
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;ABC&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
-  &quot;ExtendedKalmanFilter&quot; [URL=&quot;../#torchfilter.filters.ExtendedKalmanFilter&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Generic differentiable EKF.&quot;];
-  &quot;KalmanFilterBase&quot; -&gt; &quot;ExtendedKalmanFilter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;Filter&quot; [URL=&quot;../../base/#torchfilter.base.Filter&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Base class for a generic differentiable state estimator.&quot;];
-  &quot;Module&quot; -&gt; &quot;Filter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;ABC&quot; -&gt; &quot;Filter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;KalmanFilterBase&quot; [URL=&quot;../../base/#torchfilter.base.KalmanFilterBase&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Base class for a generic Kalman-style filter. Parameterizes beliefs with a mean&quot;];
-  &quot;Filter&quot; -&gt; &quot;KalmanFilterBase&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;ABC&quot; -&gt; &quot;KalmanFilterBase&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;Module&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Base class for all neural network modules.&quot;];
-}
-<p>Generic differentiable EKF.</p>
+<div class="graphviz"><img src="../../../../_images/inheritance-d3ce0dba0d0dd0cc059fcf514990ba487bf723dc.png" alt="Inheritance diagram of torchfilter.filters._extended_kalman_filter.ExtendedKalmanFilter" usemap="#inheritance4679c6ebed" class="inheritance graphviz" /></div>
+<map id="inheritance4679c6ebed" name="inheritance4679c6ebed">
+<area shape="rect" id="node3" href="../../base/#torchfilter.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,29,381,55"/>
+<area shape="rect" id="node4" href="../../base/#torchfilter.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,55,197,80"/>
+<area shape="rect" id="node2" href="../#torchfilter.filters.ExtendedKalmanFilter" target="_top" title="Generic differentiable EKF." alt="" coords="429,29,595,55"/>
+</map><p>Generic differentiable EKF.</p>
 <p>For building estimators with more complex observation spaces (eg images), see
 <code class="docutils literal notranslate"><span class="pre">VirtualSensorExtendedKalmanFilter</span></code>.</p>
 </dd></dl>

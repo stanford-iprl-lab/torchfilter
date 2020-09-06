@@ -171,20 +171,11 @@
 <dt id="torchfilter.base._kalman_filter_base.KalmanFilterBase">
 <em class="property">class </em><code class="sig-prename descclassname">torchfilter.base._kalman_filter_base.</code><code class="sig-name descname">KalmanFilterBase</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">unused_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/base/_kalman_filter_base/#KalmanFilterBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.base._kalman_filter_base.KalmanFilterBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../#torchfilter.base.Filter" title="torchfilter.base.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.base.Filter</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-digraph inheritance964064ca7a {
-bgcolor=transparent;
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;ABC&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
-  &quot;Filter&quot; [URL=&quot;../#torchfilter.base.Filter&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Base class for a generic differentiable state estimator.&quot;];
-  &quot;Module&quot; -&gt; &quot;Filter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;ABC&quot; -&gt; &quot;Filter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;KalmanFilterBase&quot; [URL=&quot;../#torchfilter.base.KalmanFilterBase&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Base class for a generic Kalman-style filter. Parameterizes beliefs with a mean&quot;];
-  &quot;Filter&quot; -&gt; &quot;KalmanFilterBase&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;ABC&quot; -&gt; &quot;KalmanFilterBase&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;Module&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Base class for all neural network modules.&quot;];
-}
-<p>Base class for a generic Kalman-style filter. Parameterizes beliefs with a mean
+<div class="graphviz"><img src="../../../../_images/inheritance-2166f2c172801b863c8fc6844d0a3aac19a9f88f.png" alt="Inheritance diagram of torchfilter.base._kalman_filter_base.KalmanFilterBase" usemap="#inheritance964064ca7a" class="inheritance graphviz" /></div>
+<map id="inheritance964064ca7a" name="inheritance964064ca7a">
+<area shape="rect" id="node2" href="../#torchfilter.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node4" href="../#torchfilter.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="245,31,381,56"/>
+</map><p>Base class for a generic Kalman-style filter. Parameterizes beliefs with a mean
 and covariance.</p>
 <p>Subclasses should override _predict_step() and _update_step().</p>
 <dl class="py attribute">

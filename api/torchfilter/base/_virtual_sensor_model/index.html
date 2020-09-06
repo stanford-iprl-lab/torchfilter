@@ -171,17 +171,10 @@
 <dt id="torchfilter.base._virtual_sensor_model.VirtualSensorModel">
 <em class="property">class </em><code class="sig-prename descclassname">torchfilter.base._virtual_sensor_model.</code><code class="sig-name descname">VirtualSensorModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/base/_virtual_sensor_model/#VirtualSensorModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.base._virtual_sensor_model.VirtualSensorModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
-digraph inheritance2bbb61fe39 {
-bgcolor=transparent;
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;ABC&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
-  &quot;Module&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Base class for all neural network modules.&quot;];
-  &quot;VirtualSensorModel&quot; [URL=&quot;../#torchfilter.base.VirtualSensorModel&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Virtual sensor base class for our differentiable Kalman filters.&quot;];
-  &quot;ABC&quot; -&gt; &quot;VirtualSensorModel&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;Module&quot; -&gt; &quot;VirtualSensorModel&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-}
-<p>Virtual sensor base class for our differentiable Kalman filters.</p>
+<div class="graphviz"><img src="../../../../_images/inheritance-ed35c85a5a20d1c061bb50a39a20da392ac70a26.png" alt="Inheritance diagram of torchfilter.base._virtual_sensor_model.VirtualSensorModel" usemap="#inheritance2bbb61fe39" class="inheritance graphviz" /></div>
+<map id="inheritance2bbb61fe39" name="inheritance2bbb61fe39">
+<area shape="rect" id="node3" href="../#torchfilter.base.VirtualSensorModel" target="_top" title="Virtual sensor base class for our differentiable Kalman filters." alt="" coords="125,31,273,56"/>
+</map><p>Virtual sensor base class for our differentiable Kalman filters.</p>
 <p>Maps each observation input to a predicted state and uncertainty, in the style of
 BackpropKF. This is often necessary for complex observation spaces like images or
 point clouds, where it’s not possible to learn a standard state-&gt;observation

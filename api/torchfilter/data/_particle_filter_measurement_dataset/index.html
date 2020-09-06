@@ -171,15 +171,10 @@
 <dt id="torchfilter.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset">
 <em class="property">class </em><code class="sig-prename descclassname">torchfilter.data._particle_filter_measurement_dataset.</code><code class="sig-name descname">ParticleFilterMeasurementDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">np.ndarray</span></em>, <em class="sig-param"><span class="n">samples_per_pair</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/data/_particle_filter_measurement_dataset/#ParticleFilterMeasurementDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
-digraph inheritance170fe3ebfd {
-bgcolor=transparent;
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;Dataset&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;An abstract class representing a :class:`Dataset`.&quot;];
-  &quot;ParticleFilterMeasurementDataset&quot; [URL=&quot;../#torchfilter.data.ParticleFilterMeasurementDataset&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;A dataset interface for pre-training particle filter measurement models.&quot;];
-  &quot;Dataset&quot; -&gt; &quot;ParticleFilterMeasurementDataset&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-}
-<p>A dataset interface for pre-training particle filter measurement models.</p>
+<div class="graphviz"><img src="../../../../_images/inheritance-9022be9761ee5544bc0cbcfa40caa0449374f81e.png" alt="Inheritance diagram of torchfilter.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset" usemap="#inheritance170fe3ebfd" class="inheritance graphviz" /></div>
+<map id="inheritance170fe3ebfd" name="inheritance170fe3ebfd">
+<area shape="rect" id="node2" href="../#torchfilter.data.ParticleFilterMeasurementDataset" target="_top" title="A dataset interface for pre&#45;training particle filter measurement models." alt="" coords="127,5,369,31"/>
+</map><p>A dataset interface for pre-training particle filter measurement models.</p>
 <p>Centers Gaussian distributions around our ground-truth states, and provides examples
 for learning the log-likelihood.</p>
 <dl class="field-list simple">

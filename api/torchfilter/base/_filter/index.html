@@ -171,17 +171,10 @@
 <dt id="torchfilter.base._filter.Filter">
 <em class="property">class </em><code class="sig-prename descclassname">torchfilter.base._filter.</code><code class="sig-name descname">Filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/base/_filter/#Filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.base._filter.Filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-digraph inheritance3b9f5a755f {
-bgcolor=transparent;
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;ABC&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
-  &quot;Filter&quot; [URL=&quot;../#torchfilter.base.Filter&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Base class for a generic differentiable state estimator.&quot;];
-  &quot;Module&quot; -&gt; &quot;Filter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;ABC&quot; -&gt; &quot;Filter&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;Module&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Base class for all neural network modules.&quot;];
-}
-<p>Base class for a generic differentiable state estimator.</p>
+<div class="graphviz"><img src="../../../../_images/inheritance-5499da951d7ffd5ff9c50cba0f551e39d24dd818.png" alt="Inheritance diagram of torchfilter.base._filter.Filter" usemap="#inheritance3b9f5a755f" class="inheritance graphviz" /></div>
+<map id="inheritance3b9f5a755f" name="inheritance3b9f5a755f">
+<area shape="rect" id="node2" href="../#torchfilter.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="125,31,197,56"/>
+</map><p>Base class for a generic differentiable state estimator.</p>
 <p>As a minimum, subclasses should override:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">initialize_beliefs</span></code> for populating the initial belief of our estimator</p></li>

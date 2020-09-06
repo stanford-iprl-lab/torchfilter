@@ -174,17 +174,10 @@
 <dt id="torchfilter.base._particle_filter_measurement_model.ParticleFilterMeasurementModel">
 <em class="property">class </em><code class="sig-prename descclassname">torchfilter.base._particle_filter_measurement_model.</code><code class="sig-name descname">ParticleFilterMeasurementModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/base/_particle_filter_measurement_model/#ParticleFilterMeasurementModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.base._particle_filter_measurement_model.ParticleFilterMeasurementModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
-digraph inheritancedde936091f {
-bgcolor=transparent;
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;ABC&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
-  &quot;Module&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Base class for all neural network modules.&quot;];
-  &quot;ParticleFilterMeasurementModel&quot; [URL=&quot;../#torchfilter.base.ParticleFilterMeasurementModel&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Observation model base class for a generic differentiable particle&quot;];
-  &quot;ABC&quot; -&gt; &quot;ParticleFilterMeasurementModel&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;Module&quot; -&gt; &quot;ParticleFilterMeasurementModel&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-}
-<p>Observation model base class for a generic differentiable particle
+<div class="graphviz"><img src="../../../../_images/inheritance-4b8216753efc7ca7e0588a86a14debaca019ccae.png" alt="Inheritance diagram of torchfilter.base._particle_filter_measurement_model.ParticleFilterMeasurementModel" usemap="#inheritancedde936091f" class="inheritance graphviz" /></div>
+<map id="inheritancedde936091f" name="inheritancedde936091f">
+<area shape="rect" id="node3" href="../#torchfilter.base.ParticleFilterMeasurementModel" target="_top" title="Observation model base class for a generic differentiable particle" alt="" coords="125,31,356,56"/>
+</map><p>Observation model base class for a generic differentiable particle
 filter; maps (state, observation) pairs to the log-likelihood of the
 observation given the state ( <span class="math notranslate nohighlight">\(\log p(z | x)\)</span> ).</p>
 <dl class="py attribute">
@@ -226,19 +219,11 @@ corresponding observation. Shape should be <code class="docutils literal notrans
 <dt id="torchfilter.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper">
 <em class="property">class </em><code class="sig-prename descclassname">torchfilter.base._particle_filter_measurement_model.</code><code class="sig-name descname">ParticleFilterMeasurementModelWrapper</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">kalman_filter_measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/base/_particle_filter_measurement_model/#ParticleFilterMeasurementModelWrapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../#torchfilter.base.ParticleFilterMeasurementModel" title="torchfilter.base.ParticleFilterMeasurementModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.base.ParticleFilterMeasurementModel</span></code></a></p>
-digraph inheritance197a6c04bb {
-bgcolor=transparent;
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;ABC&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
-  &quot;Module&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Base class for all neural network modules.&quot;];
-  &quot;ParticleFilterMeasurementModel&quot; [URL=&quot;../#torchfilter.base.ParticleFilterMeasurementModel&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Observation model base class for a generic differentiable particle&quot;];
-  &quot;ABC&quot; -&gt; &quot;ParticleFilterMeasurementModel&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;Module&quot; -&gt; &quot;ParticleFilterMeasurementModel&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;ParticleFilterMeasurementModelWrapper&quot; [URL=&quot;../#torchfilter.base.ParticleFilterMeasurementModelWrapper&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Helper class for creating a particle filter measurement model (states,&quot;];
-  &quot;ParticleFilterMeasurementModel&quot; -&gt; &quot;ParticleFilterMeasurementModelWrapper&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-}
-<p>Helper class for creating a particle filter measurement model (states,
+<div class="graphviz"><img src="../../../../_images/inheritance-1b4936498c5451a259903722e25508cad8862846.png" alt="Inheritance diagram of torchfilter.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper" usemap="#inheritance197a6c04bb" class="inheritance graphviz" /></div>
+<map id="inheritance197a6c04bb" name="inheritance197a6c04bb">
+<area shape="rect" id="node3" href="../#torchfilter.base.ParticleFilterMeasurementModel" target="_top" title="Observation model base class for a generic differentiable particle" alt="" coords="125,31,356,56"/>
+<area shape="rect" id="node4" href="../#torchfilter.base.ParticleFilterMeasurementModelWrapper" target="_top" title="Helper class for creating a particle filter measurement model (states," alt="" coords="404,31,688,56"/>
+</map><p>Helper class for creating a particle filter measurement model (states,
 observations -&gt; log-likelihoods) from a Kalman filter one (states -&gt; observations).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

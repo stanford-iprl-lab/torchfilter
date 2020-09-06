@@ -171,15 +171,10 @@
 <dt id="torchfilter.data._single_step_dataset.SingleStepDataset">
 <em class="property">class </em><code class="sig-prename descclassname">torchfilter.data._single_step_dataset.</code><code class="sig-name descname">SingleStepDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/data/_single_step_dataset/#SingleStepDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data._single_step_dataset.SingleStepDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
-digraph inheritanceacf067555f {
-bgcolor=transparent;
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;Dataset&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;An abstract class representing a :class:`Dataset`.&quot;];
-  &quot;SingleStepDataset&quot; [URL=&quot;../#torchfilter.data.SingleStepDataset&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;A dataset interface that returns single-step training examples:&quot;];
-  &quot;Dataset&quot; -&gt; &quot;SingleStepDataset&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-}
-<p>A dataset interface that returns single-step training examples:
+<div class="graphviz"><img src="../../../../_images/inheritance-154c6808ff46b6ef24f18e865257cb426443fc71.png" alt="Inheritance diagram of torchfilter.data._single_step_dataset.SingleStepDataset" usemap="#inheritanceacf067555f" class="inheritance graphviz" /></div>
+<map id="inheritanceacf067555f" name="inheritanceacf067555f">
+<area shape="rect" id="node2" href="../#torchfilter.data.SingleStepDataset" target="_top" title="A dataset interface that returns single&#45;step training examples:" alt="" coords="127,5,269,31"/>
+</map><p>A dataset interface that returns single-step training examples:
 <code class="docutils literal notranslate"><span class="pre">(previous_state,</span> <span class="pre">state,</span> <span class="pre">observation,</span> <span class="pre">control)</span></code></p>
 <p>By default, extracts these examples from a list of trajectories.</p>
 <dl class="field-list simple">

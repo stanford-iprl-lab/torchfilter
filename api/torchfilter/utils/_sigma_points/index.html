@@ -177,15 +177,10 @@
 <dt id="torchfilter.utils._sigma_points.SigmaPointStrategy">
 <em class="property">class </em><code class="sig-prename descclassname">torchfilter.utils._sigma_points.</code><code class="sig-name descname">SigmaPointStrategy</code><a class="reference internal" href="../../../../_modules/torchfilter/utils/_sigma_points/#SigmaPointStrategy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils._sigma_points.SigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-digraph inheritance9eee2e6180 {
-bgcolor=transparent;
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;ABC&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
-  &quot;SigmaPointStrategy&quot; [URL=&quot;../#torchfilter.utils.SigmaPointStrategy&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Strategy to use for computing sigma weights + selecting sigma points.&quot;];
-  &quot;ABC&quot; -&gt; &quot;SigmaPointStrategy&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-}
-<p>Strategy to use for computing sigma weights + selecting sigma points.</p>
+<div class="graphviz"><img src="../../../../_images/inheritance-363fdb9c0b461e94b413c4daf50ba634ed44ff65.png" alt="Inheritance diagram of torchfilter.utils._sigma_points.SigmaPointStrategy" usemap="#inheritance9eee2e6180" class="inheritance graphviz" /></div>
+<map id="inheritance9eee2e6180" name="inheritance9eee2e6180">
+<area shape="rect" id="node2" href="../#torchfilter.utils.SigmaPointStrategy" target="_top" title="Strategy to use for computing sigma weights + selecting sigma points." alt="" coords="125,5,276,31"/>
+</map><p>Strategy to use for computing sigma weights + selecting sigma points.</p>
 <dl class="py method">
 <dt id="torchfilter.utils._sigma_points.SigmaPointStrategy.compute_lambda">
 <em class="property">abstract </em><code class="sig-name descname">compute_lambda</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="../../../../_modules/torchfilter/utils/_sigma_points/#SigmaPointStrategy.compute_lambda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils._sigma_points.SigmaPointStrategy.compute_lambda" title="Permalink to this definition">¶</a></dt>
@@ -221,17 +216,11 @@ float32 tensors on the CPU.</p>
 <dt id="torchfilter.utils._sigma_points.MerweSigmaPointStrategy">
 <em class="property">class </em><code class="sig-prename descclassname">torchfilter.utils._sigma_points.</code><code class="sig-name descname">MerweSigmaPointStrategy</code><a class="reference internal" href="../../../../_modules/torchfilter/utils/_sigma_points/#MerweSigmaPointStrategy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils._sigma_points.MerweSigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../#torchfilter.utils.SigmaPointStrategy" title="torchfilter.utils.SigmaPointStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.utils.SigmaPointStrategy</span></code></a></p>
-digraph inheritance4806557a46 {
-bgcolor=transparent;
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;ABC&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
-  &quot;MerweSigmaPointStrategy&quot; [URL=&quot;../#torchfilter.utils.MerweSigmaPointStrategy&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Sigma point selection in the style of [2].&quot;];
-  &quot;SigmaPointStrategy&quot; -&gt; &quot;MerweSigmaPointStrategy&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;SigmaPointStrategy&quot; [URL=&quot;../#torchfilter.utils.SigmaPointStrategy&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Strategy to use for computing sigma weights + selecting sigma points.&quot;];
-  &quot;ABC&quot; -&gt; &quot;SigmaPointStrategy&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-}
-<p>Sigma point selection in the style of [2].</p>
+<div class="graphviz"><img src="../../../../_images/inheritance-598794dbd41aed5cfe09c99afb175f542d7b7252.png" alt="Inheritance diagram of torchfilter.utils._sigma_points.MerweSigmaPointStrategy" usemap="#inheritance4806557a46" class="inheritance graphviz" /></div>
+<map id="inheritance4806557a46" name="inheritance4806557a46">
+<area shape="rect" id="node3" href="../#torchfilter.utils.SigmaPointStrategy" target="_top" title="Strategy to use for computing sigma weights + selecting sigma points." alt="" coords="125,5,276,31"/>
+<area shape="rect" id="node2" href="../#torchfilter.utils.MerweSigmaPointStrategy" target="_top" title="Sigma point selection in the style of [2]." alt="" coords="324,5,519,31"/>
+</map><p>Sigma point selection in the style of [2].</p>
 <p>[2] <a class="reference external" href="http://www.gatsby.ucl.ac.uk/~byron/nlds/merwe2003a.pdf">http://www.gatsby.ucl.ac.uk/~byron/nlds/merwe2003a.pdf</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
@@ -294,17 +283,11 @@ float32 tensors on the CPU.</p>
 <dt id="torchfilter.utils._sigma_points.JulierSigmaPointStrategy">
 <em class="property">class </em><code class="sig-prename descclassname">torchfilter.utils._sigma_points.</code><code class="sig-name descname">JulierSigmaPointStrategy</code><a class="reference internal" href="../../../../_modules/torchfilter/utils/_sigma_points/#JulierSigmaPointStrategy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils._sigma_points.JulierSigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../#torchfilter.utils.SigmaPointStrategy" title="torchfilter.utils.SigmaPointStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.utils.SigmaPointStrategy</span></code></a></p>
-digraph inheritance1ff13429da {
-bgcolor=transparent;
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;ABC&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;Helper class that provides a standard way to create an ABC using&quot;];
-  &quot;JulierSigmaPointStrategy&quot; [URL=&quot;../#torchfilter.utils.JulierSigmaPointStrategy&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Sigma point selection in this style of [1].&quot;];
-  &quot;SigmaPointStrategy&quot; -&gt; &quot;JulierSigmaPointStrategy&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;SigmaPointStrategy&quot; [URL=&quot;../#torchfilter.utils.SigmaPointStrategy&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Strategy to use for computing sigma weights + selecting sigma points.&quot;];
-  &quot;ABC&quot; -&gt; &quot;SigmaPointStrategy&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-}
-<p>Sigma point selection in this style of [1].</p>
+<div class="graphviz"><img src="../../../../_images/inheritance-5789c4e71dab8784fbd51bc328f3c0db9f0f1b2f.png" alt="Inheritance diagram of torchfilter.utils._sigma_points.JulierSigmaPointStrategy" usemap="#inheritance1ff13429da" class="inheritance graphviz" /></div>
+<map id="inheritance1ff13429da" name="inheritance1ff13429da">
+<area shape="rect" id="node3" href="../#torchfilter.utils.SigmaPointStrategy" target="_top" title="Strategy to use for computing sigma weights + selecting sigma points." alt="" coords="125,5,276,31"/>
+<area shape="rect" id="node2" href="../#torchfilter.utils.JulierSigmaPointStrategy" target="_top" title="Sigma point selection in this style of [1]." alt="" coords="324,5,508,31"/>
+</map><p>Sigma point selection in this style of [1].</p>
 <p>[1] <a class="reference external" href="https://www.cs.unc.edu/~welch/kalman/media/pdf/Julier1997_SPIE_KF.pdf">https://www.cs.unc.edu/~welch/kalman/media/pdf/Julier1997_SPIE_KF.pdf</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>

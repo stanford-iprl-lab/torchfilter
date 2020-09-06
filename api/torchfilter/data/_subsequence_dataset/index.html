@@ -171,15 +171,10 @@
 <dt id="torchfilter.data._subsequence_dataset.SubsequenceDataset">
 <em class="property">class </em><code class="sig-prename descclassname">torchfilter.data._subsequence_dataset.</code><code class="sig-name descname">SubsequenceDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">subsequence_length</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/data/_subsequence_dataset/#SubsequenceDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data._subsequence_dataset.SubsequenceDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
-digraph inheritance39931b41a0 {
-bgcolor=transparent;
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;Dataset&quot; [fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,tooltip=&quot;An abstract class representing a :class:`Dataset`.&quot;];
-  &quot;SubsequenceDataset&quot; [URL=&quot;../#torchfilter.data.SubsequenceDataset&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;A data preprocessor for producing training subsequences from&quot;];
-  &quot;Dataset&quot; -&gt; &quot;SubsequenceDataset&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-}
-<p>A data preprocessor for producing training subsequences from
+<div class="graphviz"><img src="../../../../_images/inheritance-d6b60877e8dc898856ed7af6b517a603a03f9e3d.png" alt="Inheritance diagram of torchfilter.data._subsequence_dataset.SubsequenceDataset" usemap="#inheritance39931b41a0" class="inheritance graphviz" /></div>
+<map id="inheritance39931b41a0" name="inheritance39931b41a0">
+<area shape="rect" id="node2" href="../#torchfilter.data.SubsequenceDataset" target="_top" title="A data preprocessor for producing training subsequences from" alt="" coords="127,5,285,31"/>
+</map><p>A data preprocessor for producing training subsequences from
 a list of trajectories.</p>
 <p>Thin wrapper around <code class="docutils literal notranslate"><span class="pre">torchfilter.data.split_trajectories()</span></code>.</p>
 <dl class="field-list simple">
