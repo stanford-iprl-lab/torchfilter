@@ -47,6 +47,7 @@ extensions = [
     "sphinx.ext.inheritance_diagram",
     "autoapi.extension",
     "sphinx_math_dollar",
+    "sphinx.ext.viewcode",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -226,10 +227,11 @@ def _gen_inheritance_alias():
             elif not member_name.startswith("__"):
                 recurse(member, prefixes + [member_name])
 
-
     import diffbayes
+
     recurse(diffbayes, prefixes=[])
     return inheritance_alias
+
 
 # Set inheritance_alias setting for inheritance diagrams
 inheritance_alias = _gen_inheritance_alias()
@@ -237,7 +239,9 @@ inheritance_alias = _gen_inheritance_alias()
 # Apply our inheritance alias to autoapi base classes
 def _override_class_documenter():
     import autoapi
+
     orig_init = autoapi.mappers.python.PythonClass.__init__
+
     def __init__(self, obj, **kwargs):
         bases = obj["bases"]
         for i, base in enumerate(bases):
@@ -245,7 +249,9 @@ def _override_class_documenter():
                 bases[i] = inheritance_alias[base]
                 print(bases[i])
         orig_init(self, obj, **kwargs)
+
     autoapi.mappers.python.PythonClass.__init__ = __init__
+
 
 _override_class_documenter()
 

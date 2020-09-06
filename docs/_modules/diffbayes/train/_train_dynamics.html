@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>diffbayes.train._train_dynamics &mdash; diffbayes  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> diffbayes
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">diffbayes</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>diffbayes.train._train_dynamics</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for diffbayes.train._train_dynamics</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Private module; avoid importing from directly.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">fannypack</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">import</span> <span class="nn">diffbayes</span>
+
+
+<span class="k">def</span> <span class="nf">_swap_batch_sequence_axes</span><span class="p">(</span><span class="n">tensor</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Converts data formatted as (N, T, ...) to (T, N, ...)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="train_dynamics_single_step"><a class="viewcode-back" href="../../../api/diffbayes/train/index.html#diffbayes.train._train_dynamics.train_dynamics_single_step">[docs]</a><span class="k">def</span> <span class="nf">train_dynamics_single_step</span><span class="p">(</span>
+    <span class="n">buddy</span><span class="p">:</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">Buddy</span><span class="p">,</span>
+    <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">diffbayes</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">DynamicsModel</span><span class="p">,</span>
+    <span class="n">dataloader</span><span class="p">:</span> <span class="n">DataLoader</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">loss_function</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;nll&quot;</span><span class="p">,</span>
+    <span class="n">log_interval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Optimizes a dynamics model&#39;s single-step prediction accuracy. This is roughly</span>
+<span class="sd">    equivalent to training with `train_dynamics_recurrent()` with a subsequence length</span>
+<span class="sd">    of 2.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        buddy (fannypack.utils.Buddy): Training helper.</span>
+<span class="sd">        dynamics_model (diffbayes.base.DynamicsModel): Model to train.</span>
+<span class="sd">        dataloader (DataLoader): Loader for a SingleStepDataset.</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        loss_function (str, optional): Either &quot;nll&quot; for negative log-likelihood or &quot;mse&quot;</span>
+<span class="sd">            for mean-squared error. Defaults to &quot;nll&quot;.</span>
+<span class="sd">        log_interval (int, optional): Minibatches between each Tensorboard log.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Input validation</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">diffbayes</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">SingleStepDataset</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">loss_function</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;nll&quot;</span><span class="p">,</span> <span class="s2">&quot;mse&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">dynamics_model</span><span class="o">.</span><span class="n">training</span><span class="p">,</span> <span class="s2">&quot;Model needs to be set to train mode&quot;</span>
+
+    <span class="c1"># Track mean epoch loss</span>
+    <span class="n">epoch_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="c1"># Train dynamics model for 1 epoch</span>
+    <span class="k">for</span> <span class="n">batch_idx</span><span class="p">,</span> <span class="n">batch_data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tqdm</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)):</span>
+        <span class="c1"># Move data</span>
+        <span class="n">batch_gpu</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">batch_data</span><span class="p">,</span> <span class="n">buddy</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">previous_states</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">observations</span><span class="p">,</span> <span class="n">controls</span> <span class="o">=</span> <span class="n">batch_gpu</span>
+
+        <span class="c1"># Sanity checks</span>
+        <span class="n">N</span><span class="p">,</span> <span class="n">state_dim</span> <span class="o">=</span> <span class="n">previous_states</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">assert</span> <span class="n">states</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">previous_states</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">assert</span> <span class="n">state_dim</span> <span class="o">==</span> <span class="n">dynamics_model</span><span class="o">.</span><span class="n">state_dim</span>
+        <span class="k">assert</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,)</span>
+        <span class="k">assert</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,)</span>
+
+        <span class="c1"># Single-step prediction</span>
+        <span class="n">predictions</span><span class="p">,</span> <span class="n">scale_trils</span> <span class="o">=</span> <span class="n">dynamics_model</span><span class="p">(</span>
+            <span class="n">initial_states</span><span class="o">=</span><span class="n">previous_states</span><span class="p">,</span> <span class="n">controls</span><span class="o">=</span><span class="n">controls</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="n">predictions</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">)</span>
+
+        <span class="c1"># Check if we want to log</span>
+        <span class="n">log_flag</span> <span class="o">=</span> <span class="n">batch_idx</span> <span class="o">%</span> <span class="n">log_interval</span> <span class="o">==</span> <span class="mi">0</span>
+
+        <span class="c1"># Minimize loss</span>
+        <span class="n">losses</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">log_flag</span> <span class="ow">or</span> <span class="n">loss_function</span> <span class="o">==</span> <span class="s2">&quot;mse&quot;</span><span class="p">:</span>
+            <span class="n">losses</span><span class="p">[</span><span class="s2">&quot;mse&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">log_flag</span> <span class="ow">or</span> <span class="n">loss_function</span> <span class="o">==</span> <span class="s2">&quot;nll&quot;</span><span class="p">:</span>
+            <span class="n">log_likelihoods</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">MultivariateNormal</span><span class="p">(</span>
+                <span class="n">loc</span><span class="o">=</span><span class="n">predictions</span><span class="p">,</span> <span class="n">scale_tril</span><span class="o">=</span><span class="n">scale_trils</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">log_likelihoods</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,)</span>
+            <span class="n">losses</span><span class="p">[</span><span class="s2">&quot;nll&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">log_likelihoods</span><span class="p">)</span>
+
+        <span class="n">buddy</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span>
+            <span class="n">losses</span><span class="p">[</span><span class="n">loss_function</span><span class="p">],</span> <span class="n">optimizer_name</span><span class="o">=</span><span class="s2">&quot;train_dynamics_single_step&quot;</span>
+        <span class="p">)</span>
+        <span class="n">epoch_loss</span> <span class="o">+=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">losses</span><span class="p">[</span><span class="n">loss_function</span><span class="p">])</span>
+
+        <span class="c1"># Logging</span>
+        <span class="k">if</span> <span class="n">log_flag</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">buddy</span><span class="o">.</span><span class="n">log_scope</span><span class="p">(</span><span class="s2">&quot;train_dynamics_single_step&quot;</span><span class="p">):</span>
+                <span class="n">buddy</span><span class="o">.</span><span class="n">log_scalar</span><span class="p">(</span><span class="s2">&quot;MSE loss&quot;</span><span class="p">,</span> <span class="n">losses</span><span class="p">[</span><span class="s2">&quot;mse&quot;</span><span class="p">])</span>
+                <span class="n">buddy</span><span class="o">.</span><span class="n">log_scalar</span><span class="p">(</span><span class="s2">&quot;NLL loss&quot;</span><span class="p">,</span> <span class="n">losses</span><span class="p">[</span><span class="s2">&quot;nll&quot;</span><span class="p">])</span>
+
+    <span class="c1"># Print average training loss</span>
+    <span class="n">epoch_loss</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;(train_dynamics_single_step) Epoch training loss (</span><span class="si">{</span><span class="n">loss_function</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">epoch_loss</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="train_dynamics_recurrent"><a class="viewcode-back" href="../../../api/diffbayes/train/index.html#diffbayes.train._train_dynamics.train_dynamics_recurrent">[docs]</a><span class="k">def</span> <span class="nf">train_dynamics_recurrent</span><span class="p">(</span>
+    <span class="n">buddy</span><span class="p">:</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">Buddy</span><span class="p">,</span>
+    <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">diffbayes</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">DynamicsModel</span><span class="p">,</span>
+    <span class="n">dataloader</span><span class="p">:</span> <span class="n">DataLoader</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">loss_function</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;nll&quot;</span><span class="p">,</span>
+    <span class="n">log_interval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Trains a dynamics model via backpropagation through time.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        buddy (fannypack.utils.Buddy): Training helper.</span>
+<span class="sd">        dynamics_model (diffbayes.base.DynamicsModel): Model to train.</span>
+<span class="sd">        dataloader (DataLoader): Loader for a SubsequenceDataset.</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        loss_function (str, optional): Either &quot;nll&quot; for negative log-likelihood or &quot;mse&quot;</span>
+<span class="sd">            for mean-squared error. Defaults to &quot;nll&quot;.</span>
+<span class="sd">        log_interval (int, optional): Minibatches between each Tensorboard log.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Input validation</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">diffbayes</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">SubsequenceDataset</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">loss_function</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;nll&quot;</span><span class="p">,</span> <span class="s2">&quot;mse&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">dynamics_model</span><span class="o">.</span><span class="n">training</span><span class="p">,</span> <span class="s2">&quot;Model needs to be set to train mode&quot;</span>
+
+    <span class="c1"># Track mean epoch loss</span>
+    <span class="n">epoch_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="c1"># Train dynamics model for 1 epoch</span>
+    <span class="k">for</span> <span class="n">batch_idx</span><span class="p">,</span> <span class="n">batch_data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tqdm</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)):</span>
+        <span class="c1"># Move data</span>
+        <span class="n">batch_gpu</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">batch_data</span><span class="p">,</span> <span class="n">buddy</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">states_label</span><span class="p">,</span> <span class="n">observations</span><span class="p">,</span> <span class="n">controls</span> <span class="o">=</span> <span class="n">batch_gpu</span>
+
+        <span class="c1"># Swap batch size, sequence length axes</span>
+        <span class="n">states_label</span> <span class="o">=</span> <span class="n">_swap_batch_sequence_axes</span><span class="p">(</span><span class="n">states_label</span><span class="p">)</span>
+        <span class="n">observations</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+            <span class="n">_swap_batch_sequence_axes</span>
+        <span class="p">)</span>
+        <span class="n">controls</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">_swap_batch_sequence_axes</span><span class="p">)</span>
+
+        <span class="c1"># Shape checks</span>
+        <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">state_dim</span> <span class="o">=</span> <span class="n">states_label</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">assert</span> <span class="n">state_dim</span> <span class="o">==</span> <span class="n">dynamics_model</span><span class="o">.</span><span class="n">state_dim</span>
+        <span class="k">assert</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">batch_idx</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">N</span> <span class="o">==</span> <span class="n">dataloader</span><span class="o">.</span><span class="n">batch_size</span>
+
+        <span class="c1"># Forward pass from the first state</span>
+        <span class="n">initial_states</span> <span class="o">=</span> <span class="n">states_label</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">predictions</span><span class="p">,</span> <span class="n">scale_trils</span> <span class="o">=</span> <span class="n">dynamics_model</span><span class="o">.</span><span class="n">forward_loop</span><span class="p">(</span>
+            <span class="n">initial_states</span><span class="o">=</span><span class="n">initial_states</span><span class="p">,</span> <span class="n">controls</span><span class="o">=</span><span class="n">controls</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="n">predictions</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">)</span>
+
+        <span class="c1"># Check if we want to log</span>
+        <span class="n">log_flag</span> <span class="o">=</span> <span class="n">batch_idx</span> <span class="o">%</span> <span class="n">log_interval</span> <span class="o">==</span> <span class="mi">0</span>
+
+        <span class="c1"># Minimize loss</span>
+        <span class="n">losses</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">log_flag</span> <span class="ow">or</span> <span class="n">loss_function</span> <span class="o">==</span> <span class="s2">&quot;mse&quot;</span><span class="p">:</span>
+            <span class="n">losses</span><span class="p">[</span><span class="s2">&quot;mse&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">states_label</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">if</span> <span class="n">log_flag</span> <span class="ow">or</span> <span class="n">loss_function</span> <span class="o">==</span> <span class="s2">&quot;nll&quot;</span><span class="p">:</span>
+            <span class="n">log_likelihoods</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">MultivariateNormal</span><span class="p">(</span>
+                <span class="n">loc</span><span class="o">=</span><span class="n">predictions</span><span class="p">,</span> <span class="n">scale_tril</span><span class="o">=</span><span class="n">scale_trils</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">states_label</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="k">assert</span> <span class="n">log_likelihoods</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+            <span class="n">losses</span><span class="p">[</span><span class="s2">&quot;nll&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">log_likelihoods</span><span class="p">)</span>
+
+        <span class="n">buddy</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">losses</span><span class="p">[</span><span class="n">loss_function</span><span class="p">],</span> <span class="n">optimizer_name</span><span class="o">=</span><span class="s2">&quot;train_dynamics_recurrent&quot;</span><span class="p">)</span>
+        <span class="n">epoch_loss</span> <span class="o">+=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">losses</span><span class="p">[</span><span class="n">loss_function</span><span class="p">])</span>
+
+        <span class="c1"># Logging</span>
+        <span class="k">if</span> <span class="n">log_flag</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">buddy</span><span class="o">.</span><span class="n">log_scope</span><span class="p">(</span><span class="s2">&quot;train_dynamics_recurrent&quot;</span><span class="p">):</span>
+                <span class="n">buddy</span><span class="o">.</span><span class="n">log_scalar</span><span class="p">(</span><span class="s2">&quot;MSE loss&quot;</span><span class="p">,</span> <span class="n">losses</span><span class="p">[</span><span class="s2">&quot;mse&quot;</span><span class="p">])</span>
+                <span class="n">buddy</span><span class="o">.</span><span class="n">log_scalar</span><span class="p">(</span><span class="s2">&quot;NLL loss&quot;</span><span class="p">,</span> <span class="n">losses</span><span class="p">[</span><span class="s2">&quot;nll&quot;</span><span class="p">])</span>
+
+    <span class="c1"># Print average training loss</span>
+    <span class="n">epoch_loss</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;(train_dynamics_recurrent) Epoch training loss (</span><span class="si">{</span><span class="n">loss_function</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">epoch_loss</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

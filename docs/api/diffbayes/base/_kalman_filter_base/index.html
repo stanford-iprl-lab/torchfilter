@@ -82,28 +82,10 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._kalman_filter_base</span></code></a><ul>
-<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
-<li><a class="reference internal" href="#classes">Classes</a><ul>
-<li><a class="reference internal" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase">KalmanFilterBase</a><ul>
-<li><a class="reference internal" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase.dynamics_model">dynamics_model</a></li>
-<li><a class="reference internal" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase.measurement_model">measurement_model</a></li>
-<li><a class="reference internal" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase.forward">forward</a></li>
-<li><a class="reference internal" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase.initialize_beliefs">initialize_beliefs</a></li>
-<li><a class="reference internal" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase.belief_mean">belief_mean</a></li>
-<li><a class="reference internal" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase.belief_covariance">belief_covariance</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+
             
           
         </div>
@@ -187,7 +169,7 @@
 </table>
 <dl class="py class">
 <dt id="diffbayes.base._kalman_filter_base.KalmanFilterBase">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._kalman_filter_base.</code><code class="sig-name descname">KalmanFilterBase</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">unused_kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._kalman_filter_base.</code><code class="sig-name descname">KalmanFilterBase</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">unused_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/diffbayes/base/_kalman_filter_base.html#KalmanFilterBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../index.html#diffbayes.base.Filter" title="diffbayes.base.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.Filter</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <div class="graphviz"><img src="../../../../_images/inheritance-de4c5334f886b10265d35f7fa8a0e0e42c232b7c.png" alt="Inheritance diagram of diffbayes.base._kalman_filter_base.KalmanFilterBase" usemap="#inheritance5daba854cb" class="inheritance graphviz" /></div>
 <map id="inheritance5daba854cb" name="inheritance5daba854cb">
@@ -220,7 +202,7 @@ and covariance.</p>
 
 <dl class="py method">
 <dt id="diffbayes.base._kalman_filter_base.KalmanFilterBase.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="headerlink" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase.forward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="reference internal" href="../../../../_modules/diffbayes/base/_kalman_filter_base.html#KalmanFilterBase.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Kalman filter forward pass, single timestep.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -240,7 +222,7 @@ be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span
 
 <dl class="py method">
 <dt id="diffbayes.base._kalman_filter_base.KalmanFilterBase.initialize_beliefs">
-<code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mean</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">types.CovarianceTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mean</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">types.CovarianceTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../../../../_modules/diffbayes/base/_kalman_filter_base.html#KalmanFilterBase.initialize_beliefs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._kalman_filter_base.KalmanFilterBase.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set filter belief to a given mean and covariance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

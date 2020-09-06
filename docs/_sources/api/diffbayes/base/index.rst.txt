@@ -5,7 +5,7 @@
 
 .. autoapi-nested-parse::
 
-   Abstract classes for filtering.
+   Base classes for filtering.
 
 
 
@@ -339,7 +339,7 @@ Classes
       :type: int
 
 
-   .. method:: forward(self, *, states: types.StatesTorch, observations: types.ObservationsTorch) -> types.StatesTorch
+   .. method:: forward(self, *, states: types.StatesTorch, observations: types.ObservationsTorch) -> torch.Tensor
       :abstractmethod:
 
       Observation model forward pass, over batch size ``N``.
@@ -372,7 +372,7 @@ Classes
                                            measurement model instance to wrap.
    :type kalman_filter_measurement_model: diffbayes.base.KalmanFilterMeasurementModel
 
-   .. method:: forward(self, *, states: types.StatesTorch, observations: types.ObservationsTorch) -> types.StatesTorch
+   .. method:: forward(self, *, states: types.StatesTorch, observations: types.ObservationsTorch) -> torch.Tensor
 
       Observation model forward pass, over batch size ``N``.
       For each member of a batch, we expect ``M`` separate states (particles)

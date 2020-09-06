@@ -82,21 +82,10 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.train._train_dynamics</span></code></a><ul>
-<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
-<li><a class="reference internal" href="#functions">Functions</a><ul>
-<li><a class="reference internal" href="#diffbayes.train._train_dynamics.train_dynamics_single_step">train_dynamics_single_step</a></li>
-<li><a class="reference internal" href="#diffbayes.train._train_dynamics.train_dynamics_recurrent">train_dynamics_recurrent</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+
             
           
         </div>
@@ -183,7 +172,7 @@
 </table>
 <dl class="py function">
 <dt id="diffbayes.train._train_dynamics.train_dynamics_single_step">
-<code class="sig-prename descclassname">diffbayes.train._train_dynamics.</code><code class="sig-name descname">train_dynamics_single_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buddy</span><span class="p">:</span> <span class="n">fannypack.utils.Buddy</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../base/index.html#diffbayes.base.DynamicsModel" title="diffbayes.base.DynamicsModel">diffbayes.base.DynamicsModel</a></span></em>, <em class="sig-param"><span class="n">dataloader</span><span class="p">:</span> <span class="n">DataLoader</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">loss_function</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'nll'</span></em>, <em class="sig-param"><span class="n">log_interval</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">10</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.train._train_dynamics.train_dynamics_single_step" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diffbayes.train._train_dynamics.</code><code class="sig-name descname">train_dynamics_single_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buddy</span><span class="p">:</span> <span class="n">fannypack.utils.Buddy</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../base/index.html#diffbayes.base.DynamicsModel" title="diffbayes.base.DynamicsModel">diffbayes.base.DynamicsModel</a></span></em>, <em class="sig-param"><span class="n">dataloader</span><span class="p">:</span> <span class="n">DataLoader</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">loss_function</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'nll'</span></em>, <em class="sig-param"><span class="n">log_interval</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">10</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../../../../_modules/diffbayes/train/_train_dynamics.html#train_dynamics_single_step"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.train._train_dynamics.train_dynamics_single_step" title="Permalink to this definition">¶</a></dt>
 <dd><p>Optimizes a dynamics model’s single-step prediction accuracy. This is roughly
 equivalent to training with <code class="docutils literal notranslate"><span class="pre">train_dynamics_recurrent()</span></code> with a subsequence length
 of 2.</p>
@@ -207,7 +196,7 @@ for mean-squared error. Defaults to “nll”.</p></li>
 
 <dl class="py function">
 <dt id="diffbayes.train._train_dynamics.train_dynamics_recurrent">
-<code class="sig-prename descclassname">diffbayes.train._train_dynamics.</code><code class="sig-name descname">train_dynamics_recurrent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buddy</span><span class="p">:</span> <span class="n">fannypack.utils.Buddy</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../base/index.html#diffbayes.base.DynamicsModel" title="diffbayes.base.DynamicsModel">diffbayes.base.DynamicsModel</a></span></em>, <em class="sig-param"><span class="n">dataloader</span><span class="p">:</span> <span class="n">DataLoader</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">loss_function</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'nll'</span></em>, <em class="sig-param"><span class="n">log_interval</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">10</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.train._train_dynamics.train_dynamics_recurrent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diffbayes.train._train_dynamics.</code><code class="sig-name descname">train_dynamics_recurrent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buddy</span><span class="p">:</span> <span class="n">fannypack.utils.Buddy</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../base/index.html#diffbayes.base.DynamicsModel" title="diffbayes.base.DynamicsModel">diffbayes.base.DynamicsModel</a></span></em>, <em class="sig-param"><span class="n">dataloader</span><span class="p">:</span> <span class="n">DataLoader</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">loss_function</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'nll'</span></em>, <em class="sig-param"><span class="n">log_interval</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">10</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../../../../_modules/diffbayes/train/_train_dynamics.html#train_dynamics_recurrent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.train._train_dynamics.train_dynamics_recurrent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Trains a dynamics model via backpropagation through time.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

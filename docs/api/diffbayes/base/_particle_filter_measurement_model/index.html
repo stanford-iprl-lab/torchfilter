@@ -82,28 +82,10 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._particle_filter_measurement_model</span></code></a><ul>
-<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
-<li><a class="reference internal" href="#classes">Classes</a><ul>
-<li><a class="reference internal" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel">ParticleFilterMeasurementModel</a><ul>
-<li><a class="reference internal" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel.state_dim">state_dim</a></li>
-<li><a class="reference internal" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel.forward">forward</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper">ParticleFilterMeasurementModelWrapper</a><ul>
-<li><a class="reference internal" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper.forward">forward</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+
             
           
         </div>
@@ -190,7 +172,7 @@
 </table>
 <dl class="py class">
 <dt id="diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._particle_filter_measurement_model.</code><code class="sig-name descname">ParticleFilterMeasurementModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._particle_filter_measurement_model.</code><code class="sig-name descname">ParticleFilterMeasurementModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/diffbayes/base/_particle_filter_measurement_model.html#ParticleFilterMeasurementModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
 <div class="graphviz"><img src="../../../../_images/inheritance-9eff980b5ed11612160482494bcd3d46223f34bb.png" alt="Inheritance diagram of diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel" usemap="#inheritance7e3adf800f" class="inheritance graphviz" /></div>
 <map id="inheritance7e3adf800f" name="inheritance7e3adf800f">
@@ -211,7 +193,7 @@ observation given the state ( <span class="math notranslate nohighlight">\(\log 
 
 <dl class="py method">
 <dt id="diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel.forward">
-<em class="property">abstract </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="headerlink" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel.forward" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="reference internal" href="../../../../_modules/diffbayes/base/_particle_filter_measurement_model.html#ParticleFilterMeasurementModel.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModel.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Observation model forward pass, over batch size <code class="docutils literal notranslate"><span class="pre">N</span></code>.
 For each member of a batch, we expect <code class="docutils literal notranslate"><span class="pre">M</span></code> separate states (particles)
 and one unique observation.</p>
@@ -235,7 +217,7 @@ corresponding observation. Shape should be <code class="docutils literal notrans
 
 <dl class="py class">
 <dt id="diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._particle_filter_measurement_model.</code><code class="sig-name descname">ParticleFilterMeasurementModelWrapper</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">kalman_filter_measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._particle_filter_measurement_model.</code><code class="sig-name descname">ParticleFilterMeasurementModelWrapper</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">kalman_filter_measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/diffbayes/base/_particle_filter_measurement_model.html#ParticleFilterMeasurementModelWrapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../index.html#diffbayes.base.ParticleFilterMeasurementModel" title="diffbayes.base.ParticleFilterMeasurementModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.ParticleFilterMeasurementModel</span></code></a></p>
 <div class="graphviz"><img src="../../../../_images/inheritance-4f53df3744f7f0dc67cf1244b9b10f17ba6c4196.png" alt="Inheritance diagram of diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper" usemap="#inheritanceb9aa454f50" class="inheritance graphviz" /></div>
 <map id="inheritanceb9aa454f50" name="inheritanceb9aa454f50">
@@ -251,7 +233,7 @@ measurement model instance to wrap.</p>
 </dl>
 <dl class="py method">
 <dt id="diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="headerlink" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper.forward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="reference internal" href="../../../../_modules/diffbayes/base/_particle_filter_measurement_model.html#ParticleFilterMeasurementModelWrapper.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._particle_filter_measurement_model.ParticleFilterMeasurementModelWrapper.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Observation model forward pass, over batch size <code class="docutils literal notranslate"><span class="pre">N</span></code>.
 For each member of a batch, we expect <code class="docutils literal notranslate"><span class="pre">M</span></code> separate states (particles)
 and one unique observation.</p>

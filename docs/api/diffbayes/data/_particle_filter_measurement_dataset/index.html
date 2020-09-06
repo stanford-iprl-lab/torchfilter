@@ -82,24 +82,10 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._particle_filter_measurement_dataset</span></code></a><ul>
-<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
-<li><a class="reference internal" href="#classes">Classes</a><ul>
-<li><a class="reference internal" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset">ParticleFilterMeasurementDataset</a><ul>
-<li><a class="reference internal" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__getitem__">__getitem__</a></li>
-<li><a class="reference internal" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__len__">__len__</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+
             
           
         </div>
@@ -183,7 +169,7 @@
 </table>
 <dl class="py class">
 <dt id="diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.data._particle_filter_measurement_dataset.</code><code class="sig-name descname">ParticleFilterMeasurementDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">np.ndarray</span></em>, <em class="sig-param"><span class="n">samples_per_pair</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.data._particle_filter_measurement_dataset.</code><code class="sig-name descname">ParticleFilterMeasurementDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">np.ndarray</span></em>, <em class="sig-param"><span class="n">samples_per_pair</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/diffbayes/data/_particle_filter_measurement_dataset.html#ParticleFilterMeasurementDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
 <div class="graphviz"><img src="../../../../_images/inheritance-cd449a66a6cf762c4f9b0e4b9571b9c3a0fc2b29.png" alt="Inheritance diagram of diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset" usemap="#inheritance134d5e8a39" class="inheritance graphviz" /></div>
 <map id="inheritance134d5e8a39" name="inheritance134d5e8a39">
@@ -206,7 +192,7 @@ to the example, and the other half far away.</p></li>
 </dl>
 <dl class="py method">
 <dt id="diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__getitem__">
-<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesNumpy<span class="p">, </span>types.ObservationsNumpy<span class="p">, </span>np.ndarray<span class="p">]</span><a class="headerlink" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesNumpy<span class="p">, </span>types.ObservationsNumpy<span class="p">, </span>np.ndarray<span class="p">]</span><a class="reference internal" href="../../../../_modules/diffbayes/data/_particle_filter_measurement_dataset.html#ParticleFilterMeasurementDataset.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a state/observation/log-likelihood sample from our dataset. Nominally, we
 want our measurement model to predict the returned log-likelihood as the PDF of
 the <code class="docutils literal notranslate"><span class="pre">p(observation</span> <span class="pre">|</span> <span class="pre">state)</span></code> distribution.</p>
@@ -222,7 +208,7 @@ the <code class="docutils literal notranslate"><span class="pre">p(observation</
 
 <dl class="py method">
 <dt id="diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__len__">
-<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__len__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../../../../_modules/diffbayes/data/_particle_filter_measurement_dataset.html#ParticleFilterMeasurementDataset.__len__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__len__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Total number of samples in the dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>

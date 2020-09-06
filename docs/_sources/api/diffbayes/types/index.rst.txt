@@ -5,7 +5,7 @@
 
 .. autoapi-nested-parse::
 
-   Semantic typehints for filtering.
+   Data structures and semantic type aliases for filtering.
 
 
 

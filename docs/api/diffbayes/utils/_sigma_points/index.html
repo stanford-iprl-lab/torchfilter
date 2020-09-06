@@ -82,38 +82,10 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.utils._sigma_points</span></code></a><ul>
-<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
-<li><a class="reference internal" href="#classes">Classes</a><ul>
-<li><a class="reference internal" href="#diffbayes.utils._sigma_points.SigmaPointStrategy">SigmaPointStrategy</a><ul>
-<li><a class="reference internal" href="#diffbayes.utils._sigma_points.SigmaPointStrategy.compute_lambda">compute_lambda</a></li>
-<li><a class="reference internal" href="#diffbayes.utils._sigma_points.SigmaPointStrategy.compute_sigma_weights">compute_sigma_weights</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#diffbayes.utils._sigma_points.MerweSigmaPointStrategy">MerweSigmaPointStrategy</a><ul>
-<li><a class="reference internal" href="#diffbayes.utils._sigma_points.MerweSigmaPointStrategy.alpha">alpha</a></li>
-<li><a class="reference internal" href="#diffbayes.utils._sigma_points.MerweSigmaPointStrategy.beta">beta</a></li>
-<li><a class="reference internal" href="#diffbayes.utils._sigma_points.MerweSigmaPointStrategy.kappa">kappa</a></li>
-<li><a class="reference internal" href="#diffbayes.utils._sigma_points.MerweSigmaPointStrategy.compute_lambda">compute_lambda</a></li>
-<li><a class="reference internal" href="#diffbayes.utils._sigma_points.MerweSigmaPointStrategy.compute_sigma_weights">compute_sigma_weights</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#diffbayes.utils._sigma_points.JulierSigmaPointStrategy">JulierSigmaPointStrategy</a><ul>
-<li><a class="reference internal" href="#diffbayes.utils._sigma_points.JulierSigmaPointStrategy.lambd">lambd</a></li>
-<li><a class="reference internal" href="#diffbayes.utils._sigma_points.JulierSigmaPointStrategy.compute_lambda">compute_lambda</a></li>
-<li><a class="reference internal" href="#diffbayes.utils._sigma_points.JulierSigmaPointStrategy.compute_sigma_weights">compute_sigma_weights</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+
             
           
         </div>
@@ -203,7 +175,7 @@
 </table>
 <dl class="py class">
 <dt id="diffbayes.utils._sigma_points.SigmaPointStrategy">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.utils._sigma_points.</code><code class="sig-name descname">SigmaPointStrategy</code><a class="headerlink" href="#diffbayes.utils._sigma_points.SigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.utils._sigma_points.</code><code class="sig-name descname">SigmaPointStrategy</code><a class="reference internal" href="../../../../_modules/diffbayes/utils/_sigma_points.html#SigmaPointStrategy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.utils._sigma_points.SigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <div class="graphviz"><img src="../../../../_images/inheritance-82b313d3a72352d3a0da2e878033ca69d69cecad.png" alt="Inheritance diagram of diffbayes.utils._sigma_points.SigmaPointStrategy" usemap="#inheritance5955298874" class="inheritance graphviz" /></div>
 <map id="inheritance5955298874" name="inheritance5955298874">
@@ -211,7 +183,7 @@
 </map><p>Strategy to use for computing sigma weights + selecting sigma points.</p>
 <dl class="py method">
 <dt id="diffbayes.utils._sigma_points.SigmaPointStrategy.compute_lambda">
-<em class="property">abstract </em><code class="sig-name descname">compute_lambda</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#diffbayes.utils._sigma_points.SigmaPointStrategy.compute_lambda" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">compute_lambda</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="../../../../_modules/diffbayes/utils/_sigma_points.html#SigmaPointStrategy.compute_lambda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.utils._sigma_points.SigmaPointStrategy.compute_lambda" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute sigma point scaling parameter.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -225,7 +197,7 @@
 
 <dl class="py method">
 <dt id="diffbayes.utils._sigma_points.SigmaPointStrategy.compute_sigma_weights">
-<em class="property">abstract </em><code class="sig-name descname">compute_sigma_weights</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>torch.Tensor<span class="p">]</span><a class="headerlink" href="#diffbayes.utils._sigma_points.SigmaPointStrategy.compute_sigma_weights" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">compute_sigma_weights</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>torch.Tensor<span class="p">]</span><a class="reference internal" href="../../../../_modules/diffbayes/utils/_sigma_points.html#SigmaPointStrategy.compute_sigma_weights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.utils._sigma_points.SigmaPointStrategy.compute_sigma_weights" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper for computing sigma weights.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -242,7 +214,7 @@ float32 tensors on the CPU.</p>
 
 <dl class="py class">
 <dt id="diffbayes.utils._sigma_points.MerweSigmaPointStrategy">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.utils._sigma_points.</code><code class="sig-name descname">MerweSigmaPointStrategy</code><a class="headerlink" href="#diffbayes.utils._sigma_points.MerweSigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.utils._sigma_points.</code><code class="sig-name descname">MerweSigmaPointStrategy</code><a class="reference internal" href="../../../../_modules/diffbayes/utils/_sigma_points.html#MerweSigmaPointStrategy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.utils._sigma_points.MerweSigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../index.html#diffbayes.utils.SigmaPointStrategy" title="diffbayes.utils.SigmaPointStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.utils.SigmaPointStrategy</span></code></a></p>
 <div class="graphviz"><img src="../../../../_images/inheritance-0adbae5419c616625cb5d31e31d7eaadd2561eae.png" alt="Inheritance diagram of diffbayes.utils._sigma_points.MerweSigmaPointStrategy" usemap="#inheritance5157ba8c4a" class="inheritance graphviz" /></div>
 <map id="inheritance5157ba8c4a" name="inheritance5157ba8c4a">
@@ -278,7 +250,7 @@ per [1]).</p></li>
 
 <dl class="py method">
 <dt id="diffbayes.utils._sigma_points.MerweSigmaPointStrategy.compute_lambda">
-<code class="sig-name descname">compute_lambda</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#diffbayes.utils._sigma_points.MerweSigmaPointStrategy.compute_lambda" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">compute_lambda</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="../../../../_modules/diffbayes/utils/_sigma_points.html#MerweSigmaPointStrategy.compute_lambda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.utils._sigma_points.MerweSigmaPointStrategy.compute_lambda" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute sigma point scaling parameter.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -292,7 +264,7 @@ per [1]).</p></li>
 
 <dl class="py method">
 <dt id="diffbayes.utils._sigma_points.MerweSigmaPointStrategy.compute_sigma_weights">
-<code class="sig-name descname">compute_sigma_weights</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>torch.Tensor<span class="p">]</span><a class="headerlink" href="#diffbayes.utils._sigma_points.MerweSigmaPointStrategy.compute_sigma_weights" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">compute_sigma_weights</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>torch.Tensor<span class="p">]</span><a class="reference internal" href="../../../../_modules/diffbayes/utils/_sigma_points.html#MerweSigmaPointStrategy.compute_sigma_weights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.utils._sigma_points.MerweSigmaPointStrategy.compute_sigma_weights" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper for computing sigma weights.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -309,7 +281,7 @@ float32 tensors on the CPU.</p>
 
 <dl class="py class">
 <dt id="diffbayes.utils._sigma_points.JulierSigmaPointStrategy">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.utils._sigma_points.</code><code class="sig-name descname">JulierSigmaPointStrategy</code><a class="headerlink" href="#diffbayes.utils._sigma_points.JulierSigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.utils._sigma_points.</code><code class="sig-name descname">JulierSigmaPointStrategy</code><a class="reference internal" href="../../../../_modules/diffbayes/utils/_sigma_points.html#JulierSigmaPointStrategy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.utils._sigma_points.JulierSigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../index.html#diffbayes.utils.SigmaPointStrategy" title="diffbayes.utils.SigmaPointStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.utils.SigmaPointStrategy</span></code></a></p>
 <div class="graphviz"><img src="../../../../_images/inheritance-a22ae0f193937679a402515ae340bc7f3cb8a1ad.png" alt="Inheritance diagram of diffbayes.utils._sigma_points.JulierSigmaPointStrategy" usemap="#inheritance496d65319a" class="inheritance graphviz" /></div>
 <map id="inheritance496d65319a" name="inheritance496d65319a">
@@ -330,7 +302,7 @@ float32 tensors on the CPU.</p>
 
 <dl class="py method">
 <dt id="diffbayes.utils._sigma_points.JulierSigmaPointStrategy.compute_lambda">
-<code class="sig-name descname">compute_lambda</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#diffbayes.utils._sigma_points.JulierSigmaPointStrategy.compute_lambda" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">compute_lambda</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="../../../../_modules/diffbayes/utils/_sigma_points.html#JulierSigmaPointStrategy.compute_lambda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.utils._sigma_points.JulierSigmaPointStrategy.compute_lambda" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute sigma point scaling parameter.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -344,7 +316,7 @@ float32 tensors on the CPU.</p>
 
 <dl class="py method">
 <dt id="diffbayes.utils._sigma_points.JulierSigmaPointStrategy.compute_sigma_weights">
-<code class="sig-name descname">compute_sigma_weights</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>torch.Tensor<span class="p">]</span><a class="headerlink" href="#diffbayes.utils._sigma_points.JulierSigmaPointStrategy.compute_sigma_weights" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">compute_sigma_weights</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>torch.Tensor<span class="p">]</span><a class="reference internal" href="../../../../_modules/diffbayes/utils/_sigma_points.html#JulierSigmaPointStrategy.compute_sigma_weights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.utils._sigma_points.JulierSigmaPointStrategy.compute_sigma_weights" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper for computing sigma weights.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

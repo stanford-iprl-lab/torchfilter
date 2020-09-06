@@ -82,20 +82,10 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.train._train_virtual_sensor</span></code></a><ul>
-<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
-<li><a class="reference internal" href="#functions">Functions</a><ul>
-<li><a class="reference internal" href="#diffbayes.train._train_virtual_sensor.train_virtual_sensor">train_virtual_sensor</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+
             
           
         </div>
@@ -179,7 +169,7 @@
 </table>
 <dl class="py function">
 <dt id="diffbayes.train._train_virtual_sensor.train_virtual_sensor">
-<code class="sig-prename descclassname">diffbayes.train._train_virtual_sensor.</code><code class="sig-name descname">train_virtual_sensor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buddy</span><span class="p">:</span> <span class="n">fannypack.utils.Buddy</span></em>, <em class="sig-param"><span class="n">virtual_sensor_model</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../base/index.html#diffbayes.base.VirtualSensorModel" title="diffbayes.base.VirtualSensorModel">diffbayes.base.VirtualSensorModel</a></span></em>, <em class="sig-param"><span class="n">dataloader</span><span class="p">:</span> <span class="n">DataLoader</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">loss_function</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span>torch.Tensor<span class="p">, </span>torch.Tensor<span class="p">]</span><span class="p">, </span>torch.Tensor<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">F.mse_loss</span></em>, <em class="sig-param"><span class="n">log_interval</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">10</span></em>, <em class="sig-param"><span class="n">optimizer_name</span><span class="o">=</span><span class="default_value">'train_measurement'</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.train._train_virtual_sensor.train_virtual_sensor" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diffbayes.train._train_virtual_sensor.</code><code class="sig-name descname">train_virtual_sensor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buddy</span><span class="p">:</span> <span class="n">fannypack.utils.Buddy</span></em>, <em class="sig-param"><span class="n">virtual_sensor_model</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../base/index.html#diffbayes.base.VirtualSensorModel" title="diffbayes.base.VirtualSensorModel">diffbayes.base.VirtualSensorModel</a></span></em>, <em class="sig-param"><span class="n">dataloader</span><span class="p">:</span> <span class="n">DataLoader</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">loss_function</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span>torch.Tensor<span class="p">, </span>torch.Tensor<span class="p">]</span><span class="p">, </span>torch.Tensor<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">F.mse_loss</span></em>, <em class="sig-param"><span class="n">log_interval</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">10</span></em>, <em class="sig-param"><span class="n">optimizer_name</span><span class="o">=</span><span class="default_value">'train_measurement'</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../../../../_modules/diffbayes/train/_train_virtual_sensor.html#train_virtual_sensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.train._train_virtual_sensor.train_virtual_sensor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Optimizes a virtual sensor model’s prediction accuracy. Minimizes output mean
 error only; does not define a loss on uncertainty.</p>
 <dl class="field-list simple">

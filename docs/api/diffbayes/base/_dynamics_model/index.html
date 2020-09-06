@@ -82,26 +82,10 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._dynamics_model</span></code></a><ul>
-<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
-<li><a class="reference internal" href="#classes">Classes</a><ul>
-<li><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel">DynamicsModel</a><ul>
-<li><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel.state_dim">state_dim</a></li>
-<li><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel.forward">forward</a></li>
-<li><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel.forward_loop">forward_loop</a></li>
-<li><a class="reference internal" href="#diffbayes.base._dynamics_model.DynamicsModel.jacobian">jacobian</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+
             
           
         </div>
@@ -185,7 +169,7 @@
 </table>
 <dl class="py class">
 <dt id="diffbayes.base._dynamics_model.DynamicsModel">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._dynamics_model.</code><code class="sig-name descname">DynamicsModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._dynamics_model.</code><code class="sig-name descname">DynamicsModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/diffbayes/base/_dynamics_model.html#DynamicsModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <div class="graphviz"><img src="../../../../_images/inheritance-8d8b9ba1375b8cab9949ea82d5d0d7db63b5df7c.png" alt="Inheritance diagram of diffbayes.base._dynamics_model.DynamicsModel" usemap="#inheritance835584e097" class="inheritance graphviz" /></div>
 <map id="inheritance835584e097" name="inheritance835584e097">
@@ -207,7 +191,7 @@ estimates.</p>
 
 <dl class="py method">
 <dt id="diffbayes.base._dynamics_model.DynamicsModel.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesTorch<span class="p">, </span>types.ScaleTrilTorch<span class="p">]</span><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.forward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesTorch<span class="p">, </span>types.ScaleTrilTorch<span class="p">]</span><a class="reference internal" href="../../../../_modules/diffbayes/base/_dynamics_model.html#DynamicsModel.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamics model forward pass, single timestep.
 Computes both predicted states and uncertainties. Note that uncertainties
 correspond to the (Cholesky decompositions of the) “Q” matrices in a standard
@@ -244,7 +228,7 @@ dict of tensors or tensor of size <code class="docutils literal notranslate"><sp
 
 <dl class="py method">
 <dt id="diffbayes.base._dynamics_model.DynamicsModel.forward_loop">
-<code class="sig-name descname">forward_loop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesTorch<span class="p">, </span>torch.Tensor<span class="p">]</span><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.forward_loop" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward_loop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesTorch<span class="p">, </span>torch.Tensor<span class="p">]</span><a class="reference internal" href="../../../../_modules/diffbayes/base/_dynamics_model.html#DynamicsModel.forward_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.forward_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamics model forward pass, over sequence length <code class="docutils literal notranslate"><span class="pre">T</span></code> and batch size
 <code class="docutils literal notranslate"><span class="pre">N</span></code>.  By default, this is implemented by iteratively calling
 <code class="docutils literal notranslate"><span class="pre">forward()</span></code>.</p>
@@ -278,7 +262,7 @@ dict of tensors or tensor of size <code class="docutils literal notranslate"><sp
 
 <dl class="py method">
 <dt id="diffbayes.base._dynamics_model.DynamicsModel.jacobian">
-<code class="sig-name descname">jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.jacobian" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="reference internal" href="../../../../_modules/diffbayes/base/_dynamics_model.html#DynamicsModel.jacobian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._dynamics_model.DynamicsModel.jacobian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns Jacobian of the dynamics model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

@@ -82,24 +82,10 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.data._subsequence_dataset</span></code></a><ul>
-<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
-<li><a class="reference internal" href="#classes">Classes</a><ul>
-<li><a class="reference internal" href="#diffbayes.data._subsequence_dataset.SubsequenceDataset">SubsequenceDataset</a><ul>
-<li><a class="reference internal" href="#diffbayes.data._subsequence_dataset.SubsequenceDataset.__getitem__">__getitem__</a></li>
-<li><a class="reference internal" href="#diffbayes.data._subsequence_dataset.SubsequenceDataset.__len__">__len__</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+
             
           
         </div>
@@ -183,7 +169,7 @@
 </table>
 <dl class="py class">
 <dt id="diffbayes.data._subsequence_dataset.SubsequenceDataset">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.data._subsequence_dataset.</code><code class="sig-name descname">SubsequenceDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">subsequence_length</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.data._subsequence_dataset.SubsequenceDataset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.data._subsequence_dataset.</code><code class="sig-name descname">SubsequenceDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">subsequence_length</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/diffbayes/data/_subsequence_dataset.html#SubsequenceDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.data._subsequence_dataset.SubsequenceDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
 <div class="graphviz"><img src="../../../../_images/inheritance-bbf0c8c5d3bc348c2556bb0817865cc195701990.png" alt="Inheritance diagram of diffbayes.data._subsequence_dataset.SubsequenceDataset" usemap="#inheritancea4d8615991" class="inheritance graphviz" /></div>
 <map id="inheritancea4d8615991" name="inheritancea4d8615991">
@@ -203,7 +189,7 @@ either a numpy array or dict of numpy arrays with shape <code class="docutils li
 </dl>
 <dl class="py method">
 <dt id="diffbayes.data._subsequence_dataset.SubsequenceDataset.__getitem__">
-<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; types.TrajectoryNumpy<a class="headerlink" href="#diffbayes.data._subsequence_dataset.SubsequenceDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; types.TrajectoryNumpy<a class="reference internal" href="../../../../_modules/diffbayes/data/_subsequence_dataset.html#SubsequenceDataset.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.data._subsequence_dataset.SubsequenceDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a subsequence from our dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -220,7 +206,7 @@ numpy array or dict of numpy arrays with shape
 
 <dl class="py method">
 <dt id="diffbayes.data._subsequence_dataset.SubsequenceDataset.__len__">
-<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#diffbayes.data._subsequence_dataset.SubsequenceDataset.__len__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../../../../_modules/diffbayes/data/_subsequence_dataset.html#SubsequenceDataset.__len__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.data._subsequence_dataset.SubsequenceDataset.__len__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Total number of subsequences in the dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>

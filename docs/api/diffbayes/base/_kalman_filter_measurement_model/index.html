@@ -82,26 +82,10 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._kalman_filter_measurement_model</span></code></a><ul>
-<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
-<li><a class="reference internal" href="#classes">Classes</a><ul>
-<li><a class="reference internal" href="#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel">KalmanFilterMeasurementModel</a><ul>
-<li><a class="reference internal" href="#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel.state_dim">state_dim</a></li>
-<li><a class="reference internal" href="#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel.observation_dim">observation_dim</a></li>
-<li><a class="reference internal" href="#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel.forward">forward</a></li>
-<li><a class="reference internal" href="#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel.jacobian">jacobian</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+
             
           
         </div>
@@ -185,7 +169,7 @@
 </table>
 <dl class="py class">
 <dt id="diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._kalman_filter_measurement_model.</code><code class="sig-name descname">KalmanFilterMeasurementModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span></em>, <em class="sig-param"><span class="n">observation_dim</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._kalman_filter_measurement_model.</code><code class="sig-name descname">KalmanFilterMeasurementModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span></em>, <em class="sig-param"><span class="n">observation_dim</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/diffbayes/base/_kalman_filter_measurement_model.html#KalmanFilterMeasurementModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
 <div class="graphviz"><img src="../../../../_images/inheritance-1541e46309261612a8d1636dbdd7e119f8c32f38.png" alt="Inheritance diagram of diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel" usemap="#inheritance5a67c7b520" class="inheritance graphviz" /></div>
 <map id="inheritance5a67c7b520" name="inheritance5a67c7b520">
@@ -216,7 +200,7 @@ inheritance.</p>
 
 <dl class="py method">
 <dt id="diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel.forward">
-<em class="property">abstract </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.ObservationsNoDictTorch<span class="p">, </span>types.ScaleTrilTorch<span class="p">]</span><a class="headerlink" href="#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel.forward" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.ObservationsNoDictTorch<span class="p">, </span>types.ScaleTrilTorch<span class="p">]</span><a class="reference internal" href="../../../../_modules/diffbayes/base/_kalman_filter_measurement_model.html#KalmanFilterMeasurementModel.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Observation model forward pass, over batch size <code class="docutils literal notranslate"><span class="pre">N</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -232,7 +216,7 @@ and cholesky decomposition of covariance.  Shape should be <code class="docutils
 
 <dl class="py method">
 <dt id="diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel.jacobian">
-<code class="sig-name descname">jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="headerlink" href="#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel.jacobian" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="reference internal" href="../../../../_modules/diffbayes/base/_kalman_filter_measurement_model.html#KalmanFilterMeasurementModel.jacobian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._kalman_filter_measurement_model.KalmanFilterMeasurementModel.jacobian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns Jacobian of the measurement model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

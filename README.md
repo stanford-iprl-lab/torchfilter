@@ -7,7 +7,7 @@
 
 **`diffbayes`** is a library for discrete-time Bayesian filtering in PyTorch.
 
-It's broken down into five submodules:
+It's broken down into six submodules:
 
 <table>
   <tbody valign="top">
@@ -15,14 +15,15 @@ It's broken down into five submodules:
       <td><code>diffbayes.<strong>base</strong></code></td>
       <td>
         Base classes that define standard interfaces for implementing filter,
-        dynamics, and measurement models as standard PyTorch modules.
+        dynamics, measurement, and virtual sensor models as standard PyTorch
+        modules.
       </td>
     </tr>
     <tr>
       <td><code>diffbayes.<strong>filters</strong></code></td>
       <td>
-        Differentiable filter implementations, which can either be used directly
-        or subclassed. Currently implemented:
+        Differentiable filters implemented as standard PyTorch modules, which
+        can either be used directly or subclassed. Currently implemented:
         <ul>
             <li>Particle Filter (PF)</li>
             <li>Extended Kalman Filter (EKF)</li>
@@ -56,7 +57,7 @@ It's broken down into five submodules:
     </tr>
     <tr>
       <td><code>diffbayes.<strong>types</strong></code></td>
-      <td>Aliases and data structures for static type-checking.</td>
+      <td>Data structures and semantic type aliases.</td>
     </tr>
   </tbody>
 </table>

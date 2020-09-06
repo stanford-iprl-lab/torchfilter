@@ -82,26 +82,10 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._filter</span></code></a><ul>
-<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
-<li><a class="reference internal" href="#classes">Classes</a><ul>
-<li><a class="reference internal" href="#diffbayes.base._filter.Filter">Filter</a><ul>
-<li><a class="reference internal" href="#diffbayes.base._filter.Filter.state_dim">state_dim</a></li>
-<li><a class="reference internal" href="#diffbayes.base._filter.Filter.initialize_beliefs">initialize_beliefs</a></li>
-<li><a class="reference internal" href="#diffbayes.base._filter.Filter.forward">forward</a></li>
-<li><a class="reference internal" href="#diffbayes.base._filter.Filter.forward_loop">forward_loop</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+
             
           
         </div>
@@ -185,7 +169,7 @@
 </table>
 <dl class="py class">
 <dt id="diffbayes.base._filter.Filter">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._filter.</code><code class="sig-name descname">Filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._filter.Filter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._filter.</code><code class="sig-name descname">Filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/diffbayes/base/_filter.html#Filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._filter.Filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <div class="graphviz"><img src="../../../../_images/inheritance-b684eec21cc4f6b4c8ad92f8a57a5b7215b019ba.png" alt="Inheritance diagram of diffbayes.base._filter.Filter" usemap="#inheritance70a645ad16" class="inheritance graphviz" /></div>
 <map id="inheritance70a645ad16" name="inheritance70a645ad16">
@@ -209,7 +193,7 @@
 
 <dl class="py method">
 <dt id="diffbayes.base._filter.Filter.initialize_beliefs">
-<em class="property">abstract </em><code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mean</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">types.CovarianceTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#diffbayes.base._filter.Filter.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mean</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">types.CovarianceTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../../../../_modules/diffbayes/base/_filter.html#Filter.initialize_beliefs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._filter.Filter.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize our filter with a Gaussian prior.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -225,7 +209,7 @@
 
 <dl class="py method">
 <dt id="diffbayes.base._filter.Filter.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="headerlink" href="#diffbayes.base._filter.Filter.forward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="reference internal" href="../../../../_modules/diffbayes/base/_filter.html#Filter.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._filter.Filter.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filtering forward pass, over a single timestep.</p>
 <p>By default, this is implemented by bootstrapping the <code class="docutils literal notranslate"><span class="pre">forward_loop()</span></code>
 method.</p>
@@ -247,7 +231,7 @@ be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span
 
 <dl class="py method">
 <dt id="diffbayes.base._filter.Filter.forward_loop">
-<code class="sig-name descname">forward_loop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="headerlink" href="#diffbayes.base._filter.Filter.forward_loop" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward_loop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="reference internal" href="../../../../_modules/diffbayes/base/_filter.html#Filter.forward_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._filter.Filter.forward_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filtering forward pass, over sequence length <code class="docutils literal notranslate"><span class="pre">T</span></code> and batch size <code class="docutils literal notranslate"><span class="pre">N</span></code>.
 By default, this is implemented by iteratively calling <code class="docutils literal notranslate"><span class="pre">forward()</span></code>.</p>
 <p>To inject code between timesteps (for example, to inspect hidden state),

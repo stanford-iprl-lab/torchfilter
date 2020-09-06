@@ -82,24 +82,10 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.base._virtual_sensor_model</span></code></a><ul>
-<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
-<li><a class="reference internal" href="#classes">Classes</a><ul>
-<li><a class="reference internal" href="#diffbayes.base._virtual_sensor_model.VirtualSensorModel">VirtualSensorModel</a><ul>
-<li><a class="reference internal" href="#diffbayes.base._virtual_sensor_model.VirtualSensorModel.state_dim">state_dim</a></li>
-<li><a class="reference internal" href="#diffbayes.base._virtual_sensor_model.VirtualSensorModel.forward">forward</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+
             
           
         </div>
@@ -183,7 +169,7 @@
 </table>
 <dl class="py class">
 <dt id="diffbayes.base._virtual_sensor_model.VirtualSensorModel">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._virtual_sensor_model.</code><code class="sig-name descname">VirtualSensorModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.base._virtual_sensor_model.VirtualSensorModel" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.base._virtual_sensor_model.</code><code class="sig-name descname">VirtualSensorModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/diffbayes/base/_virtual_sensor_model.html#VirtualSensorModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._virtual_sensor_model.VirtualSensorModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
 <div class="graphviz"><img src="../../../../_images/inheritance-a290a5fe5b88cdd50ba51368c9239335228a2cb5.png" alt="Inheritance diagram of diffbayes.base._virtual_sensor_model.VirtualSensorModel" usemap="#inheritance3e7ea51bad" class="inheritance graphviz" /></div>
 <map id="inheritance3e7ea51bad" name="inheritance3e7ea51bad">
@@ -206,7 +192,7 @@ measurement model.</p>
 
 <dl class="py method">
 <dt id="diffbayes.base._virtual_sensor_model.VirtualSensorModel.forward">
-<em class="property">abstract </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesTorch<span class="p">, </span>types.ScaleTrilTorch<span class="p">]</span><a class="headerlink" href="#diffbayes.base._virtual_sensor_model.VirtualSensorModel.forward" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesTorch<span class="p">, </span>types.ScaleTrilTorch<span class="p">]</span><a class="reference internal" href="../../../../_modules/diffbayes/base/_virtual_sensor_model.html#VirtualSensorModel.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.base._virtual_sensor_model.VirtualSensorModel.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predicts states and uncertainties from observation inputs.</p>
 <p>Uncertainties should be lower-triangular Cholesky decompositions of covariance
 matrices.</p>

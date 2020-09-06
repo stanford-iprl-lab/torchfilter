@@ -1,4 +1,4 @@
-"""Semantic typehints for filtering.
+"""Data structures and semantic type aliases for filtering.
 """
 from typing import Dict, NamedTuple, Union
 

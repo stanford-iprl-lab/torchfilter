@@ -82,32 +82,10 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diffbayes.filters._particle_filter</span></code></a><ul>
-<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
-<li><a class="reference internal" href="#classes">Classes</a><ul>
-<li><a class="reference internal" href="#diffbayes.filters._particle_filter.ParticleFilter">ParticleFilter</a><ul>
-<li><a class="reference internal" href="#diffbayes.filters._particle_filter.ParticleFilter.dynamics_model">dynamics_model</a></li>
-<li><a class="reference internal" href="#diffbayes.filters._particle_filter.ParticleFilter.measurement_model">measurement_model</a></li>
-<li><a class="reference internal" href="#diffbayes.filters._particle_filter.ParticleFilter.num_particles">num_particles</a></li>
-<li><a class="reference internal" href="#diffbayes.filters._particle_filter.ParticleFilter.resample">resample</a></li>
-<li><a class="reference internal" href="#diffbayes.filters._particle_filter.ParticleFilter.soft_resample_alpha">soft_resample_alpha</a></li>
-<li><a class="reference internal" href="#diffbayes.filters._particle_filter.ParticleFilter.estimation_method">estimation_method</a></li>
-<li><a class="reference internal" href="#diffbayes.filters._particle_filter.ParticleFilter.particle_states">particle_states</a></li>
-<li><a class="reference internal" href="#diffbayes.filters._particle_filter.ParticleFilter.particle_log_weights">particle_log_weights</a></li>
-<li><a class="reference internal" href="#diffbayes.filters._particle_filter.ParticleFilter.initialize_beliefs">initialize_beliefs</a></li>
-<li><a class="reference internal" href="#diffbayes.filters._particle_filter.ParticleFilter.forward">forward</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+
             
           
         </div>
@@ -191,7 +169,7 @@
 </table>
 <dl class="py class">
 <dt id="diffbayes.filters._particle_filter.ParticleFilter">
-<em class="property">class </em><code class="sig-prename descclassname">diffbayes.filters._particle_filter.</code><code class="sig-name descname">ParticleFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">ParticleFilterMeasurementModel</span></em>, <em class="sig-param"><span class="n">num_particles</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">100</span></em>, <em class="sig-param"><span class="n">resample</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">soft_resample_alpha</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">estimation_method</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'weighted_average'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.filters._particle_filter.ParticleFilter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diffbayes.filters._particle_filter.</code><code class="sig-name descname">ParticleFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">ParticleFilterMeasurementModel</span></em>, <em class="sig-param"><span class="n">num_particles</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">100</span></em>, <em class="sig-param"><span class="n">resample</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">soft_resample_alpha</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">estimation_method</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'weighted_average'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/diffbayes/filters/_particle_filter.html#ParticleFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.filters._particle_filter.ParticleFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../base/index.html#diffbayes.base.Filter" title="diffbayes.base.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">diffbayes.base.Filter</span></code></a></p>
 <div class="graphviz"><img src="../../../../_images/inheritance-801768d4aa2ff0c7c7d7d81d3037b161acae3b64.png" alt="Inheritance diagram of diffbayes.filters._particle_filter.ParticleFilter" usemap="#inheritance3fe8651cb7" class="inheritance graphviz" /></div>
 <map id="inheritance3fe8651cb7" name="inheritance3fe8651cb7">
@@ -300,7 +278,7 @@ log-likelihoods. Shape should be <code class="docutils literal notranslate"><spa
 
 <dl class="py method">
 <dt id="diffbayes.filters._particle_filter.ParticleFilter.initialize_beliefs">
-<code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mean</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">types.CovarianceTorch</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diffbayes.filters._particle_filter.ParticleFilter.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mean</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">types.CovarianceTorch</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/diffbayes/filters/_particle_filter.html#ParticleFilter.initialize_beliefs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.filters._particle_filter.ParticleFilter.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Populates initial particles, which will be normally distributed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -316,7 +294,7 @@ log-likelihoods. Shape should be <code class="docutils literal notranslate"><spa
 
 <dl class="py method">
 <dt id="diffbayes.filters._particle_filter.ParticleFilter.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="headerlink" href="#diffbayes.filters._particle_filter.ParticleFilter.forward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="reference internal" href="../../../../_modules/diffbayes/filters/_particle_filter.html#ParticleFilter.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diffbayes.filters._particle_filter.ParticleFilter.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Particle filter forward pass, single timestep.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
