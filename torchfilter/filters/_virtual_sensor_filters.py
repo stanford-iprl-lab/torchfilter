@@ -100,9 +100,9 @@ class _VirtualSensorKalmanFilterMixin(
     ):
         # Check submodule consistency
         assert isinstance(dynamics_model, DynamicsModel)
+        assert isinstance(virtual_sensor_model, VirtualSensorModel)
 
         # Initialize state dimension
-        assert isinstance(self, KalmanFilterBase)
         super(_VirtualSensorKalmanFilterMixin, self).__init__(
             dynamics_model=dynamics_model,
             measurement_model=_IdentityMeasurementModel(

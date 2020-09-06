@@ -250,9 +250,9 @@
     <span class="p">):</span>
         <span class="c1"># Check submodule consistency</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dynamics_model</span><span class="p">,</span> <span class="n">DynamicsModel</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">virtual_sensor_model</span><span class="p">,</span> <span class="n">VirtualSensorModel</span><span class="p">)</span>
 
         <span class="c1"># Initialize state dimension</span>
-        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">KalmanFilterBase</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">_VirtualSensorKalmanFilterMixin</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">dynamics_model</span><span class="o">=</span><span class="n">dynamics_model</span><span class="p">,</span>
             <span class="n">measurement_model</span><span class="o">=</span><span class="n">_IdentityMeasurementModel</span><span class="p">(</span>
