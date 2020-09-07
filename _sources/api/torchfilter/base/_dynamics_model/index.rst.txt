@@ -54,12 +54,6 @@ Classes
       should be lower triangular and not accumulate -- the uncertainty at at time ``t``
       should be computed as if the estimate at time ``t - 1`` is a ground-truth input.
 
-      Computes both predicted states and uncertainties. Note that uncertainties
-      correspond to the (Cholesky decompositions of the) "Q" matrices in a standard
-      linear dynamical system w/ additive white Gaussian noise. In other words, they
-      should be lower triangular and not accumulate -- the uncertainty at at time ``t``
-      should be computed as if the estimate at time ``t - 1`` is a ground-truth input.
-
       By default, this is implemented by bootstrapping the ``forward_loop()``
       method.
 
@@ -70,14 +64,9 @@ Classes
                        dict of tensors or tensor of size ``(N, ...)``.
       :type controls: dict or torch.Tensor
 
-      :returns: *Tuple[torch.Tensor, torch.Tensor]* --
-
-      .. code-block::
-
-               Predicted states & uncertainties.
-                   - States should have shape `(N, state_dim).`
-                   - Uncertainties should be lower triangular, and should have shape
-                   `(N, state_dim, state_dim).`
+      :returns: *Tuple[torch.Tensor, torch.Tensor]* -- Predicted states & uncertainties. States
+                should have shape ``(N, state_dim)``\ , and uncertainties should be lower
+                triangular with shape ``(N, state_dim, state_dim).``
 
 
    .. method:: forward_loop(self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch) -> Tuple[types.StatesTorch, torch.Tensor]
@@ -102,14 +91,9 @@ Classes
                        dict of tensors or tensor of size ``(T, N, ...)``.
       :type controls: dict or torch.Tensor
 
-      :returns: *Tuple[torch.Tensor, torch.Tensor]* --
-
-      .. code-block::
-
-               Predicted states & uncertainties.
-                   - States should have shape `(T, N, state_dim).`
-                   - Uncertainties should be lower triangular, and should have shape
-                   `(T, N, state_dim, state_dim).`
+      :returns: *Tuple[torch.Tensor, torch.Tensor]* -- Predicted states & uncertainties. States
+                should have shape ``(T, N, state_dim)``\ , and uncertainties should be lower
+                triangular with shape ``(T, N, state_dim, state_dim).``
 
 
    .. method:: jacobian(self, initial_states: types.StatesTorch, controls: types.ControlsTorch) -> torch.Tensor

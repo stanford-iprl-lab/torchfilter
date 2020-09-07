@@ -202,15 +202,11 @@ matrices.</p>
 either a dict of tensors or tensor of size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> –</p>
+<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> – Predicted states &amp; uncertainties. States
+should have shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>, and uncertainties should be lower
+triangular with shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim).</span></code></p>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Predicted states &amp; uncertainties.
-    - States should have shape `(N, state_dim).`
-    - Uncertainties should be lower triangular, and should have shape
-    `(N, state_dim, state_dim).`
-</pre></div>
-</div>
 </dd></dl>
 
 </dd></dl>

@@ -57,14 +57,9 @@ Classes
                            either a dict of tensors or tensor of size ``(N, ...)``.
       :type observations: dict or torch.Tensor
 
-      :returns: *Tuple[torch.Tensor, torch.Tensor]* --
-
-      .. code-block::
-
-               Predicted states & uncertainties.
-                   - States should have shape `(N, state_dim).`
-                   - Uncertainties should be lower triangular, and should have shape
-                   `(N, state_dim, state_dim).`
+      :returns: *Tuple[torch.Tensor, torch.Tensor]* -- Predicted states & uncertainties. States
+                should have shape ``(N, state_dim)``\ , and uncertainties should be lower
+                triangular with shape ``(N, state_dim, state_dim).``
 
 
 

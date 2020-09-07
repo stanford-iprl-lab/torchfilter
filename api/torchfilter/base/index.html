@@ -216,11 +216,6 @@ correspond to the (Cholesky decompositions of the) “Q” matrices in a standar
 linear dynamical system w/ additive white Gaussian noise. In other words, they
 should be lower triangular and not accumulate – the uncertainty at at time <code class="docutils literal notranslate"><span class="pre">t</span></code>
 should be computed as if the estimate at time <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">-</span> <span class="pre">1</span></code> is a ground-truth input.</p>
-<p>Computes both predicted states and uncertainties. Note that uncertainties
-correspond to the (Cholesky decompositions of the) “Q” matrices in a standard
-linear dynamical system w/ additive white Gaussian noise. In other words, they
-should be lower triangular and not accumulate – the uncertainty at at time <code class="docutils literal notranslate"><span class="pre">t</span></code>
-should be computed as if the estimate at time <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">-</span> <span class="pre">1</span></code> is a ground-truth input.</p>
 <p>By default, this is implemented by bootstrapping the <code class="docutils literal notranslate"><span class="pre">forward_loop()</span></code>
 method.</p>
 <dl class="field-list simple">
@@ -233,15 +228,11 @@ dict of tensors or tensor of size <code class="docutils literal notranslate"><sp
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> –</p>
+<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> – Predicted states &amp; uncertainties. States
+should have shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>, and uncertainties should be lower
+triangular with shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim).</span></code></p>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Predicted states &amp; uncertainties.
-    - States should have shape `(N, state_dim).`
-    - Uncertainties should be lower triangular, and should have shape
-    `(N, state_dim, state_dim).`
-</pre></div>
-</div>
 </dd></dl>
 
 <dl class="py method">
@@ -267,15 +258,11 @@ dict of tensors or tensor of size <code class="docutils literal notranslate"><sp
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> –</p>
+<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> – Predicted states &amp; uncertainties. States
+should have shape <code class="docutils literal notranslate"><span class="pre">(T,</span> <span class="pre">N,</span> <span class="pre">state_dim)</span></code>, and uncertainties should be lower
+triangular with shape <code class="docutils literal notranslate"><span class="pre">(T,</span> <span class="pre">N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim).</span></code></p>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Predicted states &amp; uncertainties.
-    - States should have shape `(T, N, state_dim).`
-    - Uncertainties should be lower triangular, and should have shape
-    `(T, N, state_dim, state_dim).`
-</pre></div>
-</div>
 </dd></dl>
 
 <dl class="py method">
@@ -650,15 +637,11 @@ matrices.</p>
 either a dict of tensors or tensor of size <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> –</p>
+<dd class="field-even"><p><em>Tuple[torch.Tensor, torch.Tensor]</em> – Predicted states &amp; uncertainties. States
+should have shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>, and uncertainties should be lower
+triangular with shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim).</span></code></p>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Predicted states &amp; uncertainties.
-    - States should have shape `(N, state_dim).`
-    - Uncertainties should be lower triangular, and should have shape
-    `(N, state_dim, state_dim).`
-</pre></div>
-</div>
 </dd></dl>
 
 </dd></dl>

@@ -189,10 +189,9 @@
 <span class="sd">            observations (dict or torch.Tensor): Measurement inputs. Should be</span>
 <span class="sd">                either a dict of tensors or tensor of size `(N, ...)`.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            Tuple[torch.Tensor, torch.Tensor]: Predicted states &amp; uncertainties.</span>
-<span class="sd">                - States should have shape `(N, state_dim).`</span>
-<span class="sd">                - Uncertainties should be lower triangular, and should have shape</span>
-<span class="sd">                `(N, state_dim, state_dim).`</span>
+<span class="sd">            Tuple[torch.Tensor, torch.Tensor]: Predicted states &amp; uncertainties. States</span>
+<span class="sd">            should have shape `(N, state_dim)`, and uncertainties should be lower</span>
+<span class="sd">            triangular with shape `(N, state_dim, state_dim).`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div></div>
 </pre></div>

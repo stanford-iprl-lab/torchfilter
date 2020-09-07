@@ -188,12 +188,6 @@
 <span class="sd">        should be lower triangular and not accumulate -- the uncertainty at at time `t`</span>
 <span class="sd">        should be computed as if the estimate at time `t - 1` is a ground-truth input.</span>
 
-<span class="sd">        Computes both predicted states and uncertainties. Note that uncertainties</span>
-<span class="sd">        correspond to the (Cholesky decompositions of the) &quot;Q&quot; matrices in a standard</span>
-<span class="sd">        linear dynamical system w/ additive white Gaussian noise. In other words, they</span>
-<span class="sd">        should be lower triangular and not accumulate -- the uncertainty at at time `t`</span>
-<span class="sd">        should be computed as if the estimate at time `t - 1` is a ground-truth input.</span>
-
 <span class="sd">        By default, this is implemented by bootstrapping the `forward_loop()`</span>
 <span class="sd">        method.</span>
 
@@ -204,21 +198,20 @@
 <span class="sd">                dict of tensors or tensor of size `(N, ...)`.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Tuple[torch.Tensor, torch.Tensor]: Predicted states &amp; uncertainties.</span>
-<span class="sd">                - States should have shape `(N, state_dim).`</span>
-<span class="sd">                - Uncertainties should be lower triangular, and should have shape</span>
-<span class="sd">                `(N, state_dim, state_dim).`</span>
+<span class="sd">            Tuple[torch.Tensor, torch.Tensor]: Predicted states &amp; uncertainties. States</span>
+<span class="sd">            should have shape `(N, state_dim)`, and uncertainties should be lower</span>
+<span class="sd">            triangular with shape `(N, state_dim, state_dim).`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># Wrap our control inputs</span>
         <span class="c1">#</span>
         <span class="c1"># If the input is a dictionary of tensors, this provides a</span>
         <span class="c1"># tensor-like interface for slicing, accessing shape, etc</span>
-        <span class="n">controls</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span>
+        <span class="n">controls_wrapped</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span>
 
         <span class="c1"># Call `forward_loop()` with a single timestep</span>
         <span class="n">predictions</span><span class="p">,</span> <span class="n">scale_trils</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward_loop</span><span class="p">(</span>
-            <span class="n">initial_states</span><span class="o">=</span><span class="n">initial_states</span><span class="p">,</span> <span class="n">controls</span><span class="o">=</span><span class="n">controls</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+            <span class="n">initial_states</span><span class="o">=</span><span class="n">initial_states</span><span class="p">,</span> <span class="n">controls</span><span class="o">=</span><span class="n">controls_wrapped</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
         <span class="p">)</span>
         <span class="k">assert</span> <span class="n">predictions</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
         <span class="k">assert</span> <span class="n">scale_trils</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
@@ -246,21 +239,19 @@
 <span class="sd">            controls (dict or torch.Tensor): Control inputs. Should be either a</span>
 <span class="sd">                dict of tensors or tensor of size `(T, N, ...)`.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            Tuple[torch.Tensor, torch.Tensor]: Predicted states &amp; uncertainties.</span>
-<span class="sd">                - States should have shape `(T, N, state_dim).`</span>
-<span class="sd">                - Uncertainties should be lower triangular, and should have shape</span>
-<span class="sd">                `(T, N, state_dim, state_dim).`</span>
+<span class="sd">            Tuple[torch.Tensor, torch.Tensor]: Predicted states &amp; uncertainties. States</span>
+<span class="sd">            should have shape `(T, N, state_dim)`, and uncertainties should be lower</span>
+<span class="sd">            triangular with shape `(T, N, state_dim, state_dim).`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># Wrap our control inputs</span>
         <span class="c1">#</span>
         <span class="c1"># If the input is a dictionary of tensors, this provides a</span>
         <span class="c1"># tensor-like interface for slicing, accessing shape, etc</span>
-        <span class="n">controls</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span>
+        <span class="n">controls_wrapped</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span>
 
         <span class="c1"># Get sequence length (T), batch size (N)</span>
-        <span class="n">T</span> <span class="o">=</span> <span class="n">controls</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">N</span> <span class="o">=</span> <span class="n">controls</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">T</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">controls_wrapped</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
         <span class="k">assert</span> <span class="n">initial_states</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">)</span>
         <span class="k">assert</span> <span class="n">T</span> <span class="o">&gt;</span> <span class="mi">0</span>
 
@@ -275,7 +266,7 @@
             <span class="c1"># Compute state estimate for a single timestep</span>
             <span class="c1"># We use __call__ to make sure hooks are dispatched correctly</span>
             <span class="n">prediction</span><span class="p">,</span> <span class="n">scale_tril</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span>
-                <span class="n">initial_states</span><span class="o">=</span><span class="n">prediction</span><span class="p">,</span> <span class="n">controls</span><span class="o">=</span><span class="n">controls</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+                <span class="n">initial_states</span><span class="o">=</span><span class="n">prediction</span><span class="p">,</span> <span class="n">controls</span><span class="o">=</span><span class="n">controls_wrapped</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
             <span class="p">)</span>
 
             <span class="c1"># Check if noise is time-varying</span>

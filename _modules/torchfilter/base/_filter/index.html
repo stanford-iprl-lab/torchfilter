@@ -211,12 +211,13 @@
         <span class="c1">#</span>
         <span class="c1"># If either of our inputs are dictionaries, this provides a tensor-like</span>
         <span class="c1"># interface for slicing, accessing shape, etc</span>
-        <span class="n">observations</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
-        <span class="n">controls</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span>
+        <span class="n">observations_wrapped</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
+        <span class="n">controls_wrapped</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span>
 
         <span class="c1"># Call `forward_loop()` with a single timestep</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward_loop</span><span class="p">(</span>
-            <span class="n">observations</span><span class="o">=</span><span class="n">observations</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">controls</span><span class="o">=</span><span class="n">controls</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+            <span class="n">observations</span><span class="o">=</span><span class="n">observations_wrapped</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+            <span class="n">controls</span><span class="o">=</span><span class="n">controls_wrapped</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
         <span class="p">)</span>
         <span class="k">assert</span> <span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
@@ -245,18 +246,20 @@
         <span class="c1">#</span>
         <span class="c1"># If either of our inputs are dictionaries, this provides a tensor-like</span>
         <span class="c1"># interface for slicing, accessing shape, etc</span>
-        <span class="n">observations</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
-        <span class="n">controls</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span>
+        <span class="n">observations_wrapped</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
+        <span class="n">controls_wrapped</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">SliceWrapper</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span>
 
         <span class="c1"># Get sequence length (T), batch size (N)</span>
-        <span class="n">T</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">controls</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
-        <span class="k">assert</span> <span class="n">observations</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+        <span class="n">T</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">controls_wrapped</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="n">observations_wrapped</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
 
         <span class="c1"># Filtering forward pass</span>
         <span class="c1"># We treat t = 0 as a special case to make it easier to create state_predictions</span>
         <span class="c1"># tensor on the correct device</span>
         <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">current_prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">observations</span><span class="o">=</span><span class="n">observations</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">controls</span><span class="o">=</span><span class="n">controls</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+        <span class="n">current_prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span>
+            <span class="n">observations</span><span class="o">=</span><span class="n">observations_wrapped</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">controls</span><span class="o">=</span><span class="n">controls_wrapped</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+        <span class="p">)</span>
         <span class="n">state_predictions</span> <span class="o">=</span> <span class="n">current_prediction</span><span class="o">.</span><span class="n">new_zeros</span><span class="p">((</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">))</span>
         <span class="k">assert</span> <span class="n">current_prediction</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">)</span>
         <span class="n">state_predictions</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_prediction</span>
@@ -265,7 +268,7 @@
             <span class="c1"># Compute state prediction for a single timestep</span>
             <span class="c1"># We use __call__ to make sure hooks are dispatched correctly</span>
             <span class="n">current_prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span>
-                <span class="n">observations</span><span class="o">=</span><span class="n">observations</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">controls</span><span class="o">=</span><span class="n">controls</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+                <span class="n">observations</span><span class="o">=</span><span class="n">observations_wrapped</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">controls</span><span class="o">=</span><span class="n">controls_wrapped</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
             <span class="p">)</span>
 
             <span class="c1"># Validate &amp; add to output</span>
