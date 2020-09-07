@@ -38,12 +38,6 @@ class DynamicsModel(nn.Module, abc.ABC):
         should be lower triangular and not accumulate -- the uncertainty at at time `t`
         should be computed as if the estimate at time `t - 1` is a ground-truth input.
 
-        Computes both predicted states and uncertainties. Note that uncertainties
-        correspond to the (Cholesky decompositions of the) "Q" matrices in a standard
-        linear dynamical system w/ additive white Gaussian noise. In other words, they
-        should be lower triangular and not accumulate -- the uncertainty at at time `t`
-        should be computed as if the estimate at time `t - 1` is a ground-truth input.
-
         By default, this is implemented by bootstrapping the `forward_loop()`
         method.
 
@@ -54,21 +48,20 @@ class DynamicsModel(nn.Module, abc.ABC):
                 dict of tensors or tensor of size `(N, ...)`.
 
         Returns:
-            Tuple[torch.Tensor, torch.Tensor]: Predicted states & uncertainties.
-                - States should have shape `(N, state_dim).`
-                - Uncertainties should be lower triangular, and should have shape
-                `(N, state_dim, state_dim).`
+            Tuple[torch.Tensor, torch.Tensor]: Predicted states & uncertainties. States
+            should have shape `(N, state_dim)`, and uncertainties should be lower
+            triangular with shape `(N, state_dim, state_dim).`
         """
 
         # Wrap our control inputs
         #
         # If the input is a dictionary of tensors, this provides a
         # tensor-like interface for slicing, accessing shape, etc
-        controls = fannypack.utils.SliceWrapper(controls)
+        controls_wrapped = fannypack.utils.SliceWrapper(controls)
 
         # Call `forward_loop()` with a single timestep
         predictions, scale_trils = self.forward_loop(
-            initial_states=initial_states, controls=controls[None, ...]
+            initial_states=initial_states, controls=controls_wrapped[None, ...]
         )
         assert predictions.shape[0] == 1
         assert scale_trils.shape[0] == 1
@@ -96,21 +89,19 @@ class DynamicsModel(nn.Module, abc.ABC):
             controls (dict or torch.Tensor): Control inputs. Should be either a
                 dict of tensors or tensor of size `(T, N, ...)`.
         Returns:
-            Tuple[torch.Tensor, torch.Tensor]: Predicted states & uncertainties.
-                - States should have shape `(T, N, state_dim).`
-                - Uncertainties should be lower triangular, and should have shape
-                `(T, N, state_dim, state_dim).`
+            Tuple[torch.Tensor, torch.Tensor]: Predicted states & uncertainties. States
+            should have shape `(T, N, state_dim)`, and uncertainties should be lower
+            triangular with shape `(T, N, state_dim, state_dim).`
         """
 
         # Wrap our control inputs
         #
         # If the input is a dictionary of tensors, this provides a
         # tensor-like interface for slicing, accessing shape, etc
-        controls = fannypack.utils.SliceWrapper(controls)
+        controls_wrapped = fannypack.utils.SliceWrapper(controls)
 
         # Get sequence length (T), batch size (N)
-        T = controls.shape[0]
-        N = controls.shape[1]
+        T, N = controls_wrapped.shape[:2]
         assert initial_states.shape == (N, self.state_dim)
         assert T > 0
 
@@ -125,7 +116,7 @@ class DynamicsModel(nn.Module, abc.ABC):
             # Compute state estimate for a single timestep
             # We use __call__ to make sure hooks are dispatched correctly
             prediction, scale_tril = self(
-                initial_states=prediction, controls=controls[t]
+                initial_states=prediction, controls=controls_wrapped[t]
             )
 
             # Check if noise is time-varying

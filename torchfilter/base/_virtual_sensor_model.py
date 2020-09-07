@@ -39,9 +39,8 @@ class VirtualSensorModel(abc.ABC, nn.Module):
             observations (dict or torch.Tensor): Measurement inputs. Should be
                 either a dict of tensors or tensor of size `(N, ...)`.
         Returns:
-            Tuple[torch.Tensor, torch.Tensor]: Predicted states & uncertainties.
-                - States should have shape `(N, state_dim).`
-                - Uncertainties should be lower triangular, and should have shape
-                `(N, state_dim, state_dim).`
+            Tuple[torch.Tensor, torch.Tensor]: Predicted states & uncertainties. States
+            should have shape `(N, state_dim)`, and uncertainties should be lower
+            triangular with shape `(N, state_dim, state_dim).`
         """
         pass

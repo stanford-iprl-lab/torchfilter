@@ -61,12 +61,13 @@ class Filter(nn.Module, abc.ABC):
         #
         # If either of our inputs are dictionaries, this provides a tensor-like
         # interface for slicing, accessing shape, etc
-        observations = fannypack.utils.SliceWrapper(observations)
-        controls = fannypack.utils.SliceWrapper(controls)
+        observations_wrapped = fannypack.utils.SliceWrapper(observations)
+        controls_wrapped = fannypack.utils.SliceWrapper(controls)
 
         # Call `forward_loop()` with a single timestep
         output = self.forward_loop(
-            observations=observations[None, ...], controls=controls[None, ...]
+            observations=observations_wrapped[None, ...],
+            controls=controls_wrapped[None, ...],
         )
         assert output.shape[0] == 1
         return output[0]
@@ -95,18 +96,20 @@ class Filter(nn.Module, abc.ABC):
         #
         # If either of our inputs are dictionaries, this provides a tensor-like
         # interface for slicing, accessing shape, etc
-        observations = fannypack.utils.SliceWrapper(observations)
-        controls = fannypack.utils.SliceWrapper(controls)
+        observations_wrapped = fannypack.utils.SliceWrapper(observations)
+        controls_wrapped = fannypack.utils.SliceWrapper(controls)
 
         # Get sequence length (T), batch size (N)
-        T, N = controls.shape[:2]
-        assert observations.shape[:2] == (T, N)
+        T, N = controls_wrapped.shape[:2]
+        assert observations_wrapped.shape[:2] == (T, N)
 
         # Filtering forward pass
         # We treat t = 0 as a special case to make it easier to create state_predictions
         # tensor on the correct device
         t = 0
-        current_prediction = self(observations=observations[t], controls=controls[t])
+        current_prediction = self(
+            observations=observations_wrapped[t], controls=controls_wrapped[t]
+        )
         state_predictions = current_prediction.new_zeros((T, N, self.state_dim))
         assert current_prediction.shape == (N, self.state_dim)
         state_predictions[t] = current_prediction
@@ -115,7 +118,7 @@ class Filter(nn.Module, abc.ABC):
             # Compute state prediction for a single timestep
             # We use __call__ to make sure hooks are dispatched correctly
             current_prediction = self(
-                observations=observations[t], controls=controls[t]
+                observations=observations_wrapped[t], controls=controls_wrapped[t]
             )
 
             # Validate & add to output

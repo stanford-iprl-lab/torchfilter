@@ -86,7 +86,7 @@ $ pip install -e .
 ### Development
 
 Tests can be run with `pytest`, and documentation can be built by running
-`make github` in the `docsource/` directory.
+`make dirhtml` in the `docs/` directory.
 
 Tooling: [black](https://github.com/psf/black) and
 [isort](https://github.com/timothycrosley/isort) for formatting,
