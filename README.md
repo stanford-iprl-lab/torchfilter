@@ -1,9 +1,9 @@
 # torchfilter
 
-![build](https://github.com/brentyi/torchfilter/workflows/build/badge.svg)
-![mypy](https://github.com/brentyi/torchfilter/workflows/mypy/badge.svg)
-![lint](https://github.com/brentyi/torchfilter/workflows/lint/badge.svg)
-[![codecov](https://codecov.io/gh/brentyi/torchfilter/branch/master/graph/badge.svg)](https://codecov.io/gh/brentyi/torchfilter)
+![build](https://github.com/stanford-iprl-lab/torchfilter/workflows/build/badge.svg)
+![mypy](https://github.com/stanford-iprl-lab/torchfilter/workflows/mypy/badge.svg)
+![lint](https://github.com/stanford-iprl-lab/torchfilter/workflows/lint/badge.svg)
+[![codecov](https://codecov.io/gh/stanford-iprl-lab/torchfilter/branch/master/graph/badge.svg)](https://codecov.io/gh/stanford-iprl-lab/torchfilter)
 
 **`torchfilter`** is a library for discrete-time Bayesian filtering in PyTorch.
 By writing filters as differentiable PyTorch modules, we can optimize for system
@@ -65,7 +65,7 @@ The package is broken down into six submodules:
 </table>
 
 For more details, see the
-[API documentation](https://brentyi.github.io/torchfilter).
+[API reference](https://stanford-iprl-lab.github.io/torchfilter).
 
 For a linear system example, see `tests/_linear_system_models.py`.
 
@@ -76,7 +76,7 @@ For a linear system example, see `tests/_linear_system_models.py`.
 From source:
 
 ```bash
-$ git clone https://github.com/brentyi/torchfilter.git
+$ git clone https://github.com/stanford-iprl-lab/torchfilter.git
 $ cd torchfilter
 $ pip install -e .
 ```
