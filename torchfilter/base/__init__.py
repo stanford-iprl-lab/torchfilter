@@ -18,6 +18,5 @@ __all__ = [
     "KalmanFilterMeasurementModel",
     "ParticleFilterMeasurementModel",
     "ParticleFilterMeasurementModelWrapper",
-    "WrappedParticleFilterMeasurementModel",
     "VirtualSensorModel",
 ]

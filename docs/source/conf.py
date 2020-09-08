@@ -185,6 +185,7 @@ autoapi_options = [
     "special-members",
     "show-module-summary",
 ]
+autoapi_add_toctree_entry = False
 
 # Generate inheritance aliases
 def _gen_inheritance_alias():
@@ -235,6 +236,7 @@ def _gen_inheritance_alias():
 
 # Set inheritance_alias setting for inheritance diagrams
 inheritance_alias = _gen_inheritance_alias()
+inheritance_alias["torch.nn.modules.module.Module"] = "torch.nn.Module"
 
 # Apply our inheritance alias to autoapi base classes
 def _override_class_documenter():

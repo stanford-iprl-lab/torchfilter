@@ -7,7 +7,18 @@ torchfilter documentation
 Source code on `Github <https://github.com/stanford-iprl-lab/torchfilter>`_.
 
 .. toctree::
-      :maxdepth: 4
+   :caption: API Reference
+   :maxdepth: 3
+   :titlesonly:
+   :glob:
+
+   api/torchfilter/base/index
+   api/torchfilter/data/index
+   api/torchfilter/filters/index
+   api/torchfilter/train/index
+   api/torchfilter/types/index
+   api/torchfilter/utils/index
+
 
 .. |build| image:: https://github.com/stanford-iprl-lab/torchfilter/workflows/build/badge.svg
    :alt: Build status icon
