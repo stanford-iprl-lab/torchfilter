@@ -176,7 +176,7 @@
 <span class="sd">    [1] The square-root unscented Kalman filter for state and parameter-estimation.</span>
 <span class="sd">    https://ieeexplore.ieee.org/document/940586/</span>
 <span class="sd">    [2] How to Train Your Differentiable Filter</span>
-<span class="sd">    https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf</span>
+<span class="sd">    https://al.is.tuebingen.mpg.de/uploads_file/attachment/attachment/617/2020_RSS_WS_alina.pdf</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -204,8 +204,7 @@
 
     <span class="nd">@overrides</span>
     <span class="k">def</span> <span class="nf">_predict_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">controls</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ControlsTorch</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Predict step.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Predict step.&quot;&quot;&quot;</span>
         <span class="c1"># See Merwe paper [1] for notation</span>
         <span class="n">x_k_minus_1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_belief_mean</span>
         <span class="n">P_k_minus_1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_belief_covariance</span>
@@ -256,8 +255,7 @@
 
     <span class="nd">@overrides</span>
     <span class="k">def</span> <span class="nf">_update_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">observations</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ObservationsTorch</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Update step.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Update step.&quot;&quot;&quot;</span>
         <span class="c1"># Extract inputs</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
             <span class="n">observations</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">ObservationsNoDictTorch</span>

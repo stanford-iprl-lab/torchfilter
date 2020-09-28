@@ -208,7 +208,9 @@
             <span class="p">)</span>
 
 <div class="viewcode-block" id="UnscentedTransform.select_sigma_points"><a class="viewcode-back" href="../../../../api/torchfilter/utils/#torchfilter.utils._unscented_transform.UnscentedTransform.select_sigma_points">[docs]</a>    <span class="k">def</span> <span class="nf">select_sigma_points</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">input_mean</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">input_covariance</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">CovarianceTorch</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">input_mean</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+        <span class="n">input_covariance</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">CovarianceTorch</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Select sigma points.</span>
 
@@ -228,7 +230,9 @@
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="UnscentedTransform.select_sigma_points_square_root"><a class="viewcode-back" href="../../../../api/torchfilter/utils/#torchfilter.utils._unscented_transform.UnscentedTransform.select_sigma_points_square_root">[docs]</a>    <span class="k">def</span> <span class="nf">select_sigma_points_square_root</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">input_mean</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">input_scale_tril</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ScaleTrilTorch</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">input_mean</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+        <span class="n">input_scale_tril</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ScaleTrilTorch</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Select sigma points using square root of covariance.</span>
 
@@ -263,7 +267,8 @@
         <span class="k">return</span> <span class="n">sigma_points</span></div>
 
 <div class="viewcode-block" id="UnscentedTransform.compute_distribution"><a class="viewcode-back" href="../../../../api/torchfilter/utils/#torchfilter.utils._unscented_transform.UnscentedTransform.compute_distribution">[docs]</a>    <span class="k">def</span> <span class="nf">compute_distribution</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">sigma_points</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">sigma_points</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">CovarianceTorch</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Estimate a distribution from selected sigma points.</span>
 
@@ -359,7 +364,9 @@
         <span class="k">assert</span> <span class="n">L</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
 
         <span class="n">transformed_scale_tril</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">cholupdate</span><span class="p">(</span>
-            <span class="n">L</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">sigma_points_centered</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">weight</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">weights_c</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">L</span><span class="o">=</span><span class="n">L</span><span class="p">,</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">sigma_points_centered</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:],</span>
+            <span class="n">weight</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">weights_c</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
         <span class="p">)</span>
 
         <span class="k">assert</span> <span class="n">transformed_scale_tril</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>

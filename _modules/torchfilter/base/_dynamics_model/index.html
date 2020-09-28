@@ -184,7 +184,10 @@
 
 <div class="viewcode-block" id="DynamicsModel.forward"><a class="viewcode-back" href="../../../../api/torchfilter/base/#torchfilter.base._dynamics_model.DynamicsModel.forward">[docs]</a>    <span class="nd">@overrides</span>
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">initial_states</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">StatesTorch</span><span class="p">,</span> <span class="n">controls</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ControlsTorch</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">initial_states</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">StatesTorch</span><span class="p">,</span>
+        <span class="n">controls</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ControlsTorch</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">StatesTorch</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">ScaleTrilTorch</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Dynamics model forward pass, single timestep.</span>
 
@@ -308,7 +311,9 @@
         <span class="k">return</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">scale_trils</span></div>
 
 <div class="viewcode-block" id="DynamicsModel.jacobian"><a class="viewcode-back" href="../../../../api/torchfilter/base/#torchfilter.base._dynamics_model.DynamicsModel.jacobian">[docs]</a>    <span class="k">def</span> <span class="nf">jacobian</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">initial_states</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">StatesTorch</span><span class="p">,</span> <span class="n">controls</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ControlsTorch</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">initial_states</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">StatesTorch</span><span class="p">,</span>
+        <span class="n">controls</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ControlsTorch</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns Jacobian of the dynamics model.</span>
 

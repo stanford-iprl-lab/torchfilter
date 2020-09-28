@@ -23,7 +23,7 @@ Classes
 
 
 
-.. py:class:: ParticleFilter(*, dynamics_model: DynamicsModel, measurement_model: ParticleFilterMeasurementModel, num_particles: int = 100, resample: bool = None, soft_resample_alpha: float = 1.0, estimation_method: str = 'weighted_average')
+.. py:class:: ParticleFilter(*, dynamics_model: DynamicsModel, measurement_model: ParticleFilterMeasurementModel, num_particles: int = 100, resample: Optional[bool] = None, soft_resample_alpha: float = 1.0, estimation_method: str = 'weighted_average')
 
    Bases: :class:`torchfilter.base.Filter`
 

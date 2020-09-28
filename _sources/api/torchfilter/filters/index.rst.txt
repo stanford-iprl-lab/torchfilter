@@ -40,7 +40,7 @@ Classes
    ``VirtualSensorExtendedKalmanFilter``.
 
 
-.. py:class:: ParticleFilter(*, dynamics_model: DynamicsModel, measurement_model: ParticleFilterMeasurementModel, num_particles: int = 100, resample: bool = None, soft_resample_alpha: float = 1.0, estimation_method: str = 'weighted_average')
+.. py:class:: ParticleFilter(*, dynamics_model: DynamicsModel, measurement_model: ParticleFilterMeasurementModel, num_particles: int = 100, resample: Optional[bool] = None, soft_resample_alpha: float = 1.0, estimation_method: str = 'weighted_average')
 
    Bases: :class:`torchfilter.base.Filter`
 
@@ -189,7 +189,7 @@ Classes
    [1] The square-root unscented Kalman filter for state and parameter-estimation.
    https://ieeexplore.ieee.org/document/940586/
    [2] How to Train Your Differentiable Filter
-   https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf
+   https://al.is.tuebingen.mpg.de/uploads_file/attachment/attachment/617/2020_RSS_WS_alina.pdf
 
 
 .. py:class:: VirtualSensorExtendedKalmanFilter(*, dynamics_model: DynamicsModel, virtual_sensor_model: VirtualSensorModel)

@@ -215,8 +215,7 @@
 
     <span class="nd">@overrides</span>
     <span class="k">def</span> <span class="nf">_predict_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">controls</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ControlsTorch</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Predict step.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Predict step.&quot;&quot;&quot;</span>
         <span class="c1"># See Merwe paper [1] for notation</span>
         <span class="n">x_k_minus_1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_belief_mean</span>
         <span class="n">S_k_minus_1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_belief_scale_tril</span>
@@ -265,8 +264,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_sigma_point_cache</span> <span class="o">=</span> <span class="n">X_k_pred</span>
 
     <span class="k">def</span> <span class="nf">_update_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">observations</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ObservationsTorch</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Update step.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Update step.&quot;&quot;&quot;</span>
         <span class="c1"># Extract inputs</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
             <span class="n">observations</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">ObservationsNoDictTorch</span>
@@ -340,7 +338,9 @@
         <span class="n">S_k</span> <span class="o">=</span> <span class="n">S_k_pred</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
             <span class="n">S_k</span> <span class="o">=</span> <span class="n">fannypack</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">cholupdate</span><span class="p">(</span>
-                <span class="n">S_k</span><span class="p">,</span> <span class="n">U</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">weight</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">U</span><span class="o">.</span><span class="n">device</span><span class="p">),</span>
+                <span class="n">S_k</span><span class="p">,</span>
+                <span class="n">U</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span>
+                <span class="n">weight</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">U</span><span class="o">.</span><span class="n">device</span><span class="p">),</span>
             <span class="p">)</span>
 
         <span class="c1"># Update internal state with corrected beliefs</span>

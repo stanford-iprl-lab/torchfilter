@@ -181,7 +181,7 @@
         <span class="o">*</span><span class="p">,</span>
         <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span><span class="p">,</span>
         <span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">unused_kwargs</span><span class="p">,</span>  <span class="c1"># For type-checking</span>
+        <span class="o">**</span><span class="n">unused_kwargs</span><span class="p">,</span>  <span class="c1"># For type checking</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">state_dim</span><span class="o">=</span><span class="n">dynamics_model</span><span class="o">.</span><span class="n">state_dim</span><span class="p">)</span>
 
@@ -208,7 +208,10 @@
 
 <div class="viewcode-block" id="KalmanFilterBase.forward"><a class="viewcode-back" href="../../../../api/torchfilter/base/#torchfilter.base._kalman_filter_base.KalmanFilterBase.forward">[docs]</a>    <span class="nd">@overrides</span>
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">observations</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ObservationsTorch</span><span class="p">,</span> <span class="n">controls</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ControlsTorch</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">observations</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ObservationsTorch</span><span class="p">,</span>
+        <span class="n">controls</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ControlsTorch</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">StatesTorch</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Kalman filter forward pass, single timestep.</span>
 
@@ -259,8 +262,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">belief_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">StatesTorch</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Posterior mean. Shape should be `(N, state_dim)`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Posterior mean. Shape should be `(N, state_dim)`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_belief_mean</span>
 
     <span class="nd">@belief_mean</span><span class="o">.</span><span class="n">setter</span>
@@ -269,8 +271,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">belief_covariance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">CovarianceTorch</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Posterior covariance. Shape should be `(N, state_dim, state_dim)`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Posterior covariance. Shape should be `(N, state_dim, state_dim)`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_belief_covariance</span>
 
     <span class="nd">@belief_covariance</span><span class="o">.</span><span class="n">setter</span>

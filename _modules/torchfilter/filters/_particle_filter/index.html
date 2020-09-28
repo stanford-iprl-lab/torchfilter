@@ -157,6 +157,8 @@
 <span></span><span class="sd">&quot;&quot;&quot;Private module; avoid importing from directly.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
 <span class="kn">import</span> <span class="nn">fannypack</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">torch</span>
@@ -167,8 +169,7 @@
 
 
 <div class="viewcode-block" id="ParticleFilter"><a class="viewcode-back" href="../../../../api/torchfilter/filters/#torchfilter.filters._particle_filter.ParticleFilter">[docs]</a><span class="k">class</span> <span class="nc">ParticleFilter</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generic differentiable particle filter.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Generic differentiable particle filter.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -176,7 +177,7 @@
         <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span><span class="p">,</span>
         <span class="n">measurement_model</span><span class="p">:</span> <span class="n">ParticleFilterMeasurementModel</span><span class="p">,</span>
         <span class="n">num_particles</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
-        <span class="n">resample</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">resample</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">soft_resample_alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="n">estimation_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;weighted_average&quot;</span><span class="p">,</span>
     <span class="p">):</span>
@@ -264,7 +265,10 @@
 
 <div class="viewcode-block" id="ParticleFilter.forward"><a class="viewcode-back" href="../../../../api/torchfilter/filters/#torchfilter.filters._particle_filter.ParticleFilter.forward">[docs]</a>    <span class="nd">@overrides</span>
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">observations</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ObservationsTorch</span><span class="p">,</span> <span class="n">controls</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ControlsTorch</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">observations</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ObservationsTorch</span><span class="p">,</span>
+        <span class="n">controls</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ControlsTorch</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">StatesTorch</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Particle filter forward pass, single timestep.</span>
 
@@ -359,7 +363,8 @@
 
         <span class="c1"># Re-weight particles using observations</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurement_model</span><span class="p">(</span>
-            <span class="n">states</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="p">,</span> <span class="n">observations</span><span class="o">=</span><span class="n">observations</span><span class="p">,</span>
+            <span class="n">states</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="p">,</span>
+            <span class="n">observations</span><span class="o">=</span><span class="n">observations</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="c1"># Normalize particle weights to sum to 1.0</span>
@@ -395,8 +400,7 @@
         <span class="k">return</span> <span class="n">state_estimates</span></div>
 
     <span class="k">def</span> <span class="nf">_resample</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Resample particles.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Resample particles.&quot;&quot;&quot;</span>
         <span class="c1"># Note the distinction between `M`, the current number of particles, and</span>
         <span class="c1"># `self.num_particles`, the desired number of particles</span>
         <span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">state_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="o">.</span><span class="n">shape</span>
