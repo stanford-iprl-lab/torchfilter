@@ -15,8 +15,7 @@ from torchfilter import types
 
 
 def test_particle_filter(generated_data):
-    """Smoke test for particle filter.
-    """
+    """Smoke test for particle filter."""
     _run_filter(
         torchfilter.filters.ParticleFilter(
             dynamics_model=LinearDynamicsModel(),
@@ -27,8 +26,7 @@ def test_particle_filter(generated_data):
 
 
 def test_particle_filter_resample(generated_data):
-    """Smoke test for particle filter with resampling.
-    """
+    """Smoke test for particle filter with resampling."""
     _run_filter(
         torchfilter.filters.ParticleFilter(
             dynamics_model=LinearDynamicsModel(),
@@ -40,8 +38,7 @@ def test_particle_filter_resample(generated_data):
 
 
 def test_particle_filter_soft_resample(generated_data):
-    """Smoke test for particle filter with soft-resampling.
-    """
+    """Smoke test for particle filter with soft-resampling."""
     _run_filter(
         torchfilter.filters.ParticleFilter(
             dynamics_model=LinearDynamicsModel(),
@@ -54,8 +51,7 @@ def test_particle_filter_soft_resample(generated_data):
 
 
 def test_particle_filter_dynamic_particle_count(generated_data):
-    """Smoke test for particle filter with a dynamically changing particle count + no resampling.
-    """
+    """Smoke test for particle filter with a dynamically changing particle count + no resampling."""
     filter_model = torchfilter.filters.ParticleFilter(
         dynamics_model=LinearDynamicsModel(),
         measurement_model=LinearParticleFilterMeasurementModel(),
@@ -77,8 +73,7 @@ def test_particle_filter_dynamic_particle_count(generated_data):
 
 
 def test_particle_filter_dynamic_particle_count_resample(generated_data):
-    """Smoke test for particle filter with a dynamically changing particle count w/ resampling.
-    """
+    """Smoke test for particle filter with a dynamically changing particle count w/ resampling."""
     filter_model = torchfilter.filters.ParticleFilter(
         dynamics_model=LinearDynamicsModel(),
         measurement_model=LinearParticleFilterMeasurementModel(),
@@ -100,8 +95,7 @@ def test_particle_filter_dynamic_particle_count_resample(generated_data):
 
 
 def test_ekf(generated_data):
-    """Smoke test for EKF.
-    """
+    """Smoke test for EKF."""
     _run_filter(
         torchfilter.filters.ExtendedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
@@ -112,8 +106,7 @@ def test_ekf(generated_data):
 
 
 def test_virtual_sensor_ekf(generated_data):
-    """Smoke test for EKF w/ virtual sensor.
-    """
+    """Smoke test for EKF w/ virtual sensor."""
     _run_filter(
         torchfilter.filters.VirtualSensorExtendedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
@@ -124,8 +117,7 @@ def test_virtual_sensor_ekf(generated_data):
 
 
 def test_ukf(generated_data):
-    """Smoke test for UKF w/ Julier-style sigma points.
-    """
+    """Smoke test for UKF w/ Julier-style sigma points."""
     _run_filter(
         torchfilter.filters.UnscentedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
@@ -136,8 +128,7 @@ def test_ukf(generated_data):
 
 
 def test_ukf_merwe(generated_data):
-    """Smoke test for UKF w/ Merwe-style sigma points.
-    """
+    """Smoke test for UKF w/ Merwe-style sigma points."""
     _run_filter(
         torchfilter.filters.UnscentedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
@@ -149,8 +140,7 @@ def test_ukf_merwe(generated_data):
 
 
 def test_virtual_sensor_ukf(generated_data):
-    """Smoke test for virtual sensor UKF w/ Julier-style sigma points.
-    """
+    """Smoke test for virtual sensor UKF w/ Julier-style sigma points."""
     _run_filter(
         torchfilter.filters.VirtualSensorUnscentedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
@@ -162,8 +152,7 @@ def test_virtual_sensor_ukf(generated_data):
 
 
 def test_srukf(generated_data):
-    """Smoke test for SRUKF w/ Julier-style sigma points.
-    """
+    """Smoke test for SRUKF w/ Julier-style sigma points."""
     _run_filter(
         torchfilter.filters.SquareRootUnscentedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
@@ -174,8 +163,7 @@ def test_srukf(generated_data):
 
 
 def test_srukf_merwe(generated_data):
-    """Smoke test for SRUKF w/ Merwe-style sigma points.
-    """
+    """Smoke test for SRUKF w/ Merwe-style sigma points."""
     _run_filter(
         torchfilter.filters.SquareRootUnscentedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
@@ -187,8 +175,7 @@ def test_srukf_merwe(generated_data):
 
 
 def test_virtual_sensor_srukf(generated_data):
-    """Smoke test for virtual sensor SRUKF w/ Julier-style sigma points.
-    """
+    """Smoke test for virtual sensor SRUKF w/ Julier-style sigma points."""
     _run_filter(
         torchfilter.filters.VirtualSensorSquareRootUnscentedKalmanFilter(
             dynamics_model=LinearDynamicsModel(),
@@ -220,7 +207,8 @@ def test_virtual_sensor_ekf_consistency(generated_data):
     # Check final beliefs
     torch.testing.assert_allclose(ekf.belief_mean, virtual_sensor_ekf.belief_mean)
     torch.testing.assert_allclose(
-        ekf.belief_covariance, virtual_sensor_ekf.belief_covariance,
+        ekf.belief_covariance,
+        virtual_sensor_ekf.belief_covariance,
     )
 
 
@@ -261,9 +249,11 @@ def test_virtual_sensor_srukf_consistency(generated_data):
         dynamics_model=LinearDynamicsModel(),
         measurement_model=LinearKalmanFilterMeasurementModel(),
     )
-    virtual_sensor_srukf = torchfilter.filters.VirtualSensorSquareRootUnscentedKalmanFilter(
-        dynamics_model=LinearDynamicsModel(),
-        virtual_sensor_model=LinearVirtualSensorModel(),
+    virtual_sensor_srukf = (
+        torchfilter.filters.VirtualSensorSquareRootUnscentedKalmanFilter(
+            dynamics_model=LinearDynamicsModel(),
+            virtual_sensor_model=LinearVirtualSensorModel(),
+        )
     )
 
     # Run over data

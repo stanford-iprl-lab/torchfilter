@@ -6,8 +6,7 @@ import torchfilter
 
 
 def test_split_trajectories():
-    """Basic check for subsequence generation helper.
-    """
+    """Basic check for subsequence generation helper."""
 
     num_trajectories = 100
     trajectory_timesteps = 100

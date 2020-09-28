@@ -22,8 +22,7 @@ def _gen_test_data(dim: int) -> Tuple[torch.Tensor, torch.Tensor]:
 
 @hypothesis.given(dim=st.integers(min_value=1, max_value=20))
 def test_unscented_transform_julier_identity(dim: int):
-    """Check unscented transform on multivariate Gaussians.
-    """
+    """Check unscented transform on multivariate Gaussians."""
     input_mean, input_covariance = _gen_test_data(dim=dim)
 
     # Perform unscented transform
@@ -42,8 +41,7 @@ def test_unscented_transform_julier_identity(dim: int):
 
 @hypothesis.given(dim=st.integers(min_value=1, max_value=20))
 def test_unscented_transform_julier_linear(dim: int):
-    """Check unscented transform on linearly transformed multivariate Gaussians.
-    """
+    """Check unscented transform on linearly transformed multivariate Gaussians."""
     input_mean, input_covariance = _gen_test_data(dim=dim)
 
     # Sample linear transformation matrix
@@ -68,8 +66,7 @@ def test_unscented_transform_julier_linear(dim: int):
 
 @hypothesis.given(dim=st.integers(min_value=1, max_value=20))
 def test_unscented_transform_merwe_identity(dim: int):
-    """Check unscented transform on multivariate Gaussians.
-    """
+    """Check unscented transform on multivariate Gaussians."""
     input_mean, input_covariance = _gen_test_data(dim=dim)
 
     # Perform unscented transform
@@ -91,8 +88,7 @@ def test_unscented_transform_merwe_identity(dim: int):
 
 @hypothesis.given(dim=st.integers(min_value=1, max_value=20))
 def test_unscented_transform_merwe_linear(dim: int):
-    """Check unscented transform on linearly transformed multivariate Gaussians.
-    """
+    """Check unscented transform on linearly transformed multivariate Gaussians."""
     input_mean, input_covariance = _gen_test_data(dim=dim)
 
     # Sample linear transformation matrix
@@ -122,8 +118,7 @@ def test_unscented_transform_merwe_linear(dim: int):
 
 @hypothesis.given(dim=st.integers(min_value=1, max_value=20))
 def test_unscented_transform_merwe_square_root(dim: int):
-    """Check unscented transform square root formulation on multivariate Gaussians.
-    """
+    """Check unscented transform square root formulation on multivariate Gaussians."""
     input_mean, input_covariance = _gen_test_data(dim=dim)
 
     # Perform unscented transform
@@ -173,7 +168,8 @@ def test_unscented_transform_merwe_square_root_additive_nosie(dim: int):
         output_mean,
         output_scale_tril,
     ) = unscented_transform.compute_distribution_square_root(
-        sigma_points, additive_noise_scale_tril=additive_noise_scale_tril,
+        sigma_points,
+        additive_noise_scale_tril=additive_noise_scale_tril,
     )
 
     # Check outputs

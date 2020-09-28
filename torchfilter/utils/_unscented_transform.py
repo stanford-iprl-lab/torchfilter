@@ -52,7 +52,9 @@ class UnscentedTransform:
             )
 
     def select_sigma_points(
-        self, input_mean: torch.Tensor, input_covariance: types.CovarianceTorch,
+        self,
+        input_mean: torch.Tensor,
+        input_covariance: types.CovarianceTorch,
     ) -> torch.Tensor:
         """Select sigma points.
 
@@ -72,7 +74,9 @@ class UnscentedTransform:
         )
 
     def select_sigma_points_square_root(
-        self, input_mean: torch.Tensor, input_scale_tril: types.ScaleTrilTorch,
+        self,
+        input_mean: torch.Tensor,
+        input_scale_tril: types.ScaleTrilTorch,
     ) -> torch.Tensor:
         """Select sigma points using square root of covariance.
 
@@ -107,7 +111,8 @@ class UnscentedTransform:
         return sigma_points
 
     def compute_distribution(
-        self, sigma_points: torch.Tensor,
+        self,
+        sigma_points: torch.Tensor,
     ) -> Tuple[torch.Tensor, types.CovarianceTorch]:
         """Estimate a distribution from selected sigma points.
 
@@ -203,7 +208,9 @@ class UnscentedTransform:
         assert L.shape == (N, dim, dim)
 
         transformed_scale_tril = fannypack.utils.cholupdate(
-            L=L, x=sigma_points_centered[:, 0, :], weight=self.weights_c[0],
+            L=L,
+            x=sigma_points_centered[:, 0, :],
+            weight=self.weights_c[0],
         )
 
         assert transformed_scale_tril.shape == (N, dim, dim)

@@ -1,7 +1,7 @@
 """Reference implementations for training state estimators with learnable parameters.
 
 These are written with a custom [model
-manager](https://brentyi.github.io/fannypack/utils/experiment_management.html) for
+manager](https://brentyi.github.io/fannypack/utils/experiment_management/) for
 brevity, but can be easily translated to raw PyTorch.
 """
 

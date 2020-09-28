@@ -20,7 +20,7 @@ class UnscentedKalmanFilter(KalmanFilterBase):
     [1] The square-root unscented Kalman filter for state and parameter-estimation.
     https://ieeexplore.ieee.org/document/940586/
     [2] How to Train Your Differentiable Filter
-    https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf
+    https://al.is.tuebingen.mpg.de/uploads_file/attachment/attachment/617/2020_RSS_WS_alina.pdf
     """
 
     def __init__(
@@ -48,8 +48,7 @@ class UnscentedKalmanFilter(KalmanFilterBase):
 
     @overrides
     def _predict_step(self, *, controls: types.ControlsTorch) -> None:
-        """Predict step.
-        """
+        """Predict step."""
         # See Merwe paper [1] for notation
         x_k_minus_1 = self._belief_mean
         P_k_minus_1 = self._belief_covariance
@@ -100,8 +99,7 @@ class UnscentedKalmanFilter(KalmanFilterBase):
 
     @overrides
     def _update_step(self, *, observations: types.ObservationsTorch) -> None:
-        """Update step.
-        """
+        """Update step."""
         # Extract inputs
         assert isinstance(
             observations, types.ObservationsNoDictTorch

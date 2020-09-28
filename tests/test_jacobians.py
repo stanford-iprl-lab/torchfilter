@@ -10,8 +10,7 @@ from _linear_system_models import (
 
 
 def test_dynamics_jacobian():
-    """Checks that our autograd-computed dynamics jacobian is correct.
-    """
+    """Checks that our autograd-computed dynamics jacobian is correct."""
     N = 10
     dynamics_model = LinearDynamicsModel()
     A_autograd = dynamics_model.jacobian(
@@ -24,8 +23,7 @@ def test_dynamics_jacobian():
 
 
 def test_measurement_jacobian():
-    """Checks that our autograd-computed measurement jacobian is correct.
-    """
+    """Checks that our autograd-computed measurement jacobian is correct."""
     N = 10
     measurement_model = LinearKalmanFilterMeasurementModel()
     C_autograd = measurement_model.jacobian(states=torch.zeros((N, state_dim)))

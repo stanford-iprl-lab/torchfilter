@@ -1,4 +1,3 @@
-import fannypack
 from _linear_system_fixtures import (
     buddy,
     generated_data,
@@ -20,8 +19,7 @@ import torchfilter
 
 
 def test_train_dynamics_recurrent(subsequence_dataloader, buddy):
-    """Check that our recurrent dynamics training drops model error.
-    """
+    """Check that our recurrent dynamics training drops model error."""
     # Create individual model
     dynamics_model = LinearDynamicsModel(trainable=True)
 
@@ -39,8 +37,7 @@ def test_train_dynamics_recurrent(subsequence_dataloader, buddy):
 
 
 def test_train_dynamics_single_step(single_step_dataloader, buddy):
-    """Check that our single-step dynamics training drops model error.
-    """
+    """Check that our single-step dynamics training drops model error."""
     # Create individual model
     dynamics_model = LinearDynamicsModel(trainable=True)
 
@@ -58,8 +55,7 @@ def test_train_dynamics_single_step(single_step_dataloader, buddy):
 
 
 def test_train_virtual_sensor(single_step_dataloader, buddy):
-    """Check that our virtual sensor training drops model error.
-    """
+    """Check that our virtual sensor training drops model error."""
     # Create individual model
     virtual_sensor_model = LinearVirtualSensorModel(trainable=True)
 
@@ -77,8 +73,7 @@ def test_train_virtual_sensor(single_step_dataloader, buddy):
 
 
 def test_train_kalman_filter_measurement(single_step_dataloader, buddy):
-    """Check that our Kalman filter measurement training drops model error.
-    """
+    """Check that our Kalman filter measurement training drops model error."""
     # Create individual model
     measurement_model = LinearKalmanFilterMeasurementModel(trainable=True)
 
@@ -98,8 +93,7 @@ def test_train_kalman_filter_measurement(single_step_dataloader, buddy):
 def test_train_particle_filter_measurement(
     particle_filter_measurement_dataloader, buddy
 ):
-    """Check that our particle filter measurement training drops model error.
-    """
+    """Check that our particle filter measurement training drops model error."""
     # Create individual model
     particle_filter_measurement_model = LinearParticleFilterMeasurementModel(
         trainable=True

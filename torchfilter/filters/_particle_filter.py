@@ -1,6 +1,8 @@
 """Private module; avoid importing from directly.
 """
 
+from typing import Optional
+
 import fannypack
 import numpy as np
 import torch
@@ -11,8 +13,7 @@ from ..base import DynamicsModel, Filter, ParticleFilterMeasurementModel
 
 
 class ParticleFilter(Filter):
-    """Generic differentiable particle filter.
-    """
+    """Generic differentiable particle filter."""
 
     def __init__(
         self,
@@ -20,7 +21,7 @@ class ParticleFilter(Filter):
         dynamics_model: DynamicsModel,
         measurement_model: ParticleFilterMeasurementModel,
         num_particles: int = 100,
-        resample: bool = None,
+        resample: Optional[bool] = None,
         soft_resample_alpha: float = 1.0,
         estimation_method: str = "weighted_average",
     ):
@@ -108,7 +109,10 @@ class ParticleFilter(Filter):
 
     @overrides
     def forward(
-        self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch,
+        self,
+        *,
+        observations: types.ObservationsTorch,
+        controls: types.ControlsTorch,
     ) -> types.StatesTorch:
         """Particle filter forward pass, single timestep.
 
@@ -203,7 +207,8 @@ class ParticleFilter(Filter):
 
         # Re-weight particles using observations
         self.particle_log_weights = self.particle_log_weights + self.measurement_model(
-            states=self.particle_states, observations=observations,
+            states=self.particle_states,
+            observations=observations,
         )
 
         # Normalize particle weights to sum to 1.0
@@ -239,8 +244,7 @@ class ParticleFilter(Filter):
         return state_estimates
 
     def _resample(self) -> None:
-        """Resample particles.
-        """
+        """Resample particles."""
         # Note the distinction between `M`, the current number of particles, and
         # `self.num_particles`, the desired number of particles
         N, M, state_dim = self.particle_states.shape

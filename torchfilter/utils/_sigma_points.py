@@ -10,8 +10,7 @@ from overrides import overrides
 
 
 class SigmaPointStrategy(abc.ABC):
-    """Strategy to use for computing sigma weights + selecting sigma points.
-    """
+    """Strategy to use for computing sigma weights + selecting sigma points."""
 
     @abc.abstractmethod
     def compute_lambda(self, dim: int) -> float:

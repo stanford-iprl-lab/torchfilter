@@ -89,7 +89,7 @@ class _IdentityMeasurementModel(KalmanFilterMeasurementModel):
 
 
 class _VirtualSensorKalmanFilterMixin(
-    KalmanFilterBase  # Only needed for type-checking
+    KalmanFilterBase  # Only needed for type checking
 ):
     def __init__(
         self,
@@ -125,7 +125,9 @@ class _VirtualSensorKalmanFilterMixin(
         super()._update_step(observations=virtual_observations)
 
     def virtual_sensor_initialize_beliefs(
-        self, *, observations: types.ObservationsTorch,
+        self,
+        *,
+        observations: types.ObservationsTorch,
     ):
         """Use virtual sensor model to intialize filter beliefs.
 
@@ -156,7 +158,8 @@ class VirtualSensorExtendedKalmanFilter(
         virtual_sensor_model: VirtualSensorModel,
     ):
         super().__init__(
-            dynamics_model=dynamics_model, virtual_sensor_model=virtual_sensor_model,
+            dynamics_model=dynamics_model,
+            virtual_sensor_model=virtual_sensor_model,
         )
 
 

@@ -1,7 +1,3 @@
-from typing import List
-
-import fannypack
-import pytest
 import torch
 from _linear_system_fixtures import (
     buddy,
@@ -20,7 +16,6 @@ from _linear_system_models import (
 )
 
 import torchfilter
-from torchfilter import types
 
 
 def test_train_ekf_e2e(subsequence_dataloader, buddy):
@@ -120,7 +115,9 @@ def test_train_pf_e2e(subsequence_dataloader, buddy):
     dynamics_model = LinearDynamicsModel(trainable=True)
     measurement_model = LinearParticleFilterMeasurementModel(trainable=True)
     filter_model = torchfilter.filters.ParticleFilter(
-        dynamics_model=dynamics_model, measurement_model=measurement_model
+        dynamics_model=dynamics_model,
+        measurement_model=measurement_model,
+        num_particles=500,
     )
 
     # Compute initial errors

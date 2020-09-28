@@ -25,7 +25,7 @@ class KalmanFilterBase(Filter, abc.ABC):
         *,
         dynamics_model: DynamicsModel,
         measurement_model: KalmanFilterMeasurementModel,
-        **unused_kwargs,  # For type-checking
+        **unused_kwargs,  # For type checking
     ):
         super().__init__(state_dim=dynamics_model.state_dim)
 
@@ -52,7 +52,10 @@ class KalmanFilterBase(Filter, abc.ABC):
 
     @overrides
     def forward(
-        self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch,
+        self,
+        *,
+        observations: types.ObservationsTorch,
+        controls: types.ControlsTorch,
     ) -> types.StatesTorch:
         """Kalman filter forward pass, single timestep.
 
@@ -103,8 +106,7 @@ class KalmanFilterBase(Filter, abc.ABC):
 
     @property
     def belief_mean(self) -> types.StatesTorch:
-        """Posterior mean. Shape should be `(N, state_dim)`.
-        """
+        """Posterior mean. Shape should be `(N, state_dim)`."""
         return self._belief_mean
 
     @belief_mean.setter
@@ -113,8 +115,7 @@ class KalmanFilterBase(Filter, abc.ABC):
 
     @property
     def belief_covariance(self) -> types.CovarianceTorch:
-        """Posterior covariance. Shape should be `(N, state_dim, state_dim)`.
-        """
+        """Posterior covariance. Shape should be `(N, state_dim, state_dim)`."""
         return self._belief_covariance
 
     @belief_covariance.setter

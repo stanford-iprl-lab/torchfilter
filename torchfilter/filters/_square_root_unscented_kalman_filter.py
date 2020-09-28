@@ -59,8 +59,7 @@ class SquareRootUnscentedKalmanFilter(KalmanFilterBase):
 
     @overrides
     def _predict_step(self, *, controls: types.ControlsTorch) -> None:
-        """Predict step.
-        """
+        """Predict step."""
         # See Merwe paper [1] for notation
         x_k_minus_1 = self._belief_mean
         S_k_minus_1 = self._belief_scale_tril
@@ -109,8 +108,7 @@ class SquareRootUnscentedKalmanFilter(KalmanFilterBase):
         self._sigma_point_cache = X_k_pred
 
     def _update_step(self, *, observations: types.ObservationsTorch) -> None:
-        """Update step.
-        """
+        """Update step."""
         # Extract inputs
         assert isinstance(
             observations, types.ObservationsNoDictTorch
@@ -184,7 +182,9 @@ class SquareRootUnscentedKalmanFilter(KalmanFilterBase):
         S_k = S_k_pred
         for i in range(U.shape[2]):
             S_k = fannypack.utils.cholupdate(
-                S_k, U[:, :, i], weight=torch.tensor(-1.0, device=U.device),
+                S_k,
+                U[:, :, i],
+                weight=torch.tensor(-1.0, device=U.device),
             )
 
         # Update internal state with corrected beliefs

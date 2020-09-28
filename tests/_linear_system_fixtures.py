@@ -163,7 +163,7 @@ def buddy():
     saved logs, checkpoints, and metadata.
     """
     # Construct and yield a training buddy
-    yield fp.utils.Buddy(
+    buddy = fp.utils.Buddy(
         "temporary_buddy",
         # Use directories relative to this fixture
         checkpoint_dir=os.path.join(
@@ -176,6 +176,8 @@ def buddy():
         optimizer_checkpoint_interval=0,
         cpu_only=True,
     )
+    buddy.set_default_learning_rate(1e-4)
+    yield buddy
 
     # Delete log files, metadata, checkpoints, etc when done
     path = os.path.join(os.path.dirname(__file__), "tmp/")

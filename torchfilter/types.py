@@ -68,8 +68,7 @@ ScaleTrilTorch = torch.Tensor
 
 
 class Trajectory(NamedTuple):
-    """Named tuple containing states, observations, and controls.
-    """
+    """Named tuple containing states, observations, and controls."""
 
     states: Union[StatesNumpy, StatesTorch]
     observations: Union[ObservationsNumpy, ObservationsTorch]
@@ -77,8 +76,7 @@ class Trajectory(NamedTuple):
 
 
 class TrajectoryNumpy(Trajectory):
-    """Named tuple containing states, observations, and controls represented in NumPy.
-    """
+    """Named tuple containing states, observations, and controls represented in NumPy."""
 
     states: StatesNumpy
     observations: ObservationsNumpy
@@ -86,8 +84,7 @@ class TrajectoryNumpy(Trajectory):
 
 
 class TrajectoryTorch(Trajectory):
-    """Named tuple containing states, observations, and controls represented in Torch.
-    """
+    """Named tuple containing states, observations, and controls represented in Torch."""
 
     states: StatesTorch
     observations: ObservationsTorch

@@ -28,7 +28,10 @@ class DynamicsModel(nn.Module, abc.ABC):
 
     @overrides
     def forward(
-        self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch,
+        self,
+        *,
+        initial_states: types.StatesTorch,
+        controls: types.ControlsTorch,
     ) -> Tuple[types.StatesTorch, types.ScaleTrilTorch]:
         """Dynamics model forward pass, single timestep.
 
@@ -152,7 +155,9 @@ class DynamicsModel(nn.Module, abc.ABC):
         return predictions, scale_trils
 
     def jacobian(
-        self, initial_states: types.StatesTorch, controls: types.ControlsTorch,
+        self,
+        initial_states: types.StatesTorch,
+        controls: types.ControlsTorch,
     ) -> torch.Tensor:
         """Returns Jacobian of the dynamics model.
 

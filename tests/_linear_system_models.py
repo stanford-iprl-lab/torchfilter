@@ -36,10 +36,13 @@ class LinearDynamicsModel(torchfilter.base.DynamicsModel):
         # parameter so there's something to compute gradients for
         self.trainable = trainable
         if trainable:
-            self.output_bias = nn.Parameter(torch.FloatTensor([1.0]))
+            self.output_bias = nn.Parameter(torch.FloatTensor([0.1]))
 
     def forward(
-        self, *, initial_states: types.StatesTorch, controls: types.ControlsTorch,
+        self,
+        *,
+        initial_states: types.StatesTorch,
+        controls: types.ControlsTorch,
     ) -> Tuple[types.StatesTorch, types.ScaleTrilTorch]:
         """Forward step for a discrete linear dynamical system.
 
@@ -91,7 +94,7 @@ class LinearKalmanFilterMeasurementModel(torchfilter.base.KalmanFilterMeasuremen
         # parameter so there's something to compute gradients for
         self.trainable = trainable
         if trainable:
-            self.output_bias = nn.Parameter(torch.FloatTensor([1.0]))
+            self.output_bias = nn.Parameter(torch.FloatTensor([0.1]))
 
     def forward(
         self, *, states: types.StatesTorch
@@ -136,7 +139,7 @@ class LinearVirtualSensorModel(torchfilter.base.VirtualSensorModel):
         # parameter so there's something to compute gradients for
         self.trainable = trainable
         if trainable:
-            self.output_bias = nn.Parameter(torch.FloatTensor([1.0]))
+            self.output_bias = nn.Parameter(torch.FloatTensor([0.1]))
 
     def forward(
         self, *, observations: types.ObservationsTorch
