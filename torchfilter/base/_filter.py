@@ -35,7 +35,6 @@ class Filter(nn.Module, abc.ABC):
             covariance (torch.Tensor): Covariance of belief. Shape should be
                 `(N, state_dim, state_dim)`.
         """
-        pass
 
     @overrides
     def forward(

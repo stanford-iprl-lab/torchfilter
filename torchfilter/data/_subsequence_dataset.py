@@ -1,7 +1,7 @@
 """Private module; avoid importing from directly.
 """
 
-from typing import List, Tuple
+from typing import List
 
 from torch.utils.data import Dataset
 

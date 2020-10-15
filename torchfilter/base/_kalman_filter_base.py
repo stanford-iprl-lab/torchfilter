@@ -132,7 +132,6 @@ class KalmanFilterBase(Filter, abc.ABC):
         Keyword Args:
             controls (dict or torch.Tensor): Control inputs.
         """
-        pass
 
     @abc.abstractmethod
     def _update_step(self, *, observations: types.ObservationsTorch) -> None:
@@ -146,4 +145,3 @@ class KalmanFilterBase(Filter, abc.ABC):
         Keyword Args:
             observations (dict or torch.Tensor): Observation inputs.
         """
-        pass

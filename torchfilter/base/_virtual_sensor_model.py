@@ -43,4 +43,3 @@ class VirtualSensorModel(abc.ABC, nn.Module):
             should have shape `(N, state_dim)`, and uncertainties should be lower
             triangular with shape `(N, state_dim, state_dim).`
         """
-        pass

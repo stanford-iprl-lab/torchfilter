@@ -22,7 +22,6 @@ class SigmaPointStrategy(abc.ABC):
         Returns:
             float: Lambda scaling parameter.
         """
-        pass
 
     @abc.abstractmethod
     def compute_sigma_weights(self, dim: int) -> Tuple[torch.Tensor, torch.Tensor]:
@@ -35,7 +34,6 @@ class SigmaPointStrategy(abc.ABC):
             Tuple[torch.Tensor, torch.Tensor]: Covariance and mean weights. We expect 1D
             float32 tensors on the CPU.
         """
-        pass
 
 
 @dataclass(frozen=True)

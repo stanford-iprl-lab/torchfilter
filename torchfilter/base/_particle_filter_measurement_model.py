@@ -43,7 +43,6 @@ class ParticleFilterMeasurementModel(abc.ABC, nn.Module):
             torch.Tensor: Log-likelihoods of each state, conditioned on a
             corresponding observation. Shape should be `(N, M)`.
         """
-        pass
 
 
 class ParticleFilterMeasurementModelWrapper(ParticleFilterMeasurementModel):

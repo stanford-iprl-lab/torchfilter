@@ -33,7 +33,6 @@ class KalmanFilterMeasurementModel(abc.ABC, nn.Module):
             Tuple[torch.Tensor, torch.Tensor]: tuple containing expected observations
             and cholesky decomposition of covariance.  Shape should be `(N, M)`.
         """
-        pass
 
     def jacobian(self, *, states: types.StatesTorch) -> torch.Tensor:
         """Returns Jacobian of the measurement model.
