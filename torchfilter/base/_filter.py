@@ -81,9 +81,9 @@ class Filter(nn.Module, abc.ABC):
         use `register_forward_hook()`.
 
         Args:
-            observations (dict or torch.Tensor): observation inputs. should be
+            observations (dict or torch.Tensor): observation inputs. Should be
                 either a dict of tensors or tensor of size `(T, N, ...)`.
-            controls (dict or torch.Tensor): control inputs. should be either a
+            controls (dict or torch.Tensor): control inputs. Should be either a
                 dict of tensors or tensor of size `(T, N, ...)`.
 
         Returns:

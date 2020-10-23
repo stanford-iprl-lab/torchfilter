@@ -85,7 +85,9 @@ class _IdentityMeasurementModel(KalmanFilterMeasurementModel):
         """
         N, state_dim = states.shape
         assert state_dim == self.state_dim == self.observation_dim
-        return torch.eye(state_dim)[None, :, :].expand((N, state_dim, state_dim))
+        return torch.eye(state_dim, device=states.device)[None, :, :].expand(
+            (N, state_dim, state_dim)
+        )
 
 
 class _VirtualSensorKalmanFilterMixin(
@@ -143,8 +145,7 @@ class _VirtualSensorKalmanFilterMixin(
 class VirtualSensorExtendedKalmanFilter(
     _VirtualSensorKalmanFilterMixin, ExtendedKalmanFilter
 ):
-    """EKF variant with a virtual sensor model for mapping raw observations to predicted
-    states.
+    """EKF variant with a virtual sensor model.
 
     Assumes measurement model is identity.
     """
@@ -166,8 +167,7 @@ class VirtualSensorExtendedKalmanFilter(
 class VirtualSensorUnscentedKalmanFilter(
     _VirtualSensorKalmanFilterMixin, UnscentedKalmanFilter
 ):
-    """UKF variant with a virtual sensor model for mapping raw observations to predicted
-    states.
+    """UKF variant with a virtual sensor model.
 
     Assumes measurement model is identity.
     """
@@ -191,8 +191,7 @@ class VirtualSensorUnscentedKalmanFilter(
 class VirtualSensorSquareRootUnscentedKalmanFilter(
     _VirtualSensorKalmanFilterMixin, SquareRootUnscentedKalmanFilter
 ):
-    """Square root UKF variant with a virtual sensor model for mapping raw observations
-    to predicted states.
+    """Square-root UKF variant with a virtual sensor model.
 
     Assumes measurement model is identity.
     """

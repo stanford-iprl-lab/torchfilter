@@ -17,7 +17,7 @@ class KalmanFilterBase(Filter, abc.ABC):
     """Base class for a generic Kalman-style filter. Parameterizes beliefs with a mean
     and covariance.
 
-    Subclasses should override _predict_step() and _update_step().
+    Subclasses should override `_predict_step()` and `_update_step()`.
     """
 
     def __init__(
