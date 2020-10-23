@@ -4,5 +4,5 @@
 <area shape="rect" id="node4" href="../../base/#torchfilter.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="177,22,275,40"/>
 <area shape="rect" id="node3" title="Base class for all neural network modules." alt="" coords="4,4,56,22"/>
 <area shape="rect" id="node5" href="../#torchfilter.filters.SquareRootUnscentedKalmanFilter" target="_top" title="Square&#45;root formulation of UKF." alt="" coords="310,22,488,40"/>
-<area shape="rect" id="node6" href="../#torchfilter.filters.VirtualSensorSquareRootUnscentedKalmanFilter" target="_top" title="Square root UKF variant with a virtual sensor model for mapping raw observations" alt="" coords="523,22,764,40"/>
+<area shape="rect" id="node6" href="../#torchfilter.filters.VirtualSensorSquareRootUnscentedKalmanFilter" target="_top" title="Square&#45;root UKF variant with a virtual sensor model." alt="" coords="523,22,764,40"/>
 </map>

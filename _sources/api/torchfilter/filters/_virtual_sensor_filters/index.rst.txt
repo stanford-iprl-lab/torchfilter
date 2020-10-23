@@ -32,8 +32,7 @@ Classes
    .. autoapi-inheritance-diagram:: torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter
       :parts: 1
 
-   EKF variant with a virtual sensor model for mapping raw observations to predicted
-   states.
+   EKF variant with a virtual sensor model.
 
    Assumes measurement model is identity.
 
@@ -45,8 +44,7 @@ Classes
    .. autoapi-inheritance-diagram:: torchfilter.filters._virtual_sensor_filters.VirtualSensorUnscentedKalmanFilter
       :parts: 1
 
-   UKF variant with a virtual sensor model for mapping raw observations to predicted
-   states.
+   UKF variant with a virtual sensor model.
 
    Assumes measurement model is identity.
 
@@ -58,8 +56,7 @@ Classes
    .. autoapi-inheritance-diagram:: torchfilter.filters._virtual_sensor_filters.VirtualSensorSquareRootUnscentedKalmanFilter
       :parts: 1
 
-   Square root UKF variant with a virtual sensor model for mapping raw observations
-   to predicted states.
+   Square-root UKF variant with a virtual sensor model.
 
    Assumes measurement model is identity.
 

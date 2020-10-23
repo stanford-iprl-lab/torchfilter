@@ -3,6 +3,6 @@
 <area shape="rect" id="node3" href="../base/#torchfilter.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="209,25,325,47"/>
 <area shape="rect" id="node4" href="../base/#torchfilter.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="107,47,168,68"/>
 <area shape="rect" id="node2" href="#torchfilter.filters.ExtendedKalmanFilter" target="_top" title="Generic differentiable EKF." alt="" coords="366,25,507,47"/>
-<area shape="rect" id="node6" href="#torchfilter.filters.VirtualSensorExtendedKalmanFilter" target="_top" title="EKF variant with a virtual sensor model for mapping raw observations to predicted" alt="" coords="548,25,763,47"/>
+<area shape="rect" id="node6" href="#torchfilter.filters.VirtualSensorExtendedKalmanFilter" target="_top" title="EKF variant with a virtual sensor model." alt="" coords="548,25,763,47"/>
 <area shape="rect" id="node5" title="Base class for all neural network modules." alt="" coords="5,47,66,68"/>
 </map>

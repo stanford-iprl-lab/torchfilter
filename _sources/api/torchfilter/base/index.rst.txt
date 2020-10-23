@@ -176,10 +176,10 @@ Classes
       To inject code between timesteps (for example, to inspect hidden state),
       use ``register_forward_hook()``.
 
-      :param observations: observation inputs. should be
+      :param observations: observation inputs. Should be
                            either a dict of tensors or tensor of size ``(T, N, ...)``.
       :type observations: dict or torch.Tensor
-      :param controls: control inputs. should be either a
+      :param controls: control inputs. Should be either a
                        dict of tensors or tensor of size ``(T, N, ...)``.
       :type controls: dict or torch.Tensor
 
@@ -198,7 +198,7 @@ Classes
    Base class for a generic Kalman-style filter. Parameterizes beliefs with a mean
    and covariance.
 
-   Subclasses should override _predict_step() and _update_step().
+   Subclasses should override ``_predict_step()`` and ``_update_step()``.
 
    .. attribute:: dynamics_model
       

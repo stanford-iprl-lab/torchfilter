@@ -241,7 +241,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">N</span><span class="p">,</span> <span class="n">state_dim</span> <span class="o">=</span> <span class="n">states</span><span class="o">.</span><span class="n">shape</span>
         <span class="k">assert</span> <span class="n">state_dim</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">observation_dim</span>
-        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">state_dim</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">expand</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">state_dim</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">states</span><span class="o">.</span><span class="n">device</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">)</span>
+        <span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">_VirtualSensorKalmanFilterMixin</span><span class="p">(</span>
@@ -299,8 +301,7 @@
 <div class="viewcode-block" id="VirtualSensorExtendedKalmanFilter"><a class="viewcode-back" href="../../../../api/torchfilter/filters/#torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter">[docs]</a><span class="k">class</span> <span class="nc">VirtualSensorExtendedKalmanFilter</span><span class="p">(</span>
     <span class="n">_VirtualSensorKalmanFilterMixin</span><span class="p">,</span> <span class="n">ExtendedKalmanFilter</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;EKF variant with a virtual sensor model for mapping raw observations to predicted</span>
-<span class="sd">    states.</span>
+    <span class="sd">&quot;&quot;&quot;EKF variant with a virtual sensor model.</span>
 
 <span class="sd">    Assumes measurement model is identity.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -322,8 +323,7 @@
 <div class="viewcode-block" id="VirtualSensorUnscentedKalmanFilter"><a class="viewcode-back" href="../../../../api/torchfilter/filters/#torchfilter.filters._virtual_sensor_filters.VirtualSensorUnscentedKalmanFilter">[docs]</a><span class="k">class</span> <span class="nc">VirtualSensorUnscentedKalmanFilter</span><span class="p">(</span>
     <span class="n">_VirtualSensorKalmanFilterMixin</span><span class="p">,</span> <span class="n">UnscentedKalmanFilter</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;UKF variant with a virtual sensor model for mapping raw observations to predicted</span>
-<span class="sd">    states.</span>
+    <span class="sd">&quot;&quot;&quot;UKF variant with a virtual sensor model.</span>
 
 <span class="sd">    Assumes measurement model is identity.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -347,8 +347,7 @@
 <div class="viewcode-block" id="VirtualSensorSquareRootUnscentedKalmanFilter"><a class="viewcode-back" href="../../../../api/torchfilter/filters/#torchfilter.filters._virtual_sensor_filters.VirtualSensorSquareRootUnscentedKalmanFilter">[docs]</a><span class="k">class</span> <span class="nc">VirtualSensorSquareRootUnscentedKalmanFilter</span><span class="p">(</span>
     <span class="n">_VirtualSensorKalmanFilterMixin</span><span class="p">,</span> <span class="n">SquareRootUnscentedKalmanFilter</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Square root UKF variant with a virtual sensor model for mapping raw observations</span>
-<span class="sd">    to predicted states.</span>
+    <span class="sd">&quot;&quot;&quot;Square-root UKF variant with a virtual sensor model.</span>
 
 <span class="sd">    Assumes measurement model is identity.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
