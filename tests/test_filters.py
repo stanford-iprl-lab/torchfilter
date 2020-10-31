@@ -116,6 +116,17 @@ def test_virtual_sensor_ekf(generated_data):
     )
 
 
+def test_eif(generated_data):
+    """Smoke test for EIF."""
+    _run_filter(
+        torchfilter.filters.ExtendedInformationFilter(
+            dynamics_model=LinearDynamicsModel(),
+            measurement_model=LinearKalmanFilterMeasurementModel(),
+        ),
+        generated_data,
+    )
+
+
 def test_ukf(generated_data):
     """Smoke test for UKF w/ Julier-style sigma points."""
     _run_filter(
@@ -270,6 +281,31 @@ def test_virtual_sensor_srukf_consistency(generated_data):
     )
 
 
+def test_eif_ekf_consistency(generated_data):
+    """Check that our EIF and EKF produce consistent results for a linear system. (they
+    should be identical)
+    """
+    # Create filters
+    ekf = torchfilter.filters.ExtendedKalmanFilter(
+        dynamics_model=LinearDynamicsModel(),
+        measurement_model=LinearKalmanFilterMeasurementModel(),
+    )
+    eif = torchfilter.filters.ExtendedInformationFilter(
+        dynamics_model=LinearDynamicsModel(),
+        measurement_model=LinearKalmanFilterMeasurementModel(),
+    )
+
+    # Run over data
+    _run_filter(ekf, generated_data)
+    _run_filter(eif, generated_data)
+
+    # Check final beliefs
+    torch.testing.assert_allclose(ekf.belief_mean, eif.belief_mean)
+    torch.testing.assert_allclose(
+        ekf.belief_covariance, eif.belief_covariance, rtol=1e-4, atol=5e-4
+    )
+
+
 def test_ukf_ekf_consistency(generated_data):
     """Check that our UKF and EKF produce consistent results for a linear system. (they
     should be identical)
@@ -348,7 +384,7 @@ def _run_filter(
         filter_model.initialize_beliefs(
             mean=states[0],
             covariance=torch.zeros(size=(N, state_dim, state_dim))
-            + torch.eye(state_dim)[None, :, :] * 0.1,
+            + torch.eye(state_dim)[None, :, :] * 0.5,
         )
 
     # Run the filter on the remaining `T - 1` timesteps
