@@ -193,17 +193,6 @@
         <span class="sd">&quot;&quot;&quot;torch.Tensor: Information matrix of our posterior; shape should be</span>
 <span class="sd">        `(N, state_dim, state_dim).&quot;&quot;&quot;</span>
 
-    <span class="c1"># # overrides</span>
-    <span class="c1"># @property</span>
-    <span class="c1"># def belief_mean(self) -&gt; types.StatesTorch:</span>
-    <span class="c1">#     &quot;&quot;&quot;Posterior mean. Shape should be `(N, state_dim)`.&quot;&quot;&quot;</span>
-    <span class="c1">#     return self.information_matrix @ self.information_vector</span>
-    <span class="c1">#</span>
-    <span class="c1"># # overrides</span>
-    <span class="c1"># @belief_mean.setter</span>
-    <span class="c1"># def belief_mean(self, mean: types.StatesTorch):</span>
-    <span class="c1">#     return self.information_matrix @ self.information_vector</span>
-
     <span class="c1"># overrides</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">belief_covariance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">CovarianceTorch</span><span class="p">:</span>
