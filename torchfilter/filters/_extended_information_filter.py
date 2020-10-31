@@ -31,11 +31,11 @@ class ExtendedInformationFilter(KalmanFilterBase):
         # Parameterize posterior uncertainty with inverse covariance
         self.information_vector: torch.Tensor
         """torch.Tensor: Information vector of our posterior; shape should be
-        `(N, state_dim)."""
+        `(N, state_dim)`."""
 
         self.information_matrix: torch.Tensor
         """torch.Tensor: Information matrix of our posterior; shape should be
-        `(N, state_dim, state_dim)."""
+        `(N, state_dim, state_dim)`."""
 
     # overrides
     @property

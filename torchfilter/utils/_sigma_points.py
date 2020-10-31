@@ -47,7 +47,7 @@ class MerweSigmaPointStrategy(SigmaPointStrategy):
         kappa (Optional[float]): Secondary scaling parameter, which is typically set to
             `0.0` or `3 - dim`. If None, we use `3 - dim`.
         beta (float): Extra sigma parameter. Defaults to `2` (optimal for Gaussians, as
-            per [1]).
+            per Section 3.2 in [2]).
     """
 
     alpha: float = 1e-2
