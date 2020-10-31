@@ -127,6 +127,17 @@ def test_eif(generated_data):
     )
 
 
+def test_virtual_sensor_eif(generated_data):
+    """Smoke test for EIF w/ virtual sensor."""
+    _run_filter(
+        torchfilter.filters.VirtualSensorExtendedInformationFilter(
+            dynamics_model=LinearDynamicsModel(),
+            virtual_sensor_model=LinearVirtualSensorModel(),
+        ),
+        generated_data,
+    )
+
+
 def test_ukf(generated_data):
     """Smoke test for UKF w/ Julier-style sigma points."""
     _run_filter(
@@ -207,6 +218,32 @@ def test_virtual_sensor_ekf_consistency(generated_data):
         measurement_model=LinearKalmanFilterMeasurementModel(),
     )
     virtual_sensor_ekf = torchfilter.filters.VirtualSensorExtendedKalmanFilter(
+        dynamics_model=LinearDynamicsModel(),
+        virtual_sensor_model=LinearVirtualSensorModel(),
+    )
+
+    # Run over data
+    _run_filter(ekf, generated_data)
+    _run_filter(virtual_sensor_ekf, generated_data)
+
+    # Check final beliefs
+    torch.testing.assert_allclose(ekf.belief_mean, virtual_sensor_ekf.belief_mean)
+    torch.testing.assert_allclose(
+        ekf.belief_covariance,
+        virtual_sensor_ekf.belief_covariance,
+    )
+
+
+def test_virtual_sensor_eif_consistency(generated_data):
+    """Check that our Virtual Sensor EIF and standard EKF produce consistent results for
+    a linear system.
+    """
+    # Create filters
+    ekf = torchfilter.filters.ExtendedKalmanFilter(
+        dynamics_model=LinearDynamicsModel(),
+        measurement_model=LinearKalmanFilterMeasurementModel(),
+    )
+    virtual_sensor_ekf = torchfilter.filters.VirtualSensorExtendedInformationFilter(
         dynamics_model=LinearDynamicsModel(),
         virtual_sensor_model=LinearVirtualSensorModel(),
     )

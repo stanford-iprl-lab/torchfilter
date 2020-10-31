@@ -45,6 +45,7 @@ The package is broken down into six submodules:
         <ul>
           <li>Particle Filter (PF)</li>
           <li>Extended Kalman Filter (EKF)</li>
+          <li>Extended Information Filter (EIF)</li>
           <li>Unscented Kalman Filter (UKF)</li>
           <li>Square Root Unscented Kalman Filter (SR-UKF)</li>
         </ul>
@@ -58,7 +59,7 @@ The package is broken down into six submodules:
           noises in the former is based on <a href="#references">[3]</a>.
         </p>
         <p>
-          For our EKF, UKF, and SR-UKF, we also provide &ldquo;virtual
+          For our EKF, EIF, UKF, and SR-UKF, we also provide &ldquo;virtual
           sensor&rdquo; implementations, which use a (raw observation =>
           state prediction/uncertainty) mapping and an identity as the measurement model. This
           is similar to the discriminative strategy described in <a href="#references">[4]</a>.
@@ -117,9 +118,10 @@ The package is broken down into six submodules:
 For more details, see the
 [API reference](https://stanford-iprl-lab.github.io/torchfilter).
 
-For a linear system example, see `tests/_linear_system_models.py`. A more complex
-application can be found in code for our IROS 2020 work <a
-href="#references">[5]</a>: [GitHub repository](https://github.com/brentyi/multimodalfilter).
+For a linear system example, see `tests/_linear_system_models.py`. A more
+complex application can be found in code for our IROS 2020 work <a
+href="#references">[5]</a>:
+[GitHub repository](https://github.com/brentyi/multimodalfilter).
 
 ---
 

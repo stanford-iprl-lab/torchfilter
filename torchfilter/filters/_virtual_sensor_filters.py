@@ -13,6 +13,7 @@ from ..base import (
     KalmanFilterMeasurementModel,
     VirtualSensorModel,
 )
+from ._extended_information_filter import ExtendedInformationFilter
 from ._extended_kalman_filter import ExtendedKalmanFilter
 from ._square_root_unscented_kalman_filter import SquareRootUnscentedKalmanFilter
 from ._unscented_kalman_filter import UnscentedKalmanFilter
@@ -98,7 +99,7 @@ class _VirtualSensorKalmanFilterMixin(
         *,
         dynamics_model: DynamicsModel,
         virtual_sensor_model: VirtualSensorModel,
-        **kwargs,
+        **kwargs,  # Keyword argument needed for unscented filtering strategies
     ):
         # Check submodule consistency
         assert isinstance(dynamics_model, DynamicsModel)
@@ -140,6 +141,28 @@ class _VirtualSensorKalmanFilterMixin(
         mean, scale_tril = self.virtual_sensor_model(observations=observations)
         covariance = scale_tril @ scale_tril.transpose(-1, -2)
         self.initialize_beliefs(mean=mean, covariance=covariance)
+
+
+class VirtualSensorExtendedInformationFilter(
+    _VirtualSensorKalmanFilterMixin, ExtendedInformationFilter
+):
+    """EIF variant with a virtual sensor model.
+
+    Assumes measurement model is identity.
+    """
+
+    # Redefine constructor to remove **kwargs
+    # This is for better static checking, makes language servers a little more useful
+    def __init__(
+        self,
+        *,
+        dynamics_model: DynamicsModel,
+        virtual_sensor_model: VirtualSensorModel,
+    ):
+        super().__init__(
+            dynamics_model=dynamics_model,
+            virtual_sensor_model=virtual_sensor_model,
+        )
 
 
 class VirtualSensorExtendedKalmanFilter(

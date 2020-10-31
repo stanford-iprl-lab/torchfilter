@@ -37,17 +37,6 @@ class ExtendedInformationFilter(KalmanFilterBase):
         """torch.Tensor: Information matrix of our posterior; shape should be
         `(N, state_dim, state_dim)."""
 
-    # # overrides
-    # @property
-    # def belief_mean(self) -> types.StatesTorch:
-    #     """Posterior mean. Shape should be `(N, state_dim)`."""
-    #     return self.information_matrix @ self.information_vector
-    #
-    # # overrides
-    # @belief_mean.setter
-    # def belief_mean(self, mean: types.StatesTorch):
-    #     return self.information_matrix @ self.information_vector
-
     # overrides
     @property
     def belief_covariance(self) -> types.CovarianceTorch:
