@@ -199,9 +199,9 @@
 <dt id="torchfilter.data.ParticleFilterMeasurementDataset">
 <em class="property">class </em><code class="sig-prename descclassname">torchfilter.data.</code><code class="sig-name descname">ParticleFilterMeasurementDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">np.ndarray</span></em>, <em class="sig-param"><span class="n">samples_per_pair</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/data/_particle_filter_measurement_dataset/#ParticleFilterMeasurementDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data.ParticleFilterMeasurementDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
-<div class="graphviz"><img src="../../../_images/inheritance-61dbd27d6b36bb62574b724c7d282d231c6b9128.png" alt="Inheritance diagram of torchfilter.data.ParticleFilterMeasurementDataset" usemap="#inheritance1f163232a6" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-c68c2013333d2c8b3626e343a17dbebb2a0799d8.png" alt="Inheritance diagram of torchfilter.data.ParticleFilterMeasurementDataset" usemap="#inheritance1f163232a6" class="inheritance graphviz" /></div>
 <map id="inheritance1f163232a6" name="inheritance1f163232a6">
-<area shape="rect" id="node2" href="#torchfilter.data.ParticleFilterMeasurementDataset" target="_top" title="A dataset interface for pre&#45;training particle filter measurement models." alt="" coords="127,5,369,31"/>
+<area shape="rect" id="node3" href="#torchfilter.data.ParticleFilterMeasurementDataset" target="_top" title="A dataset interface for pre&#45;training particle filter measurement models." alt="" coords="247,5,489,31"/>
 </map><p>A dataset interface for pre-training particle filter measurement models.</p>
 <p>Centers Gaussian distributions around our ground-truth states, and provides examples
 for learning the log-likelihood.</p>
@@ -251,9 +251,9 @@ the <code class="docutils literal notranslate"><span class="pre">p(observation</
 <dt id="torchfilter.data.SingleStepDataset">
 <em class="property">class </em><code class="sig-prename descclassname">torchfilter.data.</code><code class="sig-name descname">SingleStepDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/data/_single_step_dataset/#SingleStepDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data.SingleStepDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
-<div class="graphviz"><img src="../../../_images/inheritance-898c0a515d67400c67fd04f6d94f9feb4ea21c77.png" alt="Inheritance diagram of torchfilter.data.SingleStepDataset" usemap="#inheritance27a0d5b29e" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-9cb9c1376ac54d41b6f777267a9b26a395cf2c04.png" alt="Inheritance diagram of torchfilter.data.SingleStepDataset" usemap="#inheritance27a0d5b29e" class="inheritance graphviz" /></div>
 <map id="inheritance27a0d5b29e" name="inheritance27a0d5b29e">
-<area shape="rect" id="node2" href="#torchfilter.data.SingleStepDataset" target="_top" title="A dataset interface that returns single&#45;step training examples:" alt="" coords="127,5,269,31"/>
+<area shape="rect" id="node3" href="#torchfilter.data.SingleStepDataset" target="_top" title="A dataset interface that returns single&#45;step training examples:" alt="" coords="247,5,389,31"/>
 </map><p>A dataset interface that returns single-step training examples:
 <code class="docutils literal notranslate"><span class="pre">(previous_state,</span> <span class="pre">state,</span> <span class="pre">observation,</span> <span class="pre">control)</span></code></p>
 <p>By default, extracts these examples from a list of trajectories.</p>
@@ -323,9 +323,9 @@ timesteps…</p>
 <dt id="torchfilter.data.SubsequenceDataset">
 <em class="property">class </em><code class="sig-prename descclassname">torchfilter.data.</code><code class="sig-name descname">SubsequenceDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">subsequence_length</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/data/_subsequence_dataset/#SubsequenceDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data.SubsequenceDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
-<div class="graphviz"><img src="../../../_images/inheritance-72bbb21ddeb142eb37e0528f31c079831adb7a31.png" alt="Inheritance diagram of torchfilter.data.SubsequenceDataset" usemap="#inheritance4e4dadefbf" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-839a877b8b15f956f544dc6fe7cef42001698321.png" alt="Inheritance diagram of torchfilter.data.SubsequenceDataset" usemap="#inheritance4e4dadefbf" class="inheritance graphviz" /></div>
 <map id="inheritance4e4dadefbf" name="inheritance4e4dadefbf">
-<area shape="rect" id="node2" href="#torchfilter.data.SubsequenceDataset" target="_top" title="A data preprocessor for producing training subsequences from" alt="" coords="127,5,285,31"/>
+<area shape="rect" id="node3" href="#torchfilter.data.SubsequenceDataset" target="_top" title="A data preprocessor for producing training subsequences from" alt="" coords="247,5,405,31"/>
 </map><p>A data preprocessor for producing training subsequences from
 a list of trajectories.</p>
 <p>Thin wrapper around <code class="docutils literal notranslate"><span class="pre">torchfilter.data.split_trajectories()</span></code>.</p>

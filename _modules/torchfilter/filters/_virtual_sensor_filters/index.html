@@ -169,6 +169,7 @@
     <span class="n">KalmanFilterMeasurementModel</span><span class="p">,</span>
     <span class="n">VirtualSensorModel</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="kn">from</span> <span class="nn">._extended_information_filter</span> <span class="kn">import</span> <span class="n">ExtendedInformationFilter</span>
 <span class="kn">from</span> <span class="nn">._extended_kalman_filter</span> <span class="kn">import</span> <span class="n">ExtendedKalmanFilter</span>
 <span class="kn">from</span> <span class="nn">._square_root_unscented_kalman_filter</span> <span class="kn">import</span> <span class="n">SquareRootUnscentedKalmanFilter</span>
 <span class="kn">from</span> <span class="nn">._unscented_kalman_filter</span> <span class="kn">import</span> <span class="n">UnscentedKalmanFilter</span>
@@ -254,7 +255,7 @@
         <span class="o">*</span><span class="p">,</span>
         <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span><span class="p">,</span>
         <span class="n">virtual_sensor_model</span><span class="p">:</span> <span class="n">VirtualSensorModel</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>  <span class="c1"># Keyword argument needed for unscented filtering strategies</span>
     <span class="p">):</span>
         <span class="c1"># Check submodule consistency</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dynamics_model</span><span class="p">,</span> <span class="n">DynamicsModel</span><span class="p">)</span>
@@ -296,6 +297,28 @@
         <span class="n">mean</span><span class="p">,</span> <span class="n">scale_tril</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">virtual_sensor_model</span><span class="p">(</span><span class="n">observations</span><span class="o">=</span><span class="n">observations</span><span class="p">)</span>
         <span class="n">covariance</span> <span class="o">=</span> <span class="n">scale_tril</span> <span class="o">@</span> <span class="n">scale_tril</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">initialize_beliefs</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">covariance</span><span class="o">=</span><span class="n">covariance</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="VirtualSensorExtendedInformationFilter"><a class="viewcode-back" href="../../../../api/torchfilter/filters/#torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedInformationFilter">[docs]</a><span class="k">class</span> <span class="nc">VirtualSensorExtendedInformationFilter</span><span class="p">(</span>
+    <span class="n">_VirtualSensorKalmanFilterMixin</span><span class="p">,</span> <span class="n">ExtendedInformationFilter</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;EIF variant with a virtual sensor model.</span>
+
+<span class="sd">    Assumes measurement model is identity.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Redefine constructor to remove **kwargs</span>
+    <span class="c1"># This is for better static checking, makes language servers a little more useful</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span><span class="p">,</span>
+        <span class="n">virtual_sensor_model</span><span class="p">:</span> <span class="n">VirtualSensorModel</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">dynamics_model</span><span class="o">=</span><span class="n">dynamics_model</span><span class="p">,</span>
+            <span class="n">virtual_sensor_model</span><span class="o">=</span><span class="n">virtual_sensor_model</span><span class="p">,</span>
+        <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="VirtualSensorExtendedKalmanFilter"><a class="viewcode-back" href="../../../../api/torchfilter/filters/#torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter">[docs]</a><span class="k">class</span> <span class="nc">VirtualSensorExtendedKalmanFilter</span><span class="p">(</span>

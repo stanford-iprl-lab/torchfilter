@@ -17,13 +17,53 @@ Classes
 
 .. autoapisummary::
 
+   torchfilter.filters.ExtendedInformationFilter
    torchfilter.filters.ExtendedKalmanFilter
    torchfilter.filters.ParticleFilter
    torchfilter.filters.SquareRootUnscentedKalmanFilter
    torchfilter.filters.UnscentedKalmanFilter
+   torchfilter.filters.VirtualSensorExtendedInformationFilter
    torchfilter.filters.VirtualSensorExtendedKalmanFilter
    torchfilter.filters.VirtualSensorSquareRootUnscentedKalmanFilter
    torchfilter.filters.VirtualSensorUnscentedKalmanFilter
+
+
+
+.. py:class:: ExtendedInformationFilter(*, dynamics_model: DynamicsModel, measurement_model: KalmanFilterMeasurementModel)
+
+   Bases: :class:`torchfilter.base.KalmanFilterBase`
+
+   .. autoapi-inheritance-diagram:: torchfilter.filters.ExtendedInformationFilter
+      :parts: 1
+
+   Information form of a Kalman filter; generally equivalent to an EKF but
+   internally parameterizes as uncertainties with the inverse covariance matrix.
+
+   For building estimators with more complex observation spaces (eg images), see
+   ``VirtualSensorExtendedInformationFilter``.
+
+   .. attribute:: information_vector
+      :annotation: :torch.Tensor
+
+      Information vector of our posterior; shape should be
+      `(N, state_dim).
+
+      :type: torch.Tensor
+
+
+   .. attribute:: information_matrix
+      :annotation: :torch.Tensor
+
+      Information matrix of our posterior; shape should be
+      `(N, state_dim, state_dim).
+
+      :type: torch.Tensor
+
+
+   .. method:: belief_covariance(self) -> types.CovarianceTorch
+      :property:
+
+      Posterior covariance. Shape should be ``(N, state_dim, state_dim)``.
 
 
 
@@ -190,6 +230,18 @@ Classes
    https://ieeexplore.ieee.org/document/940586/
    [2] How to Train Your Differentiable Filter
    https://al.is.tuebingen.mpg.de/uploads_file/attachment/attachment/617/2020_RSS_WS_alina.pdf
+
+
+.. py:class:: VirtualSensorExtendedInformationFilter(*, dynamics_model: DynamicsModel, virtual_sensor_model: VirtualSensorModel)
+
+   Bases: :class:`torchfilter.filters`, :class:`torchfilter.filters.ExtendedInformationFilter`
+
+   .. autoapi-inheritance-diagram:: torchfilter.filters.VirtualSensorExtendedInformationFilter
+      :parts: 1
+
+   EIF variant with a virtual sensor model.
+
+   Assumes measurement model is identity.
 
 
 .. py:class:: VirtualSensorExtendedKalmanFilter(*, dynamics_model: DynamicsModel, virtual_sensor_model: VirtualSensorModel)

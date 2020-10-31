@@ -1,4 +1,0 @@
-<map id="inheritanceacf067555f" name="inheritanceacf067555f">
-<area shape="rect" id="node1" title="An abstract class representing a :class:`Dataset`." alt="" coords="5,5,79,31"/>
-<area shape="rect" id="node2" href="../#torchfilter.data.SingleStepDataset" target="_top" title="A dataset interface that returns single&#45;step training examples:" alt="" coords="127,5,269,31"/>
-</map>

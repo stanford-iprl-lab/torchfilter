@@ -168,17 +168,34 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter" title="torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VirtualSensorExtendedKalmanFilter</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedInformationFilter" title="torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedInformationFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VirtualSensorExtendedInformationFilter</span></code></a></p></td>
+<td><p>EIF variant with a virtual sensor model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter" title="torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VirtualSensorExtendedKalmanFilter</span></code></a></p></td>
 <td><p>EKF variant with a virtual sensor model.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#torchfilter.filters._virtual_sensor_filters.VirtualSensorUnscentedKalmanFilter" title="torchfilter.filters._virtual_sensor_filters.VirtualSensorUnscentedKalmanFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VirtualSensorUnscentedKalmanFilter</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#torchfilter.filters._virtual_sensor_filters.VirtualSensorUnscentedKalmanFilter" title="torchfilter.filters._virtual_sensor_filters.VirtualSensorUnscentedKalmanFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VirtualSensorUnscentedKalmanFilter</span></code></a></p></td>
 <td><p>UKF variant with a virtual sensor model.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#torchfilter.filters._virtual_sensor_filters.VirtualSensorSquareRootUnscentedKalmanFilter" title="torchfilter.filters._virtual_sensor_filters.VirtualSensorSquareRootUnscentedKalmanFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VirtualSensorSquareRootUnscentedKalmanFilter</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#torchfilter.filters._virtual_sensor_filters.VirtualSensorSquareRootUnscentedKalmanFilter" title="torchfilter.filters._virtual_sensor_filters.VirtualSensorSquareRootUnscentedKalmanFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VirtualSensorSquareRootUnscentedKalmanFilter</span></code></a></p></td>
 <td><p>Square-root UKF variant with a virtual sensor model.</p></td>
 </tr>
 </tbody>
 </table>
+<dl class="py class">
+<dt id="torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedInformationFilter">
+<em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters._virtual_sensor_filters.</code><code class="sig-name descname">VirtualSensorExtendedInformationFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">virtual_sensor_model</span><span class="p">:</span> <span class="n">VirtualSensorModel</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/filters/_virtual_sensor_filters/#VirtualSensorExtendedInformationFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedInformationFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../#module-torchfilter.filters" title="torchfilter.filters"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.filters</span></code></a>, <a class="reference internal" href="../#torchfilter.filters.ExtendedInformationFilter" title="torchfilter.filters.ExtendedInformationFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.filters.ExtendedInformationFilter</span></code></a></p>
+<div class="graphviz"><img src="../../../../_images/inheritance-04fece87cf7217ff60f2a618704bc2f8f6ee3924.png" alt="Inheritance diagram of torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedInformationFilter" usemap="#inheritance3e463b5b85" class="inheritance graphviz" /></div>
+<map id="inheritance3e463b5b85" name="inheritance3e463b5b85">
+<area shape="rect" id="node3" href="../../base/#torchfilter.base.KalmanFilterBase" target="_top" title="Base class for a generic Kalman&#45;style filter. Parameterizes beliefs with a mean" alt="" coords="198,24,308,44"/>
+<area shape="rect" id="node4" href="../../base/#torchfilter.base.Filter" target="_top" title="Base class for a generic differentiable state estimator." alt="" coords="101,44,159,65"/>
+<area shape="rect" id="node2" href="../#torchfilter.filters.ExtendedInformationFilter" target="_top" title="Information form of a Kalman filter; generally equivalent to an EKF but" alt="" coords="346,24,500,44"/>
+<area shape="rect" id="node6" href="../#torchfilter.filters.VirtualSensorExtendedInformationFilter" target="_top" title="EIF variant with a virtual sensor model." alt="" coords="539,24,764,44"/>
+</map><p>EIF variant with a virtual sensor model.</p>
+<p>Assumes measurement model is identity.</p>
+</dd></dl>
+
 <dl class="py class">
 <dt id="torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter">
 <em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters._virtual_sensor_filters.</code><code class="sig-name descname">VirtualSensorExtendedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">virtual_sensor_model</span><span class="p">:</span> <span class="n">VirtualSensorModel</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/filters/_virtual_sensor_filters/#VirtualSensorExtendedKalmanFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter" title="Permalink to this definition">¶</a></dt>

@@ -19,10 +19,23 @@ Classes
 
 .. autoapisummary::
 
+   torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedInformationFilter
    torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter
    torchfilter.filters._virtual_sensor_filters.VirtualSensorUnscentedKalmanFilter
    torchfilter.filters._virtual_sensor_filters.VirtualSensorSquareRootUnscentedKalmanFilter
 
+
+
+.. py:class:: VirtualSensorExtendedInformationFilter(*, dynamics_model: DynamicsModel, virtual_sensor_model: VirtualSensorModel)
+
+   Bases: :class:`torchfilter.filters`, :class:`torchfilter.filters.ExtendedInformationFilter`
+
+   .. autoapi-inheritance-diagram:: torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedInformationFilter
+      :parts: 1
+
+   EIF variant with a virtual sensor model.
+
+   Assumes measurement model is identity.
 
 
 .. py:class:: VirtualSensorExtendedKalmanFilter(*, dynamics_model: DynamicsModel, virtual_sensor_model: VirtualSensorModel)

@@ -1,4 +1,0 @@
-<map id="inheritance170fe3ebfd" name="inheritance170fe3ebfd">
-<area shape="rect" id="node1" title="An abstract class representing a :class:`Dataset`." alt="" coords="5,5,79,31"/>
-<area shape="rect" id="node2" href="../#torchfilter.data.ParticleFilterMeasurementDataset" target="_top" title="A dataset interface for pre&#45;training particle filter measurement models." alt="" coords="127,5,369,31"/>
-</map>

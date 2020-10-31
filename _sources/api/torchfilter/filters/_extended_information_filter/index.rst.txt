@@ -1,0 +1,63 @@
+:orphan:
+
+:mod:`torchfilter.filters._extended_information_filter`
+=======================================================
+
+.. py:module:: torchfilter.filters._extended_information_filter
+
+.. autoapi-nested-parse::
+
+   Private module; avoid importing from directly.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   torchfilter.filters._extended_information_filter.ExtendedInformationFilter
+
+
+
+.. py:class:: ExtendedInformationFilter(*, dynamics_model: DynamicsModel, measurement_model: KalmanFilterMeasurementModel)
+
+   Bases: :class:`torchfilter.base.KalmanFilterBase`
+
+   .. autoapi-inheritance-diagram:: torchfilter.filters._extended_information_filter.ExtendedInformationFilter
+      :parts: 1
+
+   Information form of a Kalman filter; generally equivalent to an EKF but
+   internally parameterizes as uncertainties with the inverse covariance matrix.
+
+   For building estimators with more complex observation spaces (eg images), see
+   ``VirtualSensorExtendedInformationFilter``.
+
+   .. attribute:: information_vector
+      :annotation: :torch.Tensor
+
+      Information vector of our posterior; shape should be
+      `(N, state_dim).
+
+      :type: torch.Tensor
+
+
+   .. attribute:: information_matrix
+      :annotation: :torch.Tensor
+
+      Information matrix of our posterior; shape should be
+      `(N, state_dim, state_dim).
+
+      :type: torch.Tensor
+
+
+   .. method:: belief_covariance(self) -> types.CovarianceTorch
+      :property:
+
+      Posterior covariance. Shape should be ``(N, state_dim, state_dim)``.
+
+
+
