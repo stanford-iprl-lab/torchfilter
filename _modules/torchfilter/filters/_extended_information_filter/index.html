@@ -187,11 +187,11 @@
         <span class="c1"># Parameterize posterior uncertainty with inverse covariance</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">information_vector</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span>
         <span class="sd">&quot;&quot;&quot;torch.Tensor: Information vector of our posterior; shape should be</span>
-<span class="sd">        `(N, state_dim).&quot;&quot;&quot;</span>
+<span class="sd">        `(N, state_dim)`.&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">information_matrix</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span>
         <span class="sd">&quot;&quot;&quot;torch.Tensor: Information matrix of our posterior; shape should be</span>
-<span class="sd">        `(N, state_dim, state_dim).&quot;&quot;&quot;</span>
+<span class="sd">        `(N, state_dim, state_dim)`.&quot;&quot;&quot;</span>
 
     <span class="c1"># overrides</span>
     <span class="nd">@property</span>

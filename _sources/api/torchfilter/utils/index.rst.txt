@@ -78,7 +78,7 @@ Classes
                    ``0.0`` or ``3 - dim``. If None, we use ``3 - dim``.
    :kwtype kappa: Optional[float]
    :keyword beta: Extra sigma parameter. Defaults to ``2`` (optimal for Gaussians, as
-                  per [1]).
+                  per Section 3.2 in [2]).
    :kwtype beta: float
 
    .. attribute:: alpha

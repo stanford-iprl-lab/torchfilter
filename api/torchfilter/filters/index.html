@@ -216,7 +216,7 @@ internally parameterizes as uncertainties with the inverse covariance matrix.</p
 <dt id="torchfilter.filters.ExtendedInformationFilter.information_vector">
 <code class="sig-name descname">information_vector</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#torchfilter.filters.ExtendedInformationFilter.information_vector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information vector of our posterior; shape should be
-<a href="#id1"><span class="problematic" id="id2">`</span></a>(N, state_dim).</p>
+<code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>torch.Tensor</p>
@@ -228,7 +228,7 @@ internally parameterizes as uncertainties with the inverse covariance matrix.</p
 <dt id="torchfilter.filters.ExtendedInformationFilter.information_matrix">
 <code class="sig-name descname">information_matrix</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#torchfilter.filters.ExtendedInformationFilter.information_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information matrix of our posterior; shape should be
-<a href="#id3"><span class="problematic" id="id4">`</span></a>(N, state_dim, state_dim).</p>
+<code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim)</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>torch.Tensor</p>
@@ -439,8 +439,8 @@ be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span
 <p>From Algorithm 2.1 of Merwe et al. [1]. For working with heteroscedastic noise
 models, we use the weighting approach described in [2].</p>
 <p>[1] The square-root unscented Kalman filter for state and parameter-estimation.
-<a class="reference external" href="https://ieeexplore.ieee.org/document/940586/">https://ieeexplore.ieee.org/document/940586/</a>
-[2] How to Train Your Differentiable Filter
+<a class="reference external" href="https://ieeexplore.ieee.org/document/940586/">https://ieeexplore.ieee.org/document/940586/</a></p>
+<p>[2] How to Train Your Differentiable Filter
 <a class="reference external" href="https://al.is.tuebingen.mpg.de/uploads_file/attachment/attachment/617/2020_RSS_WS_alina.pdf">https://al.is.tuebingen.mpg.de/uploads_file/attachment/attachment/617/2020_RSS_WS_alina.pdf</a></p>
 </dd></dl>
 
