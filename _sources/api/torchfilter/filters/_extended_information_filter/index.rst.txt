@@ -31,7 +31,7 @@ Classes
       :parts: 1
 
    Information form of a Kalman filter; generally equivalent to an EKF but
-   internally parameterizes as uncertainties with the inverse covariance matrix.
+   internally parameterizes uncertainties with the inverse covariance matrix.
 
    For building estimators with more complex observation spaces (eg images), see
    ``VirtualSensorExtendedInformationFilter``.
