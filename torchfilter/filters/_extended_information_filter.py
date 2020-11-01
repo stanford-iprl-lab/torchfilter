@@ -12,7 +12,7 @@ from ..base import DynamicsModel, KalmanFilterBase, KalmanFilterMeasurementModel
 
 class ExtendedInformationFilter(KalmanFilterBase):
     """Information form of a Kalman filter; generally equivalent to an EKF but
-    internally parameterizes as uncertainties with the inverse covariance matrix.
+    internally parameterizes uncertainties with the inverse covariance matrix.
 
     For building estimators with more complex observation spaces (eg images), see
     `VirtualSensorExtendedInformationFilter`.
@@ -77,10 +77,14 @@ class ExtendedInformationFilter(KalmanFilterBase):
                 + dynamics_covariance
             )
         )
+        pred_information_vector = (
+            pred_information_matrix @ pred_mean[:, :, None]
+        ).squeeze(-1)
 
         # Update internal state
         self._belief_mean = pred_mean
         self.information_matrix = pred_information_matrix
+        self.information_vector = pred_information_vector
 
     @overrides
     def _update_step(self, *, observations: types.ObservationsTorch) -> None:
@@ -91,9 +95,7 @@ class ExtendedInformationFilter(KalmanFilterBase):
         observations = cast(types.ObservationsNoDictTorch, observations)
         pred_mean = self._belief_mean
         pred_information_matrix = self.information_matrix
-        pred_information_vector = (
-            pred_information_matrix @ pred_mean[:, :, None]
-        ).squeeze(-1)
+        pred_information_vector = self.information_vector
 
         # Measurement model forward pass, Jacobian
         observations_mean = observations
