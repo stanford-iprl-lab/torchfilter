@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import find_packages, setup
 
 setup(
     name="torchfilter",
@@ -8,7 +8,7 @@ setup(
     author="brentyi",
     author_email="brentyi@berkeley.edu",
     license="BSD",
-    packages=["torchfilter"],
+    packages=find_packages(),
     install_requires=[
         "fannypack",
         "hypothesis",
