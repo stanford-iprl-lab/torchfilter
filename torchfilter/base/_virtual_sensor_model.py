@@ -26,7 +26,7 @@ class VirtualSensorModel(abc.ABC, nn.Module):
         """int: Dimensionality of our state."""
 
     @abc.abstractmethod
-    @overrides
+    # @overrides
     def forward(
         self, *, observations: types.ObservationsTorch
     ) -> Tuple[types.StatesTorch, types.ScaleTrilTorch]:

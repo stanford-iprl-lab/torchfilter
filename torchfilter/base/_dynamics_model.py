@@ -26,7 +26,7 @@ class DynamicsModel(nn.Module, abc.ABC):
         self.state_dim = state_dim
         """int: Dimensionality of our state."""
 
-    @overrides
+    # @overrides
     def forward(
         self,
         *,

@@ -25,7 +25,7 @@ class ParticleFilterMeasurementModel(abc.ABC, nn.Module):
         """int: Dimensionality of our state."""
 
     @abc.abstractmethod
-    @overrides
+    # @overrides
     def forward(
         self, *, states: types.StatesTorch, observations: types.ObservationsTorch
     ) -> torch.Tensor:

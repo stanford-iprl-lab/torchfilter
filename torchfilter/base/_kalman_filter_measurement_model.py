@@ -20,7 +20,7 @@ class KalmanFilterMeasurementModel(abc.ABC, nn.Module):
         """int: Observation dimensionality."""
 
     @abc.abstractmethod
-    @overrides
+    # @overrides
     def forward(
         self, *, states: types.StatesTorch
     ) -> Tuple[types.ObservationsNoDictTorch, types.ScaleTrilTorch]:

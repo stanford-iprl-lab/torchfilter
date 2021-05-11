@@ -36,7 +36,7 @@ class Filter(nn.Module, abc.ABC):
                 `(N, state_dim, state_dim)`.
         """
 
-    @overrides
+    # @overrides
     def forward(
         self, *, observations: types.ObservationsTorch, controls: types.ControlsTorch
     ) -> types.StatesTorch:
