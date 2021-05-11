@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
 
   
@@ -30,10 +32,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
@@ -178,10 +180,10 @@
 </tbody>
 </table>
 <dl class="py class">
-<dt id="torchfilter.data._single_step_dataset.SingleStepDataset">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.data._single_step_dataset.</code><code class="sig-name descname">SingleStepDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/data/_single_step_dataset/#SingleStepDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data._single_step_dataset.SingleStepDataset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.data._single_step_dataset.SingleStepDataset">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.data._single_step_dataset.</span></span><span class="sig-name descname"><span class="pre">SingleStepDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectories</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">types.TrajectoryNumpy</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/data/_single_step_dataset/#SingleStepDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.data._single_step_dataset.SingleStepDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
-<div class="graphviz"><img src="../../../../_images/inheritance-4a5a39a0b8d6485b227e0873b5664689607c1587.png" alt="Inheritance diagram of torchfilter.data._single_step_dataset.SingleStepDataset" usemap="#inheritanceacf067555f" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../../_images/inheritance-ae92effc8118e54a0542deeed9879ce5c0cadd04.png" alt="Inheritance diagram of torchfilter.data._single_step_dataset.SingleStepDataset" usemap="#inheritanceacf067555f" class="inheritance graphviz" /></div>
 <map id="inheritanceacf067555f" name="inheritanceacf067555f">
 <area shape="rect" id="node3" href="../#torchfilter.data.SingleStepDataset" target="_top" title="A dataset interface that returns single&#45;step training examples:" alt="" coords="247,5,389,31"/>
 </map><p>A dataset interface that returns single-step training examples:
@@ -193,8 +195,8 @@
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchfilter.data._single_step_dataset.SingleStepDataset.__getitem__">
-<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesNumpy<span class="p">, </span>types.StatesNumpy<span class="p">, </span>types.ObservationsNumpy<span class="p">, </span>types.ControlsNumpy<span class="p">]</span><a class="reference internal" href="../../../../_modules/torchfilter/data/_single_step_dataset/#SingleStepDataset.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data._single_step_dataset.SingleStepDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.data._single_step_dataset.SingleStepDataset.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">types.StatesNumpy</span><span class="p"><span class="pre">,</span> </span><span class="pre">types.StatesNumpy</span><span class="p"><span class="pre">,</span> </span><span class="pre">types.ObservationsNumpy</span><span class="p"><span class="pre">,</span> </span><span class="pre">types.ControlsNumpy</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../../../_modules/torchfilter/data/_single_step_dataset/#SingleStepDataset.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.data._single_step_dataset.SingleStepDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a single-step prediction sample from our dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -209,8 +211,8 @@ numpy array or dict of numpy arrays with shape <code class="docutils literal not
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.data._single_step_dataset.SingleStepDataset.__len__">
-<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../../../../_modules/torchfilter/data/_single_step_dataset/#SingleStepDataset.__len__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data._single_step_dataset.SingleStepDataset.__len__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.data._single_step_dataset.SingleStepDataset.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="../../../../_modules/torchfilter/data/_single_step_dataset/#SingleStepDataset.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.data._single_step_dataset.SingleStepDataset.__len__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Total number of subsequences in the dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>

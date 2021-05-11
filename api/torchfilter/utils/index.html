@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
 
   
@@ -30,10 +32,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -187,8 +189,8 @@
 </tbody>
 </table>
 <dl class="py class">
-<dt id="torchfilter.utils.JulierSigmaPointStrategy">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.utils.</code><code class="sig-name descname">JulierSigmaPointStrategy</code><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#JulierSigmaPointStrategy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.JulierSigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.JulierSigmaPointStrategy">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.utils.</span></span><span class="sig-name descname"><span class="pre">JulierSigmaPointStrategy</span></span><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#JulierSigmaPointStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils.JulierSigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#torchfilter.utils.SigmaPointStrategy" title="torchfilter.utils.SigmaPointStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.utils.SigmaPointStrategy</span></code></a></p>
 <div class="graphviz"><img src="../../../_images/inheritance-574cb7f977a01ae93de7e0faeb112d330620680d.png" alt="Inheritance diagram of torchfilter.utils.JulierSigmaPointStrategy" usemap="#inheritancecae6dbbfe6" class="inheritance graphviz" /></div>
 <map id="inheritancecae6dbbfe6" name="inheritancecae6dbbfe6">
@@ -203,13 +205,13 @@
 </dd>
 </dl>
 <dl class="py attribute">
-<dt id="torchfilter.utils.JulierSigmaPointStrategy.lambd">
-<code class="sig-name descname">lambd</code><em class="property"> :Optional[float]</em><a class="headerlink" href="#torchfilter.utils.JulierSigmaPointStrategy.lambd" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.JulierSigmaPointStrategy.lambd">
+<span class="sig-name descname"><span class="pre">lambd</span></span><em class="property"> <span class="pre">:Optional[float]</span></em><a class="headerlink" href="#torchfilter.utils.JulierSigmaPointStrategy.lambd" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.utils.JulierSigmaPointStrategy.compute_lambda">
-<code class="sig-name descname">compute_lambda</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#JulierSigmaPointStrategy.compute_lambda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.JulierSigmaPointStrategy.compute_lambda" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.JulierSigmaPointStrategy.compute_lambda">
+<span class="sig-name descname"><span class="pre">compute_lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#JulierSigmaPointStrategy.compute_lambda"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils.JulierSigmaPointStrategy.compute_lambda" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute sigma point scaling parameter.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -222,8 +224,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.utils.JulierSigmaPointStrategy.compute_sigma_weights">
-<code class="sig-name descname">compute_sigma_weights</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>torch.Tensor<span class="p">]</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#JulierSigmaPointStrategy.compute_sigma_weights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.JulierSigmaPointStrategy.compute_sigma_weights" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.JulierSigmaPointStrategy.compute_sigma_weights">
+<span class="sig-name descname"><span class="pre">compute_sigma_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#JulierSigmaPointStrategy.compute_sigma_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils.JulierSigmaPointStrategy.compute_sigma_weights" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper for computing sigma weights.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -239,8 +241,8 @@ float32 tensors on the CPU.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="torchfilter.utils.MerweSigmaPointStrategy">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.utils.</code><code class="sig-name descname">MerweSigmaPointStrategy</code><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#MerweSigmaPointStrategy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.MerweSigmaPointStrategy">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.utils.</span></span><span class="sig-name descname"><span class="pre">MerweSigmaPointStrategy</span></span><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#MerweSigmaPointStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#torchfilter.utils.SigmaPointStrategy" title="torchfilter.utils.SigmaPointStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.utils.SigmaPointStrategy</span></code></a></p>
 <div class="graphviz"><img src="../../../_images/inheritance-133f16e6cef7b3c6bc67225817080c64f338a9c8.png" alt="Inheritance diagram of torchfilter.utils.MerweSigmaPointStrategy" usemap="#inheritance7d5c63e9f7" class="inheritance graphviz" /></div>
 <map id="inheritance7d5c63e9f7" name="inheritance7d5c63e9f7">
@@ -260,23 +262,23 @@ per Section 3.2 in [2]).</p></li>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt id="torchfilter.utils.MerweSigmaPointStrategy.alpha">
-<code class="sig-name descname">alpha</code><em class="property"> :float = 0.01</em><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy.alpha" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.MerweSigmaPointStrategy.alpha">
+<span class="sig-name descname"><span class="pre">alpha</span></span><em class="property"> <span class="pre">:float</span> <span class="pre">=</span> <span class="pre">0.01</span></em><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy.alpha" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.utils.MerweSigmaPointStrategy.beta">
-<code class="sig-name descname">beta</code><em class="property"> :float = 2.0</em><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy.beta" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.MerweSigmaPointStrategy.beta">
+<span class="sig-name descname"><span class="pre">beta</span></span><em class="property"> <span class="pre">:float</span> <span class="pre">=</span> <span class="pre">2.0</span></em><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy.beta" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.utils.MerweSigmaPointStrategy.kappa">
-<code class="sig-name descname">kappa</code><em class="property"> :Optional[float]</em><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy.kappa" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.MerweSigmaPointStrategy.kappa">
+<span class="sig-name descname"><span class="pre">kappa</span></span><em class="property"> <span class="pre">:Optional[float]</span></em><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy.kappa" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.utils.MerweSigmaPointStrategy.compute_lambda">
-<code class="sig-name descname">compute_lambda</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#MerweSigmaPointStrategy.compute_lambda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy.compute_lambda" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.MerweSigmaPointStrategy.compute_lambda">
+<span class="sig-name descname"><span class="pre">compute_lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#MerweSigmaPointStrategy.compute_lambda"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy.compute_lambda" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute sigma point scaling parameter.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -289,8 +291,8 @@ per Section 3.2 in [2]).</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.utils.MerweSigmaPointStrategy.compute_sigma_weights">
-<code class="sig-name descname">compute_sigma_weights</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>torch.Tensor<span class="p">]</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#MerweSigmaPointStrategy.compute_sigma_weights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy.compute_sigma_weights" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.MerweSigmaPointStrategy.compute_sigma_weights">
+<span class="sig-name descname"><span class="pre">compute_sigma_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#MerweSigmaPointStrategy.compute_sigma_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils.MerweSigmaPointStrategy.compute_sigma_weights" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper for computing sigma weights.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -306,16 +308,16 @@ float32 tensors on the CPU.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="torchfilter.utils.SigmaPointStrategy">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.utils.</code><code class="sig-name descname">SigmaPointStrategy</code><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#SigmaPointStrategy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.SigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.SigmaPointStrategy">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.utils.</span></span><span class="sig-name descname"><span class="pre">SigmaPointStrategy</span></span><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#SigmaPointStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils.SigmaPointStrategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <div class="graphviz"><img src="../../../_images/inheritance-784b2a89883a0c81d56cc66c254d0a5ace955d7f.png" alt="Inheritance diagram of torchfilter.utils.SigmaPointStrategy" usemap="#inheritancedba8aeb3d1" class="inheritance graphviz" /></div>
 <map id="inheritancedba8aeb3d1" name="inheritancedba8aeb3d1">
 <area shape="rect" id="node2" href="#torchfilter.utils.SigmaPointStrategy" target="_top" title="Strategy to use for computing sigma weights + selecting sigma points." alt="" coords="125,5,276,31"/>
 </map><p>Strategy to use for computing sigma weights + selecting sigma points.</p>
 <dl class="py method">
-<dt id="torchfilter.utils.SigmaPointStrategy.compute_lambda">
-<em class="property">abstract </em><code class="sig-name descname">compute_lambda</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#SigmaPointStrategy.compute_lambda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.SigmaPointStrategy.compute_lambda" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.SigmaPointStrategy.compute_lambda">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">compute_lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#SigmaPointStrategy.compute_lambda"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils.SigmaPointStrategy.compute_lambda" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute sigma point scaling parameter.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -328,8 +330,8 @@ float32 tensors on the CPU.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.utils.SigmaPointStrategy.compute_sigma_weights">
-<em class="property">abstract </em><code class="sig-name descname">compute_sigma_weights</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>torch.Tensor<span class="p">]</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#SigmaPointStrategy.compute_sigma_weights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.SigmaPointStrategy.compute_sigma_weights" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.SigmaPointStrategy.compute_sigma_weights">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">compute_sigma_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../../_modules/torchfilter/utils/_sigma_points/#SigmaPointStrategy.compute_sigma_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils.SigmaPointStrategy.compute_sigma_weights" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper for computing sigma weights.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -345,8 +347,8 @@ float32 tensors on the CPU.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="torchfilter.utils.UnscentedTransform">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.utils.</code><code class="sig-name descname">UnscentedTransform</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">sigma_point_strategy</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#torchfilter.utils.SigmaPointStrategy" title="torchfilter.utils.SigmaPointStrategy">SigmaPointStrategy</a></span> <span class="o">=</span> <span class="default_value">JulierSigmaPointStrategy()</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.UnscentedTransform" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.UnscentedTransform">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.utils.</span></span><span class="sig-name descname"><span class="pre">UnscentedTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_point_strategy</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#torchfilter.utils.SigmaPointStrategy" title="torchfilter.utils.SigmaPointStrategy"><span class="pre">SigmaPointStrategy</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">JulierSigmaPointStrategy()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils.UnscentedTransform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper class for performing (batched, differentiable) unscented transforms.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
@@ -358,8 +360,8 @@ use for sigma point selection. Defaults to Julier.</p></li>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt id="torchfilter.utils.UnscentedTransform.weights_c">
-<code class="sig-name descname">weights_c</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.weights_c" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.UnscentedTransform.weights_c">
+<span class="sig-name descname"><span class="pre">weights_c</span></span><em class="property"> <span class="pre">:torch.Tensor</span></em><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.weights_c" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unscented transform covariance weights. Note that this will be
 initially instantiated on the CPU, and moved in <code class="docutils literal notranslate"><span class="pre">compute_distribution()</span></code>.</p>
 <dl class="field-list simple">
@@ -370,8 +372,8 @@ initially instantiated on the CPU, and moved in <code class="docutils literal no
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.utils.UnscentedTransform.weights_m">
-<code class="sig-name descname">weights_m</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.weights_m" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.UnscentedTransform.weights_m">
+<span class="sig-name descname"><span class="pre">weights_m</span></span><em class="property"> <span class="pre">:torch.Tensor</span></em><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.weights_m" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unscented transform mean weights. Note that this will be
 initially instantiated on the CPU, and moved in <code class="docutils literal notranslate"><span class="pre">compute_distribution()</span></code>.</p>
 <dl class="field-list simple">
@@ -382,8 +384,8 @@ initially instantiated on the CPU, and moved in <code class="docutils literal no
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.utils.UnscentedTransform.select_sigma_points">
-<code class="sig-name descname">select_sigma_points</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">input_mean</span><span class="p">:</span> <span class="n">torch.Tensor</span></em>, <em class="sig-param"><span class="n">input_covariance</span><span class="p">:</span> <span class="n">types.CovarianceTorch</span></em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="reference internal" href="../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.select_sigma_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.select_sigma_points" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.UnscentedTransform.select_sigma_points">
+<span class="sig-name descname"><span class="pre">select_sigma_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_mean</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_covariance</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.CovarianceTorch</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">torch.Tensor</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.select_sigma_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.select_sigma_points" title="Permalink to this definition">¶</a></dt>
 <dd><p>Select sigma points.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -400,8 +402,8 @@ initially instantiated on the CPU, and moved in <code class="docutils literal no
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.utils.UnscentedTransform.select_sigma_points_square_root">
-<code class="sig-name descname">select_sigma_points_square_root</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">input_mean</span><span class="p">:</span> <span class="n">torch.Tensor</span></em>, <em class="sig-param"><span class="n">input_scale_tril</span><span class="p">:</span> <span class="n">types.ScaleTrilTorch</span></em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="reference internal" href="../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.select_sigma_points_square_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.select_sigma_points_square_root" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.UnscentedTransform.select_sigma_points_square_root">
+<span class="sig-name descname"><span class="pre">select_sigma_points_square_root</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_mean</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_scale_tril</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.ScaleTrilTorch</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">torch.Tensor</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.select_sigma_points_square_root"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.select_sigma_points_square_root" title="Permalink to this definition">¶</a></dt>
 <dd><p>Select sigma points using square root of covariance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -418,8 +420,8 @@ covariance. Shape should be <code class="docutils literal notranslate"><span cla
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.utils.UnscentedTransform.compute_distribution">
-<code class="sig-name descname">compute_distribution</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">sigma_points</span><span class="p">:</span> <span class="n">torch.Tensor</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>types.CovarianceTorch<span class="p">]</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.compute_distribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.compute_distribution" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.UnscentedTransform.compute_distribution">
+<span class="sig-name descname"><span class="pre">compute_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_points</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span> </span><span class="pre">types.CovarianceTorch</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.compute_distribution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.compute_distribution" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimate a distribution from selected sigma points.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -434,8 +436,8 @@ covariance. Shape should be <code class="docutils literal notranslate"><span cla
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.utils.UnscentedTransform.compute_distribution_square_root">
-<code class="sig-name descname">compute_distribution_square_root</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">sigma_points</span><span class="p">:</span> <span class="n">torch.Tensor</span></em>, <em class="sig-param"><span class="n">additive_noise_scale_tril</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>types.ScaleTrilTorch<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>types.ScaleTrilTorch<span class="p">]</span><a class="reference internal" href="../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.compute_distribution_square_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.compute_distribution_square_root" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils.UnscentedTransform.compute_distribution_square_root">
+<span class="sig-name descname"><span class="pre">compute_distribution_square_root</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_points</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">additive_noise_scale_tril</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">types.ScaleTrilTorch</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span> </span><span class="pre">types.ScaleTrilTorch</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.compute_distribution_square_root"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils.UnscentedTransform.compute_distribution_square_root" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimate a distribution from selected sigma points; square root formulation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

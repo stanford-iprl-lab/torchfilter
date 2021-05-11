@@ -108,7 +108,7 @@ Classes
       :type: torch.Tensor
 
 
-   .. method:: initialize_beliefs(self, *, mean: types.StatesTorch, covariance: types.CovarianceTorch)
+   .. method:: initialize_beliefs(self, *, mean: types.StatesTorch, covariance: types.CovarianceTorch) -> None
 
       Populates initial particles, which will be normally distributed.
 

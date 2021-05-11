@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
 
   
@@ -30,10 +32,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
@@ -178,8 +180,8 @@
 </tbody>
 </table>
 <dl class="py class">
-<dt id="torchfilter.utils._unscented_transform.UnscentedTransform">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.utils._unscented_transform.</code><code class="sig-name descname">UnscentedTransform</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dim</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">sigma_point_strategy</span><span class="p">:</span> <span class="n">SigmaPointStrategy</span> <span class="o">=</span> <span class="default_value">JulierSigmaPointStrategy()</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils._unscented_transform.UnscentedTransform" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils._unscented_transform.UnscentedTransform">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.utils._unscented_transform.</span></span><span class="sig-name descname"><span class="pre">UnscentedTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_point_strategy</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">SigmaPointStrategy</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">JulierSigmaPointStrategy()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils._unscented_transform.UnscentedTransform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper class for performing (batched, differentiable) unscented transforms.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
@@ -191,8 +193,8 @@ use for sigma point selection. Defaults to Julier.</p></li>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt id="torchfilter.utils._unscented_transform.UnscentedTransform.weights_c">
-<code class="sig-name descname">weights_c</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#torchfilter.utils._unscented_transform.UnscentedTransform.weights_c" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils._unscented_transform.UnscentedTransform.weights_c">
+<span class="sig-name descname"><span class="pre">weights_c</span></span><em class="property"> <span class="pre">:torch.Tensor</span></em><a class="headerlink" href="#torchfilter.utils._unscented_transform.UnscentedTransform.weights_c" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unscented transform covariance weights. Note that this will be
 initially instantiated on the CPU, and moved in <code class="docutils literal notranslate"><span class="pre">compute_distribution()</span></code>.</p>
 <dl class="field-list simple">
@@ -203,8 +205,8 @@ initially instantiated on the CPU, and moved in <code class="docutils literal no
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.utils._unscented_transform.UnscentedTransform.weights_m">
-<code class="sig-name descname">weights_m</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#torchfilter.utils._unscented_transform.UnscentedTransform.weights_m" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils._unscented_transform.UnscentedTransform.weights_m">
+<span class="sig-name descname"><span class="pre">weights_m</span></span><em class="property"> <span class="pre">:torch.Tensor</span></em><a class="headerlink" href="#torchfilter.utils._unscented_transform.UnscentedTransform.weights_m" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unscented transform mean weights. Note that this will be
 initially instantiated on the CPU, and moved in <code class="docutils literal notranslate"><span class="pre">compute_distribution()</span></code>.</p>
 <dl class="field-list simple">
@@ -215,8 +217,8 @@ initially instantiated on the CPU, and moved in <code class="docutils literal no
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.utils._unscented_transform.UnscentedTransform.select_sigma_points">
-<code class="sig-name descname">select_sigma_points</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">input_mean</span><span class="p">:</span> <span class="n">torch.Tensor</span></em>, <em class="sig-param"><span class="n">input_covariance</span><span class="p">:</span> <span class="n">types.CovarianceTorch</span></em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="reference internal" href="../../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.select_sigma_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils._unscented_transform.UnscentedTransform.select_sigma_points" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils._unscented_transform.UnscentedTransform.select_sigma_points">
+<span class="sig-name descname"><span class="pre">select_sigma_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_mean</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_covariance</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.CovarianceTorch</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">torch.Tensor</span><a class="reference internal" href="../../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.select_sigma_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils._unscented_transform.UnscentedTransform.select_sigma_points" title="Permalink to this definition">¶</a></dt>
 <dd><p>Select sigma points.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -233,8 +235,8 @@ initially instantiated on the CPU, and moved in <code class="docutils literal no
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.utils._unscented_transform.UnscentedTransform.select_sigma_points_square_root">
-<code class="sig-name descname">select_sigma_points_square_root</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">input_mean</span><span class="p">:</span> <span class="n">torch.Tensor</span></em>, <em class="sig-param"><span class="n">input_scale_tril</span><span class="p">:</span> <span class="n">types.ScaleTrilTorch</span></em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="reference internal" href="../../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.select_sigma_points_square_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils._unscented_transform.UnscentedTransform.select_sigma_points_square_root" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils._unscented_transform.UnscentedTransform.select_sigma_points_square_root">
+<span class="sig-name descname"><span class="pre">select_sigma_points_square_root</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_mean</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_scale_tril</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.ScaleTrilTorch</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">torch.Tensor</span><a class="reference internal" href="../../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.select_sigma_points_square_root"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils._unscented_transform.UnscentedTransform.select_sigma_points_square_root" title="Permalink to this definition">¶</a></dt>
 <dd><p>Select sigma points using square root of covariance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -251,8 +253,8 @@ covariance. Shape should be <code class="docutils literal notranslate"><span cla
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.utils._unscented_transform.UnscentedTransform.compute_distribution">
-<code class="sig-name descname">compute_distribution</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">sigma_points</span><span class="p">:</span> <span class="n">torch.Tensor</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>types.CovarianceTorch<span class="p">]</span><a class="reference internal" href="../../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.compute_distribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils._unscented_transform.UnscentedTransform.compute_distribution" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils._unscented_transform.UnscentedTransform.compute_distribution">
+<span class="sig-name descname"><span class="pre">compute_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_points</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span> </span><span class="pre">types.CovarianceTorch</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.compute_distribution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils._unscented_transform.UnscentedTransform.compute_distribution" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimate a distribution from selected sigma points.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -267,8 +269,8 @@ covariance. Shape should be <code class="docutils literal notranslate"><span cla
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.utils._unscented_transform.UnscentedTransform.compute_distribution_square_root">
-<code class="sig-name descname">compute_distribution_square_root</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">sigma_points</span><span class="p">:</span> <span class="n">torch.Tensor</span></em>, <em class="sig-param"><span class="n">additive_noise_scale_tril</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>types.ScaleTrilTorch<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>torch.Tensor<span class="p">, </span>types.ScaleTrilTorch<span class="p">]</span><a class="reference internal" href="../../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.compute_distribution_square_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.utils._unscented_transform.UnscentedTransform.compute_distribution_square_root" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.utils._unscented_transform.UnscentedTransform.compute_distribution_square_root">
+<span class="sig-name descname"><span class="pre">compute_distribution_square_root</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_points</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">additive_noise_scale_tril</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">types.ScaleTrilTorch</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span> </span><span class="pre">types.ScaleTrilTorch</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../../../_modules/torchfilter/utils/_unscented_transform/#UnscentedTransform.compute_distribution_square_root"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.utils._unscented_transform.UnscentedTransform.compute_distribution_square_root" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimate a distribution from selected sigma points; square root formulation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

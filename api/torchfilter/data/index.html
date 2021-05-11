@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
 
   
@@ -30,10 +32,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -200,10 +202,10 @@
 </tbody>
 </table>
 <dl class="py class">
-<dt id="torchfilter.data.ParticleFilterMeasurementDataset">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.data.</code><code class="sig-name descname">ParticleFilterMeasurementDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">np.ndarray</span></em>, <em class="sig-param"><span class="n">samples_per_pair</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/data/_particle_filter_measurement_dataset/#ParticleFilterMeasurementDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data.ParticleFilterMeasurementDataset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.data.ParticleFilterMeasurementDataset">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.data.</span></span><span class="sig-name descname"><span class="pre">ParticleFilterMeasurementDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectories</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">types.TrajectoryNumpy</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariance</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">np.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples_per_pair</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/data/_particle_filter_measurement_dataset/#ParticleFilterMeasurementDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.data.ParticleFilterMeasurementDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
-<div class="graphviz"><img src="../../../_images/inheritance-c68c2013333d2c8b3626e343a17dbebb2a0799d8.png" alt="Inheritance diagram of torchfilter.data.ParticleFilterMeasurementDataset" usemap="#inheritance1f163232a6" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-08ab5f3b698a244f2d7167073f1f5c1c677899d3.png" alt="Inheritance diagram of torchfilter.data.ParticleFilterMeasurementDataset" usemap="#inheritance1f163232a6" class="inheritance graphviz" /></div>
 <map id="inheritance1f163232a6" name="inheritance1f163232a6">
 <area shape="rect" id="node3" href="#torchfilter.data.ParticleFilterMeasurementDataset" target="_top" title="A dataset interface for pre&#45;training particle filter measurement models." alt="" coords="247,5,489,31"/>
 </map><p>A dataset interface for pre-training particle filter measurement models.</p>
@@ -223,8 +225,8 @@ to the example, and the other half far away.</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchfilter.data.ParticleFilterMeasurementDataset.__getitem__">
-<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesNumpy<span class="p">, </span>types.ObservationsNumpy<span class="p">, </span>np.ndarray<span class="p">]</span><a class="reference internal" href="../../../_modules/torchfilter/data/_particle_filter_measurement_dataset/#ParticleFilterMeasurementDataset.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data.ParticleFilterMeasurementDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.data.ParticleFilterMeasurementDataset.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">types.StatesNumpy</span><span class="p"><span class="pre">,</span> </span><span class="pre">types.ObservationsNumpy</span><span class="p"><span class="pre">,</span> </span><span class="pre">np.ndarray</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../../_modules/torchfilter/data/_particle_filter_measurement_dataset/#ParticleFilterMeasurementDataset.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.data.ParticleFilterMeasurementDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a state/observation/log-likelihood sample from our dataset. Nominally, we
 want our measurement model to predict the returned log-likelihood as the PDF of
 the <code class="docutils literal notranslate"><span class="pre">p(observation</span> <span class="pre">|</span> <span class="pre">state)</span></code> distribution.</p>
@@ -239,8 +241,8 @@ the <code class="docutils literal notranslate"><span class="pre">p(observation</
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.data.ParticleFilterMeasurementDataset.__len__">
-<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../../../_modules/torchfilter/data/_particle_filter_measurement_dataset/#ParticleFilterMeasurementDataset.__len__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data.ParticleFilterMeasurementDataset.__len__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.data.ParticleFilterMeasurementDataset.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="../../../_modules/torchfilter/data/_particle_filter_measurement_dataset/#ParticleFilterMeasurementDataset.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.data.ParticleFilterMeasurementDataset.__len__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Total number of samples in the dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -252,10 +254,10 @@ the <code class="docutils literal notranslate"><span class="pre">p(observation</
 </dd></dl>
 
 <dl class="py class">
-<dt id="torchfilter.data.SingleStepDataset">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.data.</code><code class="sig-name descname">SingleStepDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/data/_single_step_dataset/#SingleStepDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data.SingleStepDataset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.data.SingleStepDataset">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.data.</span></span><span class="sig-name descname"><span class="pre">SingleStepDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectories</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">types.TrajectoryNumpy</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/data/_single_step_dataset/#SingleStepDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.data.SingleStepDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
-<div class="graphviz"><img src="../../../_images/inheritance-9cb9c1376ac54d41b6f777267a9b26a395cf2c04.png" alt="Inheritance diagram of torchfilter.data.SingleStepDataset" usemap="#inheritance27a0d5b29e" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-6729e5c9c88124577aae1722ddbbea92ccf2351d.png" alt="Inheritance diagram of torchfilter.data.SingleStepDataset" usemap="#inheritance27a0d5b29e" class="inheritance graphviz" /></div>
 <map id="inheritance27a0d5b29e" name="inheritance27a0d5b29e">
 <area shape="rect" id="node3" href="#torchfilter.data.SingleStepDataset" target="_top" title="A dataset interface that returns single&#45;step training examples:" alt="" coords="247,5,389,31"/>
 </map><p>A dataset interface that returns single-step training examples:
@@ -267,8 +269,8 @@ the <code class="docutils literal notranslate"><span class="pre">p(observation</
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchfilter.data.SingleStepDataset.__getitem__">
-<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesNumpy<span class="p">, </span>types.StatesNumpy<span class="p">, </span>types.ObservationsNumpy<span class="p">, </span>types.ControlsNumpy<span class="p">]</span><a class="reference internal" href="../../../_modules/torchfilter/data/_single_step_dataset/#SingleStepDataset.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data.SingleStepDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.data.SingleStepDataset.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">types.StatesNumpy</span><span class="p"><span class="pre">,</span> </span><span class="pre">types.StatesNumpy</span><span class="p"><span class="pre">,</span> </span><span class="pre">types.ObservationsNumpy</span><span class="p"><span class="pre">,</span> </span><span class="pre">types.ControlsNumpy</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../../_modules/torchfilter/data/_single_step_dataset/#SingleStepDataset.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.data.SingleStepDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a single-step prediction sample from our dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -283,8 +285,8 @@ numpy array or dict of numpy arrays with shape <code class="docutils literal not
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.data.SingleStepDataset.__len__">
-<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../../../_modules/torchfilter/data/_single_step_dataset/#SingleStepDataset.__len__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data.SingleStepDataset.__len__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.data.SingleStepDataset.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="../../../_modules/torchfilter/data/_single_step_dataset/#SingleStepDataset.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.data.SingleStepDataset.__len__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Total number of subsequences in the dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -296,8 +298,8 @@ numpy array or dict of numpy arrays with shape <code class="docutils literal not
 </dd></dl>
 
 <dl class="py function">
-<dt id="torchfilter.data.split_trajectories">
-<code class="sig-prename descclassname">torchfilter.data.</code><code class="sig-name descname">split_trajectories</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">subsequence_length</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span><a class="reference internal" href="../../../_modules/torchfilter/data/_split_trajectories/#split_trajectories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data.split_trajectories" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.data.split_trajectories">
+<span class="sig-prename descclassname"><span class="pre">torchfilter.data.</span></span><span class="sig-name descname"><span class="pre">split_trajectories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectories</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">types.TrajectoryNumpy</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsequence_length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">types.TrajectoryNumpy</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../../_modules/torchfilter/data/_split_trajectories/#split_trajectories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.data.split_trajectories" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper for splitting a list of trajectories into a list of overlapping
 subsequences.</p>
 <p>For each trajectory, assuming a subsequence length of 10, this function
@@ -324,10 +326,10 @@ timesteps…</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="torchfilter.data.SubsequenceDataset">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.data.</code><code class="sig-name descname">SubsequenceDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">subsequence_length</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/data/_subsequence_dataset/#SubsequenceDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data.SubsequenceDataset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.data.SubsequenceDataset">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.data.</span></span><span class="sig-name descname"><span class="pre">SubsequenceDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectories</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">types.TrajectoryNumpy</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsequence_length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/data/_subsequence_dataset/#SubsequenceDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.data.SubsequenceDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
-<div class="graphviz"><img src="../../../_images/inheritance-839a877b8b15f956f544dc6fe7cef42001698321.png" alt="Inheritance diagram of torchfilter.data.SubsequenceDataset" usemap="#inheritance4e4dadefbf" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../_images/inheritance-13c946e18423c45d7babcb4e552e3e8bb74ca088.png" alt="Inheritance diagram of torchfilter.data.SubsequenceDataset" usemap="#inheritance4e4dadefbf" class="inheritance graphviz" /></div>
 <map id="inheritance4e4dadefbf" name="inheritance4e4dadefbf">
 <area shape="rect" id="node3" href="#torchfilter.data.SubsequenceDataset" target="_top" title="A data preprocessor for producing training subsequences from" alt="" coords="247,5,405,31"/>
 </map><p>A data preprocessor for producing training subsequences from
@@ -344,8 +346,8 @@ either a numpy array or dict of numpy arrays with shape <code class="docutils li
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchfilter.data.SubsequenceDataset.__getitem__">
-<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; types.TrajectoryNumpy<a class="reference internal" href="../../../_modules/torchfilter/data/_subsequence_dataset/#SubsequenceDataset.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data.SubsequenceDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.data.SubsequenceDataset.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">types.TrajectoryNumpy</span><a class="reference internal" href="../../../_modules/torchfilter/data/_subsequence_dataset/#SubsequenceDataset.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.data.SubsequenceDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a subsequence from our dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -361,8 +363,8 @@ numpy array or dict of numpy arrays with shape
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.data.SubsequenceDataset.__len__">
-<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../../../_modules/torchfilter/data/_subsequence_dataset/#SubsequenceDataset.__len__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data.SubsequenceDataset.__len__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.data.SubsequenceDataset.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="../../../_modules/torchfilter/data/_subsequence_dataset/#SubsequenceDataset.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.data.SubsequenceDataset.__len__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Total number of subsequences in the dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>

@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
 
   
@@ -30,10 +32,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
@@ -178,8 +180,8 @@
 </tbody>
 </table>
 <dl class="py class">
-<dt id="torchfilter.base._dynamics_model.DynamicsModel">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.base._dynamics_model.</code><code class="sig-name descname">DynamicsModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">state_dim</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/base/_dynamics_model/#DynamicsModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.base._dynamics_model.DynamicsModel" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.base._dynamics_model.DynamicsModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.base._dynamics_model.</span></span><span class="sig-name descname"><span class="pre">DynamicsModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/base/_dynamics_model/#DynamicsModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.base._dynamics_model.DynamicsModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <div class="graphviz"><img src="../../../../_images/inheritance-c177061efe204198fc3e57e95e421458c7f6fbeb.png" alt="Inheritance diagram of torchfilter.base._dynamics_model.DynamicsModel" usemap="#inheritance678585050b" class="inheritance graphviz" /></div>
 <map id="inheritance678585050b" name="inheritance678585050b">
@@ -189,8 +191,8 @@ Gaussian noise.</p>
 <p>Subclasses should override either <code class="docutils literal notranslate"><span class="pre">forward</span></code> or <code class="docutils literal notranslate"><span class="pre">forward_loop</span></code> for computing dynamics
 estimates.</p>
 <dl class="py attribute">
-<dt id="torchfilter.base._dynamics_model.DynamicsModel.state_dim">
-<code class="sig-name descname">state_dim</code><a class="headerlink" href="#torchfilter.base._dynamics_model.DynamicsModel.state_dim" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.base._dynamics_model.DynamicsModel.state_dim">
+<span class="sig-name descname"><span class="pre">state_dim</span></span><a class="headerlink" href="#torchfilter.base._dynamics_model.DynamicsModel.state_dim" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionality of our state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -200,8 +202,8 @@ estimates.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.base._dynamics_model.DynamicsModel.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesTorch<span class="p">, </span>types.ScaleTrilTorch<span class="p">]</span><a class="reference internal" href="../../../../_modules/torchfilter/base/_dynamics_model/#DynamicsModel.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.base._dynamics_model.DynamicsModel.forward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.base._dynamics_model.DynamicsModel.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_states</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.StatesTorch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controls</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.ControlsTorch</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">types.StatesTorch</span><span class="p"><span class="pre">,</span> </span><span class="pre">types.ScaleTrilTorch</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../../../_modules/torchfilter/base/_dynamics_model/#DynamicsModel.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.base._dynamics_model.DynamicsModel.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamics model forward pass, single timestep.</p>
 <p>Computes both predicted states and uncertainties. Note that uncertainties
 correspond to the (Cholesky decompositions of the) “Q” matrices in a standard
@@ -228,8 +230,8 @@ triangular with shape <code class="docutils literal notranslate"><span class="pr
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.base._dynamics_model.DynamicsModel.forward_loop">
-<code class="sig-name descname">forward_loop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesTorch<span class="p">, </span>torch.Tensor<span class="p">]</span><a class="reference internal" href="../../../../_modules/torchfilter/base/_dynamics_model/#DynamicsModel.forward_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.base._dynamics_model.DynamicsModel.forward_loop" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.base._dynamics_model.DynamicsModel.forward_loop">
+<span class="sig-name descname"><span class="pre">forward_loop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_states</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.StatesTorch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controls</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.ControlsTorch</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">types.StatesTorch</span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../../../_modules/torchfilter/base/_dynamics_model/#DynamicsModel.forward_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.base._dynamics_model.DynamicsModel.forward_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamics model forward pass, over sequence length <code class="docutils literal notranslate"><span class="pre">T</span></code> and batch size
 <code class="docutils literal notranslate"><span class="pre">N</span></code>.  By default, this is implemented by iteratively calling
 <code class="docutils literal notranslate"><span class="pre">forward()</span></code>.</p>
@@ -258,8 +260,8 @@ triangular with shape <code class="docutils literal notranslate"><span class="pr
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.base._dynamics_model.DynamicsModel.jacobian">
-<code class="sig-name descname">jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">initial_states</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="reference internal" href="../../../../_modules/torchfilter/base/_dynamics_model/#DynamicsModel.jacobian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.base._dynamics_model.DynamicsModel.jacobian" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.base._dynamics_model.DynamicsModel.jacobian">
+<span class="sig-name descname"><span class="pre">jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_states</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.StatesTorch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controls</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.ControlsTorch</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">torch.Tensor</span><a class="reference internal" href="../../../../_modules/torchfilter/base/_dynamics_model/#DynamicsModel.jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.base._dynamics_model.DynamicsModel.jacobian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns Jacobian of the dynamics model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

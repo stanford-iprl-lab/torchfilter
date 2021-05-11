@@ -1,4 +1,5 @@
 <map id="inheritance4e4dadefbf" name="inheritance4e4dadefbf">
 <area shape="rect" id="node1" title="An abstract class representing a :class:`Dataset`." alt="" coords="125,5,199,31"/>
 <area shape="rect" id="node3" href="#torchfilter.data.SubsequenceDataset" target="_top" title="A data preprocessor for producing training subsequences from" alt="" coords="247,5,405,31"/>
+<area shape="rect" id="node2" title="Abstract base class for generic types." alt="" coords="5,5,77,31"/>
 </map>

@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
 
   
@@ -30,10 +32,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -204,8 +206,8 @@
 </tbody>
 </table>
 <dl class="py class">
-<dt id="torchfilter.filters.ExtendedInformationFilter">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters.</code><code class="sig-name descname">ExtendedInformationFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_extended_information_filter/#ExtendedInformationFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters.ExtendedInformationFilter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.ExtendedInformationFilter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.filters.</span></span><span class="sig-name descname"><span class="pre">ExtendedInformationFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamics_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DynamicsModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measurement_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">KalmanFilterMeasurementModel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_extended_information_filter/#ExtendedInformationFilter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.filters.ExtendedInformationFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/#torchfilter.base.KalmanFilterBase" title="torchfilter.base.KalmanFilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.base.KalmanFilterBase</span></code></a></p>
 <div class="graphviz"><img src="../../../_images/inheritance-1d1bbce5869e3b8737b2e2392a641a7ac2b26023.png" alt="Inheritance diagram of torchfilter.filters.ExtendedInformationFilter" usemap="#inheritance37921823bb" class="inheritance graphviz" /></div>
 <map id="inheritance37921823bb" name="inheritance37921823bb">
@@ -217,8 +219,8 @@ internally parameterizes uncertainties with the inverse covariance matrix.</p>
 <p>For building estimators with more complex observation spaces (eg images), see
 <code class="docutils literal notranslate"><span class="pre">VirtualSensorExtendedInformationFilter</span></code>.</p>
 <dl class="py attribute">
-<dt id="torchfilter.filters.ExtendedInformationFilter.information_vector">
-<code class="sig-name descname">information_vector</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#torchfilter.filters.ExtendedInformationFilter.information_vector" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.ExtendedInformationFilter.information_vector">
+<span class="sig-name descname"><span class="pre">information_vector</span></span><em class="property"> <span class="pre">:torch.Tensor</span></em><a class="headerlink" href="#torchfilter.filters.ExtendedInformationFilter.information_vector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information vector of our posterior; shape should be
 <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>.</p>
 <dl class="field-list simple">
@@ -229,8 +231,8 @@ internally parameterizes uncertainties with the inverse covariance matrix.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.filters.ExtendedInformationFilter.information_matrix">
-<code class="sig-name descname">information_matrix</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#torchfilter.filters.ExtendedInformationFilter.information_matrix" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.ExtendedInformationFilter.information_matrix">
+<span class="sig-name descname"><span class="pre">information_matrix</span></span><em class="property"> <span class="pre">:torch.Tensor</span></em><a class="headerlink" href="#torchfilter.filters.ExtendedInformationFilter.information_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information matrix of our posterior; shape should be
 <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim)</span></code>.</p>
 <dl class="field-list simple">
@@ -241,16 +243,16 @@ internally parameterizes uncertainties with the inverse covariance matrix.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.filters.ExtendedInformationFilter.belief_covariance">
-<em class="property">property </em><code class="sig-name descname">belief_covariance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; types.CovarianceTorch<a class="headerlink" href="#torchfilter.filters.ExtendedInformationFilter.belief_covariance" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.ExtendedInformationFilter.belief_covariance">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">belief_covariance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">types.CovarianceTorch</span><a class="headerlink" href="#torchfilter.filters.ExtendedInformationFilter.belief_covariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Posterior covariance. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim)</span></code>.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="torchfilter.filters.ExtendedKalmanFilter">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters.</code><code class="sig-name descname">ExtendedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">unused_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_extended_kalman_filter/#ExtendedKalmanFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters.ExtendedKalmanFilter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.ExtendedKalmanFilter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.filters.</span></span><span class="sig-name descname"><span class="pre">ExtendedKalmanFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamics_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DynamicsModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measurement_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">KalmanFilterMeasurementModel</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">unused_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_extended_kalman_filter/#ExtendedKalmanFilter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.filters.ExtendedKalmanFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/#torchfilter.base.KalmanFilterBase" title="torchfilter.base.KalmanFilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.base.KalmanFilterBase</span></code></a></p>
 <div class="graphviz"><img src="../../../_images/inheritance-40248c9b597ccc9ba675ab006e7f76faaf33c339.png" alt="Inheritance diagram of torchfilter.filters.ExtendedKalmanFilter" usemap="#inheritance6cb918c70a" class="inheritance graphviz" /></div>
 <map id="inheritance6cb918c70a" name="inheritance6cb918c70a">
@@ -263,8 +265,8 @@ internally parameterizes uncertainties with the inverse covariance matrix.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="torchfilter.filters.ParticleFilter">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters.</code><code class="sig-name descname">ParticleFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">ParticleFilterMeasurementModel</span></em>, <em class="sig-param"><span class="n">num_particles</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">100</span></em>, <em class="sig-param"><span class="n">resample</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>bool<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">soft_resample_alpha</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">estimation_method</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'weighted_average'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_particle_filter/#ParticleFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters.ParticleFilter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.ParticleFilter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.filters.</span></span><span class="sig-name descname"><span class="pre">ParticleFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamics_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DynamicsModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measurement_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">ParticleFilterMeasurementModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_particles</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resample</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">soft_resample_alpha</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimation_method</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'weighted_average'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_particle_filter/#ParticleFilter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.filters.ParticleFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/#torchfilter.base.Filter" title="torchfilter.base.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.base.Filter</span></code></a></p>
 <div class="graphviz"><img src="../../../_images/inheritance-8c68d4a4105c5965fb29e608f8142f7cc63ffbb7.png" alt="Inheritance diagram of torchfilter.filters.ParticleFilter" usemap="#inheritancee395f7502a" class="inheritance graphviz" /></div>
 <map id="inheritancee395f7502a" name="inheritancee395f7502a">
@@ -272,8 +274,8 @@ internally parameterizes uncertainties with the inverse covariance matrix.</p>
 <area shape="rect" id="node4" href="#torchfilter.filters.ParticleFilter" target="_top" title="Generic differentiable particle filter." alt="" coords="245,31,348,56"/>
 </map><p>Generic differentiable particle filter.</p>
 <dl class="py attribute">
-<dt id="torchfilter.filters.ParticleFilter.dynamics_model">
-<code class="sig-name descname">dynamics_model</code><a class="headerlink" href="#torchfilter.filters.ParticleFilter.dynamics_model" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.ParticleFilter.dynamics_model">
+<span class="sig-name descname"><span class="pre">dynamics_model</span></span><a class="headerlink" href="#torchfilter.filters.ParticleFilter.dynamics_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -283,8 +285,8 @@ internally parameterizes uncertainties with the inverse covariance matrix.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.filters.ParticleFilter.measurement_model">
-<code class="sig-name descname">measurement_model</code><a class="headerlink" href="#torchfilter.filters.ParticleFilter.measurement_model" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.ParticleFilter.measurement_model">
+<span class="sig-name descname"><span class="pre">measurement_model</span></span><a class="headerlink" href="#torchfilter.filters.ParticleFilter.measurement_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Observation model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -294,8 +296,8 @@ internally parameterizes uncertainties with the inverse covariance matrix.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.filters.ParticleFilter.num_particles">
-<code class="sig-name descname">num_particles</code><a class="headerlink" href="#torchfilter.filters.ParticleFilter.num_particles" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.ParticleFilter.num_particles">
+<span class="sig-name descname"><span class="pre">num_particles</span></span><a class="headerlink" href="#torchfilter.filters.ParticleFilter.num_particles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of particles to represent our belief distribution.
 Defaults to 100.</p>
 <dl class="field-list simple">
@@ -306,8 +308,8 @@ Defaults to 100.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.filters.ParticleFilter.resample">
-<code class="sig-name descname">resample</code><a class="headerlink" href="#torchfilter.filters.ParticleFilter.resample" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.ParticleFilter.resample">
+<span class="sig-name descname"><span class="pre">resample</span></span><a class="headerlink" href="#torchfilter.filters.ParticleFilter.resample" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True, we resample particles &amp; normalize weights at each
 timestep. If unset (None), we automatically turn resampling on in eval mode
 and off in train mode.</p>
@@ -319,8 +321,8 @@ and off in train mode.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.filters.ParticleFilter.soft_resample_alpha">
-<code class="sig-name descname">soft_resample_alpha</code><a class="headerlink" href="#torchfilter.filters.ParticleFilter.soft_resample_alpha" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.ParticleFilter.soft_resample_alpha">
+<span class="sig-name descname"><span class="pre">soft_resample_alpha</span></span><a class="headerlink" href="#torchfilter.filters.ParticleFilter.soft_resample_alpha" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tunable constant for differentiable resampling, as described
 by Karkus et al. in “Particle Filter Networks with Application to Visual
 Localization”: <a class="reference external" href="https://arxiv.org/abs/1805.08975">https://arxiv.org/abs/1805.08975</a>
@@ -333,8 +335,8 @@ Defaults to 1.0 (disabled).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.filters.ParticleFilter.estimation_method">
-<code class="sig-name descname">estimation_method</code><a class="headerlink" href="#torchfilter.filters.ParticleFilter.estimation_method" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.ParticleFilter.estimation_method">
+<span class="sig-name descname"><span class="pre">estimation_method</span></span><a class="headerlink" href="#torchfilter.filters.ParticleFilter.estimation_method" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method of producing state estimates. Options include:</p>
 <ul class="simple">
 <li><p>‘weighted_average’: average of particles weighted by their weights.</p></li>
@@ -348,8 +350,8 @@ Defaults to 1.0 (disabled).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.filters.ParticleFilter.particle_states">
-<code class="sig-name descname">particle_states</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#torchfilter.filters.ParticleFilter.particle_states" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.ParticleFilter.particle_states">
+<span class="sig-name descname"><span class="pre">particle_states</span></span><em class="property"> <span class="pre">:torch.Tensor</span></em><a class="headerlink" href="#torchfilter.filters.ParticleFilter.particle_states" title="Permalink to this definition">¶</a></dt>
 <dd><p>Discrete particles representing our current belief
 distribution. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">M,</span> <span class="pre">state_dim)</span></code>.</p>
 <dl class="field-list simple">
@@ -360,8 +362,8 @@ distribution. Shape should be <code class="docutils literal notranslate"><span c
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.filters.ParticleFilter.particle_log_weights">
-<code class="sig-name descname">particle_log_weights</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#torchfilter.filters.ParticleFilter.particle_log_weights" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.ParticleFilter.particle_log_weights">
+<span class="sig-name descname"><span class="pre">particle_log_weights</span></span><em class="property"> <span class="pre">:torch.Tensor</span></em><a class="headerlink" href="#torchfilter.filters.ParticleFilter.particle_log_weights" title="Permalink to this definition">¶</a></dt>
 <dd><p>Weights corresponding to each particle, stored as
 log-likelihoods. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">M)</span></code>.</p>
 <dl class="field-list simple">
@@ -372,8 +374,8 @@ log-likelihoods. Shape should be <code class="docutils literal notranslate"><spa
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.filters.ParticleFilter.initialize_beliefs">
-<code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mean</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">types.CovarianceTorch</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_particle_filter/#ParticleFilter.initialize_beliefs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters.ParticleFilter.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.ParticleFilter.initialize_beliefs">
+<span class="sig-name descname"><span class="pre">initialize_beliefs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.StatesTorch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariance</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.CovarianceTorch</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_particle_filter/#ParticleFilter.initialize_beliefs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.filters.ParticleFilter.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Populates initial particles, which will be normally distributed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -388,8 +390,8 @@ log-likelihoods. Shape should be <code class="docutils literal notranslate"><spa
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.filters.ParticleFilter.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="reference internal" href="../../../_modules/torchfilter/filters/_particle_filter/#ParticleFilter.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters.ParticleFilter.forward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.ParticleFilter.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observations</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.ObservationsTorch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controls</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.ControlsTorch</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">types.StatesTorch</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_particle_filter/#ParticleFilter.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.filters.ParticleFilter.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Particle filter forward pass, single timestep.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -410,8 +412,8 @@ be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span
 </dd></dl>
 
 <dl class="py class">
-<dt id="torchfilter.filters.SquareRootUnscentedKalmanFilter">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters.</code><code class="sig-name descname">SquareRootUnscentedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="n">sigma_point_strategy</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>utils.SigmaPointStrategy<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_square_root_unscented_kalman_filter/#SquareRootUnscentedKalmanFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters.SquareRootUnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.SquareRootUnscentedKalmanFilter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.filters.</span></span><span class="sig-name descname"><span class="pre">SquareRootUnscentedKalmanFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamics_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DynamicsModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measurement_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">KalmanFilterMeasurementModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_point_strategy</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">utils.SigmaPointStrategy</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_square_root_unscented_kalman_filter/#SquareRootUnscentedKalmanFilter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.filters.SquareRootUnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/#torchfilter.base.KalmanFilterBase" title="torchfilter.base.KalmanFilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.base.KalmanFilterBase</span></code></a></p>
 <div class="graphviz"><img src="../../../_images/inheritance-571dafb62aade696b317cd2060d1a6d6726782c1.png" alt="Inheritance diagram of torchfilter.filters.SquareRootUnscentedKalmanFilter" usemap="#inheritance95a83c40cd" class="inheritance graphviz" /></div>
 <map id="inheritance95a83c40cd" name="inheritance95a83c40cd">
@@ -423,16 +425,16 @@ be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span
 <p>[1] The square-root unscented Kalman filter for state and parameter-estimation.
 <a class="reference external" href="https://ieeexplore.ieee.org/document/940586/">https://ieeexplore.ieee.org/document/940586/</a></p>
 <dl class="py method">
-<dt id="torchfilter.filters.SquareRootUnscentedKalmanFilter.belief_covariance">
-<em class="property">property </em><code class="sig-name descname">belief_covariance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; types.CovarianceTorch<a class="headerlink" href="#torchfilter.filters.SquareRootUnscentedKalmanFilter.belief_covariance" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.SquareRootUnscentedKalmanFilter.belief_covariance">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">belief_covariance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">types.CovarianceTorch</span><a class="headerlink" href="#torchfilter.filters.SquareRootUnscentedKalmanFilter.belief_covariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Posterior covariance. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim)</span></code>.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="torchfilter.filters.UnscentedKalmanFilter">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters.</code><code class="sig-name descname">UnscentedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="n">sigma_point_strategy</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>utils.SigmaPointStrategy<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_unscented_kalman_filter/#UnscentedKalmanFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters.UnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.UnscentedKalmanFilter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.filters.</span></span><span class="sig-name descname"><span class="pre">UnscentedKalmanFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamics_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DynamicsModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measurement_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">KalmanFilterMeasurementModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_point_strategy</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">utils.SigmaPointStrategy</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_unscented_kalman_filter/#UnscentedKalmanFilter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.filters.UnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/#torchfilter.base.KalmanFilterBase" title="torchfilter.base.KalmanFilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.base.KalmanFilterBase</span></code></a></p>
 <div class="graphviz"><img src="../../../_images/inheritance-e39735591c0bb1085dc44728fd32975f545e1981.png" alt="Inheritance diagram of torchfilter.filters.UnscentedKalmanFilter" usemap="#inheritance55cdced6da" class="inheritance graphviz" /></div>
 <map id="inheritance55cdced6da" name="inheritance55cdced6da">
@@ -449,8 +451,8 @@ models, we use the weighting approach described in [2].</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="torchfilter.filters.VirtualSensorExtendedInformationFilter">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters.</code><code class="sig-name descname">VirtualSensorExtendedInformationFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">virtual_sensor_model</span><span class="p">:</span> <span class="n">VirtualSensorModel</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_virtual_sensor_filters/#VirtualSensorExtendedInformationFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters.VirtualSensorExtendedInformationFilter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.VirtualSensorExtendedInformationFilter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.filters.</span></span><span class="sig-name descname"><span class="pre">VirtualSensorExtendedInformationFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamics_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DynamicsModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">virtual_sensor_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">VirtualSensorModel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_virtual_sensor_filters/#VirtualSensorExtendedInformationFilter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.filters.VirtualSensorExtendedInformationFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#module-torchfilter.filters" title="torchfilter.filters"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.filters</span></code></a>, <a class="reference internal" href="#torchfilter.filters.ExtendedInformationFilter" title="torchfilter.filters.ExtendedInformationFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.filters.ExtendedInformationFilter</span></code></a></p>
 <div class="graphviz"><img src="../../../_images/inheritance-8d897dd19d77f7fc341f7f3c6c51162b40d2a94d.png" alt="Inheritance diagram of torchfilter.filters.VirtualSensorExtendedInformationFilter" usemap="#inheritance0d7f279175" class="inheritance graphviz" /></div>
 <map id="inheritance0d7f279175" name="inheritance0d7f279175">
@@ -463,8 +465,8 @@ models, we use the weighting approach described in [2].</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="torchfilter.filters.VirtualSensorExtendedKalmanFilter">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters.</code><code class="sig-name descname">VirtualSensorExtendedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">virtual_sensor_model</span><span class="p">:</span> <span class="n">VirtualSensorModel</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_virtual_sensor_filters/#VirtualSensorExtendedKalmanFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters.VirtualSensorExtendedKalmanFilter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.VirtualSensorExtendedKalmanFilter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.filters.</span></span><span class="sig-name descname"><span class="pre">VirtualSensorExtendedKalmanFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamics_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DynamicsModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">virtual_sensor_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">VirtualSensorModel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_virtual_sensor_filters/#VirtualSensorExtendedKalmanFilter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.filters.VirtualSensorExtendedKalmanFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#module-torchfilter.filters" title="torchfilter.filters"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.filters</span></code></a>, <a class="reference internal" href="#torchfilter.filters.ExtendedKalmanFilter" title="torchfilter.filters.ExtendedKalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.filters.ExtendedKalmanFilter</span></code></a></p>
 <div class="graphviz"><img src="../../../_images/inheritance-c875291b955f98b189a0583a9e98dd3dd325dfdc.png" alt="Inheritance diagram of torchfilter.filters.VirtualSensorExtendedKalmanFilter" usemap="#inheritancefeb04029c3" class="inheritance graphviz" /></div>
 <map id="inheritancefeb04029c3" name="inheritancefeb04029c3">
@@ -477,8 +479,8 @@ models, we use the weighting approach described in [2].</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="torchfilter.filters.VirtualSensorSquareRootUnscentedKalmanFilter">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters.</code><code class="sig-name descname">VirtualSensorSquareRootUnscentedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">virtual_sensor_model</span><span class="p">:</span> <span class="n">VirtualSensorModel</span></em>, <em class="sig-param"><span class="n">sigma_point_strategy</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>utils.SigmaPointStrategy<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_virtual_sensor_filters/#VirtualSensorSquareRootUnscentedKalmanFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters.VirtualSensorSquareRootUnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.VirtualSensorSquareRootUnscentedKalmanFilter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.filters.</span></span><span class="sig-name descname"><span class="pre">VirtualSensorSquareRootUnscentedKalmanFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamics_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DynamicsModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">virtual_sensor_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">VirtualSensorModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_point_strategy</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">utils.SigmaPointStrategy</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_virtual_sensor_filters/#VirtualSensorSquareRootUnscentedKalmanFilter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.filters.VirtualSensorSquareRootUnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#module-torchfilter.filters" title="torchfilter.filters"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.filters</span></code></a>, <a class="reference internal" href="#torchfilter.filters.SquareRootUnscentedKalmanFilter" title="torchfilter.filters.SquareRootUnscentedKalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.filters.SquareRootUnscentedKalmanFilter</span></code></a></p>
 <div class="graphviz"><img src="../../../_images/inheritance-1db683581086be308099d9a308fd4bf7c756ff1b.png" alt="Inheritance diagram of torchfilter.filters.VirtualSensorSquareRootUnscentedKalmanFilter" usemap="#inheritancec8a8a944a6" class="inheritance graphviz" /></div>
 <map id="inheritancec8a8a944a6" name="inheritancec8a8a944a6">
@@ -491,8 +493,8 @@ models, we use the weighting approach described in [2].</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="torchfilter.filters.VirtualSensorUnscentedKalmanFilter">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters.</code><code class="sig-name descname">VirtualSensorUnscentedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">virtual_sensor_model</span><span class="p">:</span> <span class="n">VirtualSensorModel</span></em>, <em class="sig-param"><span class="n">sigma_point_strategy</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>utils.SigmaPointStrategy<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_virtual_sensor_filters/#VirtualSensorUnscentedKalmanFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters.VirtualSensorUnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters.VirtualSensorUnscentedKalmanFilter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.filters.</span></span><span class="sig-name descname"><span class="pre">VirtualSensorUnscentedKalmanFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamics_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DynamicsModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">virtual_sensor_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">VirtualSensorModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_point_strategy</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">utils.SigmaPointStrategy</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/torchfilter/filters/_virtual_sensor_filters/#VirtualSensorUnscentedKalmanFilter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.filters.VirtualSensorUnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#module-torchfilter.filters" title="torchfilter.filters"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.filters</span></code></a>, <a class="reference internal" href="#torchfilter.filters.UnscentedKalmanFilter" title="torchfilter.filters.UnscentedKalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.filters.UnscentedKalmanFilter</span></code></a></p>
 <div class="graphviz"><img src="../../../_images/inheritance-0ae664d0554515811351e35be3e41d7630643bb0.png" alt="Inheritance diagram of torchfilter.filters.VirtualSensorUnscentedKalmanFilter" usemap="#inheritance245cad4ee0" class="inheritance graphviz" /></div>
 <map id="inheritance245cad4ee0" name="inheritance245cad4ee0">

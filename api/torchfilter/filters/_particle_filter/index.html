@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
 
   
@@ -30,10 +32,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
@@ -178,8 +180,8 @@
 </tbody>
 </table>
 <dl class="py class">
-<dt id="torchfilter.filters._particle_filter.ParticleFilter">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters._particle_filter.</code><code class="sig-name descname">ParticleFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">ParticleFilterMeasurementModel</span></em>, <em class="sig-param"><span class="n">num_particles</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">100</span></em>, <em class="sig-param"><span class="n">resample</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>bool<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">soft_resample_alpha</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">estimation_method</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'weighted_average'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/filters/_particle_filter/#ParticleFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters._particle_filter.ParticleFilter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.filters._particle_filter.</span></span><span class="sig-name descname"><span class="pre">ParticleFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamics_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DynamicsModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measurement_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">ParticleFilterMeasurementModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_particles</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resample</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">soft_resample_alpha</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimation_method</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'weighted_average'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/filters/_particle_filter/#ParticleFilter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../base/#torchfilter.base.Filter" title="torchfilter.base.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.base.Filter</span></code></a></p>
 <div class="graphviz"><img src="../../../../_images/inheritance-f789771d30805f7ccd539cfb1e878a3a14b773ce.png" alt="Inheritance diagram of torchfilter.filters._particle_filter.ParticleFilter" usemap="#inheritancecdd5d52834" class="inheritance graphviz" /></div>
 <map id="inheritancecdd5d52834" name="inheritancecdd5d52834">
@@ -187,8 +189,8 @@
 <area shape="rect" id="node4" href="../#torchfilter.filters.ParticleFilter" target="_top" title="Generic differentiable particle filter." alt="" coords="245,31,348,56"/>
 </map><p>Generic differentiable particle filter.</p>
 <dl class="py attribute">
-<dt id="torchfilter.filters._particle_filter.ParticleFilter.dynamics_model">
-<code class="sig-name descname">dynamics_model</code><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.dynamics_model" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters._particle_filter.ParticleFilter.dynamics_model">
+<span class="sig-name descname"><span class="pre">dynamics_model</span></span><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.dynamics_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -198,8 +200,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.filters._particle_filter.ParticleFilter.measurement_model">
-<code class="sig-name descname">measurement_model</code><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.measurement_model" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters._particle_filter.ParticleFilter.measurement_model">
+<span class="sig-name descname"><span class="pre">measurement_model</span></span><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.measurement_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Observation model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -209,8 +211,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.filters._particle_filter.ParticleFilter.num_particles">
-<code class="sig-name descname">num_particles</code><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.num_particles" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters._particle_filter.ParticleFilter.num_particles">
+<span class="sig-name descname"><span class="pre">num_particles</span></span><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.num_particles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of particles to represent our belief distribution.
 Defaults to 100.</p>
 <dl class="field-list simple">
@@ -221,8 +223,8 @@ Defaults to 100.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.filters._particle_filter.ParticleFilter.resample">
-<code class="sig-name descname">resample</code><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.resample" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters._particle_filter.ParticleFilter.resample">
+<span class="sig-name descname"><span class="pre">resample</span></span><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.resample" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True, we resample particles &amp; normalize weights at each
 timestep. If unset (None), we automatically turn resampling on in eval mode
 and off in train mode.</p>
@@ -234,8 +236,8 @@ and off in train mode.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.filters._particle_filter.ParticleFilter.soft_resample_alpha">
-<code class="sig-name descname">soft_resample_alpha</code><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.soft_resample_alpha" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters._particle_filter.ParticleFilter.soft_resample_alpha">
+<span class="sig-name descname"><span class="pre">soft_resample_alpha</span></span><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.soft_resample_alpha" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tunable constant for differentiable resampling, as described
 by Karkus et al. in “Particle Filter Networks with Application to Visual
 Localization”: <a class="reference external" href="https://arxiv.org/abs/1805.08975">https://arxiv.org/abs/1805.08975</a>
@@ -248,8 +250,8 @@ Defaults to 1.0 (disabled).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.filters._particle_filter.ParticleFilter.estimation_method">
-<code class="sig-name descname">estimation_method</code><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.estimation_method" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters._particle_filter.ParticleFilter.estimation_method">
+<span class="sig-name descname"><span class="pre">estimation_method</span></span><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.estimation_method" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method of producing state estimates. Options include:</p>
 <ul class="simple">
 <li><p>‘weighted_average’: average of particles weighted by their weights.</p></li>
@@ -263,8 +265,8 @@ Defaults to 1.0 (disabled).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.filters._particle_filter.ParticleFilter.particle_states">
-<code class="sig-name descname">particle_states</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.particle_states" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters._particle_filter.ParticleFilter.particle_states">
+<span class="sig-name descname"><span class="pre">particle_states</span></span><em class="property"> <span class="pre">:torch.Tensor</span></em><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.particle_states" title="Permalink to this definition">¶</a></dt>
 <dd><p>Discrete particles representing our current belief
 distribution. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">M,</span> <span class="pre">state_dim)</span></code>.</p>
 <dl class="field-list simple">
@@ -275,8 +277,8 @@ distribution. Shape should be <code class="docutils literal notranslate"><span c
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.filters._particle_filter.ParticleFilter.particle_log_weights">
-<code class="sig-name descname">particle_log_weights</code><em class="property"> :torch.Tensor</em><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.particle_log_weights" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters._particle_filter.ParticleFilter.particle_log_weights">
+<span class="sig-name descname"><span class="pre">particle_log_weights</span></span><em class="property"> <span class="pre">:torch.Tensor</span></em><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.particle_log_weights" title="Permalink to this definition">¶</a></dt>
 <dd><p>Weights corresponding to each particle, stored as
 log-likelihoods. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">M)</span></code>.</p>
 <dl class="field-list simple">
@@ -287,8 +289,8 @@ log-likelihoods. Shape should be <code class="docutils literal notranslate"><spa
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.filters._particle_filter.ParticleFilter.initialize_beliefs">
-<code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mean</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">types.CovarianceTorch</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/filters/_particle_filter/#ParticleFilter.initialize_beliefs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters._particle_filter.ParticleFilter.initialize_beliefs">
+<span class="sig-name descname"><span class="pre">initialize_beliefs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.StatesTorch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariance</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.CovarianceTorch</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="../../../../_modules/torchfilter/filters/_particle_filter/#ParticleFilter.initialize_beliefs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Populates initial particles, which will be normally distributed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -303,8 +305,8 @@ log-likelihoods. Shape should be <code class="docutils literal notranslate"><spa
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.filters._particle_filter.ParticleFilter.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="reference internal" href="../../../../_modules/torchfilter/filters/_particle_filter/#ParticleFilter.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.forward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters._particle_filter.ParticleFilter.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observations</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.ObservationsTorch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controls</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.ControlsTorch</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">types.StatesTorch</span><a class="reference internal" href="../../../../_modules/torchfilter/filters/_particle_filter/#ParticleFilter.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.filters._particle_filter.ParticleFilter.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Particle filter forward pass, single timestep.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

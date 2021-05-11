@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
 
   
@@ -30,10 +32,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
@@ -178,8 +180,8 @@
 </tbody>
 </table>
 <dl class="py class">
-<dt id="torchfilter.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.filters._square_root_unscented_kalman_filter.</code><code class="sig-name descname">SquareRootUnscentedKalmanFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="n">sigma_point_strategy</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>utils.SigmaPointStrategy<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/filters/_square_root_unscented_kalman_filter/#SquareRootUnscentedKalmanFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.filters._square_root_unscented_kalman_filter.</span></span><span class="sig-name descname"><span class="pre">SquareRootUnscentedKalmanFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamics_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DynamicsModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measurement_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">KalmanFilterMeasurementModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_point_strategy</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">utils.SigmaPointStrategy</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/filters/_square_root_unscented_kalman_filter/#SquareRootUnscentedKalmanFilter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../base/#torchfilter.base.KalmanFilterBase" title="torchfilter.base.KalmanFilterBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.base.KalmanFilterBase</span></code></a></p>
 <div class="graphviz"><img src="../../../../_images/inheritance-a3e8da4912e4a8d607201d143271e87c222ca655.png" alt="Inheritance diagram of torchfilter.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter" usemap="#inheritance043a2712a5" class="inheritance graphviz" /></div>
 <map id="inheritance043a2712a5" name="inheritance043a2712a5">
@@ -191,8 +193,8 @@
 <p>[1] The square-root unscented Kalman filter for state and parameter-estimation.
 <a class="reference external" href="https://ieeexplore.ieee.org/document/940586/">https://ieeexplore.ieee.org/document/940586/</a></p>
 <dl class="py method">
-<dt id="torchfilter.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter.belief_covariance">
-<em class="property">property </em><code class="sig-name descname">belief_covariance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; types.CovarianceTorch<a class="headerlink" href="#torchfilter.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter.belief_covariance" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter.belief_covariance">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">belief_covariance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">types.CovarianceTorch</span><a class="headerlink" href="#torchfilter.filters._square_root_unscented_kalman_filter.SquareRootUnscentedKalmanFilter.belief_covariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Posterior covariance. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim)</span></code>.</p>
 </dd></dl>
 

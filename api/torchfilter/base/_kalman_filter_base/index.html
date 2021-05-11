@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
 
   
@@ -30,10 +32,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
@@ -178,8 +180,8 @@
 </tbody>
 </table>
 <dl class="py class">
-<dt id="torchfilter.base._kalman_filter_base.KalmanFilterBase">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.base._kalman_filter_base.</code><code class="sig-name descname">KalmanFilterBase</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">dynamics_model</span><span class="p">:</span> <span class="n">DynamicsModel</span></em>, <em class="sig-param"><span class="n">measurement_model</span><span class="p">:</span> <span class="n">KalmanFilterMeasurementModel</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">unused_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/base/_kalman_filter_base/#KalmanFilterBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.base._kalman_filter_base.KalmanFilterBase" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.base._kalman_filter_base.KalmanFilterBase">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.base._kalman_filter_base.</span></span><span class="sig-name descname"><span class="pre">KalmanFilterBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamics_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DynamicsModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measurement_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">KalmanFilterMeasurementModel</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">unused_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/base/_kalman_filter_base/#KalmanFilterBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.base._kalman_filter_base.KalmanFilterBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../#torchfilter.base.Filter" title="torchfilter.base.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchfilter.base.Filter</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <div class="graphviz"><img src="../../../../_images/inheritance-2166f2c172801b863c8fc6844d0a3aac19a9f88f.png" alt="Inheritance diagram of torchfilter.base._kalman_filter_base.KalmanFilterBase" usemap="#inheritance964064ca7a" class="inheritance graphviz" /></div>
 <map id="inheritance964064ca7a" name="inheritance964064ca7a">
@@ -189,8 +191,8 @@
 and covariance.</p>
 <p>Subclasses should override <code class="docutils literal notranslate"><span class="pre">_predict_step()</span></code> and <code class="docutils literal notranslate"><span class="pre">_update_step()</span></code>.</p>
 <dl class="py attribute">
-<dt id="torchfilter.base._kalman_filter_base.KalmanFilterBase.dynamics_model">
-<code class="sig-name descname">dynamics_model</code><a class="headerlink" href="#torchfilter.base._kalman_filter_base.KalmanFilterBase.dynamics_model" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.base._kalman_filter_base.KalmanFilterBase.dynamics_model">
+<span class="sig-name descname"><span class="pre">dynamics_model</span></span><a class="headerlink" href="#torchfilter.base._kalman_filter_base.KalmanFilterBase.dynamics_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -200,8 +202,8 @@ and covariance.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="torchfilter.base._kalman_filter_base.KalmanFilterBase.measurement_model">
-<code class="sig-name descname">measurement_model</code><a class="headerlink" href="#torchfilter.base._kalman_filter_base.KalmanFilterBase.measurement_model" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.base._kalman_filter_base.KalmanFilterBase.measurement_model">
+<span class="sig-name descname"><span class="pre">measurement_model</span></span><a class="headerlink" href="#torchfilter.base._kalman_filter_base.KalmanFilterBase.measurement_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Measurement model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -211,8 +213,8 @@ and covariance.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.base._kalman_filter_base.KalmanFilterBase.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">observations</span><span class="p">:</span> <span class="n">types.ObservationsTorch</span></em>, <em class="sig-param"><span class="n">controls</span><span class="p">:</span> <span class="n">types.ControlsTorch</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="reference internal" href="../../../../_modules/torchfilter/base/_kalman_filter_base/#KalmanFilterBase.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.base._kalman_filter_base.KalmanFilterBase.forward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.base._kalman_filter_base.KalmanFilterBase.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observations</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.ObservationsTorch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controls</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.ControlsTorch</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">types.StatesTorch</span><a class="reference internal" href="../../../../_modules/torchfilter/base/_kalman_filter_base/#KalmanFilterBase.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.base._kalman_filter_base.KalmanFilterBase.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Kalman filter forward pass, single timestep.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -231,8 +233,8 @@ be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.base._kalman_filter_base.KalmanFilterBase.initialize_beliefs">
-<code class="sig-name descname">initialize_beliefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mean</span><span class="p">:</span> <span class="n">types.StatesTorch</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">types.CovarianceTorch</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../../../../_modules/torchfilter/base/_kalman_filter_base/#KalmanFilterBase.initialize_beliefs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.base._kalman_filter_base.KalmanFilterBase.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.base._kalman_filter_base.KalmanFilterBase.initialize_beliefs">
+<span class="sig-name descname"><span class="pre">initialize_beliefs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.StatesTorch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariance</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">types.CovarianceTorch</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="../../../../_modules/torchfilter/base/_kalman_filter_base/#KalmanFilterBase.initialize_beliefs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.base._kalman_filter_base.KalmanFilterBase.initialize_beliefs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set filter belief to a given mean and covariance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -246,14 +248,14 @@ be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.base._kalman_filter_base.KalmanFilterBase.belief_mean">
-<em class="property">property </em><code class="sig-name descname">belief_mean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; types.StatesTorch<a class="headerlink" href="#torchfilter.base._kalman_filter_base.KalmanFilterBase.belief_mean" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.base._kalman_filter_base.KalmanFilterBase.belief_mean">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">belief_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">types.StatesTorch</span><a class="headerlink" href="#torchfilter.base._kalman_filter_base.KalmanFilterBase.belief_mean" title="Permalink to this definition">¶</a></dt>
 <dd><p>Posterior mean. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim)</span></code>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.base._kalman_filter_base.KalmanFilterBase.belief_covariance">
-<em class="property">property </em><code class="sig-name descname">belief_covariance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; types.CovarianceTorch<a class="headerlink" href="#torchfilter.base._kalman_filter_base.KalmanFilterBase.belief_covariance" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.base._kalman_filter_base.KalmanFilterBase.belief_covariance">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">belief_covariance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">types.CovarianceTorch</span><a class="headerlink" href="#torchfilter.base._kalman_filter_base.KalmanFilterBase.belief_covariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Posterior covariance. Shape should be <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">state_dim,</span> <span class="pre">state_dim)</span></code>.</p>
 </dd></dl>
 

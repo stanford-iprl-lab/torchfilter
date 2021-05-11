@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
 
   
@@ -30,10 +32,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
@@ -178,10 +180,10 @@
 </tbody>
 </table>
 <dl class="py class">
-<dt id="torchfilter.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset">
-<em class="property">class </em><code class="sig-prename descclassname">torchfilter.data._particle_filter_measurement_dataset.</code><code class="sig-name descname">ParticleFilterMeasurementDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trajectories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>types.TrajectoryNumpy<span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="p">:</span> <span class="n">np.ndarray</span></em>, <em class="sig-param"><span class="n">samples_per_pair</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/data/_particle_filter_measurement_dataset/#ParticleFilterMeasurementDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">torchfilter.data._particle_filter_measurement_dataset.</span></span><span class="sig-name descname"><span class="pre">ParticleFilterMeasurementDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectories</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">types.TrajectoryNumpy</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariance</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">np.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples_per_pair</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/torchfilter/data/_particle_filter_measurement_dataset/#ParticleFilterMeasurementDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
-<div class="graphviz"><img src="../../../../_images/inheritance-e6929f3697a2ae87ee9799d249bf59db1ad95949.png" alt="Inheritance diagram of torchfilter.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset" usemap="#inheritance170fe3ebfd" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../../../_images/inheritance-04f0aeafaf94d938b0efdd730a2d324c392b3204.png" alt="Inheritance diagram of torchfilter.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset" usemap="#inheritance170fe3ebfd" class="inheritance graphviz" /></div>
 <map id="inheritance170fe3ebfd" name="inheritance170fe3ebfd">
 <area shape="rect" id="node3" href="../#torchfilter.data.ParticleFilterMeasurementDataset" target="_top" title="A dataset interface for pre&#45;training particle filter measurement models." alt="" coords="247,5,489,31"/>
 </map><p>A dataset interface for pre-training particle filter measurement models.</p>
@@ -201,8 +203,8 @@ to the example, and the other half far away.</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchfilter.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__getitem__">
-<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>types.StatesNumpy<span class="p">, </span>types.ObservationsNumpy<span class="p">, </span>np.ndarray<span class="p">]</span><a class="reference internal" href="../../../../_modules/torchfilter/data/_particle_filter_measurement_dataset/#ParticleFilterMeasurementDataset.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">types.StatesNumpy</span><span class="p"><span class="pre">,</span> </span><span class="pre">types.ObservationsNumpy</span><span class="p"><span class="pre">,</span> </span><span class="pre">np.ndarray</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../../../../_modules/torchfilter/data/_particle_filter_measurement_dataset/#ParticleFilterMeasurementDataset.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__getitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a state/observation/log-likelihood sample from our dataset. Nominally, we
 want our measurement model to predict the returned log-likelihood as the PDF of
 the <code class="docutils literal notranslate"><span class="pre">p(observation</span> <span class="pre">|</span> <span class="pre">state)</span></code> distribution.</p>
@@ -217,8 +219,8 @@ the <code class="docutils literal notranslate"><span class="pre">p(observation</
 </dd></dl>
 
 <dl class="py method">
-<dt id="torchfilter.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__len__">
-<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../../../../_modules/torchfilter/data/_particle_filter_measurement_dataset/#ParticleFilterMeasurementDataset.__len__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfilter.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__len__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchfilter.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="../../../../_modules/torchfilter/data/_particle_filter_measurement_dataset/#ParticleFilterMeasurementDataset.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.data._particle_filter_measurement_dataset.ParticleFilterMeasurementDataset.__len__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Total number of samples in the dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
