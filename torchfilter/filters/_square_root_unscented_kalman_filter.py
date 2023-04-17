@@ -54,7 +54,7 @@ class SquareRootUnscentedKalmanFilter(KalmanFilterBase):
     # overrides
     @belief_covariance.setter
     def belief_covariance(self, covariance: types.CovarianceTorch):
-        self._belief_scale_tril = torch.cholesky(covariance)
+        self._belief_scale_tril = torch.linalg.cholesky(covariance)
         self._belief_covariance = covariance
 
     @overrides
@@ -167,10 +167,10 @@ class SquareRootUnscentedKalmanFilter(KalmanFilterBase):
         # Kalman gain
         # In MATLAB:
         # > K = (P_x_k_y_k / S_y_k_pred.T) / S_y_k
-        K = torch.solve(
-            torch.solve(P_xy.transpose(-1, -2), S_y_k_pred).solution,
+        K = torch.linalg.solve(
             S_y_k_pred.transpose(-1, -2),
-        ).solution.transpose(-1, -2)
+            torch.linalg.solve(S_y_k_pred, P_xy.transpose(-1, -2)),
+        ).transpose(-1, -2)
         assert K.shape == (N, state_dim, observation_dim)
 
         # Correct mean
