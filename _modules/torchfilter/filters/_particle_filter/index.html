@@ -1,92 +1,46 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>torchfilter.filters._particle_filter &mdash; torchfilter  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
-
-    
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex/" />
     <link rel="search" title="Search" href="../../../../search/" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../../../" class="icon icon-home"> torchfilter
           
-
-          
+          <a href="../../../../" class="icon icon-home">
+            torchfilter
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search/" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">API Reference</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../api/torchfilter/base/"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.base</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../api/torchfilter/data/"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.data</span></code></a></li>
@@ -96,69 +50,30 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../api/torchfilter/utils/"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.utils</span></code></a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../../">torchfilter</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../../../" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../../../">Module code</a> &raquo;</li>
-        
-      <li>torchfilter.filters._particle_filter</li>
-    
-    
+      <li><a href="../../../../" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../">Module code</a></li>
+      <li class="breadcrumb-item active">torchfilter.filters._particle_filter</li>
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for torchfilter.filters._particle_filter</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Private module; avoid importing from directly.</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -175,7 +90,7 @@
 
 
 <div class="viewcode-block" id="ParticleFilter"><a class="viewcode-back" href="../../../../api/torchfilter/filters/#torchfilter.filters._particle_filter.ParticleFilter">[docs]</a><span class="k">class</span> <span class="nc">ParticleFilter</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generic differentiable particle filter.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic differentiable particle filter.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -198,39 +113,39 @@
 
         <span class="c1"># Assign submodules</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_model</span> <span class="o">=</span> <span class="n">dynamics_model</span>
-        <span class="sd">&quot;&quot;&quot;torchfilter.base.DynamicsModel: Forward model.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;torchfilter.base.DynamicsModel: Forward model.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">measurement_model</span> <span class="o">=</span> <span class="n">measurement_model</span>
-        <span class="sd">&quot;&quot;&quot;torchfilter.base.ParticleFilterMeasurementModel: Observation model.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;torchfilter.base.ParticleFilterMeasurementModel: Observation model.&quot;&quot;&quot;</span>
 
         <span class="c1"># Settings</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_particles</span> <span class="o">=</span> <span class="n">num_particles</span>
-        <span class="sd">&quot;&quot;&quot;int: Number of particles to represent our belief distribution.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: Number of particles to represent our belief distribution.</span>
 <span class="sd">        Defaults to 100.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">resample</span> <span class="o">=</span> <span class="n">resample</span>
-        <span class="sd">&quot;&quot;&quot;bool: If True, we resample particles &amp; normalize weights at each</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;bool: If True, we resample particles &amp; normalize weights at each</span>
 <span class="sd">        timestep. If unset (None), we automatically turn resampling on in eval mode</span>
 <span class="sd">        and off in train mode.&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">soft_resample_alpha</span> <span class="o">=</span> <span class="n">soft_resample_alpha</span>
-        <span class="sd">&quot;&quot;&quot;float: Tunable constant for differentiable resampling, as described</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: Tunable constant for differentiable resampling, as described</span>
 <span class="sd">        by Karkus et al. in &quot;Particle Filter Networks with Application to Visual</span>
 <span class="sd">        Localization&quot;: https://arxiv.org/abs/1805.08975</span>
 <span class="sd">        Defaults to 1.0 (disabled).&quot;&quot;&quot;</span>
 
         <span class="k">assert</span> <span class="n">estimation_method</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;weighted_average&quot;</span><span class="p">,</span> <span class="s2">&quot;argmax&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">estimation_method</span> <span class="o">=</span> <span class="n">estimation_method</span>
-        <span class="sd">&quot;&quot;&quot;str: Method of producing state estimates. Options include:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Method of producing state estimates. Options include:</span>
 <span class="sd">        - &#39;weighted_average&#39;: average of particles weighted by their weights.</span>
 <span class="sd">        - &#39;argmax&#39;: state of highest weighted particle.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># &quot;Hidden state&quot; tensors</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span>
-        <span class="sd">&quot;&quot;&quot;torch.Tensor: Discrete particles representing our current belief</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;torch.Tensor: Discrete particles representing our current belief</span>
 <span class="sd">        distribution. Shape should be `(N, M, state_dim)`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">particle_log_weights</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span>
-        <span class="sd">&quot;&quot;&quot;torch.Tensor: Weights corresponding to each particle, stored as</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;torch.Tensor: Weights corresponding to each particle, stored as</span>
 <span class="sd">        log-likelihoods. Shape should be `(N, M)`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_initialized</span> <span class="o">=</span> <span class="kc">False</span>
@@ -239,7 +154,7 @@
     <span class="k">def</span> <span class="nf">initialize_beliefs</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">mean</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">StatesTorch</span><span class="p">,</span> <span class="n">covariance</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">CovarianceTorch</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Populates initial particles, which will be normally distributed.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Populates initial particles, which will be normally distributed.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            mean (torch.Tensor): Mean of belief. Shape should be</span>
@@ -276,7 +191,7 @@
         <span class="n">observations</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ObservationsTorch</span><span class="p">,</span>
         <span class="n">controls</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ControlsTorch</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">StatesTorch</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Particle filter forward pass, single timestep.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Particle filter forward pass, single timestep.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            observations (dict or torch.Tensor): observation inputs. should be</span>
@@ -406,7 +321,7 @@
         <span class="k">return</span> <span class="n">state_estimates</span></div>
 
     <span class="k">def</span> <span class="nf">_resample</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Resample particles.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resample particles.&quot;&quot;&quot;</span>
         <span class="c1"># Note the distinction between `M`, the current number of particles, and</span>
         <span class="c1"># `self.num_particles`, the desired number of particles</span>
         <span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">state_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_states</span><span class="o">.</span><span class="n">shape</span>
@@ -456,46 +371,30 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020.
-
-    </p>
+    <p>&#169; Copyright 2020.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

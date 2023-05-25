@@ -1,92 +1,46 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>torchfilter.filters._unscented_kalman_filter &mdash; torchfilter  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
-
-    
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex/" />
     <link rel="search" title="Search" href="../../../../search/" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../../../" class="icon icon-home"> torchfilter
           
-
-          
+          <a href="../../../../" class="icon icon-home">
+            torchfilter
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search/" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">API Reference</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../api/torchfilter/base/"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.base</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../api/torchfilter/data/"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.data</span></code></a></li>
@@ -96,69 +50,30 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../api/torchfilter/utils/"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.utils</span></code></a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../../">torchfilter</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../../../" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../../../">Module code</a> &raquo;</li>
-        
-      <li>torchfilter.filters._unscented_kalman_filter</li>
-    
-    
+      <li><a href="../../../../" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../">Module code</a></li>
+      <li class="breadcrumb-item active">torchfilter.filters._unscented_kalman_filter</li>
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for torchfilter.filters._unscented_kalman_filter</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Private module; avoid importing from directly.</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -174,7 +89,7 @@
 
 
 <div class="viewcode-block" id="UnscentedKalmanFilter"><a class="viewcode-back" href="../../../../api/torchfilter/filters/#torchfilter.filters._unscented_kalman_filter.UnscentedKalmanFilter">[docs]</a><span class="k">class</span> <span class="nc">UnscentedKalmanFilter</span><span class="p">(</span><span class="n">KalmanFilterBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Standard UKF.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Standard UKF.</span>
 
 <span class="sd">    From Algorithm 2.1 of Merwe et al. [1]. For working with heteroscedastic noise</span>
 <span class="sd">    models, we use the weighting approach described in [2].</span>
@@ -211,7 +126,7 @@
 
     <span class="nd">@overrides</span>
     <span class="k">def</span> <span class="nf">_predict_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">controls</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ControlsTorch</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Predict step.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Predict step.&quot;&quot;&quot;</span>
         <span class="c1"># See Merwe paper [1] for notation</span>
         <span class="n">x_k_minus_1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_belief_mean</span>
         <span class="n">P_k_minus_1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_belief_covariance</span>
@@ -262,7 +177,7 @@
 
     <span class="nd">@overrides</span>
     <span class="k">def</span> <span class="nf">_update_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">observations</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ObservationsTorch</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Update step.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update step.&quot;&quot;&quot;</span>
         <span class="c1"># Extract inputs</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
             <span class="n">observations</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">ObservationsNoDictTorch</span>
@@ -327,7 +242,7 @@
     <span class="k">def</span> <span class="nf">_weighted_covariance</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">sigma_trils</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ScaleTrilTorch</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">CovarianceTorch</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;For heteroscedastic covariances, we apply the weighted average approach</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;For heteroscedastic covariances, we apply the weighted average approach</span>
 <span class="sd">        described by Kloss et al:</span>
 <span class="sd">        https://homes.cs.washington.edu/~barun/files/workshops/rss2020_sarl/submissions/7_differentiablefilter.pdf</span>
 
@@ -354,46 +269,30 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020.
-
-    </p>
+    <p>&#169; Copyright 2020.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

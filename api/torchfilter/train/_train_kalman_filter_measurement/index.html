@@ -1,92 +1,47 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>torchfilter.train._train_kalman_filter_measurement &mdash; torchfilter  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
-
-    
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex/" />
     <link rel="search" title="Search" href="../../../../search/" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../../../" class="icon icon-home"> torchfilter
           
-
-          
+          <a href="../../../../" class="icon icon-home">
+            torchfilter
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search/" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">API Reference</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../base/"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.base</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data/"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.data</span></code></a></li>
@@ -96,103 +51,58 @@
 <li class="toctree-l1"><a class="reference internal" href="../../utils/"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.utils</span></code></a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../../">torchfilter</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../../../" class="icon icon-home"></a> &raquo;</li>
-        
-      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.train._train_kalman_filter_measurement</span></code></li>
-    
-    
+      <li><a href="../../../../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.train._train_kalman_filter_measurement</span></code></li>
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../../../../_sources/api/torchfilter/train/_train_kalman_filter_measurement/index.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="module-torchfilter.train._train_kalman_filter_measurement">
-<span id="torchfilter-train-train-kalman-filter-measurement"></span><h1><a class="reference internal" href="#module-torchfilter.train._train_kalman_filter_measurement" title="torchfilter.train._train_kalman_filter_measurement"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.train._train_kalman_filter_measurement</span></code></a><a class="headerlink" href="#module-torchfilter.train._train_kalman_filter_measurement" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="module-torchfilter.train._train_kalman_filter_measurement">
+<span id="torchfilter-train-train-kalman-filter-measurement"></span><h1><a class="reference internal" href="#module-torchfilter.train._train_kalman_filter_measurement" title="torchfilter.train._train_kalman_filter_measurement"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.train._train_kalman_filter_measurement</span></code></a><a class="headerlink" href="#module-torchfilter.train._train_kalman_filter_measurement" title="Permalink to this heading"></a></h1>
 <p>Private module; avoid importing from directly.</p>
-<div class="section" id="module-contents">
-<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="functions">
-<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#torchfilter.train._train_kalman_filter_measurement.train_kalman_filter_measurement" title="torchfilter.train._train_kalman_filter_measurement.train_kalman_filter_measurement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train_kalman_filter_measurement</span></code></a>(buddy: fannypack.utils.Buddy, measurement_model: torchfilter.base.KalmanFilterMeasurementModel, dataloader: DataLoader, *, loss_function: Callable[[torch.Tensor, torch.Tensor], torch.Tensor] = F.mse_loss, log_interval: int = 10, optimizer_name='train_kalman_filter_measurement') → None</p></td>
-<td><p>Optimizes a Kalman filter measurement model’s prediction accuracy. Minimizes</p></td>
+<td><p>Optimizes a Kalman filter measurement model's prediction accuracy. Minimizes</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py function">
 <dt class="sig sig-object py" id="torchfilter.train._train_kalman_filter_measurement.train_kalman_filter_measurement">
-<span class="sig-prename descclassname"><span class="pre">torchfilter.train._train_kalman_filter_measurement.</span></span><span class="sig-name descname"><span class="pre">train_kalman_filter_measurement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buddy</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">fannypack.utils.Buddy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measurement_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../../base/#torchfilter.base.KalmanFilterMeasurementModel" title="torchfilter.base.KalmanFilterMeasurementModel"><span class="pre">torchfilter.base.KalmanFilterMeasurementModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataloader</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DataLoader</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_function</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">F.mse_loss</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_interval</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'train_kalman_filter_measurement'</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="../../../../_modules/torchfilter/train/_train_kalman_filter_measurement/#train_kalman_filter_measurement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.train._train_kalman_filter_measurement.train_kalman_filter_measurement" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">torchfilter.train._train_kalman_filter_measurement.</span></span><span class="sig-name descname"><span class="pre">train_kalman_filter_measurement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buddy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">fannypack.utils.Buddy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measurement_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../base/#torchfilter.base.KalmanFilterMeasurementModel" title="torchfilter.base.KalmanFilterMeasurementModel"><span class="pre">torchfilter.base.KalmanFilterMeasurementModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataloader</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataLoader</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">F.mse_loss</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'train_kalman_filter_measurement'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../../_modules/torchfilter/train/_train_kalman_filter_measurement/#train_kalman_filter_measurement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchfilter.train._train_kalman_filter_measurement.train_kalman_filter_measurement" title="Permalink to this definition"></a></dt>
 <dd><p>Optimizes a Kalman filter measurement model’s prediction accuracy. Minimizes
 output mean error only; does not define a loss on uncertainty.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>buddy</strong> (<em>fannypack.utils.Buddy</em>) – Training helper.</p></li>
 <li><p><strong>measurement_model</strong> (<a class="reference internal" href="../../base/#torchfilter.base.KalmanFilterMeasurementModel" title="torchfilter.base.KalmanFilterMeasurementModel"><em>torchfilter.base.KalmanFilterMeasurementModel</em></a>) – Model to train.</p></li>
 <li><p><strong>dataloader</strong> (<em>DataLoader</em>) – Loader for a SingleStepDataset.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Keyword Arguments</dt>
+<dt class="field-even">Keyword Arguments<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>loss_function</strong> (<em>callable</em><em>, </em><em>optional</em>) – Loss function, from <code class="docutils literal notranslate"><span class="pre">torch.nn.functional</span></code>.
 Defaults to MSE.</p></li>
@@ -202,52 +112,36 @@ Defaults to MSE.</p></li>
 </dl>
 </dd></dl>
 
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020.
-
-    </p>
+    <p>&#169; Copyright 2020.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

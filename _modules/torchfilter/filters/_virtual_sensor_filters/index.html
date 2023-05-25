@@ -1,92 +1,46 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>torchfilter.filters._virtual_sensor_filters &mdash; torchfilter  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
-
-    
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex/" />
     <link rel="search" title="Search" href="../../../../search/" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../../../" class="icon icon-home"> torchfilter
           
-
-          
+          <a href="../../../../" class="icon icon-home">
+            torchfilter
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search/" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">API Reference</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../api/torchfilter/base/"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.base</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../api/torchfilter/data/"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.data</span></code></a></li>
@@ -96,69 +50,30 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../api/torchfilter/utils/"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchfilter.utils</span></code></a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../../">torchfilter</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../../../" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../../../">Module code</a> &raquo;</li>
-        
-      <li>torchfilter.filters._virtual_sensor_filters</li>
-    
-    
+      <li><a href="../../../../" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../">Module code</a></li>
+      <li class="breadcrumb-item active">torchfilter.filters._virtual_sensor_filters</li>
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for torchfilter.filters._virtual_sensor_filters</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Private module; avoid importing from directly.</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -182,7 +97,7 @@
 
 
 <span class="k">class</span> <span class="nc">_IdentityMeasurementModel</span><span class="p">(</span><span class="n">KalmanFilterMeasurementModel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Identity measurement model. For use with our virtual sensor Kalman filters, which</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Identity measurement model. For use with our virtual sensor Kalman filters, which</span>
 <span class="sd">    assume that the &quot;observation&quot; of the system is in the state space.</span>
 
 <span class="sd">    Possible extension to consider in the future: we could very reasonably have both a</span>
@@ -191,7 +106,7 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scale_tril</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ScaleTrilTorch</span>
-        <span class="sd">&quot;&quot;&quot;torch.Tensor: Lower-triangular uncertainty term, with shape</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;torch.Tensor: Lower-triangular uncertainty term, with shape</span>
 <span class="sd">        `(N, state_dim, state_dim)`. This should be set externally.&quot;&quot;&quot;</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">state_dim</span><span class="o">=</span><span class="n">state_dim</span><span class="p">,</span> <span class="n">observation_dim</span><span class="o">=</span><span class="n">state_dim</span><span class="p">)</span>
@@ -200,7 +115,7 @@
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">states</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">StatesTorch</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">ObservationsNoDictTorch</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">ScaleTrilTorch</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Observation model forward pass, over batch size `N`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Observation model forward pass, over batch size `N`.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            states (torch.Tensor): States to pass to our observation model.</span>
@@ -237,7 +152,7 @@
 
     <span class="nd">@overrides</span>
     <span class="k">def</span> <span class="nf">jacobian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">states</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">StatesTorch</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;To avoid using autograd for computing our models Jacobian, we can directly</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;To avoid using autograd for computing our models Jacobian, we can directly</span>
 <span class="sd">        return identity matrices.</span>
 
 <span class="sd">        Args:</span>
@@ -278,7 +193,7 @@
 
         <span class="c1"># Assign submodules</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">virtual_sensor_model</span> <span class="o">=</span> <span class="n">virtual_sensor_model</span>
-        <span class="sd">&quot;&quot;&quot;torchfilter.base.VirtualSensorModel: Virtual sensor model.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;torchfilter.base.VirtualSensorModel: Virtual sensor model.&quot;&quot;&quot;</span>
 
     <span class="nd">@overrides</span>
     <span class="k">def</span> <span class="nf">_update_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">observations</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ObservationsTorch</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -294,7 +209,7 @@
         <span class="o">*</span><span class="p">,</span>
         <span class="n">observations</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ObservationsTorch</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Use virtual sensor model to intialize filter beliefs.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Use virtual sensor model to intialize filter beliefs.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            observations (dict or torch.Tensor): observation inputs. should be</span>
@@ -308,7 +223,7 @@
 <div class="viewcode-block" id="VirtualSensorExtendedInformationFilter"><a class="viewcode-back" href="../../../../api/torchfilter/filters/#torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedInformationFilter">[docs]</a><span class="k">class</span> <span class="nc">VirtualSensorExtendedInformationFilter</span><span class="p">(</span>
     <span class="n">_VirtualSensorKalmanFilterMixin</span><span class="p">,</span> <span class="n">ExtendedInformationFilter</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;EIF variant with a virtual sensor model.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;EIF variant with a virtual sensor model.</span>
 
 <span class="sd">    Assumes measurement model is identity.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -330,7 +245,7 @@
 <div class="viewcode-block" id="VirtualSensorExtendedKalmanFilter"><a class="viewcode-back" href="../../../../api/torchfilter/filters/#torchfilter.filters._virtual_sensor_filters.VirtualSensorExtendedKalmanFilter">[docs]</a><span class="k">class</span> <span class="nc">VirtualSensorExtendedKalmanFilter</span><span class="p">(</span>
     <span class="n">_VirtualSensorKalmanFilterMixin</span><span class="p">,</span> <span class="n">ExtendedKalmanFilter</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;EKF variant with a virtual sensor model.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;EKF variant with a virtual sensor model.</span>
 
 <span class="sd">    Assumes measurement model is identity.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -352,7 +267,7 @@
 <div class="viewcode-block" id="VirtualSensorUnscentedKalmanFilter"><a class="viewcode-back" href="../../../../api/torchfilter/filters/#torchfilter.filters._virtual_sensor_filters.VirtualSensorUnscentedKalmanFilter">[docs]</a><span class="k">class</span> <span class="nc">VirtualSensorUnscentedKalmanFilter</span><span class="p">(</span>
     <span class="n">_VirtualSensorKalmanFilterMixin</span><span class="p">,</span> <span class="n">UnscentedKalmanFilter</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;UKF variant with a virtual sensor model.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;UKF variant with a virtual sensor model.</span>
 
 <span class="sd">    Assumes measurement model is identity.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -376,7 +291,7 @@
 <div class="viewcode-block" id="VirtualSensorSquareRootUnscentedKalmanFilter"><a class="viewcode-back" href="../../../../api/torchfilter/filters/#torchfilter.filters._virtual_sensor_filters.VirtualSensorSquareRootUnscentedKalmanFilter">[docs]</a><span class="k">class</span> <span class="nc">VirtualSensorSquareRootUnscentedKalmanFilter</span><span class="p">(</span>
     <span class="n">_VirtualSensorKalmanFilterMixin</span><span class="p">,</span> <span class="n">SquareRootUnscentedKalmanFilter</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Square-root UKF variant with a virtual sensor model.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Square-root UKF variant with a virtual sensor model.</span>
 
 <span class="sd">    Assumes measurement model is identity.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -398,46 +313,30 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020.
-
-    </p>
+    <p>&#169; Copyright 2020.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
