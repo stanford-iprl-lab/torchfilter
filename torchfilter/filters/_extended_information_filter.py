@@ -41,13 +41,13 @@ class ExtendedInformationFilter(KalmanFilterBase):
     @property
     def belief_covariance(self) -> types.CovarianceTorch:
         """Posterior covariance. Shape should be `(N, state_dim, state_dim)`."""
-        return fannypack.utils.cholesky_inverse(torch.cholesky(self.information_matrix))
+        return fannypack.utils.cholesky_inverse(torch.linalg.cholesky(self.information_matrix))
 
     # overrides
     @belief_covariance.setter
     def belief_covariance(self, covariance: types.CovarianceTorch):
         self.information_matrix = fannypack.utils.cholesky_inverse(
-            torch.cholesky(covariance)
+            torch.linalg.cholesky(covariance)
         )
 
     @overrides
@@ -70,7 +70,7 @@ class ExtendedInformationFilter(KalmanFilterBase):
 
         # Calculate Sigma_{t+1|t}
         pred_information_matrix = fannypack.utils.cholesky_inverse(
-            torch.cholesky(
+            torch.linalg.cholesky(
                 dynamics_A_matrix
                 @ prev_covariance
                 @ dynamics_A_matrix.transpose(-1, -2)
@@ -132,6 +132,6 @@ class ExtendedInformationFilter(KalmanFilterBase):
         self.information_matrix = information_matrix
         self.information_vector = information_vector
         self._belief_mean = (
-            fannypack.utils.cholesky_inverse(torch.cholesky(information_matrix))
+            fannypack.utils.cholesky_inverse(torch.linalg.cholesky(information_matrix))
             @ information_vector[:, :, None]
         ).squeeze(-1)

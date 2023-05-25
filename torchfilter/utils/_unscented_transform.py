@@ -70,7 +70,7 @@ class UnscentedTransform:
         assert input_covariance.shape == (N, dim, dim)
         assert dim == self._dim
         return self.select_sigma_points_square_root(
-            input_mean, input_scale_tril=torch.cholesky(input_covariance)
+            input_mean, input_scale_tril=torch.linalg.cholesky(input_covariance)
         )
 
     def select_sigma_points_square_root(
@@ -203,7 +203,7 @@ class UnscentedTransform:
             ],
             dim=1,
         )
-        _unused_Q, R = torch.qr(concatenated, some=False)
+        _unused_Q, R = torch.linalg.qr(concatenated, mode="complete")
         L = R[:, :dim, :].transpose(-1, -2)
         assert L.shape == (N, dim, dim)
 
